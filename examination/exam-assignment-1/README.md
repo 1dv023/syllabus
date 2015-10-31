@@ -24,7 +24,7 @@ Vännerna har bara möjlighet att ses på helgerna därför är bara fredag, lö
 ####Biosalongen (/cinema)
 Den andra webbplatsen simulerar en enklare sida för att se stadens biografs aktuella föreställningar. Informationen som man kan få där är vilken dag och vilken tid en viss film går och hur vida den är fullbokad eller inte. Informationen om detta får man genom att analysera trafiken mellan klient och server och i vilket format applikationen skickar informationen däremellan.
 
-####Resturangen (/dinner)
+####Restaurangen (/dinner)
 Den tredje webbplatsen visar favoritresturangens tillgänglighet. Sidan är gjord av en HTML-sparad wordfil. Här kan man förutom se tillgängligheten även göra en bokning av bord (extrauppgift)
 
 ##Genomförande
