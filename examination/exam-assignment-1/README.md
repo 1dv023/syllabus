@@ -45,11 +45,11 @@ Din applikation ska således utifrån en given URL:
 * Självständigt lösa ett tillhandhållet problem
 
 
-###Val av teknik
+##Val av teknik
 Du är fri att välja programmeringsspråk utefter dina förkunskaper eller nyfikenhet. Du ansvarar dock själv för din egen utvecklingsmiljö och publicering av applikation inför examinationen.
 
 
-###Krav
+##Krav
 * Applikationens källkod ska vara publicerad på ett GitHub-repositorie som är delat med användaren "1DV449".
 * Examinatorn ska kunna köra din applikation via en vanlig webbläsare, dvs du ska publisera din applikation på en publik webbserver.
 * Man ska på något sätt kunna ange en start-URL som applikationen använder sig av. Vid examinationen kommer vi köra mot en instans av servern som vi har och då ska vi kunna ange URL:en till den.
@@ -59,7 +59,7 @@ Du är fri att välja programmeringsspråk utefter dina förkunskaper eller nyfi
 * Du ska vid examinationen kunna besvara på nedanstående reflektionsfrågor förslagsvis genom att skriva dem i ditt repositories README-fil.
 
 
-###Reflektionsfrågor
+##Reflektionsfrågor
 * Finns det några etiska aspekter vid webbskrapning. Kan du hitta något rättsfall?
 * Finns det några riktlinjer för utvecklare att tänka på om man vill vara "en god skrapare"?
 * Begränsningar i din lösning- vad är generellt och vad är inte generellt i din kod?
