@@ -7,7 +7,7 @@ Till uppgiften kommer du få en node-applikation där tre stycken webbplatser fi
 således skrivna efter detta, dvs utseende m.m. kan se lite enkelt ut. Du ska dock inte koncentrera dig på deras konstruktion eller utseende utan mer på vad för
 information de spottar ut. Webbapplikationerna kommer delvis vara skrivna i node.js. För att kunna köra igång dessa applikationer utan att behöva installera massa mjukvara och webbservrar på er egna dator kommer vi använda en virtualliseringsmodell med applikationen Vagrant. Läs mer om detta på kursens webbplats under [rubriken "Virtualizations"](https://coursepress.lnu.se/kurs/webbteknik-ii/virtualization/), titta på [filmen](http://orion.lnu.se/pub/education/course/1DV449/ht15/1DV449-vagrant-server.mp4) som visar hur du kommer igång samt läs den [readme som finns i reprot](https://github.com/thajo/weekend-booking-web-site/blob/master/README.md).
 
-Hur en färdig lösning skulle kunna fungera hittar du i [följande film](http://orion.lnu.se/pub/education/course/1DV449/ht15/1DV449-L01.mp4)
+Hur en färdig lösning skulle kunna fungera hittar du i [följande film](http://orion.lnu.se/pub/education/course/1DV449/ht15/1DV449_L01.mp4)
 
 
 ##Senario för uppgiften
