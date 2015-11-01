@@ -61,8 +61,10 @@ Du är fri att välja programmeringsspråk utefter dina förkunskaper eller nyfi
 
 ##Reflektionsfrågor
 * Finns det några etiska aspekter vid webbskrapning. Kan du hitta något rättsfall?
-* Finns det några riktlinjer för utvecklare att tänka på om man vill vara "en god skrapare"?
+* Finns det några riktlinjer för utvecklare att tänka på om man vill vara "en god skrapare" mot serverägarna?
 * Begränsningar i din lösning- vad är generellt och vad är inte generellt i din kod?
+* Vad kan robots.txt spela för roll?
+
 
 ##Examination
 Uppgiften bedöms under en muntlig redovisning tillsammans med teori ifrån de peer-instructions som genomförts. Examinatorn ska då kunna köra din applikation endast genom att skriva in en URL i en webbläsare och på något sätt ange start-URLen till en identiskt instans av vagrant-maskinen.
