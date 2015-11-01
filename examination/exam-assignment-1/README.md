@@ -35,7 +35,7 @@ Din applikation ska således utifrån en given URL:
 1. Analysera vilken dag som alla vännerna är lediga
 2. Analysera vilka filmer som går den dagen och visa upp de förslag som finns. Låt användaren välja en filmvisning.
 3. Utifrån informationen i punkt 1 och 2, ge förslahg på filmvisningar som skulle kunna passa sällskapet.
-4. (EXTRA!) Använd de lilla formulär som finns för att göra en bordsbokning på resturangen.
+4. (EXTRA!) Använd de lilla formulär som finns för att göra en bordsbokning på resturangen. Användarnamn: "zeke" lösenord: "coys"
 
 
 ##Mål
