@@ -1,6 +1,4 @@
-# Examinationsuppgift 1
-
-##Uppgiften
+##Examinationsuppgift 1
 I denna uppgift är det tänkt att du ska ska skriva en enklare webbagent som skrapar och analyserar information 
 på några, för uppgiften konstruerade, webbplatser. Tanken är att du ska försöka skriva en agent/skrapa/script som ska
 anpassas efter ett färdigt senario.
