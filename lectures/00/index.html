@@ -1,0 +1,267 @@
+﻿<!doctype html>
+<html lang="sv-se">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>00 - Introduction - Server-based programming (1DV023)</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="icon" href="../images/favicon.png" type="image/png" />
+
+    <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.lnu.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="reveal lnu">
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <!-- Start -->
+            <section class="center" data-state="lnu-intro">
+                <h3>Server-based Web Programming</h3>
+                <h3>(1DV023)</h3>
+                <h1>Introduction</h1>
+                <div class="lnu-footer">
+                    <img src="../images/lnu-logotype.png" />
+                    <img src="../images/lnu-symbol.png" />
+                </div>
+            </section>
+
+            <!-- CC -->
+            <section data-state="lnu-cc">
+                <h2>Licence for this work</h2>
+                <p>
+                    This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Client-based Web Programming (1DV023) at Linnaeus University.
+                </p>
+                <p>All content in this work excluding photographs, icons, picture of course litterature and Linnaeus University logotype and symbol, is licensied under a
+                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.</p>
+                <h4>You are free to </h4>
+                <ul>
+                    <li>copy and redistribute the material in any medium or format</li>
+                    <li>spread the whole or parts of the content</li>
+                    <li>show the whole or parts of the content publicly and digital</li>
+                    <li>convert the content to another format</li>
+                    <li>change the content</li>
+                </ul>
+                <p>
+                    If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus University logotype and symbol in your new work!
+                </p>
+                <p>
+                    At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
+                </p>
+            </section>
+
+            <!-- Course management -->
+           <section>
+                <section>
+                    <h2>Course management</h2>
+                    <dl class="table">
+                      <dt class="table-cell">
+                          <img class="grayscale" src="http://www.gravatar.com/avatar/2261038623688f4d83dc10c53b85efb8.jpg?s=80" alt="John">
+                      </dt>
+                      <dd class="table-cell">John Häggerud (Course manager)</dd>
+                  </dl>
+                  <dl class="table">
+                      <dt class="table-cell">
+                          <img class="grayscale" src="http://www.gravatar.com/avatar/a334470b8e87eb204a337c228f940e13.jpg?s=80" alt="Mats">
+                      </dt>
+                      <dd class="table-cell">Mats Loock (Course manager)</dd>
+                  </dl>
+                    <dl class="table">
+                        <dt class="table-cell">
+                            <img class="grayscale" src="http://www.gravatar.com/avatar/f0792a7226128e723ae2a45450e4da5c.jpg?s=80" alt="Johan">
+                        </dt>
+                        <dd class="table-cell">Johan Leitet (Course instructor)</dd>
+                    </dl>
+
+
+<!--
+                    <dl class="table">
+                        <dt class="table-cell">
+                            <img class="grayscale" src="http://www.gravatar.com/avatar/b47109ad8c128221c9dd060d15c89cc9.jpg?s=80" alt="Jacob">
+                        </dt>
+                        <dd class="table-cell">Jacob Lindehoff (Course instructor)</dd>
+                    </dl>
+-->
+                </section>
+
+            </section>
+
+            <section>
+                <!-- Syllabus -->
+                <section data-markdown>
+                        <script type="text/template">
+                            ## Syllabus
+
+                            * Main field of study
+                             * Computer Science (dv)
+                            * Progression
+                             * G1F
+                            * Prerequisites
+                              * "Client-based web programming (1DV022)" or equivalent and <br>"Web technology 1 (1ME321)" or equivalent
+
+
+                            http://kursplan.lnu.se/kursplaner/kursplan-1DV023-1.pdf
+                        </script>
+                </section>
+
+                <!-- Goals -->
+                <section data-markdown>
+                        <script type="text/template">
+                            ### After the course you should be able to...
+
+                            * Describe the task of the web server in diffrent kinds of web applications.
+                            * Describe the purpose of the HTTP­protocol in diffrent kinds of web applications 
+                              and its pros and cons in this context.
+                            * Create web applications with the plattform Node.js.
+                            * Create web applications for handling persistent data where data can be saved, 
+                              updated and deleted.
+
+                            #### ...
+
+                        </script>
+                </section>
+                <!-- Goals -->
+                <section data-markdown>
+                        <script type="text/template">
+                            ### After the course you should be able to...
+
+                            *  Describe and have a practical understanding of diffrent security problem that can
+                               occur in web applications.
+                            * Create web applications with, for the context, suitable architecture.
+                            * Create server­based realtime applications.
+                            * Plan and to perfom publishing of web applications created for the Node.jsplattform
+                              in production enviroment.
+                        </script>
+                </section>
+            </section>
+
+
+            <section data-markdown>
+                    <script type="text/template">
+                        ## Approach
+
+                        * The course is devided into three parts
+                          * Part 1: node.js, web servers, HTTP, (es2016)
+                          * Part 2: Backend web application, web security, web architecture
+                          * Part 3: Real-time application, publishing and production
+                        * Scheduled activities
+                          * 7 Lectures (Tuesday 13.15)
+                          * 3 Peer Instructions
+                          * 2x1h/week tutoring
+                          * 3 examination assignments
+                          * 3 oral hearings
+                    </script>
+            </section>
+
+            <!-- Tools -->
+            <section data-markdown>
+                <script type="text/template">
+                ## Litterature
+
+                * Eloquent JavaScript, 2nd Edition av Marijn Haverbake
+                  * Mandatory
+                  * ISBN 978-1593275846
+                  * http://eloquentjavascript.net/
+                  * Chapter 17, 20
+                * Web Development with Node &amp; Express, Ethan Brown, latest edition. 
+                  * Optional
+                  * ISBN 978-1491949306
+                * Lots of articles and other open resources
+
+                </script>
+            </section>
+
+
+            <!-- Tools -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## Tools to be used...
+                    * Installed on your computers os...
+                      * [Git](https://git-scm.com/)
+                      * [Atom](https:/atom.io) or [JetBrains WebStorm 10](https://www.jetbrains.com/webstorm/)
+                      * [Virtual Box](https://www.virtualbox.org/)
+                      * [Vagrant](https://www.vagrantup.com/)
+                      * Optional (we use vagrant) - Node.js (>= 5.0), npm
+
+                </script>
+            </section>
+
+            <!-- Info -->
+            <section data-markdown>
+                <script type="text/template">
+                    ## Course webpage
+                    https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/
+                    * Everything static + news
+                    * Slack: Discussions and questions [#1dv023-klientutv](https://coursepress.slack.com/messages/1dv023-serverutv/)
+                    * 1dv023@lnu.se (Private mattyers only!)
+
+                </script>
+            </section>
+
+            <section data-markdown class="center">
+                <script type="text/template">
+                    # Questions?
+
+                </script>
+            </section>
+
+
+        </div>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            width: 1280,
+            height: 800,
+            controls: true,
+            progress: true,
+            history: true,
+            center: false,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '../reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+
+    </script>
+
+</body>
+</html>
