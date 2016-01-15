@@ -14,4 +14,5 @@ The assignments are devided in to seperate levels, A, B and C where C is the mos
 | Study week  | 1-3 |
 | Lectures| [TODO] |
 | Keywords| [TODO] |
+| Readme | https://github.com/1dv023/exercise-promising-web-scraper/blob/master/README.md |
 | Solutions | [TODO]|
