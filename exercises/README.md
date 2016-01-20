@@ -18,6 +18,7 @@ The assignments are devided in to seperate levels, A, B and C where C is the mos
 | Solution | [TODO]|
 
 Before you start:
+
 1. Clone your exercise repo: `git clone https://github.com/1dv023/<USERNAME>-rotten-tomatoes`
 2. Pull the [node-mongodb-vagrant](https://github.com/1dv023/node-mongodb-vagrant) into the repo: `git pull https://github.com/1dv023/node-mongodb-vagrant.git`
 3. Pull and merge the [javascript-style-guide](https://github.com/CS-LNU-Learning-Objects/javascript-style-guide) into the repo: `git pull https://github.com/CS-LNU-Learning-Objects/javascript-style-guide` or write your own style guide files.
