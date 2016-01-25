@@ -1,0 +1,245 @@
+﻿<!doctype html>
+<html lang="sv-se">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>01 - HTTP - Server-based programming (1DV023)</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="icon" href="../images/favicon.png" type="image/png" />
+
+    <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.lnu.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="reveal lnu">
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <!-- Start -->
+            <section class="center" data-state="lnu-intro">
+                <h3>Server-based Web Programming</h3>
+                <h3>(1DV023)</h3>
+                <h1>Lecture 01</h1>
+                <div class="lnu-footer">
+                    <img src="../images/lnu-logotype.png" />
+                    <img src="../images/lnu-symbol.png" />
+                </div>
+                <pre><code></code></pre> <!-- Fix for color coding in md -->
+
+            </section>
+
+            <!-- CC -->
+            <section data-state="lnu-cc">
+                <h2>Licence for this work</h2>
+                <p>
+                    This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
+                </p>
+                <p>All content in this work excluding photographs, icons, picture of course litterature and Linnaeus University logotype and symbol, is licensied under a
+                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.</p>
+                <h4>You are free to </h4>
+                <ul>
+                    <li>copy and redistribute the material in any medium or format</li>
+                    <li>spread the whole or parts of the content</li>
+                    <li>show the whole or parts of the content publicly and digital</li>
+                    <li>convert the content to another format</li>
+                    <li>change the content</li>
+                </ul>
+                <p>
+                    If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus University logotype and symbol in your new work!
+                </p>
+                <p>
+                    At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
+                </p>
+            </section>
+
+
+
+
+              <!-- Syllabus -->
+              <section data-markdown>
+                <script type="text/template">
+                  ##Content
+
+                  * Web Servers
+                  * HTTP
+                  * Express.js
+
+                  </script>
+              </section>
+
+              <section>
+              <section data-markdown class="center">
+                  <script type="text/template">
+                      ## Web Servers
+
+                      * Understand HTTP/HTTPS
+                      * Listen (on port 80 / 443) for HTTP/HTTPS requests
+                      * Serve static and dynamic web pages
+                        * Reading from file system
+                      * Support server-script languages
+                        * Render web data on-the-fly (HTML, JSON...)
+                        * Communicate with databases
+                        * Send request to other servers
+                      * Virtual hosting
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Not just web servers!
+                    <img src="../images/server_farm.png" alt="">
+                  </script>
+              </section>
+
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                      ## Web Servers
+
+                      * Apache
+                        * The A in LAMP
+                        * Often used as load balancer and reverse proxy
+                      * IIS (Internet Information Services)
+                      * Nginx
+                        * Often used as load balancer and reverse proxy
+                        * Often infront of your node.js application
+                      * Apache Tomcat
+                        * JAVA
+                        * Diffrent components for servlet, HTTP, JSP engine
+                      * Node.js
+                        * A plattform! Create a web server!
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ```
+                    var http = require("http");
+                    var port = 80;
+                    var hostname = "127.0.0.1";
+
+                    http.createServer(function(req, res) {
+
+                      // create HTTP Head
+                      res.writeHead(200, { "Content-Type": "text/plain" });
+                      // Send out text
+                      res.end("Hello World!\n");
+
+                    }).listen(port, hostname, function() {
+                      // Called when application get a request
+                      console.log("Server running at http://%s:%s", hostname, port);
+                    });
+
+                    ```
+                  </script>
+              </section>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                      #[HTTP](https://rawgit.com/CS-LNU-Learning-Objects/http/master/slides/index.html#/2)
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ```
+                    var http = require("http");
+                    var port = 80;
+                    var hostname = "127.0.0.1";
+
+                    http.createServer(function(req, res) {
+                      res.writeHead(200, { "Content-Type": "text/plain" });
+                      res.end("Hello World!\n");
+                    }).listen(port, hostname, function() {
+                      console.log("Server running at http://%s:%s", hostname, port);
+                    })
+
+                    ```
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Express.js
+                    http://expressjs.com/
+
+                    Fast, unopinionated, minimalist web framework for Node.js
+
+                    * URL mapping
+                    * Structure the web application
+                    * rendering views
+                    * Handling request and respons
+                    * Using middlewares
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    quick demo of get - post - render
+                    * install
+                    * load routes
+                    * handle request params, render with handlebars template
+                  </script>
+              </section>
+        </div>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            width: 1280,
+            height: 800,
+            controls: true,
+            progress: true,
+            history: true,
+            center: false,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '../reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+
+    </script>
+
+</body>
+</html>
