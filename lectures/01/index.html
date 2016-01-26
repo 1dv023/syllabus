@@ -97,16 +97,38 @@
                   <script type="text/template">
                       ## Web Servers
 
-                      * Understand HTTP/HTTPS
-                      * Listen (on port 80 / 443) for HTTP/HTTPS requests
-                      * Serve static and dynamic web pages
+                      * Server software that understands HTTP/HTTPS
+                      * Serve static and dynamic web resources
                         * Reading from file system
+                        * Documents, static files, streaming media
                       * Support server-script languages
+                        * PHP, ASP.NET...
                         * Render web data on-the-fly (HTML, JSON...)
                         * Communicate with databases
                         * Send request to other servers
                       * Virtual hosting
 
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                      ## Web Servers
+
+                      * Apache
+                        * The A in LAMP
+                        * Often used as load balancer and reverse proxy
+                      * IIS for Windows server (Internet Information Services)
+                        * .NET
+                      * Nginx
+                        * Often also used as load balancer and reverse proxy (in front of node)
+                        * Uses an asynchronous event-driven approach to handling requests
+                      * Apache Tomcat
+                        * JAVA
+                        * Diffrent components for servlet, HTTP, JSP engine
+                      * Node.js
+                        * A plattform! Create a web server!
                   </script>
               </section>
 
@@ -118,32 +140,14 @@
               </section>
 
 
-              <section data-markdown class="center">
-                  <script type="text/template">
-                      ## Web Servers
 
-                      * Apache
-                        * The A in LAMP
-                        * Often used as load balancer and reverse proxy
-                      * IIS (Internet Information Services)
-                      * Nginx
-                        * Often used as load balancer and reverse proxy
-                        * Often infront of your node.js application
-                      * Apache Tomcat
-                        * JAVA
-                        * Diffrent components for servlet, HTTP, JSP engine
-                      * Node.js
-                        * A plattform! Create a web server!
-                  </script>
-              </section>
 
               <section data-markdown class="center">
                   <script type="text/template">
-
-                    ## Demo
+                    ### Running a web server on node.js
 
                     ```
-                    var http = require("http");
+                    var http = require("http"); // core module
                     var port = 80;
                     var hostname = "127.0.0.1";
 
