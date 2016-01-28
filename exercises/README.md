@@ -40,7 +40,7 @@ Before you start:
 | Readme | https://github.com/1dv023/exercise-promising-web-scraper/blob/master/README.md |
 | Solution | [TODO]|
 
-##Finding wWldo
+##Finding Waldo
 
 |  |  |
 | ------------- | ------------- |
