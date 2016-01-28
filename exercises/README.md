@@ -39,3 +39,15 @@ Before you start:
 | Keywords| [TODO] |
 | Readme | https://github.com/1dv023/exercise-promising-web-scraper/blob/master/README.md |
 | Solution | [TODO]|
+
+##Finding wWldo
+
+|  |  |
+| ------------- | ------------- |
+| Repo | [the-node-plattform-finding-waldo](https://github.com/CS-LNU-Learning-Objects/the-node-plattform-finding-waldo/) |
+| Level  | B  |
+| Study week  | 1-2 |
+| Lectures| 1-2 |
+| Keywords| EventEmitter |
+| Readme | https://github.com/CS-LNU-Learning-Objects/the-node-plattform-finding-waldo/ |
+| Solution | [TODO]|
