@@ -1,0 +1,495 @@
+﻿<!doctype html>
+<html lang="sv-se">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>02 - HTTP - Server-based programming (1DV023)</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="icon" href="../images/favicon.png" type="image/png" />
+
+    <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.lnu.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="reveal lnu">
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <!-- Start -->
+            <section class="center" data-state="lnu-intro">
+                <h3>Server-based Web Programming</h3>
+                <h3>(1DV023)</h3>
+                <h1>Lecture 02</h1>
+                <div class="lnu-footer">
+                    <img src="../images/lnu-logotype.png" />
+                    <img src="../images/lnu-symbol.png" />
+                </div>
+                <pre><code></code></pre> <!-- Fix for color coding in md -->
+
+            </section>
+
+            <!-- CC -->
+            <section data-state="lnu-cc">
+                <h2>Licence for this work</h2>
+                <p>
+                    This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
+                </p>
+                <p>All content in this work excluding photographs, icons, picture of course litterature and Linnaeus University logotype and symbol, is licensied under a
+                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.</p>
+                <h4>You are free to </h4>
+                <ul>
+                    <li>copy and redistribute the material in any medium or format</li>
+                    <li>spread the whole or parts of the content</li>
+                    <li>show the whole or parts of the content publicly and digital</li>
+                    <li>convert the content to another format</li>
+                    <li>change the content</li>
+                </ul>
+                <p>
+                    If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus University logotype and symbol in your new work!
+                </p>
+                <p>
+                    At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
+                </p>
+            </section>
+
+
+
+
+              <!-- Syllabus -->
+              <section data-markdown>
+                <script type="text/template">
+                  ##Content
+
+                  * Web architecture
+                  * Web Application design (code)
+                  * Server-side development with Express.js
+
+                  </script>
+              </section>
+
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                      ## The Web changes
+
+                      * Web applications changes
+                        * Static pages
+                        * Dynamic Pages - CGI (Common Gateway Interface)
+                        * Web APIs, Real-time
+                        * Complexity, number of users, demands of scaling
+                        * New technology, new devices (Web Of Things)
+                      * Web architecture change
+
+                  </script>
+              </section>
+              <!-- architecture -->
+                <section>
+              <section data-markdown class="center">
+                  <script type="text/template">
+                      ## Web Architecture?
+
+                      * A design of the web application with pre made descisions solving a problem in a successful way
+                      * "...deleveoper using the right architecture will naturally fall in to pit of success"
+                        * *Rico Mariani*
+                      * Diffrent contexts, diffrent architectures!
+                      * Handle change in application, performance, security, maintainability...
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Web Architecture?
+
+                    * Pysical, System architecture
+                      * Hardware components, servers, clients, Operating Systems, Virtualization, monitoring...
+                    * Logical, Software architecture
+                      * Software design, Design patterns, Code structure, error handling, logging,
+                        seperations of concerns, code reuse, testability
+                    * Data Architecture
+                      * How data should be handle, storage, cache, data flows
+                    * Information Architecture
+                      * The real-world information the application will handle, usability
+
+
+                  </script>
+              </section>
+            </section>
+
+
+
+
+            <!--- Layered architecture -->
+            <section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Two tier/layer architecture
+                    Client–Server software architecture pattern<br />
+                    Thin Client, Fat Client
+
+                    <img src="../images/thin_client.png" width="60%" alt=""><br>
+                    <img src="../images/fat_client.png" width="60%" alt="">
+                  </script>
+              </section>
+
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Three tier architecture
+                    <img src="../images/three-layer.png" alt="">
+                    <strong>CRUD</strong> - Create, Read, Update, Delete
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Three tier architecture
+                    <img src="../images/three-layer2.png" alt="">
+                    Horizontal vs. vertical scaling
+
+                  </script>
+              </section>
+
+
+              <!-- Presentation layer - responsible for managing user interaction with the system -->
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## n-Tier archictecture
+
+                    <img src="../images/n-layer.png" alt="">
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Servers architecture n-layer
+                    <img src="../images/server_farm.png" alt="">
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Microservice
+                    TO DO modern way
+                    Big scale enterprice
+                    vs monolotic, as we are doing
+                  </script>
+              </section>
+
+
+            </section>
+
+
+            <!-- code structure -->
+            <section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Code Structure
+
+
+                    <img src="../images/three-solution.jpg" width="25%" alt="">
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Code Structure - MVC
+
+                    * Model - View - Controller
+                    * Software Design pattern, 1970s, SmallTalk, [Trygve Reenskaug](https://en.wikipedia.org/wiki/Trygve_Reenskaug)
+                    * Graphical User Interface (GUI), Desktop
+                    * Common in diffrent kinds of web frameworks, both servers and clients
+                    * Not in contrast to n-tier Architecture
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Code Structure - MVC
+
+                    <img src="../images/MVC.png" width="80%" alt="">
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Code Structure - MVC
+
+                    TODO MVC client and server
+                    [Facebook: MVC Does Not Scale, Use Flux Instead](http://www.infoq.com/news/2014/05/facebook-mvc-flux)
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Code Structure - MVC
+
+                    MVC, MVVM, MTV, MVP, MV-WHAT-EVER!
+
+
+
+                  </script>
+              </section>
+            </section>
+
+
+            <!-- express -->
+            <section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Express.js
+                    * Web Framework for node.js
+                    * Building web applications on Node.js
+                      * "Classic" CRUD web Applications
+                      * Web APIs
+                    * Creating a HTTP Server
+                    * Handling URL mapping
+                    * Handling request, generating response
+                    * View engine
+                    * Middlewares
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Examination assignment 2
+
+                    *Our goal (exmaination 2) is to write a classic CRUD application with
+                    persistent data in a mongoDB, security in mind and nice, clean code.*
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Express.js - code structure
+
+                    * File structure
+                    * MVC in mind
+                    * URL Mapping - Routes
+                    * Adding persistent storage
+
+                    Everyone has an opinion - So do we...or three opinions
+
+                    [https://gist.github.com/lancejpollard/1398757](https://gist.github.com/lancejpollard/1398757)
+                  </script>
+              </section>
+
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## File structure in express.js
+                    A suggestion
+
+                    IMAGE
+
+                  </script>
+              </section>
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Express.js - URL Mapping
+                    The ability to **route** URLs to functions (code)<br>
+                    app.METHOD(PATH, HANDLER)
+
+                    ```javascript
+                    /**
+                     *  app is the express instance for the application
+                     *  Executed when the url /message/:id is called
+                     *  @param {Object} req - Request Object, What the client sends
+                     *  @param {Object} res - Response Object, Render or Redirect, status codes
+                     */
+                    app.get("/message/:id", function(req, res) {
+                      var id = req.params.id; // get the id in the url /message/123 gives id = 123
+                      ...
+                    });
+
+                    app.post("/message", function(req, res) {
+                      var postdata = req.body;
+                      ...
+                    });
+                    ```
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Express.js - Middleware
+
+                    Input --> M1 --> M2 --> M3 --> Output <br><br>
+
+                    * Parsing the body of the resuest
+                    * Compressing/decompression
+                    * Creating logs
+                    * Manage sessions
+                    * Security
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Middleware
+                    - Use built-in middleware like: express.static(root, [options])
+
+                    - Use third party middleware
+
+                    ```javascript
+                    var cookieParser = require("cookie-parser");
+                    var bodyParser = require("body-parser");
+                    // load the cookie-parsing middleware
+                    app.use(cookieParser());
+                    ```
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Express.js - Write Middleware
+
+                    Three parameters where the last (next) is a function <br>
+                    Don't redirect or render or end the response!
+
+                    ```javascript
+                    app.get("/message", function(req, res, next) {
+                      // do something
+                      next(); // send to next middleware function
+                    });
+
+                    app.use("/message", function(req, res, next) {
+                      // do something - ALL request
+                      next(); // send to next middleware function
+                    });
+                    ```
+
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Express.js - Error handling
+
+                    Use the middleware pattern for handling errors
+
+                    ```javascript
+                    // catch all = 404 - Put last
+                    app.use(function(request, response, next) {
+                      response.status(404).send("error/404");
+                    )
+
+                    // four parameters for errors
+                    app.use(function(err, req, res, next) {
+                      console.error(err.stack);
+                      res.status(500).send('Something broke!');
+                    });
+                    ```
+
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## URL-mapping
+                    How to structure your URLs in CRUD application?
+
+                    | VERB | URL | Description |
+                    | --- | --- | --- |
+                    | GET | /users   &nbsp;&nbsp; | Get all users |
+                    |POST|/users|Create a new user|
+                    |PUT|/users/:id |Update the user with id = :id |
+                    |DELETE|/users/:id|Delete the user with id = :id |
+
+                    *REST Web API*
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## URL-mapping
+                    But, we need to render HTML forms and we don´t have PUT and DELETE
+
+                    | VERB | URL | Description |
+                    | --- | --- | --- |
+                    | GET | /users   | Get all users |
+                    | GET | /users/create   | Get a HTML form to create a user|
+                    | POST | /users/create | Create a new user |
+                    | GET | /users/edit/:id   | Get a HTML form to edit a user |
+                    | POST | /users/edit/:id  | Update the user |
+                    | GET | /users/delete/:id   | Get a confirmation view befor delete |
+                    | POST | /users/delete/:id | Deletes the user |
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                  ## DEMO
+                  </script>
+              </section>
+
+        </div>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            width: 1280,
+            height: 800,
+            controls: true,
+            progress: true,
+            history: true,
+            center: false,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '../reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+
+    </script>
+
+</body>
+</html>
