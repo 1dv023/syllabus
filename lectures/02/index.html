@@ -88,6 +88,10 @@
                   * Web architecture
                   * Web Application design (code)
                   * Server-side development with Express.js
+                    * File structure
+                    * Routes / URL-mapping
+                    * Middleware
+                    * Template engines
 
                   </script>
               </section>
@@ -187,6 +191,7 @@
                   </script>
               </section>
 
+              <!--
               <section data-markdown class="center">
                   <script type="text/template">
                     ## Servers architecture n-layer
@@ -202,7 +207,7 @@
                     vs monolotic, as we are doing
                   </script>
               </section>
-
+            -->
 
             </section>
 
@@ -213,8 +218,6 @@
               <section data-markdown class="center">
                   <script type="text/template">
                     ## Code Structure
-
-
                     <img src="../images/three-solution.jpg" width="25%" alt="">
                   </script>
               </section>
@@ -245,8 +248,10 @@
                   <script type="text/template">
                     ## Code Structure - MVC
 
-                    TODO MVC client and server
-                    [Facebook: MVC Does Not Scale, Use Flux Instead](http://www.infoq.com/news/2014/05/facebook-mvc-flux)
+                    MVC, MVVM, MTV, MVP, MV-WHAT-EVER!
+                    <br>
+                    <img src="http://www.reactiongifs.com/r/wtthll.gif" alt="">
+
                   </script>
               </section>
 
@@ -254,12 +259,22 @@
                   <script type="text/template">
                     ## Code Structure - MVC
 
-                    MVC, MVVM, MTV, MVP, MV-WHAT-EVER!
-
-
-
+                    <img src="../images/mvceverywhere.png" alt="">
+                    <br>
+                    [Facebook: MVC Does Not Scale, Use Flux Instead](http://www.infoq.com/news/2014/05/facebook-mvc-flux)
                   </script>
               </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## What to remember!
+                    * When applications grow we need structure
+                    * Architecture can help us with structuring, physical and logical
+                    * MVC is a design pattern which help us structure code and solve problems
+                    * Express.js is inspired by MVC
+                  </script>
+              </section>
+
             </section>
 
 
@@ -276,8 +291,8 @@
                     * Creating a HTTP Server
                     * Handling URL mapping
                     * Handling request, generating response
-                    * View engine
-                    * Middlewares
+                    * Template engine
+                    * Middleware
                   </script>
               </section>
 
@@ -286,7 +301,7 @@
                     ## Examination assignment 2
 
                     *Our goal (exmaination 2) is to write a classic CRUD application with
-                    persistent data in a mongoDB, security in mind and nice, clean code.*
+                    persistent data (mongoDB) and having security in mind*
 
                   </script>
               </section>
@@ -297,10 +312,11 @@
 
                     * File structure
                     * MVC in mind
-                    * URL Mapping - Routes
-                    * Adding persistent storage
+                      * URL Mapping - Controllers/Routes
+                      * Persistent data - Models
+                      * Template rendering - Views
 
-                    Everyone has an opinion - So do we...or three opinions
+                    Everyone has an opinion - So do we...or several opinions
 
                     [https://gist.github.com/lancejpollard/1398757](https://gist.github.com/lancejpollard/1398757)
                   </script>
@@ -311,11 +327,58 @@
                   <script type="text/template">
                     ## File structure in express.js
                     A suggestion
+                  </script>
+              </section>
 
-                    IMAGE
+              <section>
+                <script type="text/template">
+                  ## Routes
+                  How to construct your URLs?
+
+                  * Never expose tech details - They will change!
+                    * http://www.example.com/pages/admin.js
+                  * Keep It Simple Stupid!
+                  * Be consistent (hyphens vs. underscore), lowercase
+                  * never use whitespace or "special characters"
+                  * SEO!
+                </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## URL-mapping
+                    How to structure your URLs in CRUD application?
+
+                    | VERB | URL | Description |
+                    | --- | --- | --- |
+                    | GET | /users   &nbsp;&nbsp; | Get all users |
+                    |POST|/users|Create a new user|
+                    |PUT|/users/:id |Update the user with id = :id |
+                    |DELETE|/users/:id|Delete the user with id = :id |
+
+                    *REST Web API*
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## URL-mapping
+                    But, we need to render HTML forms and we don´t have PUT and DELETE
+
+                    | VERB | URL | Description |
+                    | --- | --- | --- |
+                    | GET | /users   | Get all users |
+                    | GET | /users/create   | Get a HTML form to create a user|
+                    | POST | /users/create | Create a new user |
+                    | GET | /users/edit/:id   | Get a HTML form to edit a user |
+                    | POST | /users/edit/:id  | Update the user |
+                    | GET | /users/delete/:id   | Get a confirmation view befor delete |
+                    | POST | /users/delete/:id | Deletes the user |
 
                   </script>
               </section>
+
+
               <section data-markdown class="center">
                   <script type="text/template">
                     ## Express.js - URL Mapping
@@ -341,6 +404,9 @@
                     ```
                   </script>
               </section>
+
+
+
 
               <section data-markdown class="center">
                   <script type="text/template">
@@ -421,43 +487,49 @@
 
               <section data-markdown class="center">
                   <script type="text/template">
-                    ## URL-mapping
-                    How to structure your URLs in CRUD application?
-
-                    | VERB | URL | Description |
-                    | --- | --- | --- |
-                    | GET | /users   &nbsp;&nbsp; | Get all users |
-                    |POST|/users|Create a new user|
-                    |PUT|/users/:id |Update the user with id = :id |
-                    |DELETE|/users/:id|Delete the user with id = :id |
-
-                    *REST Web API*
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## URL-mapping
-                    But, we need to render HTML forms and we don´t have PUT and DELETE
-
-                    | VERB | URL | Description |
-                    | --- | --- | --- |
-                    | GET | /users   | Get all users |
-                    | GET | /users/create   | Get a HTML form to create a user|
-                    | POST | /users/create | Create a new user |
-                    | GET | /users/edit/:id   | Get a HTML form to edit a user |
-                    | POST | /users/edit/:id  | Update the user |
-                    | GET | /users/delete/:id   | Get a confirmation view befor delete |
-                    | POST | /users/delete/:id | Deletes the user |
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
                   ## DEMO
                   </script>
               </section>
+
+
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                  ## Template Engines
+
+                  <img src="../images/template_engine.png" alt="">
+
+                  * http://handlebarsjs.com/
+                  * http://jade-lang.com/
+                  * https://mustache.github.io/
+                  * http://www.embeddedjs.com/
+
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                  ## Next time
+
+                  * More about templating
+                  * Web Security
+                  * Session
+                  * ...
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## See ya!
+                  <img src="http://www.reactiongifs.com/r/cya.gif" alt="">
+                  </script>
+              </section>
+
+
+
+
+
+
 
         </div>
     </div>
