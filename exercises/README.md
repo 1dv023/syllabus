@@ -38,7 +38,7 @@ Before you start:
 | Lectures| [TODO] |
 | Keywords| [TODO] |
 | Readme | https://github.com/1dv023/exercise-promising-web-scraper/blob/master/README.md |
-| Solution | [TODO]|
+| Solution | https://github.com/1dv023/exercise-promising-web-scraper-SOLUTION |
 
 ##Finding Waldo
 
