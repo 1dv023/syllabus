@@ -85,12 +85,12 @@
                 <script type="text/template">
                   ##Content
 
-                  * Web architecture
-                  * Web Application design (code)
+                  * Web Application Architecture
+                  * Web Application Design (structure code)
                   * Server-side development with Express.js
                     * File structure
                     * Routes / URL-mapping
-                    * Middleware
+                    * Middleware, Error handling
                     * Template engines
 
                   </script>
@@ -105,9 +105,9 @@
                         * Static pages
                         * Dynamic Pages - CGI (Common Gateway Interface)
                         * Web APIs, Real-time
-                        * Complexity, number of users, demands of scaling
+                        * Complexity, Number of users, Scaling
                         * New technology, new devices (Web Of Things)
-                      * Web architecture change
+
 
                   </script>
               </section>
@@ -115,22 +115,23 @@
                 <section>
               <section data-markdown class="center">
                   <script type="text/template">
-                      ## Web Architecture?
+                      ## Web Application Architecture?
 
                       * A design of the web application with pre made descisions solving a problem in a successful way
                       * "...deleveoper using the right architecture will naturally fall in to pit of success"
                         * *Rico Mariani*
-                      * Diffrent contexts, diffrent architectures!
                       * Handle change in application, performance, security, maintainability...
+                      * Diffrent contexts, diffrent architectures!
+
 
                   </script>
               </section>
 
               <section data-markdown class="center">
                   <script type="text/template">
-                    ## Web Architecture?
+                    ## Web Application Architecture?
 
-                    * Pysical, System architecture
+                    * Physical, System architecture
                       * Hardware components, servers, clients, Operating Systems, Virtualization, monitoring...
                     * Logical, Software architecture
                       * Software design, Design patterns, Code structure, error handling, logging,
@@ -138,7 +139,7 @@
                     * Data Architecture
                       * How data should be handle, storage, cache, data flows
                     * Information Architecture
-                      * The real-world information the application will handle, usability
+                      * The real-world information the application will handle, usability, URLs
 
 
                   </script>
@@ -157,8 +158,8 @@
                     Client–Server software architecture pattern<br />
                     Thin Client, Fat Client
 
-                    <img src="../images/thin_client.png" width="60%" alt=""><br>
-                    <img src="../images/fat_client.png" width="60%" alt="">
+                    <img src="../images/thin_client.png" width="45%" alt=""><br>
+                    <img src="../images/fat_client.png" width="45%" alt="">
                   </script>
               </section>
 
@@ -186,7 +187,7 @@
                   <script type="text/template">
                     ## n-Tier archictecture
 
-                    <img src="../images/n-layer.png" alt="">
+                    <img src="../images/n-layer.png" width="75%" alt="">
 
                   </script>
               </section>
@@ -247,10 +248,10 @@
               <section data-markdown class="center">
                   <script type="text/template">
                     ## Code Structure - MVC
-
-                    MVC, MVVM, MTV, MVP, MV-WHAT-EVER!
-                    <br>
                     <img src="http://www.reactiongifs.com/r/wtthll.gif" alt="">
+                    <br>
+                    MVC, MVVM, MTV, MVP <br>
+                    MV-WHAT-EVER!
 
                   </script>
               </section>
@@ -260,17 +261,17 @@
                     ## Code Structure - MVC
 
                     <img src="../images/mvceverywhere.png" alt="">
-                    <br>
-                    [Facebook: MVC Does Not Scale, Use Flux Instead](http://www.infoq.com/news/2014/05/facebook-mvc-flux)
-                  </script>
+                    #### Isomorphic JavaScript
+                    </script>
               </section>
 
               <section data-markdown class="center">
                   <script type="text/template">
                     ## What to remember!
-                    * When applications grow we need structure
+                    * When applications grows we need structure
                     * Architecture can help us with structuring, physical and logical
-                    * MVC is a design pattern which help us structure code and solve problems
+                      * Different architecture in different context
+                    * MVC is a software design pattern which help us structure code and solve problems
                     * Express.js is inspired by MVC
                   </script>
               </section>
@@ -286,7 +287,7 @@
                     ## Express.js
                     * Web Framework for node.js
                     * Building web applications on Node.js
-                      * "Classic" CRUD web Applications
+                      * "Classic" CRUD web applications
                       * Web APIs
                     * Creating a HTTP Server
                     * Handling URL mapping
@@ -327,19 +328,21 @@
                   <script type="text/template">
                     ## File structure in express.js
                     A suggestion
+
+                    <img src="../images/file_structure_express.png"  width="30%" alt="">
                   </script>
               </section>
 
-              <section>
+              <section data-markdown class="center">
                 <script type="text/template">
-                  ## Routes
+                  ## Routes / URL-mapping
                   How to construct your URLs?
 
                   * Never expose tech details - They will change!
-                    * http://www.example.com/pages/admin.js
+                    * http://www.example.com/pages/admin.html
                   * Keep It Simple Stupid!
                   * Be consistent (hyphens vs. underscore), lowercase
-                  * never use whitespace or "special characters"
+                  * Never use whitespace or "special characters"
                   * SEO!
                 </script>
               </section>
@@ -347,7 +350,7 @@
               <section data-markdown class="center">
                   <script type="text/template">
                     ## URL-mapping
-                    How to structure your URLs in CRUD application?
+                    How to structure your URLs in a CRUD application?
 
                     | VERB | URL | Description |
                     | --- | --- | --- |
@@ -368,6 +371,7 @@
                     | VERB | URL | Description |
                     | --- | --- | --- |
                     | GET | /users   | Get all users |
+                    | GET | /users/:id   | Get one user |
                     | GET | /users/create   | Get a HTML form to create a user|
                     | POST | /users/create | Create a new user |
                     | GET | /users/edit/:id   | Get a HTML form to edit a user |
@@ -386,6 +390,7 @@
                     app.METHOD(PATH, HANDLER)
 
                     ```javascript
+                    let app = express();
                     /**
                      *  app is the express instance for the application
                      *  Executed when the url /message/:id is called
@@ -393,12 +398,12 @@
                      *  @param {Object} res - Response Object, Render or Redirect, status codes
                      */
                     app.get("/message/:id", function(req, res) {
-                      var id = req.params.id; // get the id in the url /message/123 gives id = 123
+                      let id = req.params.id; // get the id in the url /message/123 gives id = 123
                       ...
                     });
 
                     app.post("/message", function(req, res) {
-                      var postdata = req.body;
+                      let postdata = req.body;
                       ...
                     });
                     ```
@@ -412,13 +417,14 @@
                   <script type="text/template">
                     ## Express.js - Middleware
 
-                    Input --> M1 --> M2 --> M3 --> Output <br><br>
+                    <img src="../images/middleware.png" alt="">
 
-                    * Parsing the body of the resuest
-                    * Compressing/decompression
+                    * Parsing the body of the request
+                    * Compression/decompression
                     * Creating logs
                     * Manage sessions
                     * Security
+                    * ...
 
                   </script>
               </section>
@@ -426,16 +432,18 @@
               <section data-markdown class="center">
                   <script type="text/template">
                     ## Middleware
-                    - Use built-in middleware like: express.static(root, [options])
 
-                    - Use third party middleware
+                    * Use built-in middleware like: express.static(root, [options])
+                    * Use third part middleware
 
                     ```javascript
                     var cookieParser = require("cookie-parser");
                     var bodyParser = require("body-parser");
                     // load the cookie-parsing middleware
                     app.use(cookieParser());
+                    app.use(bodyParser.json());
                     ```
+
                   </script>
               </section>
 
@@ -447,12 +455,12 @@
                     Don't redirect or render or end the response!
 
                     ```javascript
-                    app.get("/message", function(req, res, next) {
-                      // do something
-                      next(); // send to next middleware function
+                    app.get("/messages", function(req, res, next) {
+                      // do something with the GET
+                      next(); // send to next middleware function in the chain
                     });
 
-                    app.use("/message", function(req, res, next) {
+                    app.use("/messages", function(req, res, next) {
                       // do something - ALL request
                       next(); // send to next middleware function
                     });
@@ -469,10 +477,10 @@
                     Use the middleware pattern for handling errors
 
                     ```javascript
-                    // catch all = 404 - Put last
+                    // catch all = 404 - (ALWAYS Keep this as the last route)
                     app.use(function(request, response, next) {
                       response.status(404).send("error/404");
-                    )
+                    });
 
                     // four parameters for errors
                     app.use(function(err, req, res, next) {
@@ -484,14 +492,6 @@
 
                   </script>
               </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                  ## DEMO
-                  </script>
-              </section>
-
-
 
               <section data-markdown class="center">
                   <script type="text/template">
@@ -509,11 +509,17 @@
 
               <section data-markdown class="center">
                   <script type="text/template">
+                  ## Showing code...
+                  </script>
+              </section>
+
+              <section data-markdown class="center">
+                  <script type="text/template">
                   ## Next time
 
-                  * More about templating
-                  * Web Security
-                  * Session
+                  * Persistent data
+                  * MongoDB, Mongoose
+                  * Session handling
                   * ...
                   </script>
               </section>
@@ -521,7 +527,8 @@
               <section data-markdown class="center">
                   <script type="text/template">
                     ## See ya!
-                  <img src="http://www.reactiongifs.com/r/cya.gif" alt="">
+
+                    <img src="http://www.reactiongifs.com/r/cya.gif" alt="">
                   </script>
               </section>
 
