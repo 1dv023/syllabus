@@ -50,4 +50,14 @@ Before you start:
 | Lectures| 1-2 |
 | Keywords| EventEmitter |
 | Readme | https://github.com/CS-LNU-Learning-Objects/the-node-plattform-finding-waldo/ |
-| Solution | [TODO]|
+
+## Follow the route
+
+|  |  |
+| ------------- | ------------- |
+| Repo | [follow-the-route](https://github.com/1dv023/follow-the-route) |
+| Level  | A  |
+| Study week  | 3 |
+| Lectures| 3 |
+| Keywords| Express.js, routes, templates |
+| Readme | https://github.com/1dv023/follow-the-route |
