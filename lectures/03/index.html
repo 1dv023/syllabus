@@ -86,11 +86,11 @@
                 <script type="text/template">
                   ##Content
 
-                  * Some repetation
-                  *  Persistent data
+                  * Some words about layout and partials
+                  * Persistent data
                     * Some diffrent strategies
-                    * mongoDB
-                    * mongoose
+                    * MongoDB
+                    * Mongoose
                   * Session Storage
 
 
@@ -98,42 +98,52 @@
               </section>
 
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
                       ## Last time
 
                       * Web Application architecture
                         * n-tier architecture
-                        * MVC
-                        * Routes
-                        * Templates
-
-
+                        * MVC - Model, View, Controller
+                        * Express.js, Routes, URL-mapping (Controller)
+                        * Express.js, Templates (View)
                   </script>
               </section>
               <!-- architecture -->
                 <section>
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
                       ## Some more about templates
 
                       * Layouts
                         * Defines the structure of the render page
-                        * Partial - includes in the sturcture (header, footer, ...)
 
+                      ```javascript
+                          // Setting up
+                          app.engine(".hbs", xphbs({ defaultLayout: "main"}));
 
+                          // ....
+                          // Will look in the folder "views/layouts" for specified template
+                          // otherwise use the one named "main"
+                          response.render("path/to/view", {layout: "otherLayoutTemplate"})
+                      ```
 
+                      * Partials
+                        * "Widgets" of the page
+                        * Include in the structure (header, footer, information alerts, ...)
+                        * Place in the folder "views/partials" (as default)
 
+                      ```html
+                        <div id="footer">
+                          {{> footer }}
+                        </div>
+                      ```
                   </script>
               </section>
 
               <section data-markdown class="center">
                   <script type="text/template">
-                    ## Example layouts
-                    ```javascript
-                    // Some code
-                    ```
-
+                    ## Lets see some of that code again
                   </script>
               </section>
             </section>
@@ -141,103 +151,128 @@
 
 
 
-            <!--- Layered architecture -->
+            <!--- Data persistant -->
             <section>
-
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
-                    ## Example partials
-                    ```javascript
-                    // Some code
-                    ```
+                    ## Data persistence
 
-                    ## DEMOcode?
-                  </script>
-              </section>
+                    * <strong>CRUD</strong> - Create, Read, Update, Delete, The M in MVC
+                    <br><br>
 
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Data persistent
-                    Model
-
-                    <strong>CRUD</strong> - Create, Read, Update, Delete
-                    How to store application data?
-
+                    *How to store application data?*
                     * In memory?
                       * var users = [{username: "thajo", firstName: "John", ...}, {...}];
+                      * Not persistent. Hard to work with.
                     * In filesystem?
-                    * Cloud persistence?
-                      * Ex. Amazon S3
+                      * Hard to work with, performance.
+                    * In the cloud?
+                      * mongolab.com, firebase.com (BaaS)
                   </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
-                    ## Database
+                    ## We will use a Database
 
-                    * Software that store and organize binary data
-                    * receive, filter, sorting, questions....
+                    * Software that store and organize collections of data
+                    * **Could** run on a own server machine
+                    * Receive, filter, sorting, questions....
+
+
+                    <div class="center">
+                      <img src="../images/database_img.jpg" alt="">
+
+                    </div>
 
                   </script>
               </section>
 
 
               <!-- Presentation layer - responsible for managing user interaction with the system -->
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
-                    ## Diffrent types of databases
+                    ## Different types of databases
 
                     * Relational database management systems (RDBMS)
-                      * mySQL, SQL Server, PostgreSQL
+                      * Widely used
+                      * MySQL, SQL Server, PostgreSQL
                       * Mature, decades of research and database theory
+                      * Standardized Query language, Structured Query Language (SQL)
+                      * Table, columns, rows
 
-                    Image of a table - User
+                    <div class="center">
+                      <img src="../images/usertable.png" alt="">
+                    </div>
+
 
                     ```sql
                       SELECT username, firstname, lastname FROM user
                     ```
 
-
-
                   </script>
               </section>
 
-              <!-- Presentation layer - responsible for managing user interaction with the system -->
               <section data-markdown class="center">
                   <script type="text/template">
-                    ## Diffrent types of databases
+                    ## RDBMS - Relations
 
-                    * noSQL databases
-                      * Key-Value database - Simple mapping
+
+                    <div class="center">
+                      <img src="../images/relationtable.png" alt="">
+                    </div>
+
+                    ```sql
+                    SELECT firstname, lastname, message
+                    FROM user, message
+                    WHERE user.id = message.user_id;
+                    ```
+                  </script>
+              </section>
+
+
+
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    <img src="../images/schema.jpg" alt="">
+                  </script>
+              </section>
+
+              <!--  -->
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## A new citizen in DB town
+
+                    * noSQL databases ("Not Only SQL")
+                      * Key-Value database - Simple mapping, fast
                       * Document database - Data stored as document (JSON, BSON...)
-                      * Graph database - Data with releations...
-                      * and some more types....
+                      * Graph database - Data with releations...think social networks
+                      * ...
+                    * Started as "In-house solution" at big web companies
+                    * Tried to solve scaling problems
                     * Simplicity of design
-                    * simpler "horizontal" scaling to clusters of machines
-
+                    * Not a silverbullet!
 
 
 
                   </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
-                    ## Releational vs. Document database
+                    ## RELATIONAL vs. noSQL
 
                     * RDBMS
-                      * Well structure data, high performance
-                      * ACID - Transactions
+                      * Mature, well tested and used
+                      * Well structured data
+                      * ACID-Transactions <span class="small">(Atomicity, Consistency, Isolation, Durability)</span>
                       * Normalization
-
-                    * Document database
+                    * noSQL
                       * Simplicity
-                      * Store in a JSONish format
-                      * Scalability
-                      * Flexibility
-
-
+                      * Store in a JSON-ish format (not all!)
+                      * Scalability, Flexibility
+                      * Denormalization
+                      * Tradeoff from ACID compliance
 
                   </script>
               </section>
@@ -245,101 +280,235 @@
             </section>
 
 
+
+
             <!-- code structure -->
             <section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
-                    ## mongoDB
+                    <div class="center">
+                      <img src="https://www.mongodb.com/assets/MongoDB_Brand_Resources/MongoDB-Logo-Knockout-7b6985b9ec51b3f90f857f6fce8eca6b296d0daaefa9213da1a79c5d16c42f91.jpg" width="60%" alt="">
+                    </div>
+
+
 
                     * Document database
-                    * JSON-like document with schemas (BSON)
+                    * JSON-like document with schemas (BSON - Binary JSON)
                     * Free and open source
+                    * The name derived from "humongous"
+                    * subdocument and references (instead of joining tables)
+                    * Vagrant installed and ready (or use mongolab.com)
                   </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
-                    ## Working against mongoDB
+                    ## Working with mongoDB
 
-                    * low-level native driver
-                    * mongoose (npm install mongoose --save)
+                    * Using a low-level native driver (https://www.npmjs.com/package/mongodb)
+                    * mongoose.js
                       * Object Document Mapper (ODM)
                       * Schemas and Models
-                      * Validation rules
-                      * Query API
-
-
+                      * Validation rules, error handling
+                      * "Query API" - Be sure to dive into the documentation
+                      * npm install mongoose --save
                   </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
                     ## Connection
                     ```javascript
-                    // Show a connection / connection string
+                    npm install mongoose --save
                     ```
+                    <br>
+                    ```javascript
+                    let mongoose = require("mongoose");
+                    let db = mongoose.connection;
 
+                    // Listen for events
+                    db.on("error", function() {
+                      console.log("We got a connection error!");
+                    });
 
+                    // When connected
+                    db.once("open", function() {
+                      console.log("Succesfully connected to mongoDB");
+                    });
+
+                    // connection URL should be in /config
+                    mongoose.connect("mongodb://localhost/todoDB");
+
+                  ```
                   </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
                     ## Creating a Scheme/Model
 
-                    * Analyze the application - Create types/objects
+                    * How should we store data?
+                    * Analyze the application - Create types/objects, Real objects
+                      * User, Blog, Post, Comment...
+                      * Create a Schema defining the Model and its types
 
-                    ```javascript
-                    // Show a model
                     ```
+                    let personSchema = new mongoose.Schema({
+                      name:    {type: String, required: true},
+                      living:  Boolean,
+                      updated: { type: Date, default: Date.now },
+                      age:     { type: Number, min: 18, max: 65 }
+                    });
+                    ```
+                    http://mongoosejs.com/docs/schematypes.html
+
                   </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
-                    ## Save to the database - Create
+                    ## Creating the model
 
+                    Should be in models/Todo.js
 
                     ```javascript
-                    // Show a model
+
+                      // Defining the Schema
+                      let todoSchema = mongoose.Schema({
+                        text: { type: String, required: true },
+                        createdAt: { type: Date, required: true, default: Date.now }
+                      });
+
+                      // Creating the Model - Just like an Object
+                      let Todo = mongoose.model("Todo", todoSchema);
+
+                      // export the object for use in code
+                      module.exports = Todo;
                     ```
-                  </script>
+
+                </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
-                    ## Read from the database - Read
-
+                    ## Save to database - Create
+                    http://mongoosejs.com/docs/api.html#model_Model-save
 
                     ```javascript
-                    // Show a model
+                    let todoObject = new Todo({
+                       text: todoText
+                       // createdAt has a default function
+                     });
+
+                     // using the callback pattern
+                     todoInstance.save(function(error) {
+                       if(error) {
+                         // Handle the error
+                       }
+                       // All is good, Redirect
+                       response.redirect("/todo");
+                     });
                     ```
+                    Psst...save returns a promise....
                   </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
-                    ## Change in the database - Update
-
+                    ## Receive from the database - Read
+                    http://mongoosejs.com/docs/api.html#model_Model.find
 
                     ```javascript
-                    // Show a model
+                    // first argument is an empty "condition-object" so we can find all
+                    Todo.find({}, function(error, data) {
+                      if(error) {
+                        throw error;
+                      }
+
+                      console.log(data); // watch this!
+                      // send the data to the view that format and present it
+                      response.render("todo/index", data);
+                    });
                     ```
+                    ```javascript
+                    Model.find({property: "value"}, callback);
+                    ```
+
                   </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
-                    ## remove from the database - Delete
+                    ## Send all data to the view?
 
+                    * View should format the data (like date formats)
+                    * We also gets properties as _id and _v
+                    * Easy to accidentally expose confidential information
+                    * Mapping the data before sending it to the view
 
                     ```javascript
-                    // Show a model
+                    Todo.find({}, function(error, data) {
+
+                      // map just the data needed by the view  (in this case)
+                      let context = {
+                        todos: data.map(function(todo) {
+                          return {
+                            text: todo.text,
+                            createdAt: todo.createdAt,
+                            id: todo._id
+                          };
+                        })
+                      };
+                      response.render("todo/index", context);
+                    });
+                  ```
+                  </script>
+              </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## Remove from database
+                    http://mongoosejs.com/docs/api.html#query_Query-findOneAndRemove
+
+                    ```javascript
+                    // first object is an condition object
+                    // The request have a parameter id in the call POST /todo/delete/:id
+
+                    Todo.findOneAndRemove({_id: request.params.id}, function(error) {
+                      if(error) {
+                        // handle error
+                      }
+                      response.redirect("/todo");
+                    });
                     ```
                   </script>
               </section>
 
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## Update data
+
+                    http://mongoosejs.com/docs/api.html#query_Query-findOneAndUpdate
+
+                    Read the documentation and you be happy!
+                    <div class="center">
+                      ![happy](https://www.reactiongifs.com/r/cheering_minions.gif)
+                    </div>
+
+                  </script>
+              </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## A look at the demo
+
+
+                  </script>
+              </section>
+
+
+              <!--
               <section data-markdown class="center">
                   <script type="text/template">
                     ## Search in the database
@@ -358,92 +527,155 @@
 
                   </script>
               </section>
-
+            -->
             </section>
 
 
             <!-- express -->
             <section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
                     ## Session storage
                     * HTTP is stateless
                     * To have a state at the server we create sessions
                     * The session is stored at the server and identified by session cookies
                       * In memory (what happen when server is restarted? multiple servers?)
-                      * Key-Value DB - redis
-                      * in mongoDB
-                    * The session is handle by the client
+                      * In key-Value DB like "redis"
+                      * In mongoDB
+                    * The session could be handle by the client
                       * store everything in a cookies
                       * JSON Web Token
                   </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
                     ## Using session in express (in-memory)
 
+                    * Middleware
+                      * express-session (https://github.com/expressjs/session)
+                      * cookie-parser (no need anymore)
+
                     ```javascript
-                    // setting up
+
+                    app.use(session({
+                        name:   "theserversession",  // Don't use default session cookie name.
+                        secret: "K7smsx9MsEasad89wEzVp5EeCep5s", // should be kept secret
+                        saveUninitialized: false, // save/not-save a created but not modified session
+                        resave: false, // resave even if a request is not changing the session
+                        cookie: {
+                            secure: true, // should be true to check that we´re using HTTPS
+                            httpOnly: true, // dont allow client script messing with the cookie
+                            maxAge: 1000 * 60 * 60 * 24 // will live for 1 day
+                        }
+                    }));
                     ```
-                    How will the cookie look on the client?
                   </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
-                    ## Setting and delete sessions
+                    ## Working with sessions
+
+                    Setting a *user-specific* view counter as a session variable
 
                     ```javascript
-                    // setting up
+                      // getting the session from the request
+                      app.get("/assignment-clue", function(request, response) {
+                        // read the session from the request
+                        var session = request.session;
+
+                        if(session.pageViews) {
+                          // if exists add 1
+                          session.pageViews += 1;
+                        }
+                        else {
+                          // else set inital value
+                          session.pageViews = 1;
+                        }
+                        // ....
+                      });
                     ```
                   </script>
               </section>
 
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## Flash messages
+                    * When you want to give feedback to a user over a redirect (for example in a PRG-pattern)
+                    * We can use the session to save the state and delete the message on next request
+
+                    <div class="center">
+                      <img src="../images/flashmessage.png" alt="">
+                    </div>
+
+
+
+                  </script>
+              </section>
+
+              <section data-markdown class="">
                   <script type="text/template">
                     ## Flash messages
 
+                    <div class="center">
+                      <img src="../images/flashmessage.png" alt="">
+                    </div>
+
+                    ```javascript
+                    /**
+                     * A middleware looking for a session variable called "flash"
+                     */
+                    app.use(function(request, response, next) {
+                      // The flash should live for one roundtrip so if it is set in the session
+                      // add it to the context (this request through locals)
+                      response.locals.flash = request.session.flash;
+                      // then delete it from the session
+                      delete request.session.flash;
+                      next();
+                    });
+
+                    ```
+
                   </script>
               </section>
 
+
+              <!--
               <section data-markdown class="center">
                 <script type="text/template">
                   ## DEMO
 
                 </script>
               </section>
-
-              <section data-markdown class="center">
+            -->
+              <section data-markdown class="">
                   <script type="text/template">
                     ## Using mongoDB as session storage
-                    ```javascript
-                    // setting up
-                    ```
+
+                    * Express-session is using in-memory storage as default
+                      * Not recommended in production, fails on restart of server
+                    * Easy setup on mongoDB
+                      * https://github.com/kcbanner/connect-mongo
+                      * The book (page 154) suggests "session-mongoose". Don´t use it.
+                    * Redis - a key-value db
+                      * Fast
+                      * https://www.npmjs.com/package/connect-redis
 
                   </script>
               </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Example - Simple log in
-
-                  </script>
-              </section>
-
-
-
-
-              <section data-markdown class="center">
+            </section>
+            <section>
+              <section data-markdown class="">
                   <script type="text/template">
                   ## Next time
 
                   * Web Security
                     * Common attacks
                     * How to protect our application
-                    * ...
+                    * Authentication and Authorization
                   </script>
               </section>
 
@@ -451,7 +683,7 @@
                   <script type="text/template">
                     ## I'm outta here! Bye!
 
-                    <img src="http://www.reactiongifs.com/r/rollaway.gif" alt="">
+                    <img src="http://www.reactiongifs.com/r/rollaway.gif" alt="" width="60%">
                   </script>
               </section>
 

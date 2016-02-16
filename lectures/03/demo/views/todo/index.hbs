@@ -1,10 +1,13 @@
 <h1>All todos</h1>
 
 <ul>
+
   {{#each todos}}
-    <li>{{ this.todo }}</li>
+    <li>{{ text }} - Created: {{ createdAt }} <a href="todo/delete/{{id}}">Remove</a></li>
   {{/each}}
 </ul>
 
 <a href="/todo/create">Make new ToDo!</a>
-
+<p>
+  You have viewed this {{views}} time(s).
+</p>

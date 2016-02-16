@@ -1,30 +1,13 @@
 "use strict";
-/**
- * Stupid data holder...waiting for persistant database
- */
 
-/**
- * Public API
- */
-module.exports = {
-  add : add,
-  all : all
-};
+let mongoose = require("mongoose");
 
-// holding data in varaible - Just as an example
-let database = [{todo: "Buy milk"}, {todo: "Go fishing"}];
+// Defining the Schema
+let todoSchema = mongoose.Schema({
+  text: { type: String, required: true },
+  createdAt: { type: Date, required: true, default: Date.now() }
+});
 
-/**
- * Get a string, add it to an object and push to the dataholder array
- */
-function add(todoText) {
-  let obj = { todo: todoText };
-  database.push(obj);
-}
-
-/**
- * Returns a copy of the dataholder array
- */
-function all() {
-  return database.slice();
-}
+// Creating the Model - Just like an Object
+let Todo = mongoose.model("Todo", todoSchema);
+module.exports = Todo;
