@@ -44,9 +44,22 @@ app.use(session({
 app.use(function(request, response, next) {
   // The flash should live for one roundtrip so if it is set in the session
   // add it to the context (this request through locals)
-  response.locals.flash = request.session.flash;
-  // then delete it from the session
-  delete request.session.flash;
+  if(request.session.flash) {
+    response.locals.flash = request.session.flash;
+    // then delete it from the session
+    delete request.session.flash;
+  }
+  next();
+});
+
+// Adding support for stupid render message (every request)
+app.use(function(request, response, next) {
+  // Always use a namespace for this
+  if(!response.locals.partials) {
+    response.locals.partials = {};
+  }
+  // This could be
+  response.locals.partials.sponsor = {name: "Acme AB"};
   next();
 });
 

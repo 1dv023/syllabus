@@ -10,9 +10,8 @@ let Todo = require("../models/Todo");
  */
 router.route("/todo/")
     .get(function(request, response) {
-
+      // Playing with the session
       var session = request.session;
-      //console.log(session);
       if(session.views) {
         session.views += 1;
       }
@@ -20,12 +19,13 @@ router.route("/todo/")
         session.views = 1;
       }
 
+
       // first argument is an empty object = no conditions - optional
       // Using callback pattern
       // See http://mongoosejs.com/docs/api.html#model_Model.find for executing with promises
       Todo.find({}, function(error, data) {
-      //  console.log(data); // watch this!
 
+        // mapping up the object for the view
         let context = {
           todos: data.map(function(todo) {
             return {
@@ -52,24 +52,32 @@ router.route("/todo/create")
         response.render("todo/create");
     })
     .post(function(request, response) {
-       let todoText = request.body.todoText;
+      let todoText = request.body.todoText;
 
-       let todoInstance = new Todo({
-         text: todoText,
-         createdAt: Date.now()
-       });
-
-       todoInstance.save().then(function() {
-         response.redirect("/todo");
-        }).catch(function(error) {
-          // get validation error for example
-          throw error;
-        });
+      // Create the object to save
+      let todo = new Todo({
+        text: todoText
       });
 
+      // Using a promise in this case
+      todo.save().then(function() {
+        // Successful
+        response.redirect("/todo");
+      }).catch(function(error) {
+        // get validation error for example
+        console.log(error.message);
+
+        // Of course you should handle this better!
+        response.redirect("/todo");
+      });
+    });
+
+/**
+ * Delete functions
+ */
 router.route("/todo/delete/:id")
     .get(function(request, response) {
-        // render the form
+        // render the form, send along the id
         response.render("todo/delete", {id: request.params.id});
     })
     .post(function(request, response) {
