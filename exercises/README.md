@@ -61,3 +61,15 @@ Before you start:
 | Lectures| 3 |
 | Keywords| Express.js, routes, templates |
 | Readme | https://github.com/1dv023/follow-the-route |
+
+## Pure approval
+
+|  |  |
+| ------------- | ------------- |
+| Repo | [Pure approval](https://github.com/1dv023/exercise-pure-approval) |
+| Level  | B  |
+| Study week  | 4 |
+| Lectures| 4 |
+| Keywords| Express.js, mongoose |
+| Readme | https://github.com/1dv023/exercise-pure-approval |
+| Solution | https://github.com/1dv023/exercise-pure-approval-SOLUTION |
