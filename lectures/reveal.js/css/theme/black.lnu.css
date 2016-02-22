@@ -163,6 +163,11 @@
     color: #2C76A8;
 }
 
+.lnu p.small_text {
+  font-size: 45%;
+  color: grey
+}
+
 .noborderimages img {
     border: none !important;
     background: none !important;
