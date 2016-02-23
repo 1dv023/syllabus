@@ -315,21 +315,16 @@
                     * A lot of diffrent databases with a lot of query languages
                     * MongoDB
                       * JS syntax permitted in some queries
+                      * $where, $or, ...
+                      ```javascript
+                          db.myCollection.find( { $where: function() {
+                            return obj.credits - obj.debits < $userInput; }
+                          });
+                      ```
                     * mongoose.js
                       * Handle all input as strings
 
-                    ```javascript
-                        db.myCollection.find( { $where: function() {
-                          return obj.credits - obj.debits < $userInput; }
-                        });
 
-                        // What if $userInput =>
-                        // 0;var date=new Date(); do{curDate = new Date();}while(curDate-date<10000);
-
-
-                        // DOS-attack 100% cpu for 10 sec
-
-                    ```
 
                   </script>
               </section>
