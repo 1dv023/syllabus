@@ -155,7 +155,7 @@
 
                     Open Web Application Security Project
 
-                    * Open, global nonprofit organization
+                    * Open, global non-profit organization
                       *  https://www.owasp.org
                     * OWASP Top Ten
 
@@ -171,10 +171,10 @@
                    ## XSS - What?
 
                    * Cross-Site Scripting
-                   * Takes unsanitized data and sends to client
+                   * The attacker get the application to send unsanitized data to client
                    * The client trust the server
                    * Attackers can execute script on client
-                     * Steal cookie - Session hijacking
+                     * Steal cookies - Session hijacking
                      * Key logging
                      * Phishing - Fake login
                      * ...
@@ -241,7 +241,7 @@
 
                  </script>
              </section>
-
+            <!--
              <section data-markdown class="">
                  <script type="text/template">
                    ## CSRF - How?
@@ -250,14 +250,14 @@
 
                  </script>
              </section>
-
+           -->
              <section data-markdown class="">
                  <script type="text/template">
                    ## CSRF - Protection?
 
                    * Synchronized Token pattern
                      * Controll that the request is made by our client
-                     * Include a token in forms (or meta tag)
+                     * Include a token in forms (and/or in meta tag)
                      * Must be unique for each request
 
                    ```html
