@@ -87,8 +87,10 @@
                 * Attack vectors
                   * XSS, CSRF, Injection...
                 * Authentication and Authorization
+                  * User management
                   * Passwords
                 * HTTPS
+                  * TLS Certificates
 
 
                 </script>
@@ -135,9 +137,9 @@
 
               <section data-markdown class="">
                   <script type="text/template">
-                      ## One thing to remember!
+                      ## Remember!
 
-                      The application must always assume that all input is potentially malicious
+                      >The application must always assume that all input is potentially malicious
 
                       <p class="center">
                         <img width="50%" src="http://45.media.tumblr.com/bf8a6931842e4cdfb08bff35771ff655/tumblr_mk4akgHpet1rajp4po1_500.gif" alt="">
@@ -235,7 +237,7 @@
                  <script type="text/template">
                    ## CSRF - How?
 
-                   <img src="../images/csrf1.png" alt="">
+                   <img src="../images/csrf.png" alt="">
 
                  </script>
              </section>
@@ -244,7 +246,7 @@
                  <script type="text/template">
                    ## CSRF - How?
 
-                   <img src="../images/csrf.png" alt="">
+                   <img src="../images/csrf1.png" alt="">
 
                  </script>
              </section>
@@ -311,7 +313,7 @@
                     ## Injections - noSQL
 
                     * You´re not safe!
-                    * A lot of implemntation with a lot of query languages
+                    * A lot of diffrent databases with a lot of query languages
                     * MongoDB
                       * JS syntax permitted in some queries
                     * mongoose.js
@@ -351,48 +353,67 @@
                  </script>
                </section>
 
-             <section data-markdown class="">
-                 <script type="text/template">
-                   ## User management
-                   * Authentication
-                     * Logging in the user against credentials
-                     * POST /login
-                       * 200 OK, 30x Redirect
-                       * 401 Unathourized
-                   * Authorization
-                     * Right resources to right user
-                       * 403 Forbidden
 
-
-
-                 </script>
-             </section>
 
              <section data-markdown class="">
                  <script type="text/template">
-                   ## Strategies when register the user
+                   ## Register
 
                    * Create a User model with username/email and password
-                   * Should the password have restrictions?
-                     * Allow looooong passwords
-                     * Restrict minimum length?
-                     * Allow special characters
-                   * A password should never be able to read back
-                   * Use a secure hashing algoritm (bcrypt)
-                     * Avoid md5, sha1, sha256
+
+                   ```javascript
+                     // Create a schema for user.
+                      let userSchema = new mongoose.Schema({
+                         email: { type: String, required: true, unique: true, ...},
+                         password: { type: String, required: true },
+                          ...
+                      });
+
+                      // Validate password
+                      userSchema.path("password").validate(function(password) {
+                          return password.length >= 6;
+                      }, "The password must be of minimum length 6 characters.");
+                   ```
 
                  </script>
              </section>
 
              <section data-markdown class="">
                  <script type="text/template">
+                  ## Passwords
 
-                   ```javascript
-                    // Code when register a user
-                   ```
+                  * Should the password have restrictions?
+                    * Allow looooong passwords
+                    * Restrict minimum length?
+                    * Allow special characters
+                  * A password should never be able to read back
+                  * Use a secure hashing algoritm (bcrypt)
+                    * Avoid md5, sha1, sha256
+
                  </script>
             </section>
+            <section data-markdown class="">
+                <script type="text/template">
+                  ##  Rainbow tables
 
+                  Trying to brute force hashed passwords trough tables with pre hashed "known passwords".
+
+                  <img width="25%" src="../images/rainbowtable.png" alt="">
+
+                </script>
+            </section>
+            <section data-markdown class="">
+                <script type="text/template">
+                  ## Salt your hash
+
+                  Server A and server B have different salt and different hash strings
+                  for same password - Protection against rainbow tables
+
+                  <img src="../images/saltcreate.png" width="80%" alt="">
+
+
+                </script>
+            </section>
             <section data-markdown class="">
                 <script type="text/template">
                   ##  Register users on your site
@@ -400,47 +421,107 @@
                   * Client fills the form
                     * Client validation
                     * required, e-mail format ect.
-                  * Check if username(email exists)
-                  * Before saving the user generate salt an hash the passward
-                  * Save the the password in db
-                    * Modern modules embed teh salt in the hash
+                  * Check if username/email already exists in application
+                  * Before saving the user hash the password with a salt
+                  * Save the the hashed password-string in db
                   * https://www.npmjs.com/package/bcrypt-nodejs
+                    * bcrypt has salts built into the generated hashes to prevent rainbow table attacks.
                 </script>
             </section>
+
+            <section data-markdown class="">
+                <script type="text/template">
+                 ## Code
+
+                  ```javascript
+                  // In the User model
+                  // Using a pre-hook (runs before saving the user)
+                  userSchema.pre("save", function(next) {
+                    bcrypt.genSalt(10, function(err, salt) {
+                      if(err) { return next(err); }
+
+                      // Using https://www.npmjs.com/package/bcrypt-nodejs
+                      bcrypt.hash(this.password, salt, function(err, hash) {
+                        if(err) { return next(err); }
+
+                        // set the password to the hash
+                        this.password = hash;
+                      });
+                    });
+                  });
+                  ```
+
+                </script>
+           </section>
+
+           <section data-markdown class="">
+               <script type="text/template">
+                 ## User management
+                 * Authentication
+                   * Logging in the user against credentials
+                   * POST /login
+                     * 200 OK, 30x Redirect
+                     * 401 Unathourized (You are not logged in, try again)
+                 * Authorization
+                   * Right resources to right user
+                     * 403 Forbidden (You may be logged in, but not authorized - Go away!)
+               </script>
+           </section>
+
+
+           <section data-markdown class="">
+               <script type="text/template">
+                 ## How to login a client
+
+                 * Log-in form, user fill in data
+                    * Validate on client, validate on server
+                 * Check credentials against database
+                 * If successful
+                   * Create a secure session coockie (regenerate) for the client
+                     * Return it with a redirect (or 2xx response)
+                 * If unsuccessful
+                   * Return a 401 Unauthorized(!)
+                     * Give the client information about what went wrong
+                 * Dont forget to give the user the possibility to log off!
+                   * Destroy the session
+                     * Redirect to start page
+
+               </script>
+           </section>
+
 
 
             <section data-markdown class="">
                 <script type="text/template">
+                  ## Code - login
 
                   ```javascript
-                   // Code when login a user
+                    // Check if password user is trying (in our model)
+                    // compare-function takes the hashed string in db
+                    // Hash candidatePassword, if they are the same res is true
+                    userSchema.methods.comparePassword = function(candidatePassword, callback) {
+                      bcrypt.compare(candidatePassword, this.password, function(err, res) {
+                          if(err) {
+                            return callback(err);
+                          }
+                          callback(null, res);
+                      });
+                    });
                   ```
                 </script>
            </section>
 
-             <section data-markdown class="">
-                 <script type="text/template">
-                   ##  Rainbow tables
 
-                   Trying to brute force hashed passwords
-
-                   IMG
-                 </script>
-             </section>
 
              <section data-markdown class="">
                  <script type="text/template">
                    ##  How do you handle your own passwords?
 
-                   * Using same passwords on diffrent sites?
-                   * Using two-factor authentication?
-                     * SMS
-                     * Something you know, Something you have
-                   * Using password services?
+                   Think about it to the peer-instruction!
                  </script>
              </section>
 
-
+<!--
              <section data-markdown class="">
                  <script type="text/template">
                    ##  DEMO
@@ -448,47 +529,29 @@
                    Login
                  </script>
              </section>
+-->
+
 
              <section data-markdown class="">
                  <script type="text/template">
-                   ## How to login a client
+                   ## Authorization in code
 
-                   * Log-in form, user fill in data
-                   * Validate on client, validate on server
-                   * Check credentials against database
-                   * If successful
-                     * Create a secure session coockie (regenerate) for the client
-                     * Return it with a redirect (or 2xx response)
-                   * If unsuccessful
-                     * Return a 401 Unauthorized(!)
-                     * Give the client information about what went wrong
-                     * Username or password wrong
-                   * Dont forget logoff
-                     * Destroy the session
-                     *
-                     IMAGE
+                    * Define middleware routes that catches all path you want to protect
+                    * Check that the client calling them has the correct session
 
+
+                    ```javascript
+                       router.all("/resource/:type(create|edit\/*|delete\/*)",
+                         function(request, response, next) {
+                           // If not authenticated trigger a 403 error.
+                           request.session.authenticatedAs ? next() : next(errorFactory(403));
+                         });
+                       });
+                    ```
                  </script>
              </section>
 
-             <section data-markdown class="">
-                 <script type="text/template">
-                   ## Athorization in code
-
-                 ```javascript
-                 router.all("/resource/:type(create|edit\/*|delete\/*)",
-                   function(request, response, next) {
-                     // If not authenticated trigger a 403 error.
-                     request.session.identity ? next() : handleTheError();
-                   });
-                 });
-                 ```
-
-
-               </script>
-             </section>
-
-
+              <!--
              <section data-markdown class="">
                  <script type="text/template">
                    ## Session cookie
@@ -509,55 +572,86 @@
                    ```
                  </script>
              </section>
+           -->
             </section>
             <section>
               <section data-markdown class="">
                   <script type="text/template">
                     ## HTTPS
-
-                    * Cryptation / Decryption
+                    * TLS(SSL) + HTTP = HTTP
+                    * Encryptation / Decryption
                       * Protect data between client and server
-                      * "Man in the middle attack"
-                    IMAGE
-
+                        * Prevent "man in the middle attack"
                     * Should we always use HTTPS?
-                    * Certificates
-                      * Can we trust the server
-                      * Diffrent levels
-                    IMAGE
+                      * Trust, SEO, New technologies
+                  </script>
+              </section>
+
+                <section data-markdown class="">
+                    <script type="text/template">
+                      ## Certificates
+                      * A digital signed document
+                        * Often created by a trusted part (CA - Certificate Authority)
+                          * Browser have a list of these
+                          * Cost money, diffrent levels of thrust
+                          * Comodo, Symantec, GlobalSign...
+                        * https://letsencrypt.org/
+                        * In development we can create our own
+                    </script>
+                </section>
+                <section>
+
+                      <strong>Domain Validated (DV)</strong><br />
+                  		Low cost, just validate the domain<br />
+                  		<img src="../images/ssl1.png" alt="">
+                      <br>
+
+                    		<strong>Organization Validation (OV)</strong> <br>
+                        Validates domain and the orgranization (addresses, country...)
+                        <br>
+                  			<img src="../images/ssl2.png" alt="">
+                  		</p>
+                  		<p>
+                  			<strong>Extended Validation (EV)</strong> <br>
+                  			Like OV plus more control of the organization that gives
+                        higher thrust <br>
+                        <img src="../images/ssl3.png" alt="">
+                  		</p>
+
+                </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## Encryption
+
+                    * Symmetric
+                      * Both parts have the private/secret key
+                    * Asymentric (public-key encryption)
+                      * A public key is used to encrypt a messages
+                      * A private key is used to decrypt the message
+                      * The part that only have the public key can only encrypt the message
+                      * Only the part with the private key can decrypt
+
 
                   </script>
               </section>
 
               <section data-markdown class="">
                   <script type="text/template">
-                    ## Cryptation
-
-                    * Symetric
-                      * Both parts have the "secret key"
-                    * Asymentric
+                    <p class="center">
+                      <img src="../images/httpsflow.png" alt="">
+                    </p>
 
 
+                    1. Client connect on port 443, requests the server identity
+                    2. Server sends a copy of the TLS Certificate, including servers public key
+                    3. Client check against list of thrusted CA´s and that the certificate is valid. Creates a symmetric key, encrypt it with the public key from the server.
+                    4. Server decrypt the symmetric key with its own private key. Start using the symmetric key when encrypt the messages
+                    5. We have a thrusted and encrypted communication
                   </script>
               </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## HTTPS Flow
 
-
-
-                  </script>
-              </section>
-
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Setting upp HTTPS in developer mode
-
-
-
-                  </script>
-              </section>
             </section>
             <section>
              <section data-markdown class="">
@@ -573,9 +667,9 @@
 
              <section data-markdown class="center">
                  <script type="text/template">
-                   ## I'm outta here! Bye!
+                   ## I bid you farewell!
 
-                   <img src="http://www.reactiongifs.com/r/rollaway.gif" alt="" width="60%">
+                   <img src="http://i.imgur.com/WLeRVMT.gif" alt="" width="60%">
                  </script>
              </section>
           </section>
