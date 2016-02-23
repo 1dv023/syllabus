@@ -224,10 +224,9 @@
 
                    * Cross-Site Request Forgery [pronounced sea-surf]
                    * Forged request, by attacker, are transmitted from a user that the website trusts (logged in)
-                   * Often combined with XSS
+                   * Trick client to visit site with bad code
+                   * Combined with XSS
                      * Inject code in site client visits (trust)
-                     * Trick client to visit site with bad code
-
                  </script>
              </section>
 
@@ -345,7 +344,7 @@
                     * OAuth, OpenID
                     * Facebook, Twitter, Github...
                   * Write your own?
-                    * Inform user how the crendetials is handled
+                    * Inform user how the credentials is handled
                     * Force the user how to form the password?
                     * Allow special characters and long passwords
                     * Remember your responsibility
@@ -386,7 +385,7 @@
                     * Allow looooong passwords
                     * Restrict minimum length?
                     * Allow special characters
-                  * A password should never be able to read back
+                  * A password should never be able to be read back
                   * Use a secure hashing algoritm (bcrypt)
                     * Avoid md5, sha1, sha256
 
@@ -437,18 +436,20 @@
                   // In the User model
                   // Using a pre-hook (runs before saving the user)
                   userSchema.pre("save", function(next) {
-                    bcrypt.genSalt(10, function(err, salt) {
-                      if(err) { return next(err); }
+                    var user = this;
+                     bcrypt.genSalt(10, function(err, salt) {
+                       if(err) { return next(err); }
 
-                      // Using https://www.npmjs.com/package/bcrypt-nodejs
-                      bcrypt.hash(this.password, salt, function(err, hash) {
-                        if(err) { return next(err); }
+                       // Using https://www.npmjs.com/package/bcrypt-nodejs
+                       bcrypt.hash(user.password, salt, null, function(err, hash) {
+                         if(err) { return next(err); }
 
-                        // set the password to the hash
-                        this.password = hash;
-                      });
-                    });
-                  });
+                         // set the password to the hash
+                         user.password = hash;
+                         next();
+                       });
+                     });
+                   });
                   ```
 
                 </script>
@@ -506,7 +507,7 @@
                           }
                           callback(null, res);
                       });
-                    });
+                    };
                   ```
                 </script>
            </section>
