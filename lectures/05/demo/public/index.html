@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+    <head>
+        <style type="text/css">
+            .hide {
+                visibility: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>The chat!</h3>
+        <div id="usernameArea">
+             Username: <input type="text" id="username" /> <button id="loginButton">Start chat</button><br>
+        </div>
+       
+        <div id="chatArea" class="hide">
+            <textarea id="ta" rows="10" cols="60" placeholder="Write your message"></textarea><br>
+            <button id="send">Send</button><br>
+            <ul id='messages'></ul>
+        </div>
+        
+        <!-- The script stuff -->
+        
+        <!-- This is automatic served by the socket.io server -->
+        <script src='/socket.io/socket.io.js'></script>
+        
+        <script>
+            // Auto discovery of the websocket server 
+            var socket = io();
+            
+            // Do boring stuff in a function
+            prepareTheDOMStuff();
+            
+            
+            //------ Start registring callbacks for diffrent messages
+            
+            // When first entering the chat
+            socket.on('welcome', function(data) {
+                addMessage(data.message);
+            });
+            
+            // When a new user is entering the chat
+            socket.on('newUser', function(data) {
+                addMessage(data.message);
+            });
+            
+            // When a user has left the chat
+            socket.on('userLeft', function(data) {
+                var message = data.user + " has left the chat";
+                addMessage(message);
+            });
+            
+            // When a new message has been written
+            socket.on("chatMessage", function(data) {
+                var message = data.user + " say: " + data.message;
+                addMessage(message);
+            })
+           
+           /**
+            * Getting references and setting upp listeners
+            */
+           function prepareTheDOMStuff() {
+               // Some boring DOM stuff
+                var ta = document.querySelector("#ta");
+                var username = document.querySelector("#username");
+                var button = document.querySelector("#send");
+                var usernameButton = document.querySelector("#loginButton");
+                
+                usernameButton.addEventListener("click", function() {
+                    document.querySelector("#chatArea").classList.remove("hide");
+                    document.querySelector("#usernameArea").classList.add("hide");
+                    socket.emit("login", {username: username.value});
+                });
+                button.addEventListener("click", function() {
+                    console.log(ta.value);
+                    socket.emit("chatMessage", {messageText: ta.value});
+                });
+
+           }
+
+            /**
+             * Function for adding messages to the DOM
+             */
+            function addMessage(message) {
+                var text = document.createTextNode(message),
+                    el = document.createElement('li'),
+                    messages = document.getElementById('messages');
+
+                el.appendChild(text);
+                messages.appendChild(el);
+            }
+        </script>
+    </body>
+</html>
