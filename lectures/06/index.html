@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="sv-se">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Real-time web - Server-based programming (1DV023)</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="icon" href="../images/favicon.png" type="image/png" />
+
+    <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.lnu.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="reveal lnu">
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <!-- Start -->
+            <section class="center" data-state="lnu-intro">
+                <h3>Server-based Web Programming</h3>
+                <h3>(1DV023)</h3>
+                <h1>Lecture</h1>
+                <h3>Real-time web</h3>
+                <div class="lnu-footer">
+                    <img src="../images/lnu-logotype.png" />
+                    <img src="../images/lnu-symbol.png" />
+                </div>
+                <pre><code></code></pre> <!-- Fix for color coding in md -->
+
+            </section>
+
+            <!-- CC -->
+            <section data-state="lnu-cc">
+                <h2>Licence for this work</h2>
+                <p>
+                    This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
+                </p>
+                <p>All content in this work excluding photographs, icons, picture of course litterature and Linnaeus University logotype and symbol, is licensied under a
+                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.</p>
+                <h4>You are free to </h4>
+                <ul>
+                    <li>copy and redistribute the material in any medium or format</li>
+                    <li>spread the whole or parts of the content</li>
+                    <li>show the whole or parts of the content publicly and digital</li>
+                    <li>convert the content to another format</li>
+                    <li>change the content</li>
+                </ul>
+                <p>
+                    If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus University logotype and symbol in your new work!
+                </p>
+                <p>
+                    At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
+                </p>
+            </section>
+
+            <section data-markdown>
+              <script type="text/template">
+                ## Content
+
+                * What is real-time web
+                  * Definition
+                  * Examples of real-time web applications
+                * Technologies for real-time web applications
+                  * History, problems, today
+                * Real-time and node.js
+                  * Small DEMO
+
+
+                </script>
+            </section>
+
+            <section>
+
+              <section data-markdown class="">
+                <script type="text/template">
+                  ## Definition
+                  Real-time web applications is clients recives data updates in a short
+                  time after the data is changed/created and without need for additional requests.
+
+                  * What do we mean by short time? (definitions from wikipedia)
+                    * Hard – missing a deadline is a total system failure.
+                    * Firm – infrequent deadline misses are tolerable, but may degrade the system's quality of service. The usefulness of a result is zero after its deadline.
+                    * Soft – the usefulness of a result degrades after its deadline, thereby degrading the system's quality of service.
+                  * Broadcast to many client
+                  * Lots of diffrent techniques (and hacks) for web applications
+                    * Not the way the web was intended to work!
+
+                </script>
+              </section>
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                          ## What kind of applications...
+
+                          * Web-based games
+                          * Social communication
+                            * Chat, Live comments, feeds...
+                            * Notifications
+
+                          <img src="../images/twitternotifications.png" width="70%" alt="">
+                          </script>
+                      </section>
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                          ## What kind of applications...
+                          * Collaboration tools
+
+                          <img src="../images/doc_realtime.png" width="60%" alt="">
+
+                          </script>
+                      </section>
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                            ## What kind of applications...
+                            * 2nd Screen Experience
+                              * Activity streams (live comments)
+                              * Statitics (live sport)
+                              * Video game extras
+                              * Voting, mentometer, Peer-instructions
+
+                            <img height="90%" src="../images/Second-screen-tv-watching.jpg" alt="">
+                          </script>
+                      </section>
+
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                          ## What kind of applications...
+
+                          * Decision making
+                            * Trading
+                            * Monitoring web application
+                              * Users, servers...
+
+                          <img src="../images/googleanalytics.png" width="60%" alt="">
+                        </script>
+                      </section>
+
+                    </section>
+                    <section>
+                      <section data-markdown class="">
+                          <script type="text/template">
+                          ## Is it a change of paradigm?
+                            * Notifications by default
+                              * How do you expect your mobile app to work?
+                            * Web of things?
+                              * Devices communicating in realtime
+                            * E-business?
+                              * Automatic price adjusting
+                            * Real-time API - Streaming API
+                              * Twitter, Google, Slack
+                          </script>
+                      </section>
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                          ## Exam assignment 3 (pre)
+                            * Create a dashboard for examination 2
+                              * Monitoring events in the application
+                                * User login, Create, Update, Delete
+                                * Realtime watching editing a snippet
+                              * Own features
+                            * Put the application in production
+
+                          </script>
+                      </section>
+
+                    </section>
+                    <section>
+                      <section data-markdown class="center">
+                        <script type="text/template">
+                          ## Technologies for real-time web
+
+                        </script>
+                      </section>
+                      <section data-markdown class="">
+                        <script type="text/template">
+                          ## The problem with HTTP...
+                          ...In realtime senario
+
+                          <img src="../images/chatproblem.png" width="80%" alt="">
+
+
+                        </script>
+                      </section>
+
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                            ## History
+                            * JAVA Applets (Netscape 2.0 - 1996)
+                              * Java virtual machine
+                              * Raw TCP socket
+                            * Flash plattform
+                              * RTMP servers, Shared Objects
+                              * Flash client
+                            * Silverlight (.NET)
+                              * In Sweden we call it "tvåa på bollen när matchen är över"
+                              * Well...was intended as a pure media server
+                          </script>
+                      </section>
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                            ## HTML and javascript
+
+                            * Comet (umbrella term)
+                              * Techniques that goes around the HTTP 1.1 spec. and browser implementations
+                                * Persistent HTTP connections, Domain sharding...
+                              * Long-lived hidden iframe
+                              * XHR long polling
+                              * XHR streaming
+                            * Server-sent events (HTML5)
+                              * No IE or Edge
+                              * Just from server, over HTTP(S)
+                              * https://docs.webplatform.org/wiki/tutorials/eventsource_basics
+                            * WebSocket
+
+                          </script>
+                      </section>
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                            ## XHR Long polling
+
+                            <img src="../images/long_poll.png" alt="">
+                          </script>
+                      </section>
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                          ## XHR Streaming
+
+                          <img src="../images/xhr_stream.png" width="70%" alt="">
+
+                          * "Transfer Encoding: chunked"
+                            * Don´t need to open new connection when data is received
+                          </script>
+                      </section>
+
+
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                          ## WebSocket
+
+                          * Socket?
+                          * Connect on HTTP(S), Upgrade to ws://  or wss://
+                            * Firewalls, proxies?
+                          * Two-way communication, full-duplex
+                            * Text or/and binary data
+                          * IETF Standard, RFC 6455, 2011,
+                            * WebSocket API for browsers, W3C
+                          * Security
+                            * Same-origin policy don´t exists
+                              * Browsers will send Origin header to server to filter
+                              * Use Content Security Policy
+                                * https://gist.github.com/subudeepak/9897212
+                              * Encryption with wss://
+                          </script>
+                      </section>
+
+
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                            ## Other architectures...
+                            * Client-to-Server
+                              * What I just said...
+                            * Client-to-Client
+                              * P2P (peer-to-peer)
+                              * WebRTC
+                            * Server-to-server
+                              * web hooks
+
+                          </script>
+                      </section>
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                          ## WebRTC (Web Real Time Communication)
+
+                          * Peer-to-peer (P2P)
+                            * Browser-to-browser
+                            * Init on a server
+                          * Audio, Video and DATA!
+                          * http://www.html5rocks.com/en/tutorials/webrtc/basics/
+
+                          </script>
+                      </section>
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                          ## Web Hooks
+
+                          <img width="65%" src="../images/webhooks.png" alt="">
+                          * Pubsubhubbub
+                            * An open protocol for distributed publish/subscribe
+
+                          </script>
+                      </section>
+                      <section data-markdown class="">
+                          <script type="text/template">
+                          ## Web Socket in node.js
+                          * Hosted solutions
+                            * "Push technology as a service"
+                              * https://www.firebase.com/, http://faye.jcoglan.com/, http://pusher.com, ...
+                          * Node Modules
+                            * http://socket.io/
+                            * https://www.npmjs.com/package/websocket
+                            * ...feel free to choose another
+
+                          </script>
+                      </section>
+
+                      <section data-markdown class="">
+                          <script type="text/template">
+                          ## DEMO - A chat
+
+                          A simple chat with socket.io and express.js
+                          </script>
+                      </section>
+
+
+                        <section data-markdown class="">
+                            <script type="text/template">
+                            ## Challenges with web sockets
+                              * Browser support
+                                * Fallback strategies
+                              * Concurrency
+                                * Syncronization
+                                * Fault-tolerant?
+                              * Security (wss)
+                              * Offline, Queue-strategies
+                            </script>
+                        </section>
+
+
+                          <section data-markdown class="">
+                                <script type="text/template">
+                                ## Next time
+                                * Bringing the application to production
+                                * Preperation
+                                  * Student Developer Pack
+                                  * https://education.github.com/pack
+                                  * Get a hosted virtual server - Digital Ocean
+                                </script>
+                            </section>
+                            <section data-markdown class="center">
+                                <script type="text/template">
+                                    ## Later skater!
+
+                                    <img width="70%" src="../images/goodbye2.gif" alt="" />
+
+                                </script>
+                              </section>
+
+        </div>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            width: 1280,
+            height: 800,
+            controls: true,
+            progress: true,
+            history: true,
+            center: false,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '../reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+
+    </script>
+
+</body>
+</html>
