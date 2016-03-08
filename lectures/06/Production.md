@@ -27,19 +27,15 @@ With these in mind we can move on to discuss some other concepts you could run i
 #### [Continuous integration](https://en.wikipedia.org/wiki/Continuous_integration)
 This is the process of merging development code with the master (the main branch for the production code) several times a day. This will help catch early issues and prevent us from all the problem a bigger integration will do. Here are automated testing a key factor. All code that goes into the master should have been tested against the test cases written for the application so we always know that pushed code don´t break anything. When a developer tries to merge her/his code into the master the test should runs and the merge should fail if there were errors. You have maybe seen the badge "build passing" on some github repos. These indicates that the last build/push have passed all test on the CI server and telling the world/team that the code is ok.
 
-BILD
+![CI server](../images/CIserver.png)
 
 There are lots of CI servers but if your are interested to try a CI server out I would recommend [travis](http://travis-ci.org) which is a online service with integration to GitHub. Travis is also included in your GitHub developer pack if you want to run it on private repos.
 
-#### Continuous delivery
+#### [Continuous delivery](https://en.wikipedia.org/wiki/Continuous_delivery)
 This is the part of delivering code to an environment. Whether it is to a staging server were a QA (Quality assurance) team can test the application or to a production server where customers use the application. The staging server is a place just before the production server where the application can be tested automatically by software and by QA people that reviews the application from a set of test methods and metrics. If there are problems the developers get to know about it and will fix it otherwise the code could manual be pushed to production. The main focus is to go from developers to a stage where the code that has been developed through this workflow should be ready for production.
 
-BILD
-
-#### Continuous deployment
+#### [Continuous deployment](https://en.wikipedia.org/wiki/Continuous_delivery#Relationship_to_continuous_deployment)
 The next step is continuos deployment. This way is a more automated step then continuous delivery. When a developer push his changes to the source control (GitHub) a trigger is run that send the code over to a continuous integration server that runs all testing (unit, acceptance, ...) and if succeeded the code is pushed over to the production server (or staging server) automatically. So its about full automation to get small features quickly from developers, through all the testing and into production.
-
-BILD
 
 ## After deploying
 Running web applications is not only about writing code and publish it to some server. The maintaining of a application is also a important thing. A application is a living thing and don´t think that you should write the whole application in developer mode and then publishing and think you are ready. You don´t know how your customers are going to use the application, which features they missing and which feature the don´t need. This is one thing to analyze but we also have the thing of catching bugs in production.
