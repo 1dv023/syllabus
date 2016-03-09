@@ -153,6 +153,7 @@ http://expressjs.com/en/advanced/best-practice-performance.html
 
 ### Setting up a application on Digital Ocean
 To show how to upload and publish your application on a virtual machine hosted at Digital Ocean I have made some videos.
+
 The videos will include:
 
 * Pushing a web socket application to the production server with git
