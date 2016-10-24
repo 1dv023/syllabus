@@ -20,7 +20,7 @@ The assignments are divided in to separate levels, A, B and C where C is the mos
 | Readme | https://github.com/CS-LNU-Learning-Objects/the-node-platform-exercise-rotten-tomatoes/blob/master/README.md |
 
 
-Before you start:
+Before you start (if using vagrant):
 
 1. Clone your exercise repo: `git clone https://github.com/1dv023/<USERNAME>-rotten-tomatoes`
 2. Pull the [node-mongodb-vagrant](https://github.com/1dv023/node-mongodb-vagrant) into the repo: `git pull https://github.com/1dv023/node-mongodb-vagrant.git`
