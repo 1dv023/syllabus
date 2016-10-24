@@ -1,5 +1,6 @@
 ## Exercises
-** OBS! many of the links and the videos points to the 1dv023 organization on GitHub. This the same course as this 1DV523.
+** OBS! many of the links and the videos points to the 1dv023 organization on GitHub. This the same course as this 1DV523.**
+
 Exercises below are in separate repositories.
 
 The assignments are divided in to separate levels, A, B and C where C is the most difficult level. You should always strive to complete at least level A and B.
@@ -14,7 +15,7 @@ The assignments are divided in to separate levels, A, B and C where C is the mos
 | Level  | A  |
 | Study week  | 1-2 |
 | Lectures| L01 |
-| Prerequisites| Watch [L01 - Kursintro och "The Node Platform" ](https://youtu.be/4VYF35H2Cn0) <br> Watch [Demo - Vagrant](https://youtu.be/70t8SDWdm2g) <br> Watch [Demo - NPM](https://www.youtube.com/watch?v=K7EVY58VH9g) <br> Watch [Demo - Async programming and callbacks](https://www.youtube.com/watch?v=XKCf8pFo5Cw) <br> Watch [Demo - Async programming and promises](https://www.youtube.com/watch?v=KUNdayQVXcA) <br> Watch [Demo - Async programming and generators](https://www.youtube.com/watch?v=EGzozn2j-wA)|
+| Prerequisites| Watch [Demo - Vagrant](https://youtu.be/70t8SDWdm2g) <br> Watch [Demo - NPM](https://www.youtube.com/watch?v=K7EVY58VH9g) <br> Watch [Demo - Async programming and callbacks](https://www.youtube.com/watch?v=XKCf8pFo5Cw) <br> Watch [Demo - Async programming and promises](https://www.youtube.com/watch?v=KUNdayQVXcA))|
 | Keywords| callback, promises, generators, filesystem |
 | Readme | https://github.com/CS-LNU-Learning-Objects/the-node-platform-exercise-rotten-tomatoes/blob/master/README.md |
 
