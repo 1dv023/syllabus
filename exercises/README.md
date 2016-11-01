@@ -41,6 +41,7 @@ Before you start (if using vagrant):
 | Keywords| callback, promises, web scrape |
 | Readme | https://github.com/1dv023/exercise-promising-web-scraper/blob/master/README.md |
 | Solution | https://github.com/1dv023/exercise-promising-web-scraper-SOLUTION |
+| Tips | Getting starting with web scraping in node.js: https://scotch.io/tutorials/scraping-the-web-with-node-js |
 
 ##Finding Waldo
 
