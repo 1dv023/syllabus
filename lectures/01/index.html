@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>01 - HTTP - Server-based programming (1DV023)</title>
+    <title>01 - HTTP - Server-based programming (1DV023/1DV523)</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -43,7 +43,7 @@
             <!-- Start -->
             <section class="center" data-state="lnu-intro">
                 <h3>Server-based Web Programming</h3>
-                <h3>(1DV023)</h3>
+                <h3>(1DV023/1DV523)</h3>
                 <h1>Lecture 01</h1>
                 <div class="lnu-footer">
                     <img src="../images/lnu-logotype.png" />
@@ -57,7 +57,7 @@
             <section data-state="lnu-cc">
                 <h2>Licence for this work</h2>
                 <p>
-                    This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
+                    This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Server-based Web Programming (1DV023/1DV523) at Linnaeus University.
                 </p>
                 <p>All content in this work excluding photographs, icons, picture of course litterature and Linnaeus University logotype and symbol, is licensied under a
                 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.</p>
@@ -102,11 +102,11 @@
                         * Reading from file system
                         * Documents, static files, streaming media
                       * Serve dynamic web resources
-                        * Support server-script languages like PHP, C# (ASP.NET)...
+                        * Support server-script platforms (like PHP, ASP.NET...)
                         * Render web data on-the-fly (HTML, JSON...)
                         * Communicate with databases
                         * Send request to other servers
-                      * Virtual hosting (multiple domain names)
+                      * Virtual hosting (handle multiple domain names)
 
 
                   </script>
@@ -126,7 +126,7 @@
                       * Apache Tomcat
                         * JAVA, Diffrent components for servlet, HTTP, JSP engine
                       * Node.js
-                        * A plattform! Create a web server!
+                        * A platform! Create a web server through APIs!
                   </script>
               </section>
 
@@ -145,22 +145,13 @@
                     ### Running a web server on node.js
 
                     ```
-                    var http = require("http"); // core module
-                    var port = 80;
-                    var hostname = "127.0.0.1";
+                    const http = require('http');
+                    const port = 8080;
 
-                    http.createServer(function(req, res) {
-
-                      // create HTTP Head
-                      res.writeHead(200, { "Content-Type": "text/plain" });
-                      // Send out text
-                      res.end("Hello World!\n");
-
-                    }).listen(port, hostname, function() {
-                      // Called when application get a request
-                      console.log("Server running at http://%s:%s", hostname, port);
-                    });
-
+                    http.createServer((req, res) => {
+                      res.writeHead(200);
+                      res.end('Hello world\n');
+                    }).listen(8000);
                     ```
                   </script>
               </section>
