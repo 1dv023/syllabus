@@ -18,6 +18,7 @@ The assignments are divided in to separate levels, A, B and C where C is the mos
 | Prerequisites| Watch [Demo - Vagrant](https://youtu.be/70t8SDWdm2g) <br> Watch [Demo - NPM](https://www.youtube.com/watch?v=K7EVY58VH9g) <br> Watch [Demo - Async programming and callbacks](https://www.youtube.com/watch?v=XKCf8pFo5Cw) <br> Watch [Demo - Async programming and promises](https://www.youtube.com/watch?v=KUNdayQVXcA))|
 | Keywords| callback, promises, generators, filesystem |
 | Readme | https://github.com/CS-LNU-Learning-Objects/the-node-platform-exercise-rotten-tomatoes/blob/master/README.md |
+| Solution proposal | https://github.com/CS-LNU-Learning-Objects/SOLUTION-the-node-platform-exercise-rotten-tomatoes |
 
 
 Before you start (if using vagrant):
