@@ -65,6 +65,7 @@ Before you start (if using vagrant):
 | Lectures| 3 |
 | Keywords| Express.js, routes, templates |
 | Readme | https://github.com/1dv023/follow-the-route |
+| Solution | https://github.com/1dv023/SOLUTION-follow-the-route |
 
 ## Pure approval
 
