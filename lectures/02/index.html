@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>02 - HTTP - Server-based programming (1DV023)</title>
+    <title>02 - HTTP - Server-based programming (1DV023/1DV523)</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -43,7 +43,7 @@
             <!-- Start -->
             <section class="center" data-state="lnu-intro">
                 <h3>Server-based Web Programming</h3>
-                <h3>(1DV023)</h3>
+                <h3>(1DV023/1DV525)</h3>
                 <h1>Lecture</h1>
                 <h3>Web Application Architecture</h3>
                 <div class="lnu-footer">
@@ -87,8 +87,8 @@
                   ##Content
 
                   * Web Application Architecture
-                  * Web Application Design (structure code)
-                  * Server-side development with Express.js
+                  * Web Application Design (code structure)
+                  * Server-side web application development with Express.js
                     * File structure
                     * Routes / URL-mapping
                     * Middleware, Error handling
@@ -193,6 +193,16 @@
                   </script>
               </section>
 
+              <section data-markdown class="center">
+                  <script type="text/template">
+                    ## Microservice Architecture
+                    SOA (service-oriented architecture) done right...
+
+                    Solit up monlitic applications to different services
+                    <img src="http://www.imotif.net/wp-content/uploads/2016/10/Richardson-microservices-part3-monolith-vs-microservices-1024x518.png" alt="">
+                  </script>
+              </section>
+
               <!--
               <section data-markdown class="center">
                   <script type="text/template">
@@ -201,14 +211,7 @@
                   </script>
               </section>
 
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Microservice
-                    TO DO modern way
-                    Big scale enterprice
-                    vs monolotic, as we are doing
-                  </script>
-              </section>
+
             -->
 
             </section>
@@ -219,14 +222,14 @@
 
               <section data-markdown class="center">
                   <script type="text/template">
-                    ## Code Structure
+                    ## Code Structure Design
                     <img src="../images/three-solution.jpg" width="25%" alt="">
                   </script>
               </section>
 
               <section data-markdown class="center">
                   <script type="text/template">
-                    ## Code Structure - MVC
+                    ## Code Structure - The MVC design pattern
 
                     * Model - View - Controller
                     * Software Design pattern, 1970s, SmallTalk, [Trygve Reenskaug](https://en.wikipedia.org/wiki/Trygve_Reenskaug)
@@ -418,7 +421,7 @@
                   <script type="text/template">
                     ## Express.js - Middleware
 
-                    <img src="../images/middleware.png" alt="">
+                    <img src="../images/middleware.png" height="200px" alt="">
 
                     * Parsing the body of the request
                     * Compression/decompression
