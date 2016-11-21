@@ -102,7 +102,7 @@
                   <script type="text/template">
                       ## The Web changes
 
-                      * Web applications changes
+                      * Web applications are changing
                         * Static pages
                         * Dynamic Pages - CGI (Common Gateway Interface)
                         * Web APIs, Real-time
@@ -401,12 +401,12 @@
                      *  @param {Object} req - Request Object, What the client sends
                      *  @param {Object} res - Response Object, Render or Redirect, status codes
                      */
-                    app.get("/message/:id", function(req, res) {
+                    app.get("/messages/:id", function(req, res) {
                       let id = req.params.id; // get the id in the url /message/123 gives id = 123
                       ...
                     });
 
-                    app.post("/message", function(req, res) {
+                    app.post("/messages", function(req, res) {
                       let postdata = req.body;
                       ...
                     });
@@ -504,7 +504,7 @@
                   <img src="../images/template_engine.png" alt="">
 
                   * http://handlebarsjs.com/
-                  * http://jade-lang.com/
+                  * https://pugjs.org
                   * https://mustache.github.io/
                   * http://www.embeddedjs.com/
 
