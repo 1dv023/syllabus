@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Load routes as "mini-apps"
 app.use("/", require("./routes/home.js"));
-app.use("/", require("./routes/todo.js"));
+app.use("/todo", require("./routes/todo.js"));
 
 // Error handling ------------------------------------------------------
 
