@@ -198,7 +198,7 @@
                     ## Microservice Architecture
                     SOA (service-oriented architecture) done right...
 
-                    Solit up monlitic applications to different services
+                    Split up monlitic applications to different services
                     <img src="http://www.imotif.net/wp-content/uploads/2016/10/Richardson-microservices-part3-monolith-vs-microservices-1024x518.png" alt="">
                   </script>
               </section>
@@ -402,7 +402,7 @@
                      *  @param {Object} res - Response Object, Render or Redirect, status codes
                      */
                     app.get("/messages/:id", function(req, res) {
-                      let id = req.params.id; // get the id in the url /message/123 gives id = 123
+                      let id = req.params.id; // get the id in the url /messages/123 gives id = 123
                       ...
                     });
 
