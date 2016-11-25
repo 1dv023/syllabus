@@ -6,7 +6,7 @@ The idea behind the application is that you should be able to list [issues](http
 
 ### The application
 
-![image of the application](https://github.com/1dv523/syllabus/examination/exam-assignment-3/application_flow.png)
+![image of the application](https://github.com/1dv023/syllabus/raw/master/examination/exam-assignment-3/application_flow.png)
 
 The image above tries to explain the application flow.
 
