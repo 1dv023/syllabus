@@ -4,7 +4,10 @@ In this assignment you will be writing a web application where you have to inclu
 
 The idea behind the application is that you should be able to list [issues](https://guides.github.com/features/issues/) done at your GitHub repository for this examination assignment (e.g. https://github.com/1dv523/xx222xx-examination-3). You will use this repository for your code but also to test the application by creating issues (and comments) and include these in your application through the GitHub web API and through GitHub webhooks.
 
-### The application
+### Assignment goals
+The assignment aims to give the student practical and theoretical experience about developing real-time web applications through Websocket and Webhooks. The student should also get practical experience how to put the built web application into production.
+
+## The application
 
 <img src="https://github.com/1dv023/syllabus/raw/master/examination/exam-assignment-3/application_flow.png" width="80%" />
 
@@ -27,14 +30,19 @@ When you register a callback for the webhook you should also define a secret so 
 
 You can solve this in a couple of ways. In this assignment you should use environments variables. This way you can read from the environment variables in your application and add it when you start your node-application.
 
-### Resources
-To be able to solve the assignment you may do some reading in the documentation at GitHub. Here are some links:
+Production of application
+The application shall be running on a public web server in production enviroment. We recommend using "Digital ocean" which gives all students a own virtual public server but feel free to choose another provider.
 
-* https://developer.github.com/v3/issues/
-* https://developer.github.com/webhooks/
-  * https://developer.github.com/webhooks/configuring/
+## Put it in production 
+Other requirements on this assignment (besides the application):
 
-### Extra features
+* The node.js application should have a reversed proxy (nginx) in-front
+* The application shall be running through HTTPS (no requirement of buying a domian name so self-signed certificate is OK)
+* The node.js application should be running through PM2
+* You shall create a installation document that describes the installation process that you used to set up your production enviroment. This shall be in md-format and provided in your repositorie.
+
+
+## Extra features [optional]
 For those of you aiming for higher grades in this course there will be some suggestions of extra features that you could implement.
 * First of all - You probably have other ideas...feel free to try them
 * Implement more feature for the user to control the issues through the application (closing issues, adding comments ect.)
@@ -42,8 +50,13 @@ For those of you aiming for higher grades in this course there will be some sugg
 * Do a authentication through [GitHubs OAuth provider](https://developer.github.com/v3/oauth/#web-application-flow) instead of the Basic Authentication. This way a user could log into your applications through their OAuth credentials and see their own resources.
   * The user could then choose what repository to watch and the server application creates the web hook through the web API.
 
-### Assignment goals
-The assignment aims to give the student practical and theoretical experience about developing real-time web applications through Websocket and Webhooks. The student should also get practical experience how to put the built web application into production.
+## Resources
+To be able to solve the assignment you may do some reading in the documentation at GitHub. Here are some links:
 
-### Examination
-Your code will be reviewed during the examination. You to pass the exam you must be able to answer questions about your code. There will also be an oral examination with more theoretical questions.
+* https://developer.github.com/v3/issues/
+* https://developer.github.com/webhooks/
+  * https://developer.github.com/webhooks/configuring/
+
+
+## Examination
+Your code will be reviewed during the examination. To pass the exam you must be able to answer questions about your code. There will also be an oral examination with more theoretical questions.
