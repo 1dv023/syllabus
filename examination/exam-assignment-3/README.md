@@ -49,6 +49,7 @@ For those of you aiming for higher grades in this course there will be some sugg
 * Add some kind of custom authentication before the user can enter the application
 * Do a authentication through [GitHubs OAuth provider](https://developer.github.com/v3/oauth/#web-application-flow) instead of the Basic Authentication. This way a user could log into your applications through their OAuth credentials and see their own resources.
   * The user could then choose what repository to watch and the server application creates the web hook through the web API.
+* Include another external API in the application
 
 ## Resources
 To be able to solve the assignment you may do some reading in the documentation at GitHub. Here are some links:
