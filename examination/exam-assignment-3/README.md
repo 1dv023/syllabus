@@ -30,10 +30,10 @@ When you register a callback for the webhook you should also define a secret so 
 
 You can solve this in a couple of ways. In this assignment you should use environments variables. This way you can read from the environment variables in your application and add it when you start your node-application.
 
-Production of application
+## Production of application
 The application shall be running on a public web server in production enviroment. We recommend using "Digital ocean" which gives all students a own virtual public server but feel free to choose another provider.
 
-## Put it in production 
+### Production requirements
 Other requirements on this assignment (besides the application):
 
 * The node.js application should have a reversed proxy (nginx) in-front
@@ -56,7 +56,7 @@ To be able to solve the assignment you may do some reading in the documentation 
 
 * https://developer.github.com/v3/issues/
 * https://developer.github.com/webhooks/
-  * https://developer.github.com/webhooks/configuring/
+* https://developer.github.com/webhooks/configuring/
 
 
 ## Examination
