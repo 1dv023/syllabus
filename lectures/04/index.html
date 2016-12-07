@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Web Security - Server-based programming (1DV023)</title>
+    <title>Web Security - Server-based programming (1DV023/1DV523)</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -43,7 +43,7 @@
             <!-- Start -->
             <section class="center" data-state="lnu-intro">
                 <h3>Server-based Web Programming</h3>
-                <h3>(1DV023)</h3>
+                <h3>(1DV023/1DV523)</h3>
                 <h1>Lecture</h1>
                 <h3>Web Security</h3>
                 <div class="lnu-footer">
@@ -111,13 +111,14 @@
                       ## What is web security?
 
                       * From desktop to web
-                        * Shopping, banking, Conversations, ...
+                        * Shopping, Banking, Conversations, ...
                         * Sensitive and important information
                           * Society, Web of things
                         * Access to back-end system
-                        * Downtime === lost of money
+                        * Downtime == lost of money
                           * Denial of Service (DOS, DDOS)
-                        * Rendering code running on clients === more attack vectors
+                        * Rendering code running on clients <br />=>
+                            more attack vectors
                   </script>
               </section>
 
@@ -138,13 +139,12 @@
 
               <section data-markdown class="">
                   <script type="text/template">
-                      ## Remember!
-
-                      >The application must always assume that all input is potentially malicious
+                      ## Always be suspicious!
 
                       <p class="center">
                         <img width="50%" src="http://45.media.tumblr.com/bf8a6931842e4cdfb08bff35771ff655/tumblr_mk4akgHpet1rajp4po1_500.gif" alt="">
                       </p>
+                      >The application must always assume that all input is potentially malicious
 
                   </script>
               </section>
@@ -382,7 +382,7 @@
                     * Restrict minimum length?
                     * Allow special characters
                   * A password should never be able to be read back
-                  * Use a secure hashing algoritm (bcrypt)
+                  * Use a secure hashing algoritm (Argon2, bcrypt, scrypt)
                     * Avoid md5, sha1, sha256
 
                  </script>
@@ -458,7 +458,7 @@
                    * Logging in the user against credentials
                    * POST /login
                      * 200 OK, 30x Redirect
-                     * 401 Unathourized (You are not logged in, try again)
+                     * 401 Unauthorized (You are not logged in, try again)
                  * Authorization
                    * Right resources to right user
                      * 403 Forbidden (You may be logged in, but not authorized - Go away!)
@@ -474,7 +474,7 @@
                     * Validate on client, validate on server
                  * Check credentials against database
                  * If successful
-                   * Create a secure session coockie (regenerate) for the client
+                   * Create a secure session cookie (regenerate) for the client
                      * Return it with a redirect (or 2xx response)
                  * If unsuccessful
                    * Return a 401 Unauthorized(!)
