@@ -79,37 +79,37 @@
             </section>
 
 
+            <section data-markdown class="">
+                <script type="text/template">
+                    ## Last time
 
+                    * Web Application architecture
+                      * n-tier architecture
+                      * MVC - Model, View, Controller
+                      * Express.js, Routes, URL-mapping (Controller)
+                      * Express.js, Templates (View)
+                </script>
+            </section>
 
               <!-- Syllabus -->
               <section data-markdown>
                 <script type="text/template">
                   ##Content
 
-                  * Some words about layout and partials
                   * Persistent data
-                    * Some diffrent strategies
+                    * Some different strategies
                     * MongoDB
                     * Mongoose
-                  * Session Storage
-
+                  * Web Session
+                    * What and how
+                    * Flash messages
 
                   </script>
               </section>
 
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                      ## Last time
 
-                      * Web Application architecture
-                        * n-tier architecture
-                        * MVC - Model, View, Controller
-                        * Express.js, Routes, URL-mapping (Controller)
-                        * Express.js, Templates (View)
-                  </script>
-              </section>
-              <!-- architecture -->
+<!--
                 <section>
               <section data-markdown class="">
                   <script type="text/template">
@@ -148,7 +148,7 @@
               </section>
             </section>
 
-
+          -->
 
 
             <!--- Data persistant -->
@@ -162,7 +162,7 @@
 
                     *How to store application data?*
                     * In memory?
-                      * var users = [{username: "thajo", firstName: "John", ...}, {...}];
+                      * let users = [{username: "thajo", firstName: "John", ...}, {...}];
                       * Not persistent. Hard to work with.
                     * In filesystem?
                       * Hard to work with, performance.
@@ -295,7 +295,7 @@
 
                     * Document database
                     * JSON-like document with schemas (BSON - Binary JSON)
-                    * Free and open source
+                    * Free and open source (GNU AGPL v3.0)
                     * The name derived from "humongous"
                     * subdocument and references (instead of joining tables)
                     * Vagrant installed and ready (or use mongolab.com)
@@ -346,7 +346,7 @@
 
               <section data-markdown class="">
                   <script type="text/template">
-                    ## Creating a Schema/Model
+                    ## Creating a Schema
 
                     * How should we store data?
                     * Analyze the application - Create types/objects, Real objects
@@ -355,10 +355,10 @@
 
                     ```
                     let personSchema = new mongoose.Schema({
-                      name:    {type: String, required: true},
-                      living:  Boolean,
-                      updated: { type: Date, default: Date.now },
-                      age:     { type: Number, min: 18, max: 65 }
+                      name:      {type: String, required: true},
+                      living:    Boolean,
+                      createdAt: { type: Date, default: Date.now },
+                      age:       { type: Number, min: 18, max: 65 }
                     });
                     ```
                     http://mongoosejs.com/docs/schematypes.html
@@ -368,7 +368,7 @@
 
               <section data-markdown class="">
                   <script type="text/template">
-                    ## Creating the model
+                    ## Creating the model (and schema)
 
                     Should be in models/Todo.js
 
@@ -376,8 +376,8 @@
 
                       // Defining the Schema
                       let todoSchema = mongoose.Schema({
-                        text: { type: String, required: true },
-                        createdAt: { type: Date, required: true, default: Date.now }
+                        text:       { type: String, required: true },
+                        createdAt:  { type: Date, required: true, default: Date.now }
                       });
 
                       // Creating the Model - Just like an Object
@@ -507,46 +507,45 @@
                   </script>
               </section>
 
-
-              <!--
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Search in the database
-
-
-                    ```javascript
-                    // Show a model
-                    ```
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Documentation mongoose
-
-
-                  </script>
-              </section>
-            -->
             </section>
 
 
-            <!-- express -->
+            <!-- Session -->
             <section>
 
               <section data-markdown class="">
                   <script type="text/template">
-                    ## Session storage
+                    ## Web Session
                     * HTTP is stateless
-                    * To have a state at the server we create sessions
-                    * The session is stored at the server and identified by session cookies
-                      * In memory (what happen when server is restarted? multiple servers?)
-                      * In key-Value DB like "redis"
-                      * In mongoDB
-                    * The session could be handle by the client
-                      * store everything in a cookies
-                      * JSON Web Token
+                    * The server don´t remember previous requests
+
+                    <img src="../images/stateless.png" alt="">
+
                   </script>
+              </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## Web Session
+
+                    * To have a state at the server we create sessions
+
+                    <img src="../images/web-session.png" width="70%" alt="">
+
+                  </script>
+              </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                * The session is stored at the server and identified by session cookies
+                  * In memory (what happen when server is restarted? multiple servers?)
+                  * Static files (bad performance)
+                  * In key-Value DB like "redis"
+                  * In mongoDB
+                * The session could be handle by the client
+                  * store all data in a cookies
+                  * JSON Web Token (http://jwt.io)
+                </script>
               </section>
 
               <section data-markdown class="">
@@ -567,7 +566,7 @@
                         cookie: {
                             secure: true, // should be true to check that we´re using HTTPS
                             httpOnly: true, // dont allow client script messing with the cookie
-                            maxAge: 1000 * 60 * 60 * 24 // will live for 1 day
+                            maxAge: 1000 * 60 * 60 * 24 // Millisecond
                         }
                     }));
                     ```
@@ -584,7 +583,7 @@
                       // getting the session from the request
                       app.get("/assignment-clue", function(request, response) {
                         // read the session from the request
-                        var session = request.session;
+                        let session = request.session;
 
                         if(session.pageViews) {
                           // if exists add 1
@@ -681,7 +680,7 @@
 
               <section data-markdown class="center">
                   <script type="text/template">
-                    ## I'm outta here! Bye!
+                    ## Bye for now!
 
                     <img src="http://www.reactiongifs.com/r/rollaway.gif" alt="" width="60%">
                   </script>
