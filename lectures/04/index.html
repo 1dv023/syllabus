@@ -102,7 +102,7 @@
                 <script type="text/template">
                   ## When the web was invented...
 
-                  <img src="http://45.media.tumblr.com/tumblr_lyuenuRvQc1qidh58o1_500.gif" alt="" width="60%">
+                  <img src="../images/www-first-website.png" alt="" width="80%">
 
               </script>
               </section>
@@ -110,10 +110,10 @@
                   <script type="text/template">
                       ## What is web security?
 
-                      * From desktop to web
+                      * How do we use the web today?
                         * Shopping, Banking, Conversations, ...
                         * Sensitive and important information
-                          * Society, Web of things
+                          * Privacy, Society, Web of things
                         * Access to back-end system
                         * Downtime == lost of money
                           * Denial of Service (DOS, DDOS)
@@ -127,7 +127,7 @@
                       ## What is web security?
 
                       * Risk factors
-                        * Undeveloped awareness
+                        * Undeveloped awareness, education
                         * Simplicity to build web applications
                         * Functionality vs. security
                         * Time, cost
@@ -142,7 +142,7 @@
                       ## Always be suspicious!
 
                       <p class="center">
-                        <img width="50%" src="http://45.media.tumblr.com/bf8a6931842e4cdfb08bff35771ff655/tumblr_mk4akgHpet1rajp4po1_500.gif" alt="">
+                        <img width="50%" src="../images/suspisious.gif" alt="">
                       </p>
                       >The application must always assume that all input is potentially malicious
 
@@ -172,7 +172,7 @@
 
                    * Cross-Site Scripting
                    * The attacker get the application to send unsanitized data to client
-                   * The client trust the server
+                   * The client trust the server/application
                    * Attackers can execute script on client
                      * Steal cookies - Session hijacking
                      * Key logging
@@ -203,6 +203,7 @@
 
                  * Client validations?
                  * Validate/Sanitize input or output?
+                   * FIEO - Filter input, escape output
                    * Whitelist/Blacklist
                    * Encoding harmful characters  ( < and > ect.)
                    * How will our application use the data?
@@ -215,6 +216,25 @@
                  * Implementing modules like https://github.com/yahoo/xss-filters
                </script>
              </section>
+             <section data-markdown class="">
+               <script type="text/template">
+                ## XSS - Protection - CSP
+                ####Content Security Policy
+
+                * Using the Content-Security-Policy HTTP header
+                * New, but pretty widley supported in browsers
+                * Whitelisting allowed sources of script, style, and other resources.
+
+                ```
+                  Content-Security-Policy: default-src 'self'; img-src *;
+                  media-src media1.com media2.com; script-src cdn.script.example.com
+                ```
+
+                https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+                <br>
+                https://github.com/helmetjs/helmet
+               </script>
+             </section>
 
             </section>
 
@@ -225,7 +245,8 @@
 
                    * Cross-Site Request Forgery [pronounced sea-surf]
                    * Forged request, by attacker, are transmitted from a user that the website trusts (logged in)
-                   * Trick client to visit site with bad code
+                   * Server/Application trust the user
+                   * Trick client to visit site where the user has a session
                    * Combined with XSS
                      * Inject code in site client visits (trust)
                  </script>
@@ -241,7 +262,6 @@
 
                  </script>
              </section>
-            <!--
              <section data-markdown class="">
                  <script type="text/template">
                    ## CSRF - How?
@@ -250,8 +270,7 @@
 
                  </script>
              </section>
-           -->
-             <section data-markdown class="">
+              <section data-markdown class="">
                  <script type="text/template">
                    ## CSRF - Protection?
 
@@ -265,6 +284,7 @@
                        <input type="hidden" name="_csrf" value="HvtsC1Ka-yq1Q2KPAu_Yh_H8F4vJEYfMIlBQ" />
                      </form>
                    ```
+                   https://github.com/expressjs/csurf
                  </script>
              </section>
 
@@ -337,7 +357,7 @@
                   How do we handle users in our application!?
 
                   * Using third part solutions?
-                    * OAuth, OpenID
+                    * OAuth, OpenID Connect
                     * Facebook, Twitter, Github...
                   * Write your own?
                     * Inform user how the credentials is handled
@@ -384,6 +404,9 @@
                   * A password should never be able to be read back
                   * Use a secure hashing algoritm (Argon2, bcrypt, scrypt)
                     * Avoid md5, sha1, sha256
+
+                  >nyoIjb8W4rVuJKap/AyxgmZv21shwaMHov
+
 
                  </script>
             </section>
@@ -477,7 +500,7 @@
                    * Create a secure session cookie (regenerate) for the client
                      * Return it with a redirect (or 2xx response)
                  * If unsuccessful
-                   * Return a 401 Unauthorized(!)
+                   * Return a 401 or a redirect to the login form
                      * Give the client information about what went wrong
                  * Dont forget to give the user the possibility to log off!
                    * Destroy the session
@@ -545,6 +568,13 @@
                          });
                        });
                     ```
+
+                    ```javascript
+                       router.post("/resource", isAuthenticated, function(request, response) {
+                           // ...
+                         });
+                       });
+                    ```
                  </script>
              </section>
 
@@ -581,6 +611,7 @@
                         * Prevent "man in the middle attack"
                     * Should we always use HTTPS?
                       * Trust, SEO, New technologies, Open WiFi
+                      * So in production...YES!
                   </script>
               </section>
 
@@ -593,7 +624,7 @@
                           * Cost money, diffrent levels of trust
                           * Comodo, Symantec, GlobalSign...
                         * https://letsencrypt.org/
-                        * In development we can create our own
+                        * In development we can create our own - Self-signed
                     </script>
                 </section>
                 <section>
@@ -664,7 +695,7 @@
 
              <section data-markdown class="center">
                  <script type="text/template">
-                   ## I bid you farewell!
+                  # Tack och adjö för idag!
 
                    <img src="http://i.imgur.com/WLeRVMT.gif" alt="" width="60%">
                  </script>
