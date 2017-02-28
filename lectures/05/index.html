@@ -88,6 +88,7 @@
                 * Technologies for real-time web applications
                   * History, problems, today
                 * Real-time and node.js
+                  * Examination assignment 3
                   * Small DEMO
 
 
@@ -121,20 +122,12 @@
                           * Social communication
                             * Chat, Live comments, feeds...
                             * Notifications
+                          * Collaboration tools
 
                           <img src="../images/twitternotifications.png" width="70%" alt="">
                           </script>
                       </section>
 
-                      <section data-markdown class="">
-                          <script type="text/template">
-                          ## What kind of applications...
-                          * Collaboration tools
-
-                          <img src="../images/doc_realtime.png" width="60%" alt="">
-
-                          </script>
-                      </section>
 
                       <section data-markdown class="">
                           <script type="text/template">
@@ -156,6 +149,7 @@
 
                           * Decision making
                             * Trading
+                            * Automatic price adjusting
                             * Monitoring web application
                               * Users, servers...
 
@@ -172,8 +166,6 @@
                               * How do you expect your mobile app to work?
                             * Web of things?
                               * Devices communicating in realtime
-                            * E-business?
-                              * Automatic price adjusting
                             * Real-time API - Streaming API
                               * Twitter, Google, Slack
                           </script>
@@ -189,6 +181,10 @@
                                 * Sending real-time events to client through Web Socket
                               * Own features
                             * Put the application in production
+
+
+                            <img src="../images/ex3-application-flow.png" width="50%" alt="">
+
 
                           </script>
                       </section>
@@ -223,7 +219,7 @@
                               * RTMP servers, Shared Objects
                               * Flash client
                             * Silverlight (.NET)
-                              * In Sweden we call it "tvåa på bollen när matchen är över"
+                              * To late...
                               * Well...was intended as a pure media server
                           </script>
                       </section>
@@ -240,9 +236,11 @@
                               * XHR streaming
                             * Server-sent events (HTML5)
                               * No IE or Edge
-                              * Just from server, over HTTP(S)
+                              * Just from server, no bi-directional or full duplex (combine with XHR)
+                              * always over HTTP(S)
                               * https://docs.webplatform.org/wiki/tutorials/eventsource_basics
                             * WebSocket
+
 
                           </script>
                       </section>
@@ -274,17 +272,16 @@
 
                           * Socket?
                           * Connect on HTTP(S), Upgrade to ws://  or wss://
-                            * Firewalls, proxies?
+                            * Firewalls, proxies? Default port 80/443
                           * Two-way communication, full-duplex
                             * Text or/and binary data
                           * IETF Standard, RFC 6455, 2011,
                             * WebSocket API for browsers, W3C
                           * Security
                             * Same-origin policy don´t exists
-                              * Browsers will send Origin header to server to filter
-                              * Use Content Security Policy
+                                * Use Content Security Policy
                                 * https://gist.github.com/subudeepak/9897212
-                              * Encryption with wss://
+                            * Encryption with wss://
                           </script>
                       </section>
 
@@ -376,7 +373,7 @@
                             </section>
                             <section data-markdown class="center">
                                 <script type="text/template">
-                                    ## Later skater!
+                                    ## Ajöken!
 
                                     <img width="70%" src="../images/goodbye2.gif" alt="" />
 
