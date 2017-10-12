@@ -5,6 +5,8 @@ Exercises below are in separate repositories.
 
 The assignments are divided in to separate levels, A, B and C where C is the most difficult level. You should always strive to complete at least level A and B.
 
+As a registred student on the course you should have been given a exercise repo where you can save your solutions. This is up to your self to handle this. The course management will NOT check your exercise repo.
+
 ***
 
 ##Rotten Tomatoes
