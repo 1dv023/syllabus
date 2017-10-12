@@ -15,18 +15,10 @@ The assignments are divided in to separate levels, A, B and C where C is the mos
 | Level  | A  |
 | Study week  | 1-2 |
 | Lectures| L01 |
-| Prerequisites| Watch [Demo - Vagrant](https://youtu.be/70t8SDWdm2g) <br> Watch [Demo - NPM](https://www.youtube.com/watch?v=K7EVY58VH9g) <br> Watch [Demo - Async programming and callbacks](https://www.youtube.com/watch?v=XKCf8pFo5Cw) <br> Watch [Demo - Async programming and promises](https://www.youtube.com/watch?v=KUNdayQVXcA))|
 | Keywords| callback, promises, generators, filesystem |
 | Readme | https://github.com/CS-LNU-Learning-Objects/the-node-platform-exercise-rotten-tomatoes/blob/master/README.md |
 | Solution proposal | https://github.com/CS-LNU-Learning-Objects/SOLUTION-the-node-platform-exercise-rotten-tomatoes |
 
-
-Before you start (if using vagrant):
-
-1. Clone your exercise repo: `git clone https://github.com/1dv023/<USERNAME>-rotten-tomatoes`
-2. Pull the [node-mongodb-vagrant](https://github.com/1dv023/node-mongodb-vagrant) into the repo: `git pull https://github.com/1dv023/node-mongodb-vagrant.git`
-3. Pull and merge the [javascript-style-guide](https://github.com/CS-LNU-Learning-Objects/javascript-style-guide) into the repo: `git pull https://github.com/CS-LNU-Learning-Objects/javascript-style-guide` or write your own style guide files.
-4. Do a `vagrant up` and `vagrant ssh`
 
 ***
 
