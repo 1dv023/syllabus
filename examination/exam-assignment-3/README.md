@@ -19,6 +19,7 @@ The image above tries to explain the application flow.
 4. When a new "issue-event" happens on Github they will fire a (by you) registered HTTP POST which should point to your application.
 5. The webhook will send you data and your application should use the websocket channel(s) to update the client in real-time.
 
+Be sure to think about the security in your application.
 
 ### To handle API keys
 To be able to request data from GitHubs web API you must get a API key. This key must be sent in the Authorization-header in every request so that GitHub could authorize the request. Please notice that this key is personal to your GitHub account. That means that the key should never be stored in a repository or be shared to anyone (not even the teachers).
@@ -37,19 +38,20 @@ The application shall be running on a public web server in production enviroment
 Other requirements on this assignment (besides the application):
 
 * The node.js application should have a reversed proxy (nginx) in-front
-* The application shall be running through HTTPS (no requirement of buying a domian name so self-signed certificate is OK)
+* The application shall be running through HTTPS (no requirement of buying a domian name so self-signed certificate is OK - fixing a own certificate i perfered)
 * The node.js application should be running through PM2
-* You shall create a installation document that describes the installation process that you used to set up your production enviroment. This shall be in md-format and provided in your repositorie.
+* You shall create a installation document that describes the installation process that you used to set up your production enviroment. This shall be in md-format and provided in your repositorie. This document should not point to the demo-videos on this course it should describe the proces you have gone through to publish your application so the you have a document for this the next time you do this. 
 
 
 ## Extra features [optional]
-For those of you aiming for higher grades in this course there will be some suggestions of extra features that you could implement.
+For those of you aiming for higher grades in this course there will be some suggestions of extra features that you could implement. 
 * First of all - You probably have other ideas...feel free to try them
 * Implement more feature for the user to control the issues through the application (closing issues, adding comments ect.)
 * Add some kind of custom authentication before the user can enter the application
 * Do a authentication through [GitHubs OAuth provider](https://developer.github.com/v3/oauth/#web-application-flow) instead of the Basic Authentication. This way a user could log into your applications through their OAuth credentials and see their own resources.
   * The user could then choose what repository to watch and the server application creates the web hook through the web API.
 * Include another external API in the application
+
 
 ## Resources
 To be able to solve the assignment you may do some reading in the documentation at GitHub. Here are some links:
