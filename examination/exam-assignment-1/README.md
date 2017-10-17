@@ -41,15 +41,21 @@ After this you can see the available booking times which you should analyze with
 * Present the solution(s) as output in your terminal/console window (or as a HTML view)
 * [Optional] - Use the form for a user to book a table with your application
 
-## What the application could look like
-To be...
+## What the application should look like
+The output of the application should look something like this:
+
+![output of application](./output.png)
+
+As you can see the application should start with `npm start` and a URL as an argument to the process.
+The output should not be more "loud" then this. Be sure to remove all your other console.log before making your release.
+The result is the correct one for the current state of the sites - You could use it to check your solution
 
 ## Requirements of your solution
 * The application should be written as a Node.js application in Javascript
 * The only command the examinator should do tor run your application when cloning it from GitHub is `npm install` and `npm start`
 * You should work with GitHub and **do several commits** to show how your solution has been made.
 * You are free to find and use external modules 
-* The application should be able to take a parameter with the start-URL so one easy could change servers when running the examination.
+* The application **should be able to take a parameter with the start-URL** so one easy could change servers when running the examination.
 * Try to make a solution that is as general as possible. The examination of the assignment may will be done on a by the examinators provided server where some changes has been made. This is to test that your code is general for different scenarios. **The HTML structure will never be changed** but there could be changes in:
   * href-attributes in HTML: To check that your scraper doesn't use hardcoded URLs. URLs only defined in Javascript-code (as in the AJAX and movie-example) will not be changed so you can hardcode these.
   * The day(s) all three friends will be available, if none the application should give the end-user a massage about that
