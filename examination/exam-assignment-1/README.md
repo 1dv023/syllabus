@@ -44,7 +44,7 @@ After this you can see the available booking times which you should analyze with
 ## What the application should look like
 The output of the application should look something like this:
 
-![output of application](./output.png)
+![output of application](https://github.com/1dv023/syllabus/blob/master/examination/exam-assignment-1/output.png?raw=true)
 
 As you can see the application should start with `npm start` and a URL as an argument to the process.
 The output should not be more "loud" then this. Be sure to remove all your other console.log before making your release.
