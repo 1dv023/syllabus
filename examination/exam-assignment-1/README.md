@@ -51,8 +51,8 @@ The output should not be more "loud" then this. Be sure to remove all your other
 The result is the correct one for the current state of the sites - You could use it to check your solution
 
 ## Requirements of your solution
-* The application should be written as a Node.js application in Javascript
-* The only command the examinator should do tor run your application when cloning it from GitHub is `npm install` and `npm start`
+* The application should be written as a Node.js application in Javascript following the [JavaScript Standard Style](https://standardjs.com/) - You have to install and configure it your self (and add it to the package.json). The examinator should be able to run `standard` in the console to see that you have no errors.
+* The only command the examinator should do to run your application when cloning it from GitHub is `npm install` and `npm start`
 * You should work with GitHub and **do several commits** to show how your solution has been made.
 * You are free to find and use external modules 
 * The application **should be able to take a parameter with the start-URL** so one easy could change servers when running the examination.
