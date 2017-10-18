@@ -8,8 +8,9 @@ For this course we can recommend using the service: https://mlab.com/
   2. You will get a database to which you could connect to through a MongoDB URI. You will find your URI when you logged in.
   3. Use this URI when making a connection through mongoose and you should be able to write and read your persistent data there. 
 
-2. Install and run Docker containers. Docker is a very popular choice when running applications (not just node.js application). If you are interested of learning more about Docker (you should be - but out of scope for this course) please read this introduction: https://github.com/CS-LNU-Learning-Objects/web-application-architecture/blob/master/containers.md
-In the text below we will just describe the necessary steps to set up your docker environment for this course, including a application server and a database server
+This is clearly the most simple solution for this course. If you want to learn more and get a way to easy build different development solutions you should check out the Docker solution below. As a developer Docker probably is something you shuld try out even if it is out of scope of this course.
 
-1. Go to https://www.docker.com/get-docker and download the Community Edition for your operating system.
-2. Open up a terminal window and 
+2. Install and run Docker containers. Docker is a very popular choice when running applications (not just node.js application). If you are interested of learning more about Docker (you should be - but out of scope for this course) please read this introduction: https://github.com/CS-LNU-Learning-Objects/web-application-architecture/blob/master/containers.md
+
+To get started with Docker follow our guide at:
+https://github.com/thajo/docker-compose-node-mongodb/blob/master/README.md
