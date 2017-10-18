@@ -1,11 +1,13 @@
 ## Exercises
 ** OBS! many of the links and the videos points to the 1dv023 organization on GitHub. This the same course as this 1DV523.**
 
+The solutions may be done with a different JavaScript Style-guide then "JavaScript Standard" that you suppose to use.
+
 Exercises below are in separate repositories.
 
 The assignments are divided in to separate levels, A, B and C where C is the most difficult level. You should always strive to complete at least level A and B.
 
-As a registred student on the course you should have been given a exercise repo where you can save your solutions. This is up to your self to handle this. The course management will NOT check your exercise repo.
+As a registered student on the course you should have been given a exercise repo where you can save your solutions. This is up to your self to handle this. The course management will NOT check your exercise repo.
 
 ***
 
