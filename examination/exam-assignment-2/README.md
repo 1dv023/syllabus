@@ -13,20 +13,20 @@ When writing and presenting snippets **the application must support multiline te
 
 If a user tries to access a resource which requires the user to be logged in, the application must return the status code 403 (forbidden). Of course, when necessary, the application must also return the status code 404 (not found) as well as 500 (internal error).
 
-As far as posssible, the application must be protected from vulnerable attacks. Be prepered to explain and defend your solution at the oral hearing.
+As far as possible, the application must be protected from vulnerable attacks. Be prepared to explain and defend your solution at the oral hearing.
 
 As always, we have the following requirements:
 * The application should be written as a Node.js application in Javascript following the [JavaScript Standard Style](https://standardjs.com/) 
 * The only command the examinator should do to run your application when cloning it from GitHub is `npm install` and `npm start`
 * You should work with GitHub and **do several commits** to show how your solution has been made.
-* To submit your solution and tell the examinators that you are ready **you must do a release of your code on your GitHub repo** otherwise will you not b eable to book a time for the oral hearing.
+* To submit your solution and tell the examinators that you are ready **you must do a release of your code on your GitHub repo** otherwise will you not be able to book a time for the oral hearing.
  
 
 ## Setup
-You are free to setup your own development environment. You will need a database connection. You are free to use Docker or a connection-string to mLab (see [the database connection text](../resources/database-connection.md) for more information)
+You are free to setup your own development environment. You will need a database connection. You are free to use Docker or a connection-string to mLab (see [the database connection text](https://github.com/1dv023/syllabus/blob/master/resources/database-connection.md) for more information)
 
 
 ## Extra features [optional]
-For those who wants to expand functionality in the application and get an extra plus on the assigment feel free to do that- Some examples of this could be:
+For those who wants to expand functionality in the application and get an extra plus on the assignment feel free to do that- Some examples of this could be:
 * Add support for [tagging](https://en.wikipedia.org/wiki/Tag_(metadata)) each snippet by one or more tags
 * Add support for just showing snippets thats belongs to one tag or/and one user
