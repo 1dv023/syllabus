@@ -53,7 +53,7 @@
 
             <!-- CC -->
             <section data-state="lnu-cc">
-                <h2>Licence for this work</h2>
+                <h2>License for this work</h2>
                 <p>
                     This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Server-based Web Programming (1DV023/1DV523) at Linnaeus University.
                 </p>
@@ -93,15 +93,6 @@
                       <dd class="table-cell">Mats Loock (Course manager)</dd>
                   </dl>
 
-                  <dl class="table">
-                      <dt class="table-cell">
-                          Oskar Emilsson (teaching assistant - @kitty on slack)
-                      </dt>
-
-
-                  </dl>
-
-
                     <dl class="table">
                         <dt class="table-cell">
                             <img class="grayscale" src="http://www.gravatar.com/avatar/f0792a7226128e723ae2a45450e4da5c.jpg?s=80" alt="Johan">
@@ -139,18 +130,32 @@
                              * G1F
 
 
-
+                             http://kursplan.lnu.se/kursplaner/kursplan-1DV023-1.pdf<br>
                             http://kursplan.lnu.se/kursplaner/kursplan-1DV523-1.pdf
                         </script>
                 </section>
+                <section data-markdown>
+                  <script type="text/template">
+                      ## Prerequisite
+
+                      Klientbaserad webbprogrammering (1DV022) (or equivalent) At least assignment 2
+                      <br>
+                      <strong>AND</strong> 
+                      <br>
+                      Webbteknik 1 (1ME321) or 1DV525 Introduktion till webbprogrammering (or equivalent)
+
+                      * Good knowledge of programming in javascript
+                      * Good knowledge of client technologies like HTML, CSS, javascript in the browser
+                  </script>
+          </section>
 
                 <!-- Goals -->
                 <section data-markdown>
                         <script type="text/template">
                             ### After the course you should be able to...
 
-                            * Describe the task of the web server in diffrent kinds of web applications.
-                            * Describe the purpose of the HTTP­ protocol in diffrent kinds of web applications 
+                            * Describe the task of the web server in different kinds of web applications.
+                            * Describe the purpose of the HTTP­ protocol in different kinds of web applications 
                               and its pros and cons in this context.
                             * Create web applications with the platform Node.js.
                             * Create web applications for handling persistent data where data can be saved, 
@@ -165,10 +170,10 @@
                         <script type="text/template">
                             ### After the course you should be able to...
 
-                            *  Describe and have a practical understanding of diffrent security problem that can
+                            *  Describe and have a practical understanding of different security problem that can
                                occur in web applications.
                             * Create web applications with, for the context, suitable architecture.
-                            * Create server­based real-time applications.
+                            * Create server­-based real-time applications.
                             * Plan and perform publishing of web applications created for the Node.js platform in production enviroment.
                         </script>
                 </section>
@@ -179,23 +184,25 @@
                     <script type="text/template">
                         ## Approach
 
-                        * The course is devided into three parts
-                          * Part 1: node.js, web servers, HTTP
+                        * The course is divided into three parts
+                          * Part 1: Node.js, web servers, HTTP
                           * Part 2: Backend web application, web security, web architecture
                           * Part 3: Real-time application, publishing and production
-                        * Scheduled activities
-                          * 7 Lectures
-                          * 2 Peer Instructions
-                          * 1x2h/week tutoring
-                          * 3 examination assignments
-                          * 2 oral hearings
+                        * Activities
+                          * 1(!) Lectures (Scheduled)
+                          * 4 Peer Instructions (Scheduled)
+                          * Vlogs, recorded demos, written material
+                          * 2x2h/week tutoring (Scheduled)
+                          * 3 examination assignments (Scheduled)
+                            * 2 oral hearings
+                          
                     </script>
             </section>
 
             <!-- Tools -->
             <section data-markdown>
                 <script type="text/template">
-                ## Litterature
+                ## Literature
 
                 * Eloquent JavaScript, 2nd Edition av Marijn Haverbake
                   * Recommended
@@ -217,11 +224,11 @@
                     ## Tools to be used...
                     * Installed on your computers OS...
                       * [Git](https://git-scm.com/)
-                      * [JetBrains WebStorm](https://www.jetbrains.com/webstorm/) or other IDE of your choice
-                      * [Virtual Box](https://www.virtualbox.org/) - Optional
-                      * [Vagrant](https://www.vagrantup.com/) - Optional
-                      * Node.js (Recommended LTS or later), npm, mongodb - (if not using vagrant)
-
+                      * [Visual Studio Code](https://code.visualstudio.com/) or other IDE of your choice
+                        * Standard.js style guide
+                      * Node.js (Recommended LTS or later), npm
+                      * [Docker](https://www.docker.com/) - Optional
+                      
                 </script>
             </section>
 
@@ -240,32 +247,42 @@
             <section data-markdown class="center">
                 <script type="text/template">
                     # Questions?
-                    ![http://www.reactiongifs.com/r/fgwtf.gif](http://www.reactiongifs.com/r/fgwtf.gif)
+                 
                 </script>
             </section>
 
             <section data-markdown class="center">
                 <script type="text/template">
                     ### Server-based web programming?
-                    ![client server](../images/clientserver.png)
+                    ![client server](../images/client-server.png)
 
                 </script>
             </section>
 
             <section data-markdown class="center">
                 <script type="text/template">
-                    ### Classic server course
-                    ![client server](../images/classicservercourse.png)
+                    ### Programming on the web server
+                    * Server-script - Code that runs on the web server (or application server)
+                      * A web server is a software that listens for requests and responses with static or dynamic pages
+                    * Common platforms/languages for web server applications
+                      * PHP
+                      * ASP.NET (platform)
+                        * C# (language)
+                      * JAVA
+                      * Ruby
+                      * Python
+                    * We will use javascript (language) and the platform (Node.js) 
                 </script>
             </section>
 
+            <!--
             <section data-markdown class="center">
                 <script type="text/template">
                     ### This course!
                     ![client server](../images/ourservercourse.png)
                 </script>
             </section>
-            <!--
+            
             <section data-markdown class="center">
                 <script type="text/template">
                     # But...but...
