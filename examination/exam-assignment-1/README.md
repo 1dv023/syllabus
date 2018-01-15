@@ -73,4 +73,4 @@ There will not be an oral examination combined with this assignment. The examine
 ## The alternative server
 We have provided an alternative server where we have made some changes on the information and some URLs. Your application should also pass this server. The starting-URL is: http://labcloudftk46.lnu.se:8080/
 The result of this site should look like this:
-![output of application](https://github.com/1dv023/syllabus/blob/master/examination/exam-assignment-1/output2.png?raw=true)
+<img src="https://github.com/1dv023/syllabus/blob/master/examination/exam-assignment-1/output2.png?raw=true" width="50%">
