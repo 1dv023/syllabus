@@ -11,7 +11,7 @@ As a registered student on the course you should have been given a exercise repo
 
 ***
 
-##Rotten Tomatoes
+## Rotten Tomatoes
 
 |  |  |
 | ------------- | ------------- |
@@ -27,7 +27,7 @@ As a registered student on the course you should have been given a exercise repo
 ***
 
 
-##Promising Web Scraper
+## Promising Web Scraper
 
 |  |  |
 | ------------- | ------------- |
@@ -37,10 +37,9 @@ As a registered student on the course you should have been given a exercise repo
 | Lectures| L01, L02 |
 | Keywords| callback, promises, web scrape |
 | Readme | https://github.com/1dv023/exercise-promising-web-scraper/blob/master/README.md |
-| Solution | https://github.com/1dv023/exercise-promising-web-scraper-SOLUTION |
-| Tips | Getting starting with web scraping in node.js: https://scotch.io/tutorials/scraping-the-web-with-node-js |
+| Solution proposal | https://github.com/1dv023/exercise-promising-web-scraper-SOLUTION |
 
-##Finding Waldo
+## Finding Waldo
 
 |  |  |
 | ------------- | ------------- |
@@ -61,7 +60,7 @@ As a registered student on the course you should have been given a exercise repo
 | Lectures| 3 |
 | Keywords| Express.js, routes, templates |
 | Readme | https://github.com/1dv023/follow-the-route |
-| Solution | https://github.com/1dv023/SOLUTION-follow-the-route |
+| Solution proposal | https://github.com/1dv023/SOLUTION-follow-the-route |
 
 ## Pure approval
 
@@ -73,4 +72,4 @@ As a registered student on the course you should have been given a exercise repo
 | Lectures| 4 |
 | Keywords| Express.js, mongoose |
 | Readme | https://github.com/1dv023/exercise-pure-approval |
-| Solution | https://github.com/1dv023/exercise-pure-approval-SOLUTION |
+| Solution proposal | https://github.com/1dv023/exercise-pure-approval-SOLUTION |
