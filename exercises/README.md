@@ -43,12 +43,13 @@ As a registered student on the course you should have been given a exercise repo
 
 |  |  |
 | ------------- | ------------- |
-| Repo | [the-node-plattform-finding-waldo](https://github.com/CS-LNU-Learning-Objects/the-node-plattform-finding-waldo/) |
+| Repo | [the-node-platform-finding-waldo](https://github.com/CS-LNU-Learning-Objects/the-node-plattform-finding-waldo/) |
 | Level  | B  |
 | Study week  | 1-2 |
 | Lectures| 1-2 |
 | Keywords| EventEmitter |
-| Readme | https://github.com/CS-LNU-Learning-Objects/the-node-plattform-finding-waldo/ |
+| Readme | https://github.com/CS-LNU-Learning-Objects/the-node-platform-finding-waldo/ |
+| Solution proposal | https://github.com/CS-LNU-Learning-Objects/SOLUTION-the-node-platform-finding-waldo |
 
 ## Follow the route
 
