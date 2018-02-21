@@ -22,15 +22,15 @@ The image above tries to explain the application flow in this assignment.
 ### Other requirements
 * Your application should be designed with security in mind
   * For instance your code must check that the web hook POST really comes from GitHub.
-* Along with your code, installation scripts you should also commit a assignment report that answers some questions (see below)
+* Along with your code and installation scripts you should also commit a assignment report that answers some questions (see below)
 * Your are free to choose and use third party modules to solve the problem but they should be mention and motivated in your assignment report 
 
 ### To handle API keys
-To be able to request data from GitHubs web API you must get a API key. This key must be sent in the Authorization-header in every request so that GitHub could authorize the request. Please notice that this key is personal to your GitHub account. That means that the key should never be stored in a repository or be shared to anyone (not even the teachers).
+To be able to request data from GitHubs web API you must get a API token that identifies yourself. This key must be sent in the Authorization-header in every request so that GitHub could authorize the request. Please notice that this key is personal to your GitHub account. That means that the key should never be stored in a repository or be shared to anyone (not even the teachers).
 
 There are several ways to authenticate your calls to GitHub: https://developer.github.com/v3/#authentication
 We are going to use Basic Authentication and you should create a ["Personal access token"](https://github.com/settings/tokens). You allow this key to work with issues and send it along with the correct header.
-If you want to use a module for this we could recommend [Octonode](https://www.npmjs.com/package/octonode) that will help you with the API calls.
+If you want to use a module for this we could recommend [Octonode](https://www.npmjs.com/package/octonode) that will help you a lot with the API calls.
 
 When you register a callback for the web hook you should also define a secret so that you can validate the hook-requests to your application. This is also one thing to keep secret.
 You can solve this in a couple of ways. In this assignment you should **use environments variables**. This way you can read from the environment variables in your application and add it when you start your node-application.
@@ -47,6 +47,7 @@ The application shall be running on a public web server in production environmen
 
 ## Assignment report
 As a complement to your code you should provide a assignment report. You do this by answering these below questions **in your repositories README**.
+* What is the address to your application?
 * Describe what you have done to make your application secure, both in code and when configuring your application server
 * Describe the following parts, how you are using them and what their purpose is
   * Reversed proxy
@@ -54,9 +55,9 @@ As a complement to your code you should provide a assignment report. You do this
   * TLS certificates
   * Environment variables
 * What differs in your application when running it in development from running it in production?
-* Which extra modules did you use? Motivate the use of them and how you have make sure that they are secure enough for production
+* Which extra modules did you use in the assignment? Motivate the use of them and how you have make sure that they are secure enough for production
 * Have you implemented any extra features (see below)? If so, describe them.
-* If you aiming for a higher grade here is also the chance to motivate it
+  * If you are aiming for a higher grade here is also the chance to motivate it
 
 ## Extra features [optional]
 For those of you aiming for higher grades in this course there will be some suggestions of extra features that you could implement. 
