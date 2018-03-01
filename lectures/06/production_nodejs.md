@@ -11,12 +11,10 @@ example.com should be proxied to https://localhost:8080
 ```
 It is also known that Nginx is better on handling static content and Node.js/Express.js in better on handling dynamic content which could give us the clue that we should let Nginx handle all of our static content instead of letting express handling it with its middleware. If Nginx handles all request for static files we don´t have to clog the Node.js process down with this.
 
-We could also let the Nginx web server handle HTTPS instead of letting each Node.js application handle this. In this way the Nginx takes the all responsible of encryption and decryption. The request and responses between the Node.js application then could be done with plain HTTP since they are made internal.
-
-To get a more practical view of how you set up an Nginx watch the demo videos that will be published on the course web site.
+We could also let the Nginx web server handle HTTPS instead of letting each Node.js application handle this. In this way the Nginx takes the all responsible of encryption and decryption. The request and responses between the Node.js application then could be done with plain HTTP since they are made internal. Don´t forget to set the "trust proxy" flag in your express application if you have configure your session cookie to only be transmitted over HTTPS.
 
 ### Environment variables
-Environment variables is a kind of variables you can use on your server and combine with a process running. This is often said to be a good way to add secret hashes to the application instead of storing them in files that could easy be spread around (its easy to check the secrets into a public git repository). This secret hashstrings will be used by the application to produce stuff like session cookies and if someone gets hold of our server secret we re in trouble.
+Environment variables is a kind of global variables you can use on your server and combine with a process running. They are often used to add configuration information to the process/application on start up. That could be URLs to databases, tokens or in what mode you want to start your application. This is often said to be a good way to add secret hashes to the application instead of storing them in files or in code that could easy be spread around (its easy to check the secrets into a public git repository). This secret hash strings will be used by the application to produce stuff like session cookies and if someone gets hold of our server secret we re in trouble.
 
 You could set it locally for the server (ubuntu) by typing
 ```
@@ -26,6 +24,12 @@ or add it to the process when you start the application
 ```
 MY_VARIBLE="some value" node app.js
 ```
+You can then get this values inside the application through the ``` process.env.MY_VARIABLE ```
+
+But when you try to automate things as much as possible it could be a good idea to store all your environment variables in a file called .env. In the node community there is a couple of different modules that could help you to use a .env file. One of the most popular is [dotenv](https://www.npmjs.com/package/dotenv) which helps you to load this file and add them to the process.env-object. One thing to remember is that the .env should be in your .gitignore so you don't push sensitive data into your repository. You also wan´t different .env-files in different environments meaning that you probably have different values on different environments; for instance you have different connection strings to databases since you have one database for developing, one for testing and one for production. 
+
+Putting your developer .env in the .gitignore-file means that you in some way need to have another .env on your server when pushing your application to production.
+
 
 ### Set NODE_ENV to “production”
 When running your application you should be sure to run it in the production environment. This is important for performance. This will trigger performance related things in how the application will work. A simple way to do this is to set this variable when you start your application.
@@ -35,9 +39,9 @@ NODE_ENV=production node app
 ```
 This will start the application in production mode. You can test it in your local setup to check how the application runs in this mode.
 
-### Running right config
+### Using different config files
 
-Maybe you want your code to act different in different environments. You maybe want to load different databases when when your in development then if your testing or are in production.
+Another way to make your application act different in different environments is to load different config files depending on the value of NODE_ENV. 
 
 ```
 // When starting the server set default node environment to development
@@ -149,15 +153,3 @@ Remember that if you use the above package you must have a running [redis](http:
 ### More information
 The Express.js documentation have a guide where you will find the above tips and some more. The guide is focusing on performance in a production environment. It is well worth a read!
 http://expressjs.com/en/advanced/best-practice-performance.html
-
-
-### Setting up a application on Digital Ocean
-To show how to upload and publish your application on a virtual machine hosted at Digital Ocean I have made some videos.
-
-The videos will include:
-
-* Pushing a web socket application to the production server with git
-* Setting up a reversed proxy (Nginx) with HTTPS support (self-signed)
-* Running the application with PM2 and with environment variables
-
-This videos will be published on the course web site.
