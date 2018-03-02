@@ -146,7 +146,7 @@ Warning: connect.session() MemoryStore is not
 designed for a production environment, as it will leak
 memory, and will not scale past a single process.
 ```
-In this course it is optinal to fix this but if you are you want you can check up this resources:
+In this course it is optional to fix this but if you are you want you can check up this resources:
 https://www.npmjs.com/package/connect-redis
 Remember that if you use the above package you must have a running [redis](http://redis.io/) server. In [our vagrant](https://github.com/1dv023/node-mongodb-vagrant) this is installed by default.
 
