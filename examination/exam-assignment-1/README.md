@@ -46,7 +46,7 @@ The output should not be more "verbose" then this. Be sure to remove all your ot
 The result shown above is the correct one for the current state of the sites - you can use it to check your solution.
 
 ## Requirements of your solution
-* The application should be written as an Node.js application in Javascript following the [JavaScript Standard Style](https://standardjs.com/) - You have to install and configure it yourself (and add it to the `package.json`) (your initial repo will be empty). The examiner should be able to run `standard` in the console to see that you have no errors **with the command ```npm lint```**.
+* The application should be written as an Node.js application in Javascript following the [JavaScript Standard Style](https://standardjs.com/) - You have to install and configure it yourself (and add it to the `package.json`) (your initial repo will be empty). The examiner should be able to run `standard` in the console to see that you have no errors **with the command ```npm run lint```**.
 * The only command the examiner should use to run your application after cloning it from GitHub is `npm install` and `npm start` (with the starting URL as a parameter).
 * You should work with GitHub and **do several commits** to show how your solution has been made.
 * You are free to find and use external modules.
