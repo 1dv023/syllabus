@@ -36,10 +36,10 @@ When you register a callback for the web hook you should also define a secret so
 You can solve this in a couple of ways. In this assignment you should **use environments variables**. This way you can read from the environment variables in your application and add it when you start your node-application.
 
 ## Production of application
-The application shall be running on a public web server in production environment. We recommend using "Digital ocean" which gives all students a own virtual public server but feel free to choose another provider. When doing the examination the application should be able to run on your production server (we will not run it locally) therefor you must add the URL to the application in your repository README.
+The application shall be running on a public web server in production environment. Each student will get a own virtual public server (see the production part of this course) but feel free to choose your own provider. When doing the examination the application should be able to run on your production server (we will not run it locally) therefor you must add the URL to the application in your repository README.
 
 ### Production requirements
-* The Node.js application should have a reversed proxy (Nginx) in-front
+* The Node.js application should have a reversed proxy (nginx) in-front
 * The application shall be running through HTTPS (no requirement of buying a domain name so self-signed certificate is OK - fixing a own certificate i preferred)
 * The sever should only listen to port 80, 443 and 22(ssh). That means you should not be able to make requests directly to your node application and that all requests goes through the reversed proxy.
 * The Node.js application should be running through PM2 and be in production mode
@@ -47,26 +47,24 @@ The application shall be running on a public web server in production environmen
 
 ## Assignment report
 As a complement to your code you should provide a assignment report. You do this by answering these below questions **in your repositories README**.
-* What is the address to your application?
+* What is the URL to your application?
 * Describe what you have done to make your application secure, both in code and when configuring your application server
-* Describe the following parts, how you are using them and what their purpose is
+* Describe the following parts, how you are using them and what their purpose is in your solution:
   * Reversed proxy
   * Process manager
   * TLS certificates
   * Environment variables
 * What differs in your application when running it in development from running it in production?
 * Which extra modules did you use in the assignment? Motivate the use of them and how you have make sure that they are secure enough for production
-* Have you implemented any extra features (see below)? If so, describe them.
-  * If you are aiming for a higher grade here is also the chance to motivate it
+* Have you implemented any extra features (see below) that could motivate a higher grade of this assignment? If so, describe them.
 
 ## Extra features [optional]
 For those of you aiming for higher grades in this course there will be some suggestions of extra features that you could implement. 
 * First of all - You probably have other ideas...feel free to try them
-* Implement more feature for the web client to control the issues through the application (closing issues, adding comments etc.)
+* Implement a richer web client that can control the issues through the application (closing issues, adding comments etc.). Think about security!
 * Add some kind of custom authentication before the user can enter the application.
-* Do a authentication through [GitHubs OAuth provider](https://developer.github.com/v3/oauth/#web-application-flow) instead of the Basic Authentication. This way a user could log into your applications through their OAuth credentials and see all of their own resources.
+* Do a authentication through [GitHubs OAuth provider](https://developer.github.com/v3/oauth/#web-application-flow) instead of the Basic Authentication. This way a user could log into your applications through their OAuth credentials and will see all of their own resources.
   * The user could then choose what repository to watch and the server application creates the web hook through the web API.
-* Use a own certificate avoiding using "self-signed certificates"
 
 ## Resources
 To be able to solve the assignment you may do some reading in the documentation at GitHub. Here are some links:
