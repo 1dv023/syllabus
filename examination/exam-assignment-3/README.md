@@ -72,6 +72,7 @@ To be able to solve the assignment you may do some reading in the documentation 
 * https://developer.github.com/v3/issues/
 * https://developer.github.com/webhooks/
 * https://developer.github.com/webhooks/configuring/
+* https://serveo.net/ - Alternative to ngrok for exposing local server when developing with web-hooks 
 
 
 ## Examination
