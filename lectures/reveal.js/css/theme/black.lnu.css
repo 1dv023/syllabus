@@ -174,3 +174,10 @@
     margin: 0 !important;
     box-shadow: none !important;
 }
+
+.reveal.lnu section img {
+    margin: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+}

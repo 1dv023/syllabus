@@ -32,6 +32,12 @@
     <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
+
+    <style>
+      .reveal pre code {
+        max-height: none;
+      }
+    </style>
 </head>
 
 <body>
@@ -58,9 +64,9 @@
             <section data-state="lnu-cc">
                 <h2>Licence for this work</h2>
                 <p>
-                    This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
+                    This work is produced by <a href="https://github.com/thajo" style="color: #333">Mats Loock</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
                 </p>
-                <p>All content in this work excluding photographs, icons, picture of course litterature and Linnaeus University logotype and symbol, is licensied under a
+                <p>All content in this work excluding photographs, icons, picture of course literature and Linnaeus University logotype and symbol, is licensed under a
                 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.</p>
                 <h4>You are free to </h4>
                 <ul>
@@ -78,143 +84,163 @@
                 </p>
             </section>
 
+              <section data-markdown>
+                  <script type="text/template">
+                    ### What is Web Application Architecture?
 
+                    - At least two parts, the server and the client.
+                      - The code which lives on the server and responds to HTTP requests.
+                      - The code which lives in the browser and responds to user actions.
+                    - It's up to the developer to decide what the code on the server and the client should do.
+                      - Server-side code.
+                        - Ruby, C#, Python, PHP, Java, JavaScript
+                        - Never seen by the client, persistent data, creates dynamic content, etc.
+                      - Client-side code.
+                        - HTML, CSS, JavaScript
+                  </script>
+              </section>
 
-
-              <!-- Syllabus -->
               <section data-markdown>
                 <script type="text/template">
-                  ##Content
+                  ### Minimal "hello, world"
 
-                  * Web Application Architecture
-                  * Web Application Design (code structure)
-                  * Server-side web application development with Express.js
-                    * File structure
-                    * Routes / URL-mapping
-                    * Middleware, Error handling
-                    * Template engines
+                  ```
+const http = require('http')
 
-                  </script>
-              </section>
+const server = http.createServer((req, res) => {
+  res.setHeader('Content-Type', 'text/plain')
+  res.end('hello, world\n')
+})
 
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                      ## The Web changes
-
-                      * Web applications are changing
-                        * Static pages
-                        * Dynamic Pages - CGI (Common Gateway Interface)
-                        * Web APIs, Real-time
-                        * Complexity, Number of users, Scaling
-                        * New technology, new devices (Web Of Things)
-
-
-                  </script>
-              </section>
-              <!-- architecture -->
-                <section>
-              <section data-markdown class="center">
-                  <script type="text/template">
-                      ## Web Application Architecture?
-
-                      * A design of the web application with pre made descisions solving a problem in a successful way
-                      * "...deleveoper using the right architecture will naturally fall in to pit of success"
-                        * *Rico Mariani*
-                      * Handle change in application, performance, security, maintainability...
-                      * Diffrent contexts, diffrent architectures!
-
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Web Application Architecture?
-
-                    * Physical, System architecture
-                      * Hardware components, servers, clients, Operating Systems, Virtualization, monitoring...
-                    * Logical, Software architecture
-                      * Software design, Design patterns, Code structure, error handling, logging,
-                        seperations of concerns, code reuse, testability
-                    * Data architecture
-                      * How data should be handle, storage, cache, data flows
-                    * Information architecture
-                      * The real-world information the application will handle, usability, URLs
-
-
-                  </script>
-              </section>
+server.listen(3000, () => console.log('Server running at http://localhost:3000/'))
+                  ```
+                  - The build-in http module allows Node to transfer data over HTTP.
+                  - Event-driven programing.
+                    - The event being handled is an HTTP request.
+                  - The `createServer` method takes a function as an argument; that function will be invoked every time an HTTP request is made.
+                    - Creates an HTTP server that listens to server ports and gives a response back to the client.
+                </script>
             </section>
 
+            <section data-markdown>
+              <script type="text/template">
+                ### Minimal website with simple routing (1 of 2)
 
+                ```
+const http = require('http')
 
+const server = http.createServer((req, res) => {
+  const path = req.url.replace(/\/?(?:\?.*)?$/, '').toLowerCase()
 
-            <!--- Layered architecture -->
-            <section>
+  switch (path) {
+    case '':
+      res.setHeader('Content-Type', 'text/plain')
+      res.end('Homepage')
+      break
 
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Two tier/layer architecture
-                    Client–Server software architecture pattern<br />
-                    Thin Client, Fat Client
+    case '/about':
+      res.setHeader('Content-Type', 'text/plain')
+      res.end('About')
+      break
 
-                    <img src="../images/thin_client.png" width="45%" alt=""><br>
-                    <img src="../images/fat_client.png" width="45%" alt="">
-                  </script>
-              </section>
+    default:
+      res.setHeader('Content-Type', 'text/plain')
+      res.statusCode = 404
+      res.end('Not Found')
+      break
+  }
+})
+                ```
+              </script>
+          </section>
 
+          <section data-markdown>
+            <script type="text/template">
+              ### Minimal website with simple routing (2 of 2)
 
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Three tier architecture
-                    <img src="../images/three-layer.png" alt=""> <br>
-                    <strong>CRUD</strong> - Create, Read, Update, Delete
-                  </script>
-              </section>
+              - Routing is the mechanism for serving the client with the requested content.
+                - It's possible to browse to http://localhost:3000 and http://localhost:3000/about (query strings will be ignored). Any other URL will get a response with status code 404.
+              - The complexity increases rapidly. We need something that makes it some what easier.
+            </script>
+        </section>
 
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Three tier architecture
-                    <img src="../images/three-layer2.png" alt=""> <br>
-                    Horizontal vs. vertical scaling
+        <section data-markdown>
+                <script type="text/template">
+                  ### Stack
 
-                  </script>
-              </section>
-
-
-              <!-- Presentation layer - responsible for managing user interaction with the system -->
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## n-Tier archictecture
-
-                    <img src="../images/n-layer.png" width="75%" alt="">
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Microservice Architecture
-                    SOA (service-oriented architecture) done right...
-
-                    Split up monlitic applications to different services
-                    <img src="http://www.imotif.net/wp-content/uploads/2016/10/Richardson-microservices-part3-monolith-vs-microservices-1024x518.png" alt="">
-                  </script>
-              </section>
-
-              <!--
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Servers architecture n-layer
-                    <img src="../images/server_farm.png" alt="">
-                  </script>
-              </section>
-
-
-            -->
-
+                  - A functional web application depends on multiple pieces of technology.
+                  - Acronyms describe "stacks", development environments.
+                    - LAMP, WAMP, …
+                  - Full stack JavaScript Development
+                    - Both client- and server-side should be written in JavaScript.
+                    - MEAN (MongoDB, Express, Angular, Node.js), MERN, ...
+                
+                </script>
             </section>
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              ### Full stack JavaScript Development
+
+              <img src="js-full-stack.png">
+              - Node.js, Express, (Handlebars), MongoDB
+            
+            </script>
+        </section>
+
+
+      <section data-markdown>
+        <script type="text/template">
+          ### JavaScript Backend Frameworks
+
+          - Express, https://expressjs.com/
+          - Meteor, https://www.meteor.com/
+          - Sails (built on Express), https://sailsjs.com/
+          - Feathers (built on Express), https://feathersjs.com/
+          - Fastify, https://www.fastify.io
+        </script>
+      </section>
+
+      <section data-markdown>
+        <script type="text/template">
+          ### What is Express?
+
+          - "A minimal and flexible Node.js web application framework."
+            - Node.js has a lot of common with other web servers, but most interesting is how it differs.
+              - Easy to setup and configure.
+              - Node.js i single threaded.
+              - Platform independent.
+          - Inspired by Sinatra, a web application framework in Ruby.
+          - Intertwined with Connect, a pluggable Node module (a.k.a. "middleware") that can handle web requests.
+      </script>
+    </section>
+
+    <section data-markdown>
+      <script type="text/template">
+        ## Minimal Express website
+
+        ```
+        const express = require('express')
+
+        const app = express()
+        
+        app.get('/', (req, res) => res.send('Homepage'))
+        app.get('/about', (req, res) => res.send('About'))
+
+        app.listen(3000, () => console.log('Server running at http://localhost:3000/'))
+        ```
+
+        - The application starts a server and listens on port 3000 for connections.
+        - The framework will handle the request.
+          - The application responds with "Homepage" for requests to the root URL (/).
+          - The application responds with "About" for requests to the about URL (/about).
+          - For any other request, it will respond with a 404 Not Found.
+    </script>
+  </section>
+    
+
+  </section>
 
 
             <!-- code structure -->
