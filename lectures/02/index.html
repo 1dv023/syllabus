@@ -2,109 +2,114 @@
 <html lang="sv-se">
 
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
 
-    <title>02 - HTTP - Server-based programming (1DV023/1DV523)</title>
+  <title>02 - HTTP - Server-based programming (1DV023/1DV523)</title>
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-    <link rel="icon" href="../images/favicon.png" type="image/png" />
+  <link rel="icon" href="../images/favicon.png" type="image/png" />
 
-    <link rel="stylesheet" href="../reveal.js/css/reveal.css">
-    <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
-    <link rel="stylesheet" href="../reveal.js/css/theme/black.lnu.css" id="theme">
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+  <link rel="stylesheet" href="../reveal.js/css/theme/black.lnu.css" id="theme">
 
-    <!-- Code syntax highlighting -->
-    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
 
-    <!-- Printing and PDF exports -->
-    <script>
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
-        document.getElementsByTagName('head')[0].appendChild(link);
-    </script>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
 
-    <!--[if lt IE 9]>
-    <script src="lib/js/html5shiv.js"></script>
-    <![endif]-->
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->
 
-    <style>
-      .reveal pre code {
-        max-height: none;
-      }
-    </style>
+  <style>
+    .reveal pre code {
+      max-height: none;
+    }
+    .reveal .twocolumn {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-gap: 10px;
+      text-align: left;
+    }    </style>
 </head>
 
 <body>
+  <div class="reveal lnu">
 
-    <div class="reveal lnu">
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+      <!-- Start -->
+      <section class="center" data-state="lnu-intro">
+        <h3>Server-based Web Programming</h3>
+        <h3>(1DV023/1DV525)</h3>
+        <h1>Lecture</h1>
+        <h3>Web Application Architecture</h3>
+        <div class="lnu-footer">
+            <img src="../images/lnu-logotype.png" />
+            <img src="../images/lnu-symbol.png" />
+        </div>
+        <pre><code></code></pre> <!-- Fix for color coding in md -->
+      </section>
 
-        <!-- Any section element inside of this container is displayed as a slide -->
-        <div class="slides">
-            <!-- Start -->
-            <section class="center" data-state="lnu-intro">
-                <h3>Server-based Web Programming</h3>
-                <h3>(1DV023/1DV525)</h3>
-                <h1>Lecture</h1>
-                <h3>Web Application Architecture</h3>
-                <div class="lnu-footer">
-                    <img src="../images/lnu-logotype.png" />
-                    <img src="../images/lnu-symbol.png" />
-                </div>
-                <pre><code></code></pre> <!-- Fix for color coding in md -->
+      <!-- CC -->
+      <section data-state="lnu-cc">
+        <h2>Licence for this work</h2>
+        <p>
+          This work is produced by <a href="https://github.com/thajo" style="color: #333">Mats Loock</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
+        </p>
+        <p>
+          All content in this work excluding photographs, icons, picture of course literature and Linnaeus University logotype and symbol, is licensed under a
+          <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.
+        </p>
+        <h4>You are free to </h4>
+        <ul>
+          <li>copy and redistribute the material in any medium or format</li>
+          <li>spread the whole or parts of the content</li>
+          <li>show the whole or parts of the content publicly and digital</li>
+          <li>convert the content to another format</li>
+          <li>change the content</li>
+      </ul>
+        <p>
+            If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus University logotype and symbol in your new work!
+        </p>
+        <p>
+            At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
+        </p>
+      </section>
 
-            </section>
+      <section data-markdown>
+        <script type="text/template">
+          ### What is Web Application Architecture?
 
-            <!-- CC -->
-            <section data-state="lnu-cc">
-                <h2>Licence for this work</h2>
-                <p>
-                    This work is produced by <a href="https://github.com/thajo" style="color: #333">Mats Loock</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
-                </p>
-                <p>All content in this work excluding photographs, icons, picture of course literature and Linnaeus University logotype and symbol, is licensed under a
-                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.</p>
-                <h4>You are free to </h4>
-                <ul>
-                    <li>copy and redistribute the material in any medium or format</li>
-                    <li>spread the whole or parts of the content</li>
-                    <li>show the whole or parts of the content publicly and digital</li>
-                    <li>convert the content to another format</li>
-                    <li>change the content</li>
-                </ul>
-                <p>
-                    If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus University logotype and symbol in your new work!
-                </p>
-                <p>
-                    At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
-                </p>
-            </section>
+          - At least two parts, the server and the client.
+            - The code which lives on the server and responds to HTTP requests.
+            - The code which lives in the browser and responds to user actions.
+          - It's up to the developer to decide what the code on the server and the client should do.
+            - Server-side code.
+              - Ruby, C#, Python, PHP, Java, JavaScript
+              - Never seen by the client, persistent data, creates dynamic content, etc.
+            - Client-side code.
+              - HTML, CSS, JavaScript
+        </script>
+      </section>
 
-              <section data-markdown>
-                  <script type="text/template">
-                    ### What is Web Application Architecture?
+      <section data-markdown>
+        <script type="text/template">
+          ### Minimal "hello, world"
 
-                    - At least two parts, the server and the client.
-                      - The code which lives on the server and responds to HTTP requests.
-                      - The code which lives in the browser and responds to user actions.
-                    - It's up to the developer to decide what the code on the server and the client should do.
-                      - Server-side code.
-                        - Ruby, C#, Python, PHP, Java, JavaScript
-                        - Never seen by the client, persistent data, creates dynamic content, etc.
-                      - Client-side code.
-                        - HTML, CSS, JavaScript
-                  </script>
-              </section>
-
-              <section data-markdown>
-                <script type="text/template">
-                  ### Minimal "hello, world"
-
-                  ```
+          ```
 const http = require('http')
 
 const server = http.createServer((req, res) => {
@@ -113,20 +118,20 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(3000, () => console.log('Server running at http://localhost:3000/'))
-                  ```
-                  - The build-in http module allows Node to transfer data over HTTP.
-                  - Event-driven programing.
-                    - The event being handled is an HTTP request.
-                  - The `createServer` method takes a function as an argument; that function will be invoked every time an HTTP request is made.
-                    - Creates an HTTP server that listens to server ports and gives a response back to the client.
-                </script>
-            </section>
+          ```
+          - The build-in http module allows Node to transfer data over HTTP.
+          - Event-driven programing.
+            - The event being handled is an HTTP request.
+          - The `createServer` method takes a function as an argument; that function will be invoked every time an HTTP request is made.
+            - Creates an HTTP server that listens to server ports and gives a response back to the client.
+        </script>
+      </section>
 
-            <section data-markdown>
-              <script type="text/template">
-                ### Minimal website with simple routing (1 of 2)
+      <section data-markdown>
+        <script type="text/template">
+          ### Minimal website with simple routing (1 of 2)
 
-                ```
+          ```
 const http = require('http')
 
 const server = http.createServer((req, res) => {
@@ -150,75 +155,76 @@ const server = http.createServer((req, res) => {
       break
   }
 })
-                ```
-              </script>
-          </section>
-
-          <section data-markdown>
-            <script type="text/template">
-              ### Minimal website with simple routing (2 of 2)
-
-              - Routing is the mechanism for serving the client with the requested content.
-                - It's possible to browse to http://localhost:3000 and http://localhost:3000/about (query strings will be ignored). Any other URL will get a response with status code 404.
-              - The complexity increases rapidly. We need something that makes it some what easier.
-            </script>
-        </section>
-
-        <section data-markdown>
-                <script type="text/template">
-                  ### Stack
-
-                  - A functional web application depends on multiple pieces of technology.
-                  - Acronyms describe "stacks", development environments.
-                    - LAMP, WAMP, …
-                  - Full stack JavaScript Development
-                    - Both client- and server-side should be written in JavaScript.
-                    - MEAN (MongoDB, Express, Angular, Node.js), MERN, ...
-                
-                </script>
-            </section>
-          </section>
-
-          <section data-markdown>
-            <script type="text/template">
-              ### Full stack JavaScript Development
-
-              <img src="js-full-stack.png">
-              - Node.js, Express, (Handlebars), MongoDB
-            
-            </script>
-        </section>
-
-
-      <section data-markdown>
-        <script type="text/template">
-          ### JavaScript Backend Frameworks
-
-          - Express, https://expressjs.com/
-          - Meteor, https://www.meteor.com/
-          - Sails (built on Express), https://sailsjs.com/
-          - Feathers (built on Express), https://feathersjs.com/
-          - Fastify, https://www.fastify.io
+          ```
         </script>
       </section>
 
       <section data-markdown>
         <script type="text/template">
-          ### What is Express?
+          ### Minimal website with simple routing (2 of 2)
 
-          - "A minimal and flexible Node.js web application framework."
-            - Node.js has a lot of common with other web servers, but most interesting is how it differs.
-              - Easy to setup and configure.
-              - Node.js i single threaded.
-              - Platform independent.
-          - Inspired by Sinatra, a web application framework in Ruby.
-          - Intertwined with Connect, a pluggable Node module (a.k.a. "middleware") that can handle web requests.
+          - Routing is the mechanism for serving the client with the requested content.
+            - It's possible to browse to http://localhost:3000 and http://localhost:3000/about (query strings will be ignored). Any other URL will get a response with status code 404.
+          - The complexity increases rapidly. We need something that makes it some what easier.
+        </script>
+      </section>
+
+      <section data-markdown>
+        <script type="text/template">
+          ### Stack
+
+          - A functional web application depends on multiple pieces of technology.
+          - Acronyms describe "stacks", development environments.
+            - LAMP, WAMP, …
+          - Full stack JavaScript Development
+            - Both client- and server-side should be written in JavaScript.
+            - MEAN (MongoDB, Express, Angular, Node.js), MERN, ...
+        </script>
+      </section>
+
+      <section data-markdown>
+        <script type="text/template">
+          ### Full stack JavaScript Development
+
+          <img src="js-full-stack.png">
+
+          - During the course we will use:
+            - HTML, CSS and vanilla JavaScript on the client.
+            - Node.js and Express (with Handlebars as the view engine) on the server.
+            - mongoDB as database.
+        </script>
+    </section>
+
+
+    <section data-markdown>
+      <script type="text/template">
+        ### JavaScript Backend Frameworks
+
+        - Express, https://expressjs.com/
+        - Meteor, https://www.meteor.com/
+        - Sails (built on Express), https://sailsjs.com/
+        - Feathers (built on Express), https://feathersjs.com/
+        - Fastify, https://www.fastify.io
       </script>
     </section>
 
     <section data-markdown>
       <script type="text/template">
-        ## Minimal Express website
+        ### What is Express?
+
+        - "A minimal and flexible Node.js web application framework."
+          - Node.js has a lot of common with other web servers, but most interesting is how it differs.
+            - Easy to setup and configure.
+            - Node.js i single threaded.
+            - Platform independent.
+        - Inspired by Sinatra, a web application framework in Ruby.
+        - Intertwined with Connect, a pluggable Node module (a.k.a. "middleware") that can handle web requests.
+      </script>
+    </section>
+
+    <section data-markdown>
+      <script type="text/template">
+        ### Minimal Express website
 
         ```
         const express = require('express')
@@ -236,11 +242,118 @@ const server = http.createServer((req, res) => {
           - The application responds with "Homepage" for requests to the root URL (/).
           - The application responds with "About" for requests to the about URL (/about).
           - For any other request, it will respond with a 404 Not Found.
-    </script>
-  </section>
+      </script>
+    </section>
     
+    <section data-markdown>
+      <script type="text/template">
+        ### "Mockup" of your first Express Application
 
-  </section>
+        <img src="mockup.png" />
+
+        1. The user requests a suitable URL...
+        2. ...enters a name and posts the form.
+        3. The server responds with a welcome message.
+      </script>
+    </section>
+
+    <section>
+      <h3>The final directory structure</h3>
+      <div class="twocolumn">
+        <div style="min-height: 600px">
+            <img src="final-directory-structure.png" />
+        </div>
+        <div style="font-size: 80%">
+          <ul>
+              <li><code>app.js</code> is the applications entry point.</li>
+              <li>Routes are stored in separate modules under the <code>routes/</code> directory.</li>
+              <li>Controllers are stored under the <code>controllers/</code> directory.</li>
+              <li>View templates are stored under the <code>views/</code> directory.</li>
+              <li>Static files are stored under the <code>public/</code> directory.</li>
+              <li>...and there are <a href="https://gist.github.com/lancejpollard/1398757">several other opinions</a>.</li>
+            </ul>
+        </div>
+      </div>
+    </section>
+
+      <section>
+      <h3>The dependencies</h3>
+      <div class="twocolumn">
+        <div style="min-height: 600px">
+          <img src="package.json.png" />
+        </div>
+        <div>
+          <ul style="font-size: 80%">
+            <li>
+              <code>express</code>
+              <ul><li>Web framework for Node.js.</li></ul>
+            </li>
+            <li>
+              <code>express-hbs</code>
+              <ul><li>Express handlebars template engine.</li></ul>
+            </li>
+            <li>
+              <code>moment</code>
+              <ul><li>Manage dates.</li></ul>
+            </li>
+            <li>
+              <code>morgan</code>
+              <ul><li>HTTP request logger.</li></ul>
+            </li>
+            <li>
+              <code>nodemon</code>
+              <ul><li>Automatically restarts the application when file changes.</li></ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>The entry point</h3>
+      <div class="twocolumn">
+        <div style="min-height: 600px">
+          <img src="app.js.png" />
+        </div>
+        <div style="font-size: 80%">
+          <ul>
+            <li>Middleware functions are functions that have access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle.
+              <ul>
+                <li>Application-level: app.use() and app.METHOD(), <code>(req, res, next))</code>.</li>
+                <li>Router-level: same as application-level (use express.Router()).</li>
+                <li>Error-handling: an error-handling middleware function has four parameters, <code>(err, req, res, next))</code>.</li>
+                <li>Built-in: <code>express.static</code>, <code>express.urlencoded</code></li>
+                <li>Third-party: Add functionality.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  
+    <section>
+        <h3>The routing</h3>
+        <div class="twocolumn">
+          <div style="min-height: 600px">
+            <img src="homeRouter.js.png" />
+          </div>
+          <div style="font-size: 80%">
+            <ul>
+              <li>The <code>router.get()</code> and <code>router.post()</code> methods is two routing functions in Express.</li>
+              <li>You provide a function to be called for a request matching the method and specified path.</li>
+              <li>
+                You use the <code>router</code> object as an argument to <code>app.use()</code>.
+                <ul>
+                    <li><code>app.use('/', require('./routes/homeRouter'))</code> http://localhost:3000/</li>
+                    <li><code>app.use('/home', require('./routes/homeRouter'))</code> http://localhost:3000/home</li>
+                  </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    
+    </section>
 
 
             <!-- code structure -->
