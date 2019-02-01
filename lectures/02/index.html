@@ -42,7 +42,8 @@
       grid-template-columns: auto auto;
       grid-gap: 10px;
       text-align: left;
-    }    </style>
+    }
+  </style>
 </head>
 
 <body>
@@ -93,6 +94,8 @@
         <script type="text/template">
           ### What is Web Application Architecture?
 
+          - When applications grows we need structure.
+          - Architecture can help us with structuring, physical and logical.
           - At least two parts, the server and the client.
             - The code which lives on the server and responds to HTTP requests.
             - The code which lives in the browser and responds to user actions.
@@ -182,536 +185,255 @@ const server = http.createServer((req, res) => {
         </script>
       </section>
 
+      <section>
+          <h3>Full stack JavaScript Development</h3>
+          <div class="twocolumn">
+            <div style="min-height: 600px">
+                <img src="js-full-stack.png" />
+            </div>
+            <div style="font-size: 80%">
+                <p>During the course we will use...</p>
+                <ul>
+                  <li>HTML, CSS and vanilla JavaScript on the client.</li>
+                  <li>Node.js and Express (with Handlebars as the view engine) on the server.</li>
+                  <li>MongoDB as document database.</li>
+                </ul>
+            </div>
+          </div>
+        </section>
+
       <section data-markdown>
         <script type="text/template">
-          ### Full stack JavaScript Development
+          ### JavaScript Backend Frameworks
 
-          <img src="js-full-stack.png">
-
-          - During the course we will use:
-            - HTML, CSS and vanilla JavaScript on the client.
-            - Node.js and Express (with Handlebars as the view engine) on the server.
-            - mongoDB as database.
+          - Express, https://expressjs.com/
+          - Meteor, https://www.meteor.com/
+          - Sails (built on Express), https://sailsjs.com/
+          - Feathers (built on Express), https://feathersjs.com/
+          - Fastify, https://www.fastify.io
+          - ...
         </script>
-    </section>
+      </section>
 
+      <section data-markdown>
+        <script type="text/template">
+          ### What is Express?
 
-    <section data-markdown>
-      <script type="text/template">
-        ### JavaScript Backend Frameworks
+          - "A minimal and flexible Node.js web application framework."
+            - Node.js has a lot of common with other web servers, but most interesting is how it differs.
+              - Easy to setup and configure.
+              - Node.js i single threaded.
+              - Platform independent.
+          - Inspired by Sinatra, a web application framework in Ruby.
+          - Intertwined with Connect, a pluggable Node module that can handle web requests (a.k.a. "middleware").
+        </script>
+      </section>
 
-        - Express, https://expressjs.com/
-        - Meteor, https://www.meteor.com/
-        - Sails (built on Express), https://sailsjs.com/
-        - Feathers (built on Express), https://feathersjs.com/
-        - Fastify, https://www.fastify.io
-      </script>
-    </section>
+      <section data-markdown>
+        <script type="text/template">
+          ### Minimal Express website
 
-    <section data-markdown>
-      <script type="text/template">
-        ### What is Express?
+          ```
+          const express = require('express')
 
-        - "A minimal and flexible Node.js web application framework."
-          - Node.js has a lot of common with other web servers, but most interesting is how it differs.
-            - Easy to setup and configure.
-            - Node.js i single threaded.
-            - Platform independent.
-        - Inspired by Sinatra, a web application framework in Ruby.
-        - Intertwined with Connect, a pluggable Node module (a.k.a. "middleware") that can handle web requests.
-      </script>
-    </section>
+          const app = express()
+          
+          app.get('/', (req, res) => res.send('Homepage'))
+          app.get('/about', (req, res) => res.send('About'))
 
-    <section data-markdown>
-      <script type="text/template">
-        ### Minimal Express website
+          app.listen(3000, () => console.log('Server running at http://localhost:3000/'))
+          ```
 
-        ```
-        const express = require('express')
+          - The application starts a server and listens on port 3000 for connections.
+          - The framework will handle the request.
+            - The application responds with "Homepage" for requests to the root URL (/).
+            - The application responds with "About" for requests to the about URL (/about).
+            - For any other request, it will respond with a 404 Not Found.
+        </script>
+      </section>
+      
+      <section data-markdown>
+        <script type="text/template">
+          ### "Mockup" of your first Express Application
 
-        const app = express()
-        
-        app.get('/', (req, res) => res.send('Homepage'))
-        app.get('/about', (req, res) => res.send('About'))
+          <img src="mockup.png" />
 
-        app.listen(3000, () => console.log('Server running at http://localhost:3000/'))
-        ```
+          1. The user requests a suitable URL...
+          2. ...enters a name and posts the form.
+          3. The server responds with a welcome message.
+        </script>
+      </section>
 
-        - The application starts a server and listens on port 3000 for connections.
-        - The framework will handle the request.
-          - The application responds with "Homepage" for requests to the root URL (/).
-          - The application responds with "About" for requests to the about URL (/about).
-          - For any other request, it will respond with a 404 Not Found.
-      </script>
-    </section>
-    
-    <section data-markdown>
-      <script type="text/template">
-        ### "Mockup" of your first Express Application
-
-        <img src="mockup.png" />
-
-        1. The user requests a suitable URL...
-        2. ...enters a name and posts the form.
-        3. The server responds with a welcome message.
-      </script>
-    </section>
-
-    <section>
-      <h3>The final directory structure</h3>
-      <div class="twocolumn">
-        <div style="min-height: 600px">
-            <img src="final-directory-structure.png" />
-        </div>
-        <div style="font-size: 80%">
-          <ul>
-              <li><code>app.js</code> is the applications entry point.</li>
-              <li>Routes are stored in separate modules under the <code>routes/</code> directory.</li>
-              <li>Controllers are stored under the <code>controllers/</code> directory.</li>
-              <li>View templates are stored under the <code>views/</code> directory.</li>
-              <li>Static files are stored under the <code>public/</code> directory.</li>
-              <li>...and there are <a href="https://gist.github.com/lancejpollard/1398757">several other opinions</a>.</li>
-            </ul>
-        </div>
-      </div>
-    </section>
-
-      <section>
-      <h3>The dependencies</h3>
-      <div class="twocolumn">
-        <div style="min-height: 600px">
-          <img src="package.json.png" />
-        </div>
-        <div>
-          <ul style="font-size: 80%">
-            <li>
-              <code>express</code>
-              <ul><li>Web framework for Node.js.</li></ul>
-            </li>
-            <li>
-              <code>express-hbs</code>
-              <ul><li>Express handlebars template engine.</li></ul>
-            </li>
-            <li>
-              <code>moment</code>
-              <ul><li>Manage dates.</li></ul>
-            </li>
-            <li>
-              <code>morgan</code>
-              <ul><li>HTTP request logger.</li></ul>
-            </li>
-            <li>
-              <code>nodemon</code>
-              <ul><li>Automatically restarts the application when file changes.</li></ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h3>The entry point</h3>
-      <div class="twocolumn">
-        <div style="min-height: 600px">
-          <img src="app.js.png" />
-        </div>
-        <div style="font-size: 80%">
-          <ul>
-            <li>Middleware functions are functions that have access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle.
-              <ul>
-                <li>Application-level: app.use() and app.METHOD(), <code>(req, res, next))</code>.</li>
-                <li>Router-level: same as application-level (use express.Router()).</li>
-                <li>Error-handling: an error-handling middleware function has four parameters, <code>(err, req, res, next))</code>.</li>
-                <li>Built-in: <code>express.static</code>, <code>express.urlencoded</code></li>
-                <li>Third-party: Add functionality.</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      <section data-markdown>
+          <script type="text/template">
+            ### Overview of your first Express Application
   
-    <section>
-        <h3>The routing</h3>
+            <img src="express-overview.png" />
+          </script>
+        </section>
+  
+      <section>
+        <h3>The final directory structure</h3>
         <div class="twocolumn">
           <div style="min-height: 600px">
-            <img src="homeRouter.js.png" />
+              <img src="final-directory-structure.png" />
           </div>
           <div style="font-size: 80%">
             <ul>
-              <li>The <code>router.get()</code> and <code>router.post()</code> methods is two routing functions in Express.</li>
-              <li>You provide a function to be called for a request matching the method and specified path.</li>
+                <li><code>app.js</code> is the applications entry point.</li>
+                <li>Routes are stored in separate modules under the <code>routes/</code> directory.</li>
+                <li>Controllers are stored under the <code>controllers/</code> directory.</li>
+                <li>View templates are stored under the <code>views/</code> directory.</li>
+                <li>Static files are stored under the <code>public/</code> directory.</li>
+                <li>...and there are <a href="https://gist.github.com/lancejpollard/1398757">several other opinions</a>.</li>
+              </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h3>The dependencies</h3>
+        <div class="twocolumn">
+          <div style="min-height: 600px">
+            <img src="package.json.png" />
+          </div>
+          <div>
+            <ul style="font-size: 80%">
               <li>
-                You use the <code>router</code> object as an argument to <code>app.use()</code>.
+                <code>express</code>
+                <ul><li>Web framework for Node.js.</li></ul>
+              </li>
+              <li>
+                <code>express-hbs</code>
+                <ul><li>Express handlebars template engine.</li></ul>
+              </li>
+              <li>
+                <code>moment</code>
+                <ul><li>Manage dates.</li></ul>
+              </li>
+              <li>
+                <code>morgan</code>
+                <ul><li>HTTP request logger.</li></ul>
+              </li>
+              <li>
+                <code>nodemon</code>
+                <ul><li>Automatically restarts the application when file changes.</li></ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h3>The entry point</h3>
+        <div class="twocolumn">
+          <div style="min-height: 600px">
+            <img src="app.js.png" />
+          </div>
+          <div style="font-size: 80%">
+            <ul>
+              <li>Middleware functions are functions that have access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle.
                 <ul>
-                    <li><code>app.use('/', require('./routes/homeRouter'))</code> http://localhost:3000/</li>
-                    <li><code>app.use('/home', require('./routes/homeRouter'))</code> http://localhost:3000/home</li>
-                  </ul>
+                  <li>Application-level: app.use() and app.METHOD(), <code>(req, res, next))</code>.</li>
+                  <li>Router-level: same as application-level (use express.Router()).</li>
+                  <li>Error-handling: an error-handling middleware function has four parameters, <code>(err, req, res, next))</code>.</li>
+                  <li>Built-in: <code>express.static</code>, <code>express.urlencoded</code></li>
+                  <li>Third-party: Add functionality.</li>
+                </ul>
               </li>
             </ul>
           </div>
         </div>
       </section>
     
-    </section>
+      <section>
+          <h3>The routing</h3>
+          <div class="twocolumn">
+            <div style="min-height: 600px">
+              <img src="homeRouter.js.png" />
+            </div>
+            <div style="font-size: 80%">
+              <ul>
+                <li>The <code>router.get()</code> and <code>router.post()</code> methods is two routing functions in Express.</li>
+                <li>You provide a function to be called for a request matching the method and specified path.</li>
+                <li>
+                  You use the <code>router</code> object as an argument to <code>app.use()</code>.
+                  <ul>
+                      <li><code>app.use('/', require('./routes/homeRouter'))</code> http://localhost:3000/</li>
+                      <li><code>app.use('/home', require('./routes/homeRouter'))</code> http://localhost:3000/home</li>
+                    </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+  
+        <section>
+          <h3>The controller</h3>
+          <div class="twocolumn">
+            <div style="min-height: 600px">
+              <img src="homeController.js.png" />
+            </div>
+            <div style="font-size: 80%">
+              <ul>
+                <li>Controller functions...
+                  <ul>
+                    <li>...get the requested data (if any), ...</li>
+                    <li>...render an HTML page using a template engine, and...</li>
+                    <li>...return HTML to the client.</li>
+                  </ul>
+                </li>
+                <li>
+                  <code>res.render(view [, locals])</code> renders a view and sends the HTML string to the client.
+                  <ul>
+                      <li><code>view</code>, the path of the view file to render.</li>
+                      <li><code>locals</code> (optional), an object that contains data to pass from the controller to the view.</li>
+                    </ul>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ### The template engine
+  
+            <img src="mockup.png" />
+  
+            - ...
+          </script>
+        </section>
 
-
-            <!-- code structure -->
-            <section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Code Structure Design
-                    <img src="../images/three-solution.jpg" width="25%" alt="">
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Code Structure - The MVC design pattern
-
-                    * Model - View - Controller
-                    * Software Design pattern, 1970s, SmallTalk, [Trygve Reenskaug](https://en.wikipedia.org/wiki/Trygve_Reenskaug)
-                    * Graphical User Interface (GUI), Desktop
-                    * Common in diffrent kinds of web frameworks, both servers and clients
-                    * Not in contrast to n-tier Architecture
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## MVC (for WP)
-
-                    <img src="../images/MVC.png" width="80%" alt="">
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Code Structure - MVC
-                    <img src="http://www.reactiongifs.com/r/wtthll.gif" alt="">
-                    <br>
-                    MVC, MVVM, MTV, MVP <br>
-                    MV-WHAT-EVER!
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Code Structure - MVC
-
-                    <img src="../images/mvceverywhere.png" alt="">
-                    #### Isomorphic JavaScript
-                    </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## What to remember!
-                    * When applications grows we need structure
-                    * Architecture can help us with structuring, physical and logical
-                      * Different architecture in different context
-                    * MVC is a software design pattern which help us structure code and solve problems
-                    * Express.js is inspired by MVC
-                  </script>
-              </section>
-
-            </section>
-
-
-            <!-- express -->
-            <section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Express.js
-                    * Web Framework for node.js
-                    * Building web applications on Node.js
-                      * "Classic" CRUD web applications
-                      * Web APIs
-                    * Creating a HTTP Server
-                    * Handling URL mapping
-                    * Handling request, generating response
-                    * Template engine
-                    * Middleware
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Examination assignment 2
-
-                    *Our goal (exmaination 2) is to write a classic CRUD application with
-                    persistent data (mongoDB) and having security in mind*
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Express.js - code structure
-
-                    * File structure
-                    * MVC in mind
-                      * URL Mapping - Controllers/Routes
-                      * Persistent data - Models
-                      * Template rendering - Views
-
-                    Everyone has an opinion - So do we...or several opinions
-
-                    [https://gist.github.com/lancejpollard/1398757](https://gist.github.com/lancejpollard/1398757)
-                  </script>
-              </section>
-
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## File structure in express.js
-                    A suggestion
-
-                    <img src="../images/file_structure_express.png"  width="30%" alt="">
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                <script type="text/template">
-                  ## Routes / URL-mapping
-                  How to construct your URLs?
-
-                  * Never expose tech details - They will change!
-                    * http://www.example.com/pages/admin.html
-                  * Keep It Simple Stupid!
-                  * Be consistent (hyphens vs. underscore), lowercase
-                  * Never use whitespace or "special characters"
-                  * SEO!
-                </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## URL-mapping
-                    How to structure your URLs in a CRUD application?
-
-                    | VERB | URL | Description |
-                    | --- | --- | --- |
-                    | GET | /users   &nbsp;&nbsp; | Get all users |
-                    |POST|/users|Create a new user|
-                    |PUT|/users/:id |Update the user with id = :id |
-                    |DELETE|/users/:id|Delete the user with id = :id |
-
-                    *REST Web API*
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## URL-mapping
-                    But, we need to render HTML forms and we don´t have PUT and DELETE
-
-                    | VERB | URL | Description |
-                    | --- | --- | --- |
-                    | GET | /users   | Get all users |
-                    | GET | /users/:id   | Get one user |
-                    | GET | /users/create   | Get a HTML form to create a user|
-                    | POST | /users/create | Create a new user |
-                    | GET | /users/edit/:id   | Get a HTML form to edit a user |
-                    | POST | /users/edit/:id  | Update the user |
-                    | GET | /users/delete/:id   | Get a confirmation view befor delete |
-                    | POST | /users/delete/:id | Deletes the user |
-
-                  </script>
-              </section>
-
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Express.js - URL Mapping
-                    The ability to **route** URLs to functions (code)<br>
-                    app.METHOD(PATH, HANDLER)
-
-                    ```javascript
-                    let app = express();
-                    /**
-                     *  app is the express instance for the application
-                     *  Executed when the url /message/:id is called
-                     *  @param {Object} req - Request Object, What the client sends
-                     *  @param {Object} res - Response Object, Render or Redirect, status codes
-                     */
-                    app.get("/messages/:id", function(req, res) {
-                      let id = req.params.id; // get the id in the url /messages/123 gives id = 123
-                      ...
-                    });
-
-                    app.post("/messages", function(req, res) {
-                      let postdata = req.body;
-                      ...
-                    });
-                    ```
-                  </script>
-              </section>
-
-
-
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Express.js - Middleware
-
-                    <img src="../images/middleware.png" height="200px" alt="">
-
-                    * Parsing the body of the request
-                    * Compression/decompression
-                    * Creating logs
-                    * Manage sessions
-                    * Security
-                    * ...
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Middleware
-
-                    * Use built-in middleware like: express.static(root, [options])
-                    * Use third part middleware
-
-                    ```javascript
-                    var cookieParser = require("cookie-parser");
-                    var bodyParser = require("body-parser");
-                    // load the cookie-parsing middleware
-                    app.use(cookieParser());
-                    app.use(bodyParser.json());
-                    ```
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Express.js - Write Middleware
-
-                    Three parameters where the last (next) is a function <br>
-                    Don't redirect or render or end the response!
-
-                    ```javascript
-                    app.get("/messages", function(req, res, next) {
-                      // do something with the GET
-                      next(); // send to next middleware function in the chain
-                    });
-
-                    app.use("/messages", function(req, res, next) {
-                      // do something - ALL request
-                      next(); // send to next middleware function
-                    });
-                    ```
-
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Express.js - Error handling
-
-                    Use the middleware pattern for handling errors
-
-                    ```javascript
-                    // catch all = 404 - (ALWAYS Keep this as the last route)
-                    app.use(function(request, response, next) {
-                      response.status(404).send("error/404");
-                    });
-
-                    // four parameters for errors
-                    app.use(function(err, req, res, next) {
-                      console.error(err.stack);
-                      res.status(500).send('Something broke!');
-                    });
-                    ```
-
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                  ## Template Engines
-
-                  <img src="../images/template_engine.png" alt="">
-
-                  * http://handlebarsjs.com/
-                  * https://pugjs.org
-                  * https://mustache.github.io/
-                  * http://www.embeddedjs.com/
-
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                  ## Showing code...
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                  ## Next time
-
-                  * Persistent data
-                  * MongoDB, Mongoose
-                  * Session handling
-                  * ...
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## See ya!
-
-                    <img src="http://www.reactiongifs.com/r/cya.gif" alt="">
-                  </script>
-              </section>
-
-
-
-
-
-
-
-        </div>
     </div>
+  </div>
 
-    <script src="../reveal.js/lib/js/head.min.js"></script>
-    <script src="../reveal.js/js/reveal.js"></script>
+  <script src="../reveal.js/lib/js/head.min.js"></script>
+  <script src="../reveal.js/js/reveal.js"></script>
 
-    <script>
-        // Full list of configuration options available at:
-        // https://github.com/hakimel/reveal.js#configuration
-        Reveal.initialize({
-            width: 1280,
-            height: 800,
-            controls: true,
-            progress: true,
-            history: true,
-            center: false,
+  <script>
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      width: 1280,
+      height: 800,
+      controls: true,
+      progress: true,
+      history: true,
+      center: false,
 
-            transition: 'slide', // none/fade/slide/convex/concave/zoom
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-            // Optional reveal.js plugins
-            dependencies: [
-                { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
-                { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
-                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
-                { src: '../reveal.js/plugin/notes/notes.js', async: true }
-            ]
-        });
-
-    </script>
-
+      // Optional reveal.js plugins
+      dependencies: [
+        { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
+        { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+        { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+        { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+        { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+        { src: '../reveal.js/plugin/notes/notes.js', async: true }
+      ]
+    });
+  </script>
 </body>
 </html>
