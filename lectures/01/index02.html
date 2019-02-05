@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="sv-se">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>01 - Web Servers - Server-based programming (1DV023/1DV523)</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="icon" href="../images/favicon.png" type="image/png" />
+
+    <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.lnu.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="reveal lnu">
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <!-- Start -->
+            <section class="center" data-state="lnu-intro">
+                <h3>Server-based Web Programming</h3>
+                <h3>(1DV023/1DV523)</h3>
+                <h1>HTTP</h1>
+                <div class="lnu-footer">
+                    <img src="../images/lnu-logotype.png" />
+                    <img src="../images/lnu-symbol.png" />
+                </div>
+                <pre><code></code></pre> <!-- Fix for color coding in md -->
+
+            </section>
+
+            <!-- CC -->
+            <section data-state="lnu-cc">
+                <h2>Licence for this work</h2>
+                <p>
+                    This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Server-based Web Programming (1DV023/1DV523) at Linnaeus University.
+                </p>
+                <p>All content in this work excluding photographs, icons, picture of course litterature and Linnaeus University logotype and symbol, is licensied under a
+                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.</p>
+                <h4>You are free to </h4>
+                <ul>
+                    <li>copy and redistribute the material in any medium or format</li>
+                    <li>spread the whole or parts of the content</li>
+                    <li>show the whole or parts of the content publicly and digital</li>
+                    <li>convert the content to another format</li>
+                    <li>change the content</li>
+                </ul>
+                <p>
+                    If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus University logotype and symbol in your new work!
+                </p>
+                <p>
+                    At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
+                </p>
+            </section>
+            <section>
+                <section data-markdown class="">
+                  <script type="text/template">
+                    <img style="width: 70%; box-shadow: none; border: 0" src="../images/DNS.png">
+                    <img style="width: 40%; box-shadow: none; border: 0" src="../images/tcpip_request.png" /> 
+                    <img style="width: 35%; box-shadow: none; border: 0" src="../images/tcpip_response.png" /> 
+                  </script>
+                </section>
+                <section data-markdown>
+                    <script type="text/template">
+                      ### HTTP
+                      * Client / server architecture
+                        * Request / Response
+                      * Stateless, no session
+                      * No built-in security
+                        * HTTPS is HTTP with a layer of security
+                      * HTTP is a text-based protocol
+
+                      <img src="../images/request_response.png" width="60%" alt="">
+                    </script>
+                  </section>
+
+                  <section data-markdown>
+                    <script type="text/template">
+                      * HTTP 0.9 (1991)
+                      * HTTP 1.0 (1996)
+                      * HTTP 1.1 (1997)
+                        * https://tools.ietf.org/html/rfc2616
+                      * HTTP/2 (May 2015)
+                      * HTTP/3 (...)
+
+                      Internet Engineering Task Force (IETF) and the World Wide Web Consortium (W3C)
+
+                      
+                    </script>
+                  </section>
+
+                  <section data-markdown>
+                      <script type="text/template">
+                        ## HTTP request
+                        <img src="../images/http_request.png" width="90%" alt="">
+
+                        * Request-Line
+                        * Headers, request header fields
+                        * Message body
+                      </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                          ## HTTP response
+                          <img src="../images/http_response.png" width="60%" alt="">
+
+                          * Status-Line
+                          * Headers, response header fields
+                          * Message body
+                        </script>
+                      </section>
+              </section>
+              <section>
+                <section data-markdown>
+                    <script type="text/template">
+                      ### HTTP Methods (verbs)
+                      * From Client to Server*
+        
+                      | *Verbs*        | *Actions*           |   |
+                      | ------------- |-------------| -----:|
+                      |GET | Get data; search result | safe, idempotent
+                      |POST | Create data |unsafe, not idempotent|
+                      |PUT | Update data |unsafe, idempotent|
+                      |PATCH | Partial update of resource |unsafe, not idempotent|
+                      |DELETE | Delete a resource |unsafe, idempotent|
+                      |HEAD | Just get headers |safe, idempotent|
+                      |OPTIONS | Check what the server can do |safe, idempotent|
+        
+                    </script>
+                  </section>
+        
+                  <section data-markdown>
+                    <script type="text/template">
+                      ## Status codes - Server to client
+                      * 1xx - Informational
+                        * 101 Switching Protocols
+                      * 2xx - Successful
+                        * 200 OK, 201 Created, 204 No Content
+                      * 3xx - Redirection
+                        * 302 Found (follow "Location"), 304 Not Modified
+                      * 4xx - Client Error
+                        * 400 Bad request, 401 Unauthorized, 403 Forbidden
+                      * 5xx - Server Error
+                        * 500 Internal Server Error
+        
+                    </script>
+                  </section>
+        
+                  <section data-markdown>
+                      <script type="text/template">
+                        ### All this headers and status codes...?                               
+                        <img src="../images/http_response.png"   width="40%" alt="">
+          
+                        * https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+                          * https://http.cat/
+                        * Custom headers?
+                          * X-my-custom-header
+                      </script>
+                    </section>
+                  </section>
+              <section>
+                  <section data-markdown>
+                      <script type="text/template">
+                        ### In what format will data be sent?
+                        Client to Server (Accept, Accept-encoding)<br />
+                        <img src="../images/http_accept.png"  width="55%" alt="">
+          
+                   
+                        Server to client (Content-Type, Content-Encoding)<br />
+                        <img src="../images/http_content.png"   width="40%" alt="">
+                        * MIME type (text/html, application/json)
+                        * The server should use gzip on text files > 1-2 Kb
+                      </script>
+                    </section>
+          
+                    <section data-markdown>
+                      <script type="text/template">
+                        ### Client to server
+                        * User-Agent: 
+                          * Identifying the client (do not trust)
+                          * Web spiders/crawlers - Filter out in logs
+                        * Authorization:
+                          * HTTP built in authentication
+                          * Sending tokens to API
+
+                        ### Server to client
+                        * Server:
+                          * Identifying the server (do not trust)
+          
+          
+                      </script>
+                    </section>
+                  </section>
+                  <section>
+                      <section data-markdown>
+                          <script type="text/template">
+                            ### If HTTP is stateless how does the server know that a user is logged in?
+              
+                            <img src="../images/stetelessb.png" style="width: 70%; box-shadow: none; border: 0" alt="" />
+              
+                          </script>
+                        </section>
+              
+                        <section data-markdown>
+                            <script type="text/template">
+                              #### In the response
+                              * Set-Cookie:
+                                * PHPSESSID=1p0sptqdupf47lefnti1j1fg40 Path=/admin
+              
+                              #### In the request
+                              * Cookie:
+                                * PHPSESSID=1p0sptqdupf47lefnti1j1fg40
+
+                              <img src="../images/cookie-state.png" style="width: 65%; box-shadow: none; border: 0" alt="" />
+                            </script>
+                        </section>
+              
+                        <section data-markdown>
+                          <script type="text/template">
+                            ## Cache
+                            The ability to temporary store resources like HTML, images, css, script
+                            closer to the client to reduce traffic
+              
+                            * Expires:
+                              * Using a HTTP Date to tell client how long to cache
+                              * ```expires:Wed, 30 Jan 2019 14:00:00 GMT```
+                            * Cache-Control:
+                              * More abilities to set cache; max-age (seconds), public/private
+                              * `cache-control: public, max-age=86400`
+                              * `cache-control: private, max-age=0, no-cache`
+                            * ETag
+                              * An id calculated by the server to check against
+                          </script>
+                        </section>
+              
+              
+              
+                        <section data-markdown>
+                          <script type="text/template">
+                            # Cache
+              
+                            <img src="../images/cache_example.png" alt="">
+              
+                          </script>
+                        </section>
+              
+                        <section data-markdown>
+                          <script type="text/template">
+                            # Cache-Control
+              
+                            <img src="../images/cache-control-example.png" width="80%" alt="">
+              
+                          </script>
+                        </section>
+            
+                  </section> 
+                  <section>
+                      <section class="center">
+                          <h2>Requests and TCP connections</h2>
+                          <img src="../images/pipeline.png" alt="" />
+                          <br />
+                          <ul>
+                            <li>Keep-Alive, Pipeline (HTTP 1.1), head of line blocking problem</li>
+
+                          </ul>
+                      </section>
+            
+                      <section data-markdown>
+                        <script type="text/template">
+                        <!-- .slide: class="center noborderimages" -->
+                        ## HTTP 1.1 is old but it works great!!?
+            
+                        <br /><br />
+                        ![traffic](../images/traffic.png)
+                        </script>
+                      </section>
+            
+                      <section data-markdown>
+                        <script type="text/template">
+                          <!-- .slide: class="center noborderimages" -->
+                          ## More bandwidth will speed things up!
+                          So why do we need HTTP/2?<br />  <br /><br />
+                          ![thinking](http://www.reactiongifs.com/r/ewis1.gif)
+                        </script>
+                      </section>
+            
+                      <section data-markdown>
+                        <script type="text/template">
+                          <!-- .slide: class="center noborderimages" -->
+                          ## Latency!
+                          <img src="../images/latency_http2.png" alt="">
+                        </script>
+                      </section>
+            
+                      <section data-markdown>
+                        <script type="text/template">
+                          ### HTTP/2
+                          * Based on SPDY (Google)
+                          * Internet Engineering Task Force (IETF)
+                          * Supported by most modern browsers and servers
+                          * May 14, 2015, [RFC 7540](https://tools.ietf.org/html/rfc7540)
+            
+                        </script>
+                      </section>
+            
+                      <section data-markdown>
+                        <script type="text/template">
+                          ### So whats new in HTTP/2?
+                          * Multiplexing - one single TCP connection for many request
+                          * Server push (not as in Web Sockets)
+                          * Data Compression of HTTP Headers
+                          * Binary data streams
+                          * Priority flags
+            
+                          Ilya Grigorik - https://www.youtube.com/watch?v=yURLTwZ3ehk
+                        </script>
+                      </section>
+                      <section data-markdown>
+                          <script type="text/template">
+                            ### What does this means for web developers?
+                            * HTTP Methods, Response codes, headers...all the same!
+                            * Don´t need to concat static files!
+                              * Becomes an anti-pattern (caching)
+                            * Not the same punish for chatty applications
+                            * HTTP/3
+                              * QUIC instead of TCP
+                              * https://http3-explained.haxx.se/en/
+                          </script>
+                        </section>
+      
+          
+                  </section> 
+          
+        
+              </section>    
+         
+  
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            width: 1280,
+            height: 800,
+            controls: true,
+            progress: true,
+            history: true,
+            center: false,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '../reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+
+    </script>
+
+</body>
+</html>

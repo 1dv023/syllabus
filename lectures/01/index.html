@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>01 - HTTP - Server-based programming (1DV023/1DV523)</title>
+    <title>01 - Web Servers - Server-based programming (1DV023/1DV523)</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -44,7 +44,7 @@
             <section class="center" data-state="lnu-intro">
                 <h3>Server-based Web Programming</h3>
                 <h3>(1DV023/1DV523)</h3>
-                <h1>Lecture 01</h1>
+                <h1>Web Servers</h1>
                 <div class="lnu-footer">
                     <img src="../images/lnu-logotype.png" />
                     <img src="../images/lnu-symbol.png" />
@@ -86,8 +86,13 @@
                   ##Content
 
                   * Web Servers
+                    * Their purpose
+                    * Different kind of servers
+                    * Different kind of web servers
                   * HTTP
-                  * Express.js (Demo as resource)
+                    * The web and how it works
+                    * TCP/IP and HTTP
+                    * About HTTP
 
                   </script>
               </section>
@@ -97,135 +102,373 @@
                     <script type="text/template">
                         ## What is a server?
 
-                        A server is a computer program that provides services to other computer programs (and their users) in the same or other computers.
+                        A server is a computer program that provides services to other computer programs (and their users).
 
-
-                        * Running in developer environment
+                        * A server is listening for connections on ports
+                          * Different services have different ports
+                        * Running in development environment
                           * Localhost (127.0.0.1)
-                          * Virtual Machine
+                          * Virtual Machine, containers (Docker)
                           * Development server machine
                         * Running in production environment
                           * Own machine(s) - Virtual or physical
                     </script>
                 </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
                       ## What is a  Web Server?
-
                       * Server software that handles and understands HTTP/HTTPS request/response
+                        * Listen default on port 80 (HTTP) or port 443 (HTTPS)
                       * Serve static web resources
                         * Reading from file system
-                        * Documents, static files, streaming media
+                        * HTML pages, Documents, static files (CSS, JS, IMG), streaming media
                       * Serve dynamic web resources
-                        * Support server-script platforms (like PHP, ASP.NET...)
+                        * Support server-script laguages/platforms (like PHP, ASP.NET...)
                         * Render web data on-the-fly (HTML, JSON...)
                         * Communicate with databases
                         * Send request to other servers
-                      * Virtual hosting (handle multiple domain names)
-
-
                   </script>
               </section>
-
-              <section data-markdown class="center">
+              <section data-markdown class="">
                   <script type="text/template">
                       ## Web Servers
 
+                    
+
                       * Apache
-                        * The A in LAMP
+                        * The A in LAMP-stack (Linux, Apache, MySQL, PHP)
+                      * Nginx
+                        * Uses an asynchronous event-driven approach to handling requests
                       * IIS for Windows server (Internet Information Services)
                         * .NET
-                      * Nginx
-                        * Often also used as load balancer and reverse proxy (in front of node)
-                        * Uses an asynchronous event-driven approach to handling requests
                       * Apache Tomcat
-                        * JAVA, Diffrent components for servlet, HTTP, JSP engine
+                        * A Java servlet, HTTP Connector, JSP engine
+                        * A Java servlet is a Java program that extends the capabilities of a server. 
                       * Node.js
-                        * A platform! Create a web server through APIs!
+                        * A platform! Create a web server through code (APIs)!
                   </script>
               </section>
 
-              <section data-markdown class="center">
+              <section data-markdown class="">
+                <script type="text/template">
+                    ### About Apache
+                    * The most used web server on the Internet
+                      * http://w3techs.com/technologies/overview/web_server/all
+                    * Open-source HTTP server for both UNIX and Windows
+                      * [Apache Software Foundation](Apache Software Foundation)
+                    * The Apache HTTP Server was launched in 1995
+                      *  Based on NCSA HTTPd server
+                      * "A-patchy-server"...?
+                    * Every request is spawn to a own thread (like a own process)
+                      * Thread pool
+                    * Loadable Dynamic Modules which extend the core functionality.
+                      * mod_access, mod_auth, mod_rewrite
+                    * .htaccess
+                    </script>
+                    </section>
+
+              <section data-markdown class="">
+                <script type="text/template">
+                    ### About Nginx ("engine x")
+                    * Free web server, 2004, second most used (?)
+                      * http://w3techs.com/technologies/overview/web_server/all
+                      * Also used as other type of servers like (reversed) proxy, load balancer, cache server
+                    * Nginx uses an asynchronous event-driven approach to handling requests
+                      * Non-blocking mode in a single main thread
+                      * Event-loop receiving event from a queue (like javascript event-loop)
+                    * The company Nginx provide and support Nginx Plus as paid software
+                    * nginx.conf
+                      <!--
+                    <img src="https://assets.wp.nginx.com/wp-content/uploads/2015/06/NGINX-Event-Loop2-e1434744201287.png" width="30%" />
+                     -->     
+                </script>
+              </section>
+
+
+              <section data-markdown class="">
+                <script type="text/template">
+                  ### About IIS (Internet Information Services)
+                  * Microsoft, tight coupled to Windows
+                  * Using modules and extensions
+                  * Graphic Administration (tight connection to the operating system)
+                    * or Powershell
+                  * .NET applications
+                </script>
+              </section>
+
+              
+              <section data-markdown>
+                <script type="text/template">
+                  ### Running a web server on Node.js
+
+                  ```
+                  const http = require('http');
+                  const PORT = 8080;
+
+                  http.createServer((req, res) => {
+                    res.writeHead(200);
+                    res.end('Hello world\n');
+                  }).listen(PORT);
+                  ```
+                </script>
+            </section>
+
+              
+              <section data-markdown>
+                <script type="text/template">
+                  ### Different kind of servers in a web environment
+                  * Reverse proxy
+                  * Load balancer
+                  * Cache server
+                  * Application server
+                  * Virtual hosting
+                </script>
+              </section>
+              
+              <section data-markdown>
+                <script type="text/template">
+                  ### Reverse proxy
+                  
+                  * Hide the origin server or servers
+                  * act as firewall can protect against common web-based attacks, such as DOS or DDOS
+                  * Distribute the load from incoming requests to several servers
+                  * Handle HTTPS
+
+                 
+                  <img style="width: 70%; box-shadow: none; border: 0" src="../images/reverse.png" />
+                  </script>
+              </section>
+
+
+              <section data-markdown>
+                <script type="text/template">
+                ### Load balancer
+                
+                * Scaling, handle more traffic
+                * Load balance traffic over more replicas
+                  * Horizontal scaling (more machines)
+                  * Vertical scaling (more hardware)
+
+                <img style="width: 90%; box-shadow: none; border: 0" src="../images/loadbalancer.png" />
+             
+              </script>
+              </section>
+
+              <section data-markdown>
+                <script type="text/template">
+                  ### Application server
+
+                  * Most of the times equals to web server
+                  * Web server always handle HTTP
+                  * Application server could also handle other requests
+              
+             
+              </script>
+              </section>
+
+              <section data-markdown>
+                <script type="text/template">
+              ### Virtual hosting
+                * A web server is hosting one or more domain names on a single server
+                  * example.com could share resources with example.se
+                * Multiple web sites on one server
+               
+              </script>
+              </section>
+
+              <section data-markdown>
+                <script type="text/template">
+                  ### Not just web servers...
+                  <img src="../images/server_farm.png" alt="">
+                </script>
+              </section>
+            </section>
+            <section>
+                
+                <section data-markdown class="">
+                    <script type="text/template">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/First_Web_Server.jpg">
+                    </script>
+                  </section>
+
+                  <section data-markdown class="">
+                      <script type="text/template">
+                      <img src="http://info.cern.ch/images/proposal.gif">
+                    </script>
+                </section>
+                <section data-markdown class="">
+                    <script type="text/template">
+                      * HTML - SGML, "documentation language" with ideas from 60s (the a-tag)
+                      * URI/URL - "hypertext name", Address resources
+                      * HTTP - Hypertext transfer protocol
+                  </script>
+                </section>                   
+                <section data-markdown class="">
+                    <script type="text/template">
+                      ### How...?
+                      > What happens when you enter an URL in your browser and press enter?
+                      
+                      > How does the web server get and understand the request?
+                      
+                    </script>
+                </section>
+
+                <section data-markdown class="">
                   <script type="text/template">
-                    ## Not just web servers!
-                    <img src="../images/server_farm.png" alt="">
+                    ### Need to find where to send the HTTP request...
+                    
+                    * Humans like domain names
+                      * lnu.se, sunet.se...
+                    * Computers like numbers like IP-addresses
+                      * 194.47.110.87, 2001:6b0:52:4000::5:5
+                    * To take care of the translation and organization of this we have DNS
+                      * Domain name server
+                      * Servers around the world connected in a hierarchic structure
+                      
+                    
                   </script>
+                </section>
+            
+            <section data-markdown class="">
+              <script type="text/template">
+                ### A DNS query
+                <img style="width: 90%; box-shadow: none; border: 0" src="../images/DNS.png">
+
+                > What is the IP-address of lnu.se?
+              </script>
+            </section>
+
+            <section data-markdown class="">
+              <script type="text/template">
+                ### We have the address to the server - Use the Internet
+                
+                * The browser (and the underlaying OS) creates "a TCP/IP packet"
+                  * TCP, IP, HTTP
+                  * How to connect, the address, the information to the server
+               
+                  
+                <img style="width: 60%; box-shadow: none; border: 0" src="../images/tcpip_request.png" /> 
+              </script>
+            </section>
+
+            <section data-markdown class="">
+              <script type="text/template">
+                ### We have the address to the server - Use the Internet
+                
+                * The browser sends this to its default router
+                  * The router is connected to internet and a lot of other routers
+                  * They analyzes the IP address and know how to send it further
+                  * The routers on the internet make sure it will go to the right server
+                  
+                <img style="width: 80%; box-shadow: none; border: 0" src="../images/tcpip_message.png">
+              </script>
+            </section>
+            <section data-markdown class="">
+                <script type="text/template">
+                  ### Routing
+                  <img style="box-shadow: none; border: 0" src="../images/traceroute.png">
+                </script>
+              </section>
+            <section data-markdown class="">
+              <script type="text/template">
+                ### The server gets the packet
+                
+                * Analyze the TCP (and IP) information
+                  * What port should we connect to? 
+                  * to which address and on what port should I send back the response?
+                * Hopefully the web server listens to the right port
+                  * The web server analyze the HTTP information and do the magic...
+                  * Create new packet and send it back to the client (along with the data)
+
+                <img style="width: 40%; box-shadow: none; border: 0" src="../images/tcpip_response.png" /> 
+              </script>
+            </section>
+
+            <section data-markdown class="">
+              <script type="text/template">
+                <img style="width: 70%; box-shadow: none; border: 0" src="../images/DNS.png">
+                <img style="width: 40%; box-shadow: none; border: 0" src="../images/tcpip_request.png" /> 
+                <img style="width: 35%; box-shadow: none; border: 0" src="../images/tcpip_response.png" /> 
+              </script>
+            </section>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+              <script type="text/template">
+                ### HTTP
+                * Client / server architecture
+                * Request / Response
+                * Stateless, no session
+                * No built-in security
+                * HTTP is a text-based protocol
+
+                <img src="../images/request_response.png" width="60%" alt="">
+              </script>
+            </section>
+
+            <section data-markdown>
+              <script type="text/template">
+                * HTTP 0.9 (1991)
+                * HTTP 1.0 (1996)
+                * HTTP 1.1 (1997)
+                * HTTP/2 (May 2015)
+              </script>
+            </section>
+
+            <section data-markdown>
+                <script type="text/template">
+                  ## HTTP request
+                  <img src="../images/http_request.png" width="80%" alt="">
+                </script>
               </section>
 
-
-
-
-              <section data-markdown class="center">
+              <section data-markdown>
                   <script type="text/template">
-                    ### Running a web server on node.js
-
-                    ```
-                    const http = require('http');
-                    const PORT = 8080;
-
-                    http.createServer((req, res) => {
-                      res.writeHead(200);
-                      res.end('Hello world\n');
-                    }).listen(PORT);
-                    ```
-
-                    ### Demo?!
+                    ## HTTP response
+                    <img src="../images/http_response.png" width="60%" alt="">
                   </script>
-              </section>
-              </section>
+                </section>
+        </section>
 
-              <section data-markdown class="center">
-                  <script type="text/template">
-                      #[HTTP](https://rawgit.com/CS-LNU-Learning-Objects/http/master/slides/index.html#/1)
+        <section>
 
-                  </script>
-              </section>
-<!--
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ```
-                    var http = require("http");
-                    var port = 80;
-                    var hostname = "127.0.0.1";
+          <section data-markdown>
+            <script type="text/template">
+              ### HTTP Methods (verbs)
+              *From Client to Server*
 
-                    http.createServer(function(req, res) {
-                      res.writeHead(200, { "Content-Type": "text/plain" });
-                      res.end("Hello World!\n");
-                    }).listen(port, hostname, function() {
-                      console.log("Server running at http://%s:%s", hostname, port);
-                    })
+              | *Verbs*        | *Actions*           |   |
+              | ------------- |-------------| -----:|
+              |GET | Get data; search result | safe, idempotent
+              |POST | Create data |unsafe, not idempotent|
+              |PUT | Update data |unsafe, idempotent|
+              |PATCH | Partial update of resource |unsafe, not idempotent|
+              |DELETE | Delete a resource |unsafe, idempotent|
+              |HEAD | Just get headers |safe, idempotent|
+              |OPTIONS | Check what the server can do |safe, idempotent|
 
-                    ```
-                  </script>
-              </section>
+            </script>
+          </section>
 
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Express.js
-                    http://expressjs.com/
+          <section data-markdown>
+            <script type="text/template">
+              ## Status codes - Server to client
+              * 1xx - Informational
+                * 101 Switching Protocols
+              * 2xx - Successful
+                * 200 OK, 201 Created, 204 No Content
+              * 3xx - Redirection
+                * 302 Found (follow "Location"), 304 Not Modified
+              * 4xx - Client Error
+                * 400 Bad request, 401 Unauthorized, 403 Forbidden
+              * 5xx - Server Error
+                * 500 Internal Server Error
 
-                    Fast, unopinionated, minimalist web framework for Node.js
+            </script>
+          </section>
 
-                    * URL mapping
-                    * Structure the web application
-                    * rendering views
-                    * Handling request and respons
-                    * Using middlewares
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    quick demo of get - post - render
-                    * install
-                    * load routes
-                    * handle request params, render with handlebars template
-                  </script>
-              </section>
-        </div>
-    </div>
--->
     <script src="../reveal.js/lib/js/head.min.js"></script>
     <script src="../reveal.js/js/reveal.js"></script>
 
