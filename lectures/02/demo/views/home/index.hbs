@@ -1,5 +1,10 @@
-<h1>Hello!</h1>
-<p>
-  Welcome to a todo app
-</p>
-<a href="/todo">See all todos</a>
+<p>Hi, I'm an Express application. What's your name?</p>
+
+<form action="/" method="POST">
+    <input type="text" name="name" placeholder="Enter your name here" />
+    <input type="submit" value="Send" />
+</form>
+
+{{#if locals}}
+<p>Welcome {{locals.name}} on this wonderful {{locals.dayName}}!</p>
+{{/if}}
