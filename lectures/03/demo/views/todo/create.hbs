@@ -1,11 +1,10 @@
-{{#if error}}
-    <p>
-        Error: {{error}}
-    </p>
-{{/if}}
+<h1>
+  <span class="far fa-plus-square"></span> Create
+</h1>
 
-<form class="" action="/todo/create" method="post">
-    
-  <input type="text" name="todoText" value=""><br>
-  <button>Make ToDo!</button>
+<form method="post" action="/todo/create">
+  <div class="form-group">
+    <input type="text" class="form-control" name="description" placeholder="Enter a new to-do description here" required="required" autofocus="autofocus" />
+  </div>
+  <button type="submit" class="btn btn-lg btn-primary">Save</button>
 </form>

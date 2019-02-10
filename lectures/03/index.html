@@ -2,309 +2,243 @@
 <html lang="sv-se">
 
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
 
-    <title>Persistent data - Server-based programming (1DV023, 1DV523)</title>
+  <title>Persistent data - Server-based programming (1DV023, 1DV523)</title>
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-    <link rel="icon" href="../images/favicon.png" type="image/png" />
+  <link rel="icon" href="../images/favicon.png" type="image/png" />
 
-    <link rel="stylesheet" href="../reveal.js/css/reveal.css">
-    <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
-    <link rel="stylesheet" href="../reveal.js/css/theme/black.lnu.css" id="theme">
+  <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+  <link rel="stylesheet" href="../reveal.js/css/theme/black.lnu.css" id="theme">
 
-    <!-- Code syntax highlighting -->
-    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+  <!-- Code syntax highlighting -->
+  <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
 
-    <!-- Printing and PDF exports -->
-    <script>
-        var link = document.createElement('link');
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
         link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
         document.getElementsByTagName('head')[0].appendChild(link);
     </script>
 
-    <!--[if lt IE 9]>
+  <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
+
+  <style>
+    .reveal pre code {
+      max-height: none;
+    }
+    .reveal .twocolumn {
+      display: grid;
+      grid-template-columns: auto auto;
+      grid-gap: 10px;
+      text-align: left;
+    }
+  </style>
 </head>
 
 <body>
 
-    <div class="reveal lnu">
+  <div class="reveal lnu">
 
-        <!-- Any section element inside of this container is displayed as a slide -->
-        <div class="slides">
-            <!-- Start -->
-            <section class="center" data-state="lnu-intro">
-                <h3>Server-based Web Programming</h3>
-                <h3>(1DV023, 1DV523)</h3>
-                <h1>Lecture</h1>
-                <h3>Persistent data</h3>
-                <div class="lnu-footer">
-                    <img src="../images/lnu-logotype.png" />
-                    <img src="../images/lnu-symbol.png" />
-                </div>
-                <pre><code></code></pre> <!-- Fix for color coding in md -->
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+      <!-- Start -->
+      <section class="center" data-state="lnu-intro">
+        <h3>Server-based Web Programming</h3>
+        <h3>(1DV023, 1DV523)</h3>
+        <h1>Lecture</h1>
+        <h3>Persistent data</h3>
+        <div class="lnu-footer">
+          <img src="../images/lnu-logotype.png" />
+          <img src="../images/lnu-symbol.png" />
+        </div>
+        <pre><code></code></pre> <!-- Fix for color coding in md -->
 
-            </section>
+      </section>
 
-            <!-- CC -->
-            <section data-state="lnu-cc">
-                <h2>Licence for this work</h2>
-                <p>
-                    This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
-                </p>
-                <p>All content in this work excluding photographs, icons, picture of course litterature and Linnaeus University logotype and symbol, is licensied under a
-                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.</p>
-                <h4>You are free to </h4>
-                <ul>
-                    <li>copy and redistribute the material in any medium or format</li>
-                    <li>spread the whole or parts of the content</li>
-                    <li>show the whole or parts of the content publicly and digital</li>
-                    <li>convert the content to another format</li>
-                    <li>change the content</li>
-                </ul>
-                <p>
-                    If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus University logotype and symbol in your new work!
-                </p>
-                <p>
-                    At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
-                </p>
-            </section>
-
-
-            <section data-markdown class="">
-                <script type="text/template">
-                    ## Last time
-
-                    * Web Application architecture
-                      * n-tier architecture
-                      * MVC - Model, View, Controller
-                      * Express.js, Routes, URL-mapping (Controller)
-                      * Express.js, Templates (View)
-                </script>
-            </section>
-
-              <!-- Syllabus -->
-              <section data-markdown>
-                <script type="text/template">
-                  ##Content
-
-                  * Persistent data
-                    * Some different strategies
-                    * MongoDB
-                    * Mongoose
-                  * Web Session
-                    * What and how
-                    * Flash messages
-
-                  </script>
-              </section>
+      <!-- CC -->
+      <section data-state="lnu-cc">
+        <h2>Licence for this work</h2>
+        <p>
+          This work is produced by <a href="https://github.com/thajo" style="color: #333">Mats Loock</a> for the course
+          Server-based Web Programming (1DV023) at Linnaeus University.
+        </p>
+        <p>All content in this work excluding photographs, icons, picture of course literature and Linnaeus University
+          logotype and symbol, is licensied under a
+          <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0"
+              src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0
+          International License</a>.</p>
+        <h4>You are free to </h4>
+        <ul>
+          <li>copy and redistribute the material in any medium or format</li>
+          <li>spread the whole or parts of the content</li>
+          <li>show the whole or parts of the content publicly and digital</li>
+          <li>convert the content to another format</li>
+          <li>change the content</li>
+        </ul>
+        <p>
+          If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus
+          University logotype and symbol in your new work!
+        </p>
+        <p>
+          At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the
+          link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a>
+          and to the Creative Common-license above.
+        </p>
+      </section>
 
 
+      <section data-markdown class="">
+        <script type="text/template">
+          ### Last time
 
-<!--
-                <section>
-              <section data-markdown class="">
-                  <script type="text/template">
-                      ## Some more about templates
+          - Web Application Architecture
+            - N-tier architecture
+            - Express.js
+              - Routes (mapping URLs to controller actions)
+              - Controller
+              - View (templates)
+              - Skeleton application
+        </script>
+      </section>
 
-                      * Layouts
-                        * Defines the structure of the render page
+      <section data-markdown>
+        <script type="text/template">
+          ### Content
 
-                      ```javascript
-                          // Setting up
-                          app.engine(".hbs", xphbs({ defaultLayout: "main"}));
-
-                          // ....
-                          // Will look in the folder "views/layouts" for specified template
-                          // otherwise use the one named "main"
-                          response.render("path/to/view", {layout: "otherLayoutTemplate"})
-                      ```
-
-                      * Partials
-                        * "Widgets" of the page
-                        * Include in the structure (header, footer, information alerts, ...)
-                        * Place in the folder "views/partials" (as default)
-
-                      ```html
-                        <div id="footer">
-                          {{> footer }}
-                        </div>
-                      ```
-                  </script>
-              </section>
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Lets see some of that code again
-                  </script>
-              </section>
-            </section>
-
-          -->
-
-
-            <!--- Data persistant -->
-            <section>
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Data persistence
-
-                    * <strong>CRUD</strong> - Create, Read, Update, Delete, The M in MVC
-                    <br><br>
-
-                    *How to store application data?*
-                    * In memory?
-                      * let users = [{username: "thajo", firstName: "John", ...}, {...}];
-                      * Not persistent. Hard to work with.
-                    * In filesystem?
-                      * Hard to work with, performance.
-                    * In the cloud?
-                      * mongolab.com, firebase.com (BaaS)
-                  </script>
-              </section>
-
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## We will use a Database
-
-                    * Software that store and organize collections of data
-                    * **Could** run on a own server machine
-                    * Receive, filter, sorting, questions....
-
-
-                    <div class="center">
-                      <img src="../images/database_img.jpg" alt="">
-
-                    </div>
+          - Persistent data
+            - Some different strategies
+            - MongoDB
+            - Mongoose
+          - Web Session
+            - What and how
+            - Flash messages
 
                   </script>
-              </section>
+      </section>
 
+      <!--- Persistent data -->
 
-              <!-- Presentation layer - responsible for managing user interaction with the system -->
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Different types of databases
+      <section>
+        <section data-markdown class="">
+          <script type="text/template">
+            ### Persistent data
 
-                    * Relational database management systems (RDBMS)
-                      * Widely used
-                      * MySQL, SQL Server, PostgreSQL
-                      * Mature, decades of research and database theory
-                      * Standardized Query language, Structured Query Language (SQL)
-                      * Table, columns, rows
+            - Create, read, update and delete (CRUD) are the four basic function of persistent storage.
+            - How to store application data at the server side?
+              - Data stored in the memory is non-persistent (data is erased when the power is turned off).
+              - Filesystem persistence?
+                - Hard to work with, performance, doesn't scale well.
+              - Database persistence?
+                - Oracle, SQL Server, MySQL, MariaDB, PostgreSQL
+                - MongoDB
+              - Cloud persistence?
+                - mLab.com (Database-as-a-Service), AWS, Azure, Google Cloud
+          </script>
+        </section>
 
-                    <div class="center">
-                      <img src="../images/usertable.png" alt="">
-                    </div>
+        <section>
+          <h3>We will use a database!</h3>
+          <div class="twocolumn">
+            <div style="min-height: 600px">
+              <img src="./images/js-full-stack.png" />
+            </div>
+            <div style="font-size: 80%">
+              <ul>
+                <li>
+                  A database is a collection of data that is organized so it can be easily accessed, manage and updated.
+                </li>
+                <li>Retrieve, add, modify, destroy, ...</li>
+                <li>Query, filter, sort, ...</li>
+                <li>(We can host it ourselves but it's easier to let somebody else do it.)</li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
+        <section data-markdown class="">
+          <script type="text/template">
+            ### Different types of databases
 
-                    ```sql
-                      SELECT username, firstname, lastname FROM user
-                    ```
+            - Relational database management systems (RDBMS)
+              - Organizes data into tables with columns and rows.
+              - Structured Query Language (SQL).
+              - Oracle, SQL Server, MySQL, MariaDB, PostgreSQL, ...
+            - NoSQL Databases types (non-relational database)
+              - Document databases
+                - Organizes data into documents.
+                - MongoDB
+              - Graph database
+              - Key-value database
+          </script>
+        </section>
 
-                  </script>
-              </section>
+      </section>
 
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## RDBMS - Relations
+      <!-- code structure -->
+      <section>
 
+        <section>
+          <h3>MongoDB ecosystem</h3>
+          <div class="twocolumn">
+            <div style="min-height: 600px">
+              <img src="./images/mongodb-mlab.png" />
+            </div>
+            <div style="font-size: 80%">
+              <ul>
+                <li>MongoDB
+                  <ul>
+                    <li>An open-source document-based database system.
+                      <ul>
+                        <li>“MongoDB” derives from the word “humongous” because of the database’s ability to scale up with ease and hold very large amounts of data.</li>
+                      </ul>
+                    </li>
+                    <li>Stores data in flexible, JSON-like documents.</li>
+                    <li>The document model is simple to learn and use.</li>
+                  </ul>
+                </li>
+                <li>mLab
+                  <ul>
+                    <li>Easy to get started at <a href="https://docs.mlab.com/">https://docs.mlab.com/</a>.</li>
+                  </ul>
+                </li>
+                <li>Mongoose is a MongoDB ODM (Object Document Mapper) for Node.js.
+                  <ul>
+                    <li>To get started, visit <a href="https://mongoosejs.com/docs/index.html">https://mongoosejs.com/docs/index.html</a>.</li>
+                  </ul>
+                </li>
+            </ul>
+            </div>
+          </div>
+        </section>
 
-                    <div class="center">
-                      <img src="../images/relationtable.png" alt="">
-                    </div>
-
-                    ```sql
-                    SELECT firstname, lastname, message
-                    FROM user, message
-                    WHERE user.id = message.user_id;
-                    ```
-                  </script>
-              </section>
-
-
-
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    <img src="../images/schema.jpg" alt="">
-                  </script>
-              </section>
-
-              <!--  -->
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## An alternative to RDBMS
-
-                    * noSQL databases ("Not Only SQL")
-                      * Key-Value database - Simple mapping, fast
-                      * Document database - Data stored as document (JSON, BSON...)
-                      * Graph database - Data with releations...think social networks
-                      * ...
-                    * Started as "In-house solution" at big web companies
-                    * Tried to solve scaling problems
-                    * Simplicity of design
-                    * Not a silverbullet!
-
-
-
-                  </script>
-              </section>
-
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## RELATIONAL vs. noSQL
-
-                    * RDBMS
-                      * Mature, well tested and used
-                      * Well structured data
-                      * ACID-Transactions <span class="small">(Atomicity, Consistency, Isolation, Durability)</span>
-                      * Normalization
-                    * noSQL
-                      * Simplicity
-                      * Store in a JSON-ish format (not all!)
-                      * Scalability, Flexibility
-                      * Denormalization
-                      * Tradeoff from ACID compliance
-
-                  </script>
-              </section>
-
-            </section>
-
-
-
-
-            <!-- code structure -->
-            <section>
-
-              <section data-markdown class="">
-                  <script type="text/template">
-                    <div class="center">
+        <section data-markdown class="">
+          <script type="text/template">
+            <div class="center">
                       <img src="https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg" width="60%" alt="">
                     </div>
 
 
 
-                    * Document database
-                    * JSON-like document with schemas (BSON - Binary JSON)
-                    * Free and open source (GNU AGPL v3.0)
                     * The name derived from "humongous"
                     * subdocument and references (instead of joining tables)
                     * Vagrant installed and ready (or use mongolab.com)
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Working with mongoDB
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Working with mongoDB
 
                     * Using a low-level native driver (https://www.npmjs.com/package/mongodb)
                     * mongoose.js
@@ -314,11 +248,11 @@
                       * "Query API" - Be sure to dive into the documentation
                       * npm install mongoose --save
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Connection
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Connection
                     ```javascript
                     npm install mongoose --save
                     ```
@@ -342,11 +276,11 @@
 
                   ```
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Creating a Schema
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Creating a Schema
 
                     * How should we store data?
                     * Analyze the application - Create types/objects, Real objects
@@ -364,11 +298,11 @@
                     http://mongoosejs.com/docs/schematypes.html
 
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Creating the model (and schema)
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Creating the model (and schema)
 
                     Should be in models/Todo.js
 
@@ -388,11 +322,11 @@
                     ```
 
                 </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Save to database - Create
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Save to database - Create
                     http://mongoosejs.com/docs/api.html#model_Model-save
 
                     ```javascript
@@ -412,11 +346,11 @@
                     ```
                     Psst...save returns a promise....
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Receive from the database - Read
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Receive from the database - Read
                     http://mongoosejs.com/docs/api.html#model_Model.find
 
                     ```javascript
@@ -436,11 +370,11 @@
                     ```
 
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Send all data to the view?
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Send all data to the view?
 
                     * View should format the data (like date formats)
                     * We also gets properties as _id and __v
@@ -464,11 +398,11 @@
                     });
                   ```
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Remove from database
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Remove from database
                     http://mongoosejs.com/docs/api.html#query_Query-findOneAndRemove
 
                     ```javascript
@@ -483,11 +417,11 @@
                     });
                     ```
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Update data
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Update data
 
                     http://mongoosejs.com/docs/api.html#query_Query-findOneAndUpdate
 
@@ -497,47 +431,47 @@
                     </div>
 
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## A look at the demo
+        <section data-markdown class="">
+          <script type="text/template">
+            ## A look at the demo
 
 
                   </script>
-              </section>
+        </section>
 
-            </section>
+      </section>
 
 
-            <!-- Session -->
-            <section>
+      <!-- Session -->
+      <section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Web Session
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Web Session
                     * HTTP is stateless
                     * The server don´t remember previous requests
 
                     <img src="../images/stateless.png" alt="">
 
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Web Session
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Web Session
 
                     * To have a state at the server we create sessions
 
                     <img src="../images/web-session.png" width="70%" alt="">
 
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                * The session is stored at the server and identified by session cookies
+        <section data-markdown class="">
+          <script type="text/template">
+            * The session is stored at the server and identified by session cookies
                   * In memory (what happen when server is restarted? multiple servers?)
                   * Static files (bad performance)
                   * In key-Value DB like "redis"
@@ -546,11 +480,11 @@
                   * store all data in a cookies
                   * JSON Web Token (http://jwt.io)
                 </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Using session in express (in-memory)
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Using session in express (in-memory)
 
                     * Middleware
                       * express-session (https://github.com/expressjs/session)
@@ -571,11 +505,11 @@
                     }));
                     ```
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Working with sessions
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Working with sessions
 
                     Setting a *user-specific* view counter as a session variable
 
@@ -597,12 +531,12 @@
                       });
                     ```
                   </script>
-              </section>
+        </section>
 
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Flash messages
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Flash messages
                     * When you want to give feedback to a user over a redirect (for example in a PRG-pattern)
                     * We can use the session to save the state and delete the message on next request
 
@@ -613,11 +547,11 @@
 
 
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Flash messages
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Flash messages
 
                     <div class="center">
                       <img src="../images/flashmessage.png" alt="">
@@ -639,10 +573,10 @@
                     ```
 
                   </script>
-              </section>
+        </section>
 
 
-              <!--
+        <!--
               <section data-markdown class="center">
                 <script type="text/template">
                   ## DEMO
@@ -650,9 +584,9 @@
                 </script>
               </section>
             -->
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Using mongoDB as session storage
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Using mongoDB as session storage
 
                     * Express-session is using in-memory storage as default
                       * Not recommended in production, fails on restart of server
@@ -664,27 +598,27 @@
                       * https://www.npmjs.com/package/connect-redis
 
                   </script>
-              </section>
-            </section>
-            <section>
-              <section data-markdown class="">
-                  <script type="text/template">
-                  ## Next time
+        </section>
+      </section>
+      <section>
+        <section data-markdown class="">
+          <script type="text/template">
+            ## Next time
 
                   * Web Security
                     * Common attacks
                     * How to protect our application
                     * Authentication and Authorization
                   </script>
-              </section>
+        </section>
 
-              <section data-markdown class="center">
-                  <script type="text/template">
-                    ## Bye for now!
+        <section data-markdown class="center">
+          <script type="text/template">
+            ## Bye for now!
 
                     <img src="http://www.reactiongifs.com/r/rollaway.gif" alt="" width="60%">
                   </script>
-              </section>
+        </section>
 
 
 
@@ -692,37 +626,66 @@
 
 
 
-        </div>
     </div>
+  </div>
 
-    <script src="../reveal.js/lib/js/head.min.js"></script>
-    <script src="../reveal.js/js/reveal.js"></script>
+  <script src="../reveal.js/lib/js/head.min.js"></script>
+  <script src="../reveal.js/js/reveal.js"></script>
 
-    <script>
-        // Full list of configuration options available at:
-        // https://github.com/hakimel/reveal.js#configuration
-        Reveal.initialize({
-            width: 1280,
-            height: 800,
-            controls: true,
-            progress: true,
-            history: true,
-            center: false,
+  <script>
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      width: 1280,
+      height: 800,
+      controls: true,
+      progress: true,
+      history: true,
+      center: false,
 
-            transition: 'slide', // none/fade/slide/convex/concave/zoom
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-            // Optional reveal.js plugins
-            dependencies: [
-                { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
-                { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
-                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
-                { src: '../reveal.js/plugin/notes/notes.js', async: true }
-            ]
-        });
-
-    </script>
+      // Optional reveal.js plugins
+      dependencies: [{
+          src: '../reveal.js/lib/js/classList.js',
+          condition: function () {
+            return !document.body.classList;
+          }
+        },
+        {
+          src: '../reveal.js/plugin/markdown/marked.js',
+          condition: function () {
+            return !!document.querySelector('[data-markdown]');
+          }
+        },
+        {
+          src: '../reveal.js/plugin/markdown/markdown.js',
+          condition: function () {
+            return !!document.querySelector('[data-markdown]');
+          }
+        },
+        {
+          src: '../reveal.js/plugin/highlight/highlight.js',
+          async: true,
+          condition: function () {
+            return !!document.querySelector('pre code');
+          },
+          callback: function () {
+            hljs.initHighlightingOnLoad();
+          }
+        },
+        {
+          src: '../reveal.js/plugin/zoom-js/zoom.js',
+          async: true
+        },
+        {
+          src: '../reveal.js/plugin/notes/notes.js',
+          async: true
+        }
+      ]
+    });
+  </script>
 
 </body>
+
 </html>
