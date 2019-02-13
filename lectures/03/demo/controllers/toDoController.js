@@ -46,7 +46,7 @@ toDoController.createPost = async (req, res, next) => {
 
     await toDoItem.save()
 
-    req.session.flash = { type: 'success', text: 'To-do item created successfully.' }
+    req.session.flash = { type: 'success', text: 'To-do item was created successfully.' }
     res.redirect('.')
   } catch (error) {
     req.session.flash = { type: 'danger', text: error.message }
@@ -83,9 +83,12 @@ toDoController.editPost = async (req, res, next) => {
     })
 
     if (result.nModified === 1) {
-      req.session.flash = { type: 'success', text: 'To-do item updated successfully.' }
+      req.session.flash = { type: 'success', text: 'To-do item was updated successfully.' }
     } else {
-      req.session.flash = { type: 'danger', text: 'The to-do item you attempted to update was removed by another user after you got the original values.' }
+      req.session.flash = {
+        type: 'danger',
+        text: 'The to-do item you attempted to update was removed by another user after you got the original values.'
+      }
     }
     res.redirect('.')
   } catch (error) {
@@ -119,7 +122,7 @@ toDoController.deletePost = async (req, res, next) => {
   try {
     await ToDoItem.deleteOne({ _id: req.body.id })
 
-    req.session.flash = { type: 'success', text: 'To-do item removed successfully.' }
+    req.session.flash = { type: 'success', text: 'To-do item was removed successfully.' }
     res.redirect('.')
   } catch (error) {
     req.session.flash = { type: 'danger', text: error.message }

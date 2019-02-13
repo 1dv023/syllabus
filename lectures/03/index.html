@@ -34,6 +34,9 @@
     <![endif]-->
 
   <style>
+    .reveal h3{
+      text-transform: none;
+    }
     .reveal pre code {
       max-height: none;
     }
@@ -42,6 +45,15 @@
       grid-template-columns: auto auto;
       grid-gap: 10px;
       text-align: left;
+    }
+    .lnu ol li {
+        counter-increment: count-me;
+        display: block;
+    }
+    .lnu li {
+        /* padding-left: 1em; */
+        text-indent: -1em;
+        margin: 0 0 .5em 0;
     }
   </style>
 </head>
@@ -97,10 +109,10 @@
         </p>
       </section>
 
-
+      <!-- Previous lecture -->
       <section data-markdown class="">
         <script type="text/template">
-          ### Last time
+          ### Previous leacture
 
           - Web Application Architecture
             - N-tier architecture
@@ -112,6 +124,7 @@
         </script>
       </section>
 
+      <!-- Content -->
       <section data-markdown>
         <script type="text/template">
           ### Content
@@ -128,7 +141,6 @@
       </section>
 
       <!--- Persistent data -->
-
       <section>
         <section data-markdown class="">
           <script type="text/template">
@@ -185,14 +197,14 @@
 
       </section>
 
-      <!-- code structure -->
+      <!-- MongoDB ecosystem -->
       <section>
 
         <section>
           <h3>MongoDB ecosystem</h3>
           <div class="twocolumn">
             <div style="min-height: 600px">
-              <img src="./images/mongodb-mlab.png" />
+              <img src="./images/mongodb-mlab-mongoose.png" />
             </div>
             <div style="font-size: 80%">
               <ul>
@@ -209,12 +221,17 @@
                 </li>
                 <li>mLab
                   <ul>
+                    <li>A cloud database service that hosts MongoDB databases.</li>
                     <li>Easy to get started at <a href="https://docs.mlab.com/">https://docs.mlab.com/</a>.</li>
                   </ul>
                 </li>
-                <li>Mongoose is a MongoDB ODM (Object Document Mapper) for Node.js.
+                <li>Mongoose
                   <ul>
-                    <li>To get started, visit <a href="https://mongoosejs.com/docs/index.html">https://mongoosejs.com/docs/index.html</a>.</li>
+                    <li>An Object Data Modeling (ODM) library for MongoDB and Node.js.</li>
+                    <li>To get started, visit <a href="https://mongoosejs.com/docs/index.html">https://mongoosejs.com/docs/index.html</a>.
+                      <ul><li><code>npm install mongoose</code></li></ul>
+                    </li>
+                    <li>Be sure to check out the documentation at <a href="https://mongoosejs.com/docs/api.html">https://mongoosejs.com/docs/api.html</a>.</li>
                   </ul>
                 </li>
             </ul>
@@ -222,410 +239,295 @@
           </div>
         </section>
 
-        <section data-markdown class="">
-          <script type="text/template">
-            <div class="center">
-                      <img src="https://webassets.mongodb.com/_com_assets/cms/mongodb-logo-rgb-j6w271g1xn.jpg" width="60%" alt="">
-                    </div>
+        <section>
+          <h3>Create a MongoDB database</h3>
+          <div class="twocolumn">
+            <div style="min-width: 500px">
+              <img src="./images/mlab-db.png" />
+            </div>
+            <div style="font-size: 80%">
+              <ul>
+                <li>By following the first two steps in the <a href="https://docs.mlab.com/">Quick-Start Guide to mLab</a> it's easy to create a new MongoDB database.</li>
+                <li>For safety reasons it's strongly recommended to create a database user whose credentials you can use when connecting to the database, <a href="https://docs.mlab.com/connecting/#users">https://docs.mlab.com/connecting/#users</a>.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
-
-
-                    * The name derived from "humongous"
-                    * subdocument and references (instead of joining tables)
-                    * Vagrant installed and ready (or use mongolab.com)
-                  </script>
+        <section>
+          <h3>Managing the Mongoose connection</h3>
+          <div class="twocolumn">
+            <div style="min-height: 600px">
+              <img src="./images/mongoose.js.png" />
+            </div>
+            <div style="font-size: 80%">
+              <ul>
+                <li>You connect to MongoDB with the <code>mongoose.connect()</code> method.
+                  <ul>
+                    <li>The connection string, enforcing access control, can be found at mLab.
+                      <ul><li><code>mongodb://&lt;dbuser&gt;:&lt;dbpassword&gt;@ds223605.mlab.com:23605/dbname</code></li></ul>
+                    </li>
+                    <li>Returns a <code>Promise</code>.</li>
+                  </ul>
+                </li>
+                <li>Listen for connection events.
+                  <ul>
+                      <li>When successfully connected (<code>connected</code>).</li>
+                      <li>If the connections throws an error (<code>error</code>).</li>
+                      <li>When the connection is disconnected (<code>disconnected</code>).</li>
+                    </ul>
+                </li>
+                <li>If the Node process ends, close the Mongoose connection.</li>
+              </ul>
+            </div>
+          </div>
         </section>
 
         <section data-markdown class="">
           <script type="text/template">
-            ## Working with mongoDB
+            ### Everything starts with a Schema
 
-                    * Using a low-level native driver (https://www.npmjs.com/package/mongodb)
-                    * mongoose.js
-                      * Object Document Mapper (ODM)
-                      * Schemas and Models
-                      * Validation rules, error handling
-                      * "Query API" - Be sure to dive into the documentation
-                      * npm install mongoose --save
-                  </script>
+            - A schema defines the shape (key and SchemaType) of the documents to be stored in the associated MongoDB collection.
+              - Read more at https://mongoosejs.com/docs/guide.html.
+
+            ```
+            const shoeSchema = new mongoose.Schema({
+              name: { type: String, required: true},
+              size: { type: Number, required: true, min: 15, max: 47 }
+            })
+            ```
+
+            - A model is compiled from a Schema definition.
+              - The first argument is the singular name of the collection the model is for.
+              - The lowercase name of the collection will automatically be the plural version of the model's name.
+
+            ```
+            const Shoe = new mongoose.model('Shoe', shoeSchema)
+            const myShoe = new Shoe();
+            ```
+          </script>
         </section>
 
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Connection
-                    ```javascript
-                    npm install mongoose --save
-                    ```
-                    <br>
-                    ```javascript
-                    let mongoose = require("mongoose");
-                    let db = mongoose.connection;
-
-                    // Listen for events
-                    db.on("error", function() {
-                      console.log("We got a connection error!");
-                    });
-
-                    // When connected
-                    db.once("open", function() {
-                      console.log("Succesfully connected to mongoDB");
-                    });
-
-                    // connection URL should be in /config
-                    mongoose.connect("mongodb://localhost/todoDB");
-
-                  ```
-                  </script>
+        <section>
+          <h3>Converting a schema into a model</h3>
+          <div class="twocolumn">
+            <div style="min-height: 600px">
+              <img src="./images/todoitem.js.png" />
+            </div>
+            <div style="font-size: 80%">
+              <ul>
+                <li>Convert a schema into a model by passing the schema to <code>mongoose.model(modelName, schema)</code>.</li>
+                <li>An instance of a model is called a document.</li>
+                <li>The module (<code>ToDoItem.js</code>) resides in the <code>models</code> directory.</li>
+              </ul>
+            </div>
+          </div>
         </section>
 
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Creating a Schema
-
-                    * How should we store data?
-                    * Analyze the application - Create types/objects, Real objects
-                      * User, Blog, Post, Comment...
-                      * Create a Schema defining the Model and its types
-
-                    ```
-                    let personSchema = new mongoose.Schema({
-                      name:      {type: String, required: true},
-                      living:    Boolean,
-                      createdAt: { type: Date, default: Date.now },
-                      age:       { type: Number, min: 18, max: 65 }
-                    });
-                    ```
-                    http://mongoosejs.com/docs/schematypes.html
-
-                  </script>
+        <section>
+          <h3>Create - the C in CRUD</h3>
+          <img src="./images/todoitem-create.png" />
+          <ul>
+            <li>Create a new instance of the model...</code>.</li>
+            <li>...and save the document to the database. Easy peasy!</li>
+          </ul>
         </section>
 
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Creating the model (and schema)
-
-                    Should be in models/Todo.js
-
-                    ```javascript
-
-                      // Defining the Schema
-                      let todoSchema = mongoose.Schema({
-                        text:       { type: String, required: true },
-                        createdAt:  { type: Date, required: true, default: Date.now }
-                      });
-
-                      // Creating the Model - Just like an Object
-                      let Todo = mongoose.model("Todo", todoSchema);
-
-                      // export the object for use in code
-                      module.exports = Todo;
-                    ```
-
-                </script>
+        <section>
+          <h3>Read - the R in CRUD</h3>
+          <img src="./images/todoitem-read.png" />
+          <ul>
+            <li>Use <code>find</code>, and pass an empty object, to find all documents in a collection.</li>
+            <li>It's good practice to transform the documents into anonymous objects before passing the data to the view.</li>
+          </ul>
         </section>
 
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Save to database - Create
-                    http://mongoosejs.com/docs/api.html#model_Model-save
-
-                    ```javascript
-                    let todoObject = new Todo({
-                       text: todoText
-                       // createdAt has a default function
-                     });
-
-                     // using the callback pattern
-                     todoObject.save(function(error) {
-                       if(error) {
-                         // Handle the error
-                       }
-                       // All is good, Redirect
-                       response.redirect("/todo");
-                     });
-                    ```
-                    Psst...save returns a promise....
-                  </script>
+        <section>
+          <h3>Update - the U in CRUD</h3>
+          <img src="./images/todoitem-update.png" />
+          <ul>
+            <li>Use <code>updateOne</code> to update a document in the database.</li>
+          </ul>
         </section>
 
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Receive from the database - Read
-                    http://mongoosejs.com/docs/api.html#model_Model.find
-
-                    ```javascript
-                    // first argument is an empty "condition-object" so we can find all
-                    Todo.find({}, function(error, data) {
-                      if(error) {
-                        throw error;
-                      }
-
-                      console.log(data); // watch this!
-                      // send the data to the view that format and present it
-                      response.render("todo/index", data);
-                    });
-                    ```
-                    ```javascript
-                    Model.find({property: "value"}, callback);
-                    ```
-
-                  </script>
-        </section>
-
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Send all data to the view?
-
-                    * View should format the data (like date formats)
-                    * We also gets properties as _id and __v
-                    * Easy to accidentally expose confidential information
-                    * Mapping the data before sending it to the view
-
-                    ```javascript
-                    Todo.find({}, function(error, data) {
-
-                      // map just the data needed by the view  (in this case)
-                      let context = {
-                        todos: data.map(function(todo) {
-                          return {
-                            text: todo.text,
-                            createdAt: todo.createdAt,
-                            id: todo._id
-                          };
-                        })
-                      };
-                      response.render("todo/index", context);
-                    });
-                  ```
-                  </script>
-        </section>
-
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Remove from database
-                    http://mongoosejs.com/docs/api.html#query_Query-findOneAndRemove
-
-                    ```javascript
-                    // first object is an condition object
-                    // The request have a parameter id in the call POST /todo/delete/:id
-
-                    Todo.findOneAndRemove({_id: request.params.id}, function(error) {
-                      if(error) {
-                        // handle error
-                      }
-                      response.redirect("/todo");
-                    });
-                    ```
-                  </script>
-        </section>
-
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Update data
-
-                    http://mongoosejs.com/docs/api.html#query_Query-findOneAndUpdate
-
-                    Read the documentation and you be happy!
-                    <div class="center">
-                      ![happy](https://www.reactiongifs.com/r/cheering_minions.gif)
-                    </div>
-
-                  </script>
-        </section>
-
-        <section data-markdown class="">
-          <script type="text/template">
-            ## A look at the demo
-
-
-                  </script>
+        <section>
+          <h3>Delete - the D in CRUD</h3>
+          <img src="./images/todoitem-delete.png" />
+          <ul>
+            <li>Use <code>deleteOne</code> to remove the document that matches the condition.</li>
+          </ul>
         </section>
 
       </section>
-
 
       <!-- Session -->
       <section>
 
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Web Session
-                    * HTTP is stateless
-                    * The server don´t remember previous requests
-
-                    <img src="../images/stateless.png" alt="">
-
-                  </script>
+        <section>
+          <h3>The web server hasn't got a clue about state</h3>
+          <div class="center">
+            <img src="./images/stateless.png" />
+          </div>
+          <ul>
+            <li>Neither the server or the browser has a intrinsic way of knowing that's the same browser wisting the same site.
+              <ul>
+                <li>(How is it then possible to log on to something?)</li>
+              </ul>
+            </li>
+          </ul>
         </section>
 
+        <section>
+          <h3>Maintaining state with sessions</h3>
+          <div class="center">
+            <img src="./images/session-cookie.png"  height="500" />
+          </div>
+          <ul>
+            <li>A session cookie contains a session ID, a unique identifier used to index the server's session storage.</li>
+          </ul>
+        </section>
+  
         <section data-markdown class="">
           <script type="text/template">
-            ## Web Session
+            ### Storing session data
 
-                    * To have a state at the server we create sessions
-
-                    <img src="../images/web-session.png" width="70%" alt="">
-
-                  </script>
+            - In a cookie at the client.
+              - Store everything in the cookie.
+                - Tampering?
+                  - JSON Web Token (https://jwt.io)
+              - Secret information?
+                - Encryption!
+            - In the web server's memory.
+              - What happens when the server is restarted?
+              - Scalability?
+            - Session server storage.
+              - Redis (in-memory data structure store).
+              - MongoDB.
+  
+          </script>
         </section>
 
-        <section data-markdown class="">
+        <section>
+          <h3>Managing session i Express</h3>
+          <img src="./images/session-app.js.png" height="400" />
+          <ul>
+            <li>
+                The default server-side session storage is <code>MemoryStorage</code>.
+              <ul>
+                <li>Not for production.</li>
+                <li>Sufficient for development and testing needs.</li>
+              </ul>
+            </li>
+            <li>Just the session ID is stored in the cookie itself.</li>
+          </ul>
+        </section>
+
+        <section data-markdown>
           <script type="text/template">
-            * The session is stored at the server and identified by session cookies
-                  * In memory (what happen when server is restarted? multiple servers?)
-                  * Static files (bad performance)
-                  * In key-Value DB like "redis"
-                  * In mongoDB
-                * The session could be handle by the client
-                  * store all data in a cookies
-                  * JSON Web Token (http://jwt.io)
-                </script>
+            ### Using sessions
+
+            - Session variables are just properties of the request object's `session` property.
+              - (The response object doesn't have a session property.)
+
+            ```
+            req.session.name = 'Ada'      // creates the session variable 'name'
+
+            const name = req.session.name // get the value of the session variable 'name'
+
+            delete req.session.name       // removes the session variable 'name'
+
+            req.session.destroy()         // destroys this session
+            req.session.regenerate()      // regenerates the session
+            ```
+          </script>
         </section>
-
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Using session in express (in-memory)
-
-                    * Middleware
-                      * express-session (https://github.com/expressjs/session)
-                      * cookie-parser (no need anymore)
-
-                    ```javascript
-
-                    app.use(session({
-                        name:   "theserversession",  // Don't use default session cookie name.
-                        secret: "K7smsx9MsEasad89wEzVp5EeCep5s", // should be kept secret
-                        saveUninitialized: false, // save/not-save a created but not modified session
-                        resave: false, // resave even if a request is not changing the session
-                        cookie: {
-                            secure: true, // should be true to check that we´re using HTTPS
-                            httpOnly: true, // dont allow client script messing with the cookie
-                            maxAge: 1000 * 60 * 60 * 24 // Millisecond
-                        }
-                    }));
-                    ```
-                  </script>
-        </section>
-
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Working with sessions
-
-                    Setting a *user-specific* view counter as a session variable
-
-                    ```javascript
-                      // getting the session from the request
-                      app.get("/assignment-clue", function(request, response) {
-                        // read the session from the request
-                        let session = request.session;
-
-                        if(session.pageViews) {
-                          // if exists add 1
-                          session.pageViews += 1;
-                        }
-                        else {
-                          // else set inital value
-                          session.pageViews = 1;
-                        }
-                        // ....
-                      });
-                    ```
-                  </script>
-        </section>
-
-
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Flash messages
-                    * When you want to give feedback to a user over a redirect (for example in a PRG-pattern)
-                    * We can use the session to save the state and delete the message on next request
-
-                    <div class="center">
-                      <img src="../images/flashmessage.png" alt="">
-                    </div>
-
-
-
-                  </script>
-        </section>
-
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Flash messages
-
-                    <div class="center">
-                      <img src="../images/flashmessage.png" alt="">
-                    </div>
-
-                    ```javascript
-                    /**
-                     * A middleware looking for a session variable called "flash"
-                     */
-                    app.use(function(request, response, next) {
-                      // The flash should live for one roundtrip so if it is set in the session
-                      // add it to the context (this request through locals)
-                      response.locals.flash = request.session.flash;
-                      // then delete it from the session
-                      delete request.session.flash;
-                      next();
-                    });
-
-                    ```
-
-                  </script>
-        </section>
-
-
-        <!--
-              <section data-markdown class="center">
-                <script type="text/template">
-                  ## DEMO
-
-                </script>
-              </section>
-            -->
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Using mongoDB as session storage
-
-                    * Express-session is using in-memory storage as default
-                      * Not recommended in production, fails on restart of server
-                    * Easy setup on mongoDB
-                      * https://github.com/kcbanner/connect-mongo
-                      * The book (page 154) suggests "session-mongoose". Don´t use it.
-                    * Redis - a key-value db
-                      * Fast
-                      * https://www.npmjs.com/package/connect-redis
-
-                  </script>
-        </section>
+      
       </section>
+
+      <!-- Flash messages -->
       <section>
-        <section data-markdown class="">
-          <script type="text/template">
-            ## Next time
 
-                  * Web Security
-                    * Common attacks
-                    * How to protect our application
-                    * Authentication and Authorization
-                  </script>
+        <section>
+          <h3>How to prevent duplicate form submissions?</h3>
+          <div class="center">
+            <img src="./images/Bild1.png"  height="500" />
+          </div>
+          <ul>
+            <li>"Double posting" accurs when the user refreshes the server response of an HTTP POST request.</li>
+          </ul>
+        </section>
+ 
+        <section>
+          <h3>Post/Redirect/Get (PRG)</h3>
+          <div class="center">
+            <img src="./images/prg.png"  height="500" />
+          </div>
+          <ul>
+            <li>To avoid "double posting" return a redirect command instead of a view directly.</li>
+          </ul>
         </section>
 
-        <section data-markdown class="center">
-          <script type="text/template">
-            ## Bye for now!
-
-                    <img src="http://www.reactiongifs.com/r/rollaway.gif" alt="" width="60%">
-                  </script>
+        <section>
+          <h3>What is a flash messages?</h3>
+          <div class="twocolumn">
+            <div style="min-height: 600px">
+              <img src="./images/flash-message.png" />
+            </div>
+            <div style="font-size: 80%">
+              <ul>
+                <li>To avoid "double posting" it's common to use the <a href="https://en.wikipedia.org/wiki/Post/Redirect/Get">Post/Redirect/Get</a> pattern (PRG).
+                  <ul>
+                    <li>How do we keep the user posted after the round trip?</li>
+                  </ul>
+                </li>
+                <li>Whenever you redirect someone in your website it is a good idea to use a flash message to let them know that what they just did worked or not.
+                  <ul>
+                    <li>The falsh message should survive only a round trip.</li>
+                    <li>Use a session variable to save the message and delete the message on the next request.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
         </section>
 
+        <section>
+          <h3>Implementing PRG and flash messages</h3>
+          <div class="twocolumn">
+            <div style="min-height: 800px">
+            <img src="./images/flash-message-delete-post.png" />
+            <img src="./images/flash-message-middleware.png" />
+            <img src="./images/flash-message-hbs.png" />
+            </div>
+            <div style="font-size: 80%">
+              <ol>
+                <li>In the function handling the POST request, create a flash message before the redirect.</li>
+                <li>Before the routing be sure to transfer the data of session variable <code>flash</code> to the response object.</li>
+                <li>Delete the <code>flash</code> session variable.</li>
+                <li>View the flash message.</li>
+                <li>Done! <del>Easy peasy!</del>
+              </ol>
+            </div>
+          </div>
+        </section>
 
+      </section>
 
+      <!-- Coming up next -->
+      <section>
 
+        <section>
+          <script type="text/template">
+            ### Next time
 
+            - Web Security
+              - Common attacks
+              - How to protect our application
+              - Authentication and authorization
+          </script>
+        </section>
 
-
+      </section>
     </div>
   </div>
 

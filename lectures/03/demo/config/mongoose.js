@@ -19,9 +19,6 @@ const CONNECTION_STRING = 'mongodb://dbuser:rzW6V0ikPyLHIzzFvu9287NaShUyH8@ds223
  * @returns {Promise}
 */
 module.exports.connect = async () => {
-  // Get Mongoose to use the global promise library.
-  mongoose.Promise = global.Promise
-
   // Bind connection to events (to get notifications).
   mongoose.connection.on('connected', () => console.log('Mongoose connection is open.'))
   mongoose.connection.on('error', err => console.error(`Mongoose connection error has occurred: ${err}`))
