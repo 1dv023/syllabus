@@ -1,3 +1,10 @@
+/**
+ * The starting point of the application.
+ *
+ * @author Mats Loock
+ * @version 1.0.0
+ */
+
 'use strict'
 
 const express = require('express')

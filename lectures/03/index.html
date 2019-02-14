@@ -130,12 +130,12 @@
           ### Content
 
           - Persistent data
-            - Some different strategies
+            - Some different strategies.
             - MongoDB
-            - Mongoose
-          - Web Session
-            - What and how
-            - Flash messages
+              - Mongoose
+          - Web session
+            - What, why and how.
+            - Flash messages.
 
                   </script>
       </section>
@@ -170,8 +170,9 @@
                 <li>
                   A database is a collection of data that is organized so it can be easily accessed, manage and updated.
                 </li>
-                <li>Retrieve, add, modify, destroy, ...</li>
-                <li>Query, filter, sort, ...</li>
+                <li>Retrieve, add, modify, destroy
+                  <ul><li>Query, filter, sort, ...</li></ul>
+                </li>
                 <li>(We can host it ourselves but it's easier to let somebody else do it.)</li>
               </ul>
             </div>
@@ -450,10 +451,10 @@
         <section>
           <h3>How to prevent duplicate form submissions?</h3>
           <div class="center">
-            <img src="./images/Bild1.png"  height="500" />
+            <img src="./images/double-post.png"  height="500" />
           </div>
           <ul>
-            <li>"Double posting" accurs when the user refreshes the server response of an HTTP POST request.</li>
+            <li>"Double posting" occurs when the user refreshes the server response of an HTTP POST request.</li>
           </ul>
         </section>
  
@@ -471,6 +472,7 @@
           <h3>What is a flash messages?</h3>
           <div class="twocolumn">
             <div style="min-height: 600px">
+              <img src="./images/flash-message-prg.png" />
               <img src="./images/flash-message.png" />
             </div>
             <div style="font-size: 80%">
@@ -482,7 +484,7 @@
                 </li>
                 <li>Whenever you redirect someone in your website it is a good idea to use a flash message to let them know that what they just did worked or not.
                   <ul>
-                    <li>The falsh message should survive only a round trip.</li>
+                    <li>The flash message should survive only a round trip.</li>
                     <li>Use a session variable to save the message and delete the message on the next request.</li>
                   </ul>
                 </li>
@@ -516,14 +518,14 @@
       <!-- Coming up next -->
       <section>
 
-        <section>
+        <section data-markdown>
           <script type="text/template">
             ### Next time
 
             - Web Security
-              - Common attacks
-              - How to protect our application
-              - Authentication and authorization
+              - Common web attacks and vulnerabilities.
+              - The first steps to protect your website.
+              - Authentication and authorization.
           </script>
         </section>
 

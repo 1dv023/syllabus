@@ -1,3 +1,10 @@
+/**
+ * toDoController.
+ *
+ * @author Mats Loock
+ * @version 1.0.0
+ */
+
 'use strict'
 
 const ToDoItem = require('../models/ToDoItem')
@@ -130,4 +137,5 @@ toDoController.deletePost = async (req, res, next) => {
   }
 }
 
+// Exports.
 module.exports = toDoController
