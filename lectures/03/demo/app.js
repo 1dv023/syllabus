@@ -43,7 +43,7 @@ const sessionOptions = {
   name: 'name of keyboard cat', // Don't use default session cookie name.
   secret: 'keyboard cat', // Change it!!! The secret is used to hash the session with HMAC.
   resave: false, // Resave even if a request is not changing the session.
-  saveUninitialized: true, // Don't save a created but not modified session.
+  saveUninitialized: false, // Don't save a created but not modified session.
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 // 1 day
   }
