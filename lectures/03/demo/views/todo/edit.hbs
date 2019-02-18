@@ -1,0 +1,14 @@
+<h1>
+  <span class="far fa-edit"></span> Edit
+</h1>
+
+<form method="post" action="/todo/edit">
+  <input type="hidden" name="id" value="{{locals.id}}" />
+  <div class="form-group">
+    <input type="text" class="form-control" name="description" placeholder="Update to-do description here" value="{{locals.description}}" required="required" autofocus="autofocus" />
+  </div>
+  <div class="form-group">
+    <input type="checkbox" class="form-control" name="done" {{#if locals.done }} checked="checked" {{/if}} />
+  </div>
+  <button type="submit" class="btn btn-lg btn-primary">Update</button>
+</form>

@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="sv-se">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Web Security - Server-based programming (1DV023/1DV523)</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="icon" href="../images/favicon.png" type="image/png" />
+
+    <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.lnu.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="reveal lnu">
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <!-- Start -->
+            <section class="center" data-state="lnu-intro">
+                <h3>Server-based Web Programming</h3>
+                <h3>(1DV023/1DV523)</h3>
+                <h1>Lecture</h1>
+                <h3>Web Security</h3>
+                <div class="lnu-footer">
+                    <img src="../images/lnu-logotype.png" />
+                    <img src="../images/lnu-symbol.png" />
+                </div>
+                <pre><code></code></pre> <!-- Fix for color coding in md -->
+
+            </section>
+
+            <!-- CC -->
+            <section data-state="lnu-cc">
+                <h2>Licence for this work</h2>
+                <p>
+                    This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
+                </p>
+                <p>All content in this work excluding photographs, icons, picture of course litterature and Linnaeus University logotype and symbol, is licensied under a
+                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.</p>
+                <h4>You are free to </h4>
+                <ul>
+                    <li>copy and redistribute the material in any medium or format</li>
+                    <li>spread the whole or parts of the content</li>
+                    <li>show the whole or parts of the content publicly and digital</li>
+                    <li>convert the content to another format</li>
+                    <li>change the content</li>
+                </ul>
+                <p>
+                    If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus University logotype and symbol in your new work!
+                </p>
+                <p>
+                    At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
+                </p>
+            </section>
+
+            <section data-markdown>
+              <script type="text/template">
+                ## Content
+
+                * About web security
+                  * OWASP
+                * Attack vectors
+                  * XSS, CSRF, Injection...
+                * Authentication and Authorization
+                  * User management
+                  * Passwords
+                * HTTPS
+                  * TLS Certificates
+
+
+                </script>
+            </section>
+
+            <section>
+
+              <section data-markdown class="center">
+                <script type="text/template">
+                  ## When the web was invented...
+
+                  <img src="../images/www-first-website.png" alt="" width="80%">
+
+              </script>
+              </section>
+              <section data-markdown class="">
+                  <script type="text/template">
+                      ## What is web security?
+
+                      * How do we use the web today?
+                        * Shopping, Banking, Conversations, ...
+                        * Sensitive and important information
+                          * Privacy, Society, Web of things
+                        * Access to back-end system
+                        * Downtime == lost of money
+                          * Denial of Service (DOS, DDOS)
+                        * Rendering code running on clients <br />=>
+                            more attack vectors
+                  </script>
+              </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                      ## What is web security?
+
+                      * Risk factors
+                        * Undeveloped awareness, education
+                        * Simplicity to build web applications
+                        * Functionality vs. security
+                        * Time, cost
+                          * Expertice in web security?
+                        * New attacks, new technology, staying up-to-date!
+
+                  </script>
+              </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                      ## Always be suspicious!
+
+                      <p class="center">
+                        <img width="50%" src="../images/suspisious.gif" alt="">
+                      </p>
+                      >The application must always assume that all input is potentially malicious
+
+                  </script>
+              </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## OWASP
+
+                    Open Web Application Security Project
+
+                    * Open, global non-profit organization
+                      *  https://www.owasp.org
+                    * OWASP Top Ten
+
+                    <img src="../images/owasp10.png" width="50%" alt="">
+
+                  </script>
+              </section>
+            </section>
+            <section>
+
+             <section data-markdown class="">
+                 <script type="text/template">
+                   ## XSS - What?
+
+                   * Cross-Site Scripting
+                   * The attacker get the application to send unsanitized data to client
+                   * The client trust the server/application
+                   * Attackers can execute script on client
+                     * Steal cookies - Session hijacking
+                     * Key logging
+                     * Phishing - Fake login
+                     * ...
+                 </script>
+             </section>
+
+             <section data-markdown class="">
+               <script type="text/template">
+                 ## XSS - How?
+
+                 <img src="http://excess-xss.com/persistent-xss.png" alt="" width="80%">
+
+
+                 <p class="small_text">
+                   Image from: http://excess-xss.com/
+                   Excess XSS by Jakob Kallin and Irene Lobo Valbuena is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
+                 </p>
+
+               </script>
+             </section>
+
+
+             <section data-markdown class="">
+               <script type="text/template">
+                 ## XSS - Protection?
+
+                 * Client validations?
+                 * Validate/Sanitize input or output?
+                   * FIEO - Filter input, escape output
+                   * Whitelist/Blacklist
+                   * Encoding harmful characters  ( < and > ect.)
+                   * How will our application use the data?
+                 * How does your template engine work?
+                   * How does you use the output in your application?
+                   ```javascript
+                   document.querySelector('a').href = userInput
+                   // userInput = "javascript:alert('hacked')"
+                   ```
+                 * Implementing modules like https://github.com/yahoo/xss-filters
+               </script>
+             </section>
+             <section data-markdown class="">
+               <script type="text/template">
+                ## XSS - Protection - CSP
+                ####Content Security Policy
+
+                * Using the Content-Security-Policy HTTP header
+                * New, but pretty widley supported in browsers
+                * Whitelisting allowed sources of script, style, and other resources.
+
+                ```
+                  Content-Security-Policy: default-src 'self'; img-src *;
+                  media-src media1.com media2.com; script-src cdn.script.example.com
+                ```
+
+                https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
+                <br>
+                https://github.com/helmetjs/helmet
+               </script>
+             </section>
+
+            </section>
+
+            <section>
+              <section data-markdown class="">
+                 <script type="text/template">
+                   ## CSRF - What?
+
+                   * Cross-Site Request Forgery [pronounced sea-surf]
+                   * Forged request, by attacker, are transmitted from a user that the website trusts (logged in)
+                   * Server/Application trust the user
+                   * Trick client to visit site where the user has a session
+                   * Combined with XSS
+                     * Inject code in site client visits (trust)
+                 </script>
+             </section>
+
+
+
+             <section data-markdown class="">
+                 <script type="text/template">
+                   ## CSRF - How?
+
+                   <img src="../images/csrf.png" alt="">
+
+                 </script>
+             </section>
+             <section data-markdown class="">
+                 <script type="text/template">
+                   ## CSRF - How?
+
+                   <img src="../images/csrf1.png" alt="">
+
+                 </script>
+             </section>
+              <section data-markdown class="">
+                 <script type="text/template">
+                   ## CSRF - Protection?
+
+                   * Synchronized Token pattern
+                     * Controll that the request is made by our client
+                     * Include a token in forms (and/or in meta tag)
+                     * Must be unique for each request
+
+                   ```html
+                     <form action="/account" method="post">
+                       <input type="hidden" name="_csrf" value="HvtsC1Ka-yq1Q2KPAu_Yh_H8F4vJEYfMIlBQ" />
+                     </form>
+                   ```
+                   https://github.com/expressjs/csurf
+                 </script>
+             </section>
+
+            </section>
+
+            <section>
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## Injections - What?
+
+                    * Manipulate the query to the database
+                    * SQL-injections
+                      * The attacker can manipulate the SQL query
+                    * noSQL-injections?
+                  </script>
+              </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## Injections - How?
+                    ```sql
+                    "SELECT * FROM user WHERE username='" + request.getParameter("username") + "'";
+                    ```
+
+
+
+                    <img src="http://csharpcorner.mindcrackerinc.netdna-cdn.com/UploadFile/75a48f/how-sql-injection-can-be-possible-in-asp-net-websites/Images/SQL%20Injection.PNG" alt="">
+
+                    ```
+                    // will show all accounts
+                    "SELECT * FROM user WHERE username='' or 1=1--"
+                    ```
+                  </script>
+              </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## SQL Injections
+                    <img src="http://i.kinja-img.com/gawker-media/image/upload/s--vekHtjBE--/c_scale,fl_progressive,q_80,w_800/18mpenleoksq8jpg.jpg" alt="">
+                  </script>
+              </section>
+
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## Injections - noSQL
+
+                    * You´re not safe!
+                    * A lot of diffrent databases with a lot of query languages
+                    * MongoDB
+                      * JS syntax permitted in some queries
+                      * $where, $or, ...
+                      ```javascript
+                          db.myCollection.find( { $where: function() {
+                            return obj.credits - obj.debits < $userInput; }
+                          });
+                      ```
+                    * mongoose.js
+                      * Handle all input as strings
+
+
+
+                  </script>
+              </section>
+              </section>
+              <section>
+                <section data-markdown class="">
+                 <script type="text/template">
+                  ## User management
+                  How do we handle users in our application!?
+
+                  * Using third part solutions?
+                    * OAuth, OpenID Connect
+                    * Facebook, Twitter, Github...
+                  * Write your own?
+                    * Inform user how the credentials is handled
+                    * Force the user how to form the password?
+                    * Allow special characters and long passwords
+                    * Remember your responsibility
+
+                 </script>
+               </section>
+
+
+
+             <section data-markdown class="">
+                 <script type="text/template">
+                   ## Register
+
+                   * Create a User model with username/email and password
+
+                   ```javascript
+                     // Create a schema for user.
+                      let userSchema = new mongoose.Schema({
+                         email: { type: String, required: true, unique: true, ...},
+                         password: { type: String, required: true },
+                          ...
+                      });
+
+                      // Validate password
+                      userSchema.path("password").validate(function(password) {
+                          return password.length >= 6;
+                      }, "The password must be of minimum length 6 characters.");
+                   ```
+
+                 </script>
+             </section>
+
+             <section data-markdown class="">
+                 <script type="text/template">
+                  ## Passwords
+
+                  * Should the password have restrictions?
+                    * Allow looooong passwords
+                    * Restrict minimum length?
+                    * Allow special characters
+                  * A password should never be able to be read back
+                  * Use a secure hashing algoritm (Argon2, bcrypt, scrypt)
+                    * Avoid md5, sha1, sha256
+
+                  >nyoIjb8W4rVuJKap/AyxgmZv21shwaMHov
+
+
+                 </script>
+            </section>
+            <section data-markdown class="">
+                <script type="text/template">
+                  ##  Rainbow tables
+
+                  Trying to brute force hashed passwords trough tables with pre hashed "known passwords".
+
+                  <img width="25%" src="../images/rainbowtable.png" alt="">
+
+                </script>
+            </section>
+            <section data-markdown class="">
+                <script type="text/template">
+                  ## Salt your hash
+
+                  Server A and server B have different salt and different hash strings
+                  for same password - Protection against rainbow tables
+
+                  <img src="../images/saltcreate.png" width="80%" alt="">
+
+
+                </script>
+            </section>
+            <section data-markdown class="">
+                <script type="text/template">
+                  ##  Register users on your site
+
+                  * Client fills the form
+                    * Client validation
+                    * required, e-mail format ect.
+                  * Check if username/email already exists in application
+                  * Before saving the user hash the password with a salt
+                  * Save the the hashed password-string in db
+                  * https://www.npmjs.com/package/bcrypt-nodejs
+                    * bcrypt has salts built into the generated hashes to prevent rainbow table attacks.
+                </script>
+            </section>
+
+            <section data-markdown class="">
+                <script type="text/template">
+                 ## Code
+
+                  ```javascript
+                  // In the User model
+                  // Using a pre-hook (runs before saving the user)
+                  userSchema.pre("save", function(next) {
+                    var user = this;
+                     bcrypt.genSalt(10, function(err, salt) {
+                       if(err) { return next(err); }
+
+                       // Using https://www.npmjs.com/package/bcrypt-nodejs
+                       bcrypt.hash(user.password, salt, null, function(err, hash) {
+                         if(err) { return next(err); }
+
+                         // set the password to the hash
+                         user.password = hash;
+                         next();
+                       });
+                     });
+                   });
+                  ```
+
+                </script>
+           </section>
+
+           <section data-markdown class="">
+               <script type="text/template">
+                 ## User management
+                 * Authentication
+                   * Logging in the user against credentials
+                   * POST /login
+                     * 200 OK, 30x Redirect
+                     * 401 Unauthorized (You are not logged in, try again)
+                 * Authorization
+                   * Right resources to right user
+                     * 403 Forbidden (You may be logged in, but not authorized - Go away!)
+               </script>
+           </section>
+
+
+           <section data-markdown class="">
+               <script type="text/template">
+                 ## How to login a client
+
+                 * Log-in form, user fill in data
+                    * Validate on client, validate on server
+                 * Check credentials against database
+                 * If successful
+                   * Create a secure session cookie (regenerate) for the client
+                     * Return it with a redirect (or 2xx response)
+                 * If unsuccessful
+                   * Return a 401 or a redirect to the login form
+                     * Give the client information about what went wrong
+                 * Dont forget to give the user the possibility to log off!
+                   * Destroy the session
+                     * Redirect to start page
+
+               </script>
+           </section>
+
+
+
+            <section data-markdown class="">
+                <script type="text/template">
+                  ## Code - login
+
+                  ```javascript
+                    // Check if password user is trying (in our model)
+                    // compare-function takes the hashed string in db
+                    // Hash candidatePassword, if they are the same res is true
+                    userSchema.methods.comparePassword = function(candidatePassword, callback) {
+                      bcrypt.compare(candidatePassword, this.password, function(err, res) {
+                          if(err) {
+                            return callback(err);
+                          }
+                          callback(null, res);
+                      });
+                    };
+                  ```
+                </script>
+           </section>
+
+
+
+             <section data-markdown class="">
+                 <script type="text/template">
+                   ##  How do you handle your own passwords?
+
+                   Think about it to the peer-instruction!
+                 </script>
+             </section>
+
+<!--
+             <section data-markdown class="">
+                 <script type="text/template">
+                   ##  DEMO
+                   Register
+                   Login
+                 </script>
+             </section>
+-->
+
+
+             <section data-markdown class="">
+                 <script type="text/template">
+                   ## Authorization in code
+
+                    * Define middleware routes that catches all path you want to protect
+                    * Check that the client calling them has the correct session
+
+
+                    ```javascript
+                       router.all("/resource/:type(create|edit\/*|delete\/*)",
+                         function(request, response, next) {
+                           // If not authenticated trigger a 403 error.
+                           request.session.authenticatedAs ? next() : next(errorFactory(403));
+                         });
+                       });
+                    ```
+
+                    ```javascript
+                       router.post("/resource", isAuthenticated, function(request, response) {
+                           // ...
+                         });
+                       });
+                    ```
+                 </script>
+             </section>
+
+              <!--
+             <section data-markdown class="">
+                 <script type="text/template">
+                   ## Session cookie
+
+                   ```javascript
+
+                   app.use(session({
+                       name:   "theserversession",  // Don't use default session cookie name.
+                       secret: require("./config/secrets").secret, // should be kept secret
+                       saveUninitialized: false, // save/not-save a created but not modified session
+                       resave: false, // resave even if a request is not changing the session
+                       cookie: {
+                           secure: true, // should be true to check that we´re using HTTPS
+                           httpOnly: true, // dont allow client script messing with the cookie
+                           maxAge: 3200 // will live for 1 day
+                       }
+                   }));
+                   ```
+                 </script>
+             </section>
+           -->
+            </section>
+            <section>
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## HTTPS
+                    * TLS(SSL) + HTTP = HTTPS
+                    * Encryption / Decryption
+                      * Protect data between client and server
+                        * Prevent "man in the middle attack"
+                    * Should we always use HTTPS?
+                      * Trust, SEO, New technologies, Open WiFi
+                      * So in production...YES!
+                  </script>
+              </section>
+
+                <section data-markdown class="">
+                    <script type="text/template">
+                      ## Certificates
+                      * A digital signed document
+                        * Often created by a trusted part (CA - Certificate Authority)
+                          * Browser have a list of these
+                          * Cost money, diffrent levels of trust
+                          * Comodo, Symantec, GlobalSign...
+                        * https://letsencrypt.org/
+                        * In development we can create our own - Self-signed
+                    </script>
+                </section>
+                <section>
+
+                      <strong>Domain Validated (DV)</strong><br />
+                  		Low cost, just validate the domain<br />
+                  		<img src="../images/ssl1.png" alt="">
+                      <br>
+
+                    		<strong>Organization Validation (OV)</strong> <br>
+                        Validates domain and the orgranization (addresses, country...)
+                        <br>
+                  			<img src="../images/ssl2.png" alt="">
+                  		</p>
+                  		<p>
+                  			<strong>Extended Validation (EV)</strong> <br>
+                  			Like OV plus more control of the organization that gives
+                        higher thrust <br>
+                        <img src="../images/ssl3.png" alt="">
+                  		</p>
+
+                </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                    ## Encryption
+
+                    * Symmetric
+                      * Both parts have the private/secret key
+                    * Asymmetric (public-key encryption)
+                      * A public key is used to encrypt a messages
+                      * A private key is used to decrypt the message
+                      * The part that only have the public key can only encrypt the message
+                      * Only the part with the private key can decrypt
+
+
+                  </script>
+              </section>
+
+              <section data-markdown class="">
+                  <script type="text/template">
+                    <p class="center">
+                      <img src="../images/httpsflow.png" alt="">
+                    </p>
+
+
+                    1. Client connect on port 443, requests the server identity
+                    2. Server sends a copy of the TLS Certificate, including servers public key
+                    3. Client check against list of thrusted CA´s and that the certificate is valid. Creates a symmetric key, encrypt it with the public key from the server.
+                    4. Server decrypt the symmetric key with its own private key. Start using the symmetric key when encrypt the messages
+                    5. We have a trusted and encrypted communication
+                  </script>
+              </section>
+
+
+            </section>
+            <section>
+             <section data-markdown class="">
+                 <script type="text/template">
+                 ## Next time
+
+                 * Real-time web applications
+                   * Server push
+                   * Web Socket server
+                   * ...
+                 </script>
+             </section>
+
+             <section data-markdown class="center">
+                 <script type="text/template">
+                  # Tack och adjö för idag!
+
+                   <img src="http://i.imgur.com/WLeRVMT.gif" alt="" width="60%">
+                 </script>
+             </section>
+          </section>
+
+        </div>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            width: 1280,
+            height: 800,
+            controls: true,
+            progress: true,
+            history: true,
+            center: false,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '../reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+
+    </script>
+
+</body>
+</html>
