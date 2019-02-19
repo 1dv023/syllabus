@@ -87,6 +87,7 @@
                 * Authentication and Authorization
                   * User management
                   * Passwords
+                * HTTPS/TLS
                 
                 </script>
             </section>
@@ -103,10 +104,11 @@
                     * OpenID Connect
                       * Facebook, Twitter, Github...
                   * Write your own?
+                    * Remember your responsibility as web developer
                     * Inform user how the credentials is handled
                     * Force the user how to form the password?
                     * Allow special characters and long passwords
-                    * Remember your responsibility
+                    
 
                  </script>
                </section>
@@ -116,7 +118,7 @@
                   * Authentication
                     * Logging in the user against credentials
                     * POST /login
-                      * 200 OK, 30x Redirect
+                      * 302 Redirect (200 OK), with session cookie
                       * 401 Unauthorized (You are not logged in, try again)
                   * Authorization
                     * Right resources to right user
@@ -127,7 +129,7 @@
 
              <section data-markdown class="">
                  <script type="text/template">
-                   ## Register
+                   ## Storing user credentials
 
                    * Create a User model with username/email and password
 
@@ -178,11 +180,14 @@
             <section data-markdown class="">
                 <script type="text/template">
                   ## Salt your hash
-
-                  Server A and server B have different salt and different hash strings
-                  for same password - Protection against rainbow tables
-
                   <img src="../images/saltcreate.png" width="80%" alt="">
+
+                  * Different servers have different salt and different hash strings
+                  for same password
+                  * Same password will have different hashes if the salt is unique for each user
+                  * Protection against rainbow tables
+
+                 
                   
                  
 
@@ -199,23 +204,23 @@
                   * Check if username/email already exists in application
                   * Before saving the user hash the password with a salt
                   * Save the the hashed password-string in db
-                  * https://www.npmjs.com/package/bcrypt-nodejs
+                  * https://www.npmjs.com/package/bcrypt
                     * bcrypt has salts built into the generated hashes
                 </script>
             </section>
 
             <section data-markdown class="">
                 <script type="text/template">
-                  ## Code
+                  ## Code for hashing passwords
                   * In the User model
-                    * Using a pre-hook (runs before saving the user)
+                    * Using a pre-hook (runs before saving the user into database)
 
                   ```javascript
                   userSchema.pre('save', async function (next) {
                     let user = this
                   
                     if (user.isModified('password') || user.isNew) {
-                      let hashPwd = await bcrypt.hash(user.password, 10)
+                      let hashPwd = await bcrypt.hash(user.password, 12)
                       user.password = hashPwd
                     }
                     next()
@@ -255,18 +260,18 @@
                   ## Code - login
 
                   ```javascript
-                    // In the User model
-                    userSchema.methods.comparePassword = function (candidatePassword) {
-                      return bcrypt.compare(candidatePassword, this.password)
-                    }
+                  // In the User model
+                  userSchema.methods.comparePassword = function (candidatePassword) {
+                    return bcrypt.compare(candidatePassword, this.password)
+                  }
                   ```
 
                   ```javascript
+                  // In the controller
                   ...
                   let user = await User.findOne({ 'username': req.body.username })
                   if (!user) {
-                    console.log('cant login: username')
-                    return res.render('user/login')
+                    // No one with that username
                   }
                   let result = await user.comparePassword(req.body.password)
                   if (result) {
@@ -329,19 +334,18 @@
                   ## Session cookie and HTTPS
 
                   ```javascript
-
                   const sessionOptions = {
-                   name: 'name of keyboard cat', // Don't use default session cookie name.
-                   secret: 'keyboard cat', // Change it!!! The secret is used to hash the session with HMAC.
-                   resave: false, // Resave even if a request is not changing the session.
-                   saveUninitialized: false, // Don't save a created but not modified session.
-                   cookie: {
-                     secure: true, // should be true to check that we´re using HTTPS
-                     httpOnly: true, // dont allow client script messing with the cookie
-                     maxAge: 3200 // will live for 1 day
-                   }
-                 }
-                  ```
+                    name: 'name of keyboard cat', // Don't use default session cookie name.
+                    secret: 'keyboard cat', // Change it!!! 
+                    resave: false, // Resave even if a request is not changing the session.
+                    saveUninitialized: false, // Don't save a created but not modified session.
+                    cookie: {
+                      secure: true, // should be true to check that we´re using HTTPS
+                      httpOnly: true, // dont allow client script messing with the cookie
+                      maxAge: 3200 // will live for 1 day
+                    }
+                  }
+                 ```
                 </script>
             </section>
 
