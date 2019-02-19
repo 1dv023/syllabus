@@ -46,7 +46,6 @@
                 <h3>(1DV023/1DV523)</h3>
                 <h1>Lecture</h1>
                 <h3>Web Security</h3>
-                <h5>Authentication/Authorization</h5>
                 <div class="lnu-footer">
                     <img src="../images/lnu-logotype.png" />
                     <img src="../images/lnu-symbol.png" />
@@ -83,11 +82,6 @@
               <script type="text/template">
                 ## Content
 
-            
-                * Authentication and Authorization
-                  * User management
-                  * Passwords
-                
                 * About web security
                   * OWASP
                 * Attack vectors
@@ -134,7 +128,7 @@
                         * Simplicity to build web applications
                         * Functionality vs. security
                         * Time, cost
-                          * Expertice in web security?
+                          * Expertise in web security?
                         * New attacks, new technology, staying up-to-date!
 
                   </script>
@@ -152,6 +146,8 @@
                   </script>
               </section>
 
+              
+
               <section data-markdown class="">
                   <script type="text/template">
                     ## OWASP
@@ -162,7 +158,7 @@
                       *  https://www.owasp.org
                     * OWASP Top Ten
 
-                    <img src="../images/owasp10.png" width="50%" alt="">
+                    <img src="../images/owasp17.png" width="50%" alt="">
 
                   </script>
               </section>
@@ -207,8 +203,8 @@
                  * Client validations?
                  * Validate/Sanitize input or output?
                    * FIEO - Filter input, escape output
+                    * Encoding harmful characters  ( < and > ect.)
                    * Whitelist/Blacklist
-                   * Encoding harmful characters  ( < and > ect.)
                    * How will our application use the data?
                  * How does your template engine work?
                    * How does you use the output in your application?
@@ -225,7 +221,7 @@
                 ####Content Security Policy
 
                 * Using the Content-Security-Policy HTTP header
-                * New, but pretty widley supported in browsers
+                * New, but pretty widely supported in browsers
                 * Whitelisting allowed sources of script, style, and other resources.
 
                 ```
@@ -268,7 +264,7 @@
              <section data-markdown class="">
                  <script type="text/template">
                    ## CSRF - How?
-
+                   by using GET requests for state changing operations.
                    <img src="../images/csrf1.png" alt="">
 
                  </script>
@@ -278,7 +274,7 @@
                    ## CSRF - Protection?
 
                    * Synchronized Token pattern
-                     * Controll that the request is made by our client
+                     * Control that the request is made by our client
                      * Include a token in forms (and/or in meta tag)
                      * Must be unique for each request
 
@@ -336,7 +332,7 @@
                     ## Injections - noSQL
 
                     * You´re not safe!
-                    * A lot of diffrent databases with a lot of query languages
+                    * A lot of different databases with a lot of query languages
                     * MongoDB
                       * JS syntax permitted in some queries
                       * $where, $or, ...
@@ -355,335 +351,107 @@
               </section>
               <section>
                 <section data-markdown class="">
-                 <script type="text/template">
-                  ## User management
-                  How do we handle users in our application!?
-
-                  * Using third part solutions?
-                    * OAuth, OpenID Connect
-                    * Facebook, Twitter, Github...
-                  * Write your own?
-                    * Inform user how the credentials is handled
-                    * Force the user how to form the password?
-                    * Allow special characters and long passwords
-                    * Remember your responsibility
-
-                 </script>
-               </section>
-
-
-
-             <section data-markdown class="">
-                 <script type="text/template">
-                   ## Register
-
-                   * Create a User model with username/email and password
-
-                   ```javascript
-                     // Create a schema for user.
-                      let userSchema = new mongoose.Schema({
-                         email: { type: String, required: true, unique: true, ...},
-                         password: { type: String, required: true },
-                          ...
-                      });
-
-                      // Validate password
-                      userSchema.path("password").validate(function(password) {
-                          return password.length >= 6;
-                      }, "The password must be of minimum length 6 characters.");
-                   ```
-
-                 </script>
-             </section>
-
-             <section data-markdown class="">
-                 <script type="text/template">
-                  ## Passwords
-
-                  * Should the password have restrictions?
-                    * Allow looooong passwords
-                    * Restrict minimum length?
-                    * Allow special characters
-                  * A password should never be able to be read back
-                  * Use a secure hashing algoritm (Argon2, bcrypt, scrypt)
-                    * Avoid md5, sha1, sha256
-
-                  >nyoIjb8W4rVuJKap/AyxgmZv21shwaMHov
-
-
-                 </script>
-            </section>
-            <section data-markdown class="">
-                <script type="text/template">
-                  ##  Rainbow tables
-
-                  Trying to brute force hashed passwords trough tables with pre hashed "known passwords".
-
-                  <img width="25%" src="../images/rainbowtable.png" alt="">
-
-                </script>
-            </section>
-            <section data-markdown class="">
-                <script type="text/template">
-                  ## Salt your hash
-
-                  Server A and server B have different salt and different hash strings
-                  for same password - Protection against rainbow tables
-
-                  <img src="../images/saltcreate.png" width="80%" alt="">
-
-
-                </script>
-            </section>
-            <section data-markdown class="">
-                <script type="text/template">
-                  ##  Register users on your site
-
-                  * Client fills the form
-                    * Client validation
-                    * required, e-mail format ect.
-                  * Check if username/email already exists in application
-                  * Before saving the user hash the password with a salt
-                  * Save the the hashed password-string in db
-                  * https://www.npmjs.com/package/bcrypt-nodejs
-                    * bcrypt has salts built into the generated hashes to prevent rainbow table attacks.
-                </script>
-            </section>
-
-            <section data-markdown class="">
-                <script type="text/template">
-                 ## Code
-
-                  ```javascript
-                  // In the User model
-                  // Using a pre-hook (runs before saving the user)
-                  userSchema.pre("save", function(next) {
-                    var user = this;
-                     bcrypt.genSalt(10, function(err, salt) {
-                       if(err) { return next(err); }
-
-                       // Using https://www.npmjs.com/package/bcrypt-nodejs
-                       bcrypt.hash(user.password, salt, null, function(err, hash) {
-                         if(err) { return next(err); }
-
-                         // set the password to the hash
-                         user.password = hash;
-                         next();
-                       });
-                     });
-                   });
-                  ```
-
-                </script>
-           </section>
-
-           <section data-markdown class="">
-               <script type="text/template">
-                 ## User management
-                 * Authentication
-                   * Logging in the user against credentials
-                   * POST /login
-                     * 200 OK, 30x Redirect
-                     * 401 Unauthorized (You are not logged in, try again)
-                 * Authorization
-                   * Right resources to right user
-                     * 403 Forbidden (You may be logged in, but not authorized - Go away!)
-               </script>
-           </section>
-
-
-           <section data-markdown class="">
-               <script type="text/template">
-                 ## How to login a client
-
-                 * Log-in form, user fill in data
-                    * Validate on client, validate on server
-                 * Check credentials against database
-                 * If successful
-                   * Create a secure session cookie (regenerate) for the client
-                     * Return it with a redirect (or 2xx response)
-                 * If unsuccessful
-                   * Return a 401 or a redirect to the login form
-                     * Give the client information about what went wrong
-                 * Dont forget to give the user the possibility to log off!
-                   * Destroy the session
-                     * Redirect to start page
-
-               </script>
-           </section>
-
-
-
-            <section data-markdown class="">
-                <script type="text/template">
-                  ## Code - login
-
-                  ```javascript
-                    // Check if password user is trying (in our model)
-                    // compare-function takes the hashed string in db
-                    // Hash candidatePassword, if they are the same res is true
-                    userSchema.methods.comparePassword = function(candidatePassword, callback) {
-                      bcrypt.compare(candidatePassword, this.password, function(err, res) {
-                          if(err) {
-                            return callback(err);
-                          }
-                          callback(null, res);
-                      });
-                    };
-                  ```
-                </script>
-           </section>
-
-
-
-             <section data-markdown class="">
-                 <script type="text/template">
-                   ##  How do you handle your own passwords?
-
-                   Think about it to the peer-instruction!
-                 </script>
-             </section>
-
-<!--
-             <section data-markdown class="">
-                 <script type="text/template">
-                   ##  DEMO
-                   Register
-                   Login
-                 </script>
-             </section>
--->
-
-
-             <section data-markdown class="">
-                 <script type="text/template">
-                   ## Authorization in code
-
-                    * Define middleware routes that catches all path you want to protect
-                    * Check that the client calling them has the correct session
-
-
-                    ```javascript
-                       router.all("/resource/:type(create|edit\/*|delete\/*)",
-                         function(request, response, next) {
-                           // If not authenticated trigger a 403 error.
-                           request.session.authenticatedAs ? next() : next(errorFactory(403));
-                         });
-                       });
-                    ```
-
-                    ```javascript
-                       router.post("/resource", isAuthenticated, function(request, response) {
-                           // ...
-                         });
-                       });
-                    ```
-                 </script>
-             </section>
-
-              <!--
-             <section data-markdown class="">
-                 <script type="text/template">
-                   ## Session cookie
-
-                   ```javascript
-
-                   app.use(session({
-                       name:   "theserversession",  // Don't use default session cookie name.
-                       secret: require("./config/secrets").secret, // should be kept secret
-                       saveUninitialized: false, // save/not-save a created but not modified session
-                       resave: false, // resave even if a request is not changing the session
-                       cookie: {
-                           secure: true, // should be true to check that we´re using HTTPS
-                           httpOnly: true, // dont allow client script messing with the cookie
-                           maxAge: 3200 // will live for 1 day
-                       }
-                   }));
-                   ```
-                 </script>
-             </section>
-           -->
-            </section>
-            <section>
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## HTTPS
-                    * TLS(SSL) + HTTP = HTTPS
-                    * Encryption / Decryption
-                      * Protect data between client and server
-                        * Prevent "man in the middle attack"
-                    * Should we always use HTTPS?
-                      * Trust, SEO, New technologies, Open WiFi
-                      * So in production...YES!
-                  </script>
-              </section>
-
-                <section data-markdown class="">
                     <script type="text/template">
-                      ## Certificates
-                      * A digital signed document
-                        * Often created by a trusted part (CA - Certificate Authority)
-                          * Browser have a list of these
-                          * Cost money, diffrent levels of trust
-                          * Comodo, Symantec, GlobalSign...
-                        * https://letsencrypt.org/
-                        * In development we can create our own - Self-signed
+                      ## HTTPS
+                      * TLS(SSL) + HTTP = HTTPS
+                      * Encryption / Decryption
+                        * Protect data between client and server
+                          * Prevent "man in the middle attack"
+                      * Should we always use HTTPS?
+                        * Trust, SEO, New technologies, Open WiFi
+                        * So in production...YES!
                     </script>
                 </section>
-                <section>
-
-                      <strong>Domain Validated (DV)</strong><br />
-                  		Low cost, just validate the domain<br />
-                  		<img src="../images/ssl1.png" alt="">
-                      <br>
-
-                    		<strong>Organization Validation (OV)</strong> <br>
-                        Validates domain and the orgranization (addresses, country...)
+  
+                <section data-markdown class="">
+                  <script type="text/template">
+                    ## Session cookie and HTTPS
+  
+                    ```javascript
+                    const sessionOptions = {
+                      name: 'name of keyboard cat', // Don't use default session cookie name.
+                      secret: 'keyboard cat', // Change it!!! 
+                      resave: false, // Resave even if a request is not changing the session.
+                      saveUninitialized: false, // Don't save a created but not modified session.
+                      cookie: {
+                        secure: true, // should be true to check that we´re using HTTPS
+                        httpOnly: true, // dont allow client script messing with the cookie
+                        maxAge: 3200 // will live for 1 day
+                      }
+                    }
+                   ```
+                  </script>
+              </section>
+  
+                  <section data-markdown class="">
+                      <script type="text/template">
+                        ## Certificates
+                        * A digital signed document
+                          * Often created by a trusted part (CA - Certificate Authority)
+                            * Browser have a list of these
+                            * Bind to your domain name, could cost money, different levels of trust
+                            * Comodo, Symantec, GlobalSign...
+                          * https://letsencrypt.org/ - Check it up! 
+                            * In development we can create our own - Self-signed
+                      </script>
+                  </section>
+                  <section>
+  
+                        <strong>Domain Validated (DV)</strong><br />
+                        Low cost, just validate the domain<br />
+                        <img src="../images/ssl1.png" alt="">
                         <br>
-                  			<img src="../images/ssl2.png" alt="">
-                  		</p>
-                  		<p>
-                  			<strong>Extended Validation (EV)</strong> <br>
-                  			Like OV plus more control of the organization that gives
-                        higher thrust <br>
-                        <img src="../images/ssl3.png" alt="">
-                  		</p>
-
+  
+                          <strong>Organization Validation (OV)</strong> <br>
+                          Validates domain and the orgranization (addresses, country...)
+                          <br>
+                          <img src="../images/ssl2.png" alt="">
+                        </p>
+                        <p>
+                          <strong>Extended Validation (EV)</strong> <br>
+                          Like OV plus more control of the organization that gives
+                          higher thrust <br>
+                          <img src="../images/ssl3.png" alt="">
+                        </p>
+  
+                  </section>
+  
+                <section data-markdown class="">
+                    <script type="text/template">
+                      ## Encryption
+  
+                      * Symmetric
+                        * Both parts have the private/secret key
+                      * Asymmetric (public-key encryption)
+                        * A public key is used to encrypt a messages
+                        * A private key is used to decrypt the message
+                        * The part that only have the public key can only encrypt the message
+                        * Only the part with the private key can decrypt
+  
+  
+                    </script>
                 </section>
-
-              <section data-markdown class="">
-                  <script type="text/template">
-                    ## Encryption
-
-                    * Symmetric
-                      * Both parts have the private/secret key
-                    * Asymmetric (public-key encryption)
-                      * A public key is used to encrypt a messages
-                      * A private key is used to decrypt the message
-                      * The part that only have the public key can only encrypt the message
-                      * Only the part with the private key can decrypt
-
-
-                  </script>
+  
+                <section data-markdown class="">
+                    <script type="text/template">
+                      <p class="center">
+                        <img src="../images/httpsflow.png" alt="" width="40%">
+                      </p>
+                      <ol>
+                          <li>Client connect on port 443, requests the server identity</li>
+                          <li>Server sends a copy of the TLS Certificate, including servers public key</li>
+                          <li>Client check against list of thrusted CA´s and that the certificate is valid. Creates a symmetric key, encrypt it with the public key from the server.</li>
+                          <li>Server decrypt the symmetric key with its own private key. Start using the symmetric key when encrypt the messages</li>
+                          <li>We have a trusted and encrypted communication</li>
+                      </ol>
+                      
+                      
+                    </script>
+                </section>
+  
+  
               </section>
 
-              <section data-markdown class="">
-                  <script type="text/template">
-                    <p class="center">
-                      <img src="../images/httpsflow.png" alt="">
-                    </p>
-
-
-                    1. Client connect on port 443, requests the server identity
-                    2. Server sends a copy of the TLS Certificate, including servers public key
-                    3. Client check against list of thrusted CA´s and that the certificate is valid. Creates a symmetric key, encrypt it with the public key from the server.
-                    4. Server decrypt the symmetric key with its own private key. Start using the symmetric key when encrypt the messages
-                    5. We have a trusted and encrypted communication
-                  </script>
-              </section>
-
-
-            </section>
             <section>
              <section data-markdown class="">
                  <script type="text/template">
