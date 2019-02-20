@@ -212,7 +212,7 @@
                    document.querySelector('a').href = userInput
                    // userInput = "javascript:alert('hacked')"
                    ```
-                 * Implementing modules like https://github.com/yahoo/xss-filters
+                  * Implementing modules like https://github.com/yahoo/xss-filters ?
                </script>
              </section>
              <section data-markdown class="">
@@ -244,10 +244,9 @@
 
                    * Cross-Site Request Forgery [pronounced sea-surf]
                    * Forged request, by attacker, are transmitted from a user that the website trusts (logged in)
-                   * Server/Application trust the user
-                   * Trick client to visit site where the user has a session
-                   * Combined with XSS
-                     * Inject code in site client visits (trust)
+                    * Server/Application trust the user
+                   * Trick client to make request to site where the user has a session
+                   
                  </script>
              </section>
 
@@ -257,7 +256,7 @@
                  <script type="text/template">
                    ## CSRF - How?
 
-                   <img src="../images/csrf.png" alt="">
+                   <img src="../images/csrf1.png" alt="">
 
                  </script>
              </section>
@@ -265,16 +264,18 @@
                  <script type="text/template">
                    ## CSRF - How?
                    by using GET requests for state changing operations.
-                   <img src="../images/csrf1.png" alt="">
+                   <img src="../images/csrf2.png" width="80%" alt="">
 
                  </script>
              </section>
+             
+
               <section data-markdown class="">
                  <script type="text/template">
                    ## CSRF - Protection?
 
-                   * Synchronized Token pattern
-                     * Control that the request is made by our client
+                   * Synchronized Token pattern (STP)
+                     * Check that the request is made by our client
                      * Include a token in forms (and/or in meta tag)
                      * Must be unique for each request
 
@@ -287,9 +288,39 @@
                  </script>
              </section>
 
-            </section>
+           
+            <section data-markdown class="">
+              <script type="text/template">
+                ### CSRF - Protection?
 
-            <section>
+                * Same-site cookie
+                  * Pretty new, not implemented in every browser
+                    * https://caniuse.com/#feat=same-site-cookie-attribute
+                  * strict
+                    * prevent the cookie from being sent by the browser to the target site in all cross-site browsing context, even when following a regular link (e.g. GET). 
+                  * lax
+                    * Blocking POSTs
+
+                  
+                ```javascript
+                const sessionOptions = {
+                  name: 'name of keyboard cat', // Don't use default session cookie name.
+                  secret: 'keyboard cat', // Change it!!! 
+                  resave: false, // Resave even if a request is not changing the session.
+                  saveUninitialized: false, // Don't save a created but not modified session.
+                  cookie: {
+                    secure: true, // should be true to check that we´re using HTTPS
+                    httpOnly: true, // dont allow client script messing with the cookie
+                    maxAge: 3200, // will live for 1 day
+                    sameSite: 'lax' // protect against POST csrf-attack(?)
+                  }
+                }
+               ```
+            
+              </script>
+          </section>
+        </section>
+           <section>
               <section data-markdown class="">
                   <script type="text/template">
                     ## Injections - What?
@@ -303,7 +334,7 @@
 
               <section data-markdown class="">
                   <script type="text/template">
-                    ## Injections - How?
+                    ### Injections - How?
                     ```sql
                     "SELECT * FROM user WHERE username='" + request.getParameter("username") + "'";
                     ```
@@ -329,9 +360,9 @@
 
               <section data-markdown class="">
                   <script type="text/template">
-                    ## Injections - noSQL
+                    ### Injections - noSQL
 
-                    * You´re not safe!
+                    * You're not safe!
                     * A lot of different databases with a lot of query languages
                     * MongoDB
                       * JS syntax permitted in some queries
@@ -343,9 +374,26 @@
                       ```
                     * mongoose.js
                       * Handle all input as strings
+                      * OK, you're safe...hopefully
 
 
 
+                  </script>
+              </section>
+            </section>
+            <section>
+                <section data-markdown class="">
+                  <script type="text/template">
+                    ### Node modules
+                    * Using third-part modules could be a security issue
+                    * Be wise
+                      * How many are using it, is it updated, "stars", open source?
+                    * ```npm audit```
+                      * Scan your modules for vulnerabilities 
+                      * automatically runs when you install a package with ```npm install```
+                    * Snyk.io
+                      * More features
+                      * Have a pricing model, free for open source
                   </script>
               </section>
               </section>
@@ -376,7 +424,8 @@
                       cookie: {
                         secure: true, // should be true to check that we´re using HTTPS
                         httpOnly: true, // dont allow client script messing with the cookie
-                        maxAge: 3200 // will live for 1 day
+                        maxAge: 3200, // will live for 1 day
+                        sameSite: 'lax' // protect against csrf-attack?
                       }
                     }
                    ```
@@ -395,6 +444,7 @@
                             * In development we can create our own - Self-signed
                       </script>
                   </section>
+          
                   <section>
   
                         <strong>Domain Validated (DV)</strong><br />
@@ -415,7 +465,7 @@
                         </p>
   
                   </section>
-  
+          
                 <section data-markdown class="">
                     <script type="text/template">
                       ## Encryption
