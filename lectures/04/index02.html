@@ -223,7 +223,7 @@
                 ####Content Security Policy
 
                 * Using the Content-Security-Policy HTTP header
-                * New, but pretty widely supported in browsers
+                * Widely supported in modern browsers
                 * Whitelisting allowed sources of script, style, and other resources.
 
                 ```
@@ -296,7 +296,7 @@
                 ### CSRF - Protection?
 
                 * Same-site cookie
-                  * Pretty new, not implemented in every browser
+                  * Pretty new, but implemented in most modern browsers
                     * https://caniuse.com/#feat=same-site-cookie-attribute
                   * strict
                     * prevent the cookie from being sent by the browser to the target site in all cross-site browsing context, even when following a regular link (e.g. GET). 
@@ -327,7 +327,7 @@
                   <script type="text/template">
                     ## Injections - What?
 
-                    * Manipulate the query to the database
+                    * Manipulate the query to the database through HTTP requests
                     * SQL-injections
                       * The attacker can manipulate the SQL query
                     * noSQL-injections?
