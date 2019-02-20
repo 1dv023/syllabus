@@ -105,13 +105,12 @@
               </section>
               <section data-markdown class="">
                   <script type="text/template">
-                      ## What is web security?
+                      ## Why is web security important?
 
                       * How do we use the web today?
                         * Shopping, Banking, Conversations, ...
                         * Sensitive and important information
                           * Privacy, Society, Web of things
-                        * Access to back-end system
                         * Downtime == lost of money
                           * Denial of Service (DOS, DDOS)
                         * Rendering code running on clients <br />=>
@@ -126,10 +125,13 @@
                       * Risk factors
                         * Undeveloped awareness, education
                         * Simplicity to build web applications
+                          * Copy & paste
                         * Functionality vs. security
                         * Time, cost
                           * Expertise in web security?
-                        * New attacks, new technology, staying up-to-date!
+                        * New attacks, new technology, hard to staying up-to-date!
+                        * Security in different layers of the service
+                          * Not just the code... 
 
                   </script>
               </section>
@@ -141,7 +143,7 @@
                       <p class="center">
                         <img width="50%" src="../images/suspisious.gif" alt="">
                       </p>
-                      >The application must always assume that all input is potentially malicious
+                      > The application must always assume that all input is potentially malicious
 
                   </script>
               </section>
@@ -170,7 +172,7 @@
                    ## XSS - What?
 
                    * Cross-Site Scripting
-                   * The attacker get the application to send unsanitized data to client
+                   * The attacker get the application to send unsanitized data (code) to client
                    * The client trust the server/application
                    * Attackers can execute script on client
                      * Steal cookies - Session hijacking
