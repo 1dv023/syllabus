@@ -85,11 +85,12 @@
                 * What is real-time web
                   * Definition
                   * Examples of real-time web applications
+                  * Examination assignment 3
                 * Technologies for real-time web applications
                   * History, problems, today
-                * Real-time and node.js
-                  * Examination assignment 3
-                  * Small DEMO
+                * Real-time and Node.js
+                  
+                  
 
 
                 </script>
@@ -100,15 +101,15 @@
               <section data-markdown class="">
                 <script type="text/template">
                   ## Definition
-                  Real-time web applications is clients recives data updates in a short
-                  time after the data is changed/created and without need for additional requests.
+                  Real-time web applications is clients receives data updates in a short
+                  time interval after the data is changed/created and without need for additional requests.
 
                   * What do we mean by short time? (definitions from wikipedia)
                     * Hard – missing a deadline is a total system failure.
                     * Firm – infrequent deadline misses are tolerable, but may degrade the system's quality of service. The usefulness of a result is zero after its deadline.
                     * Soft – the usefulness of a result degrades after its deadline, thereby degrading the system's quality of service.
                   * Broadcast to many clients
-                  * Lots of diffrent techniques (and hacks) for web applications
+                  * Lots of different techniques (and hacks) for web applications
                     * Not the way the web was intended to work!
 
                 </script>
@@ -134,9 +135,10 @@
                             ## What kind of applications...
                             * 2nd Screen Experience
                               * Activity streams (live comments)
-                              * Statitics (live sport)
-                              * Video game extras
-                              * Voting, mentometer, Peer-instructions
+                              * Statistics
+                                * Live sport
+                                * Video game extras
+                              * Voting, Peer-instructions
 
                             <img height="90%" src="../images/Second-screen-tv-watching.jpg" alt="">
                           </script>
@@ -150,7 +152,7 @@
                           * Decision making
                             * Trading
                             * Automatic price adjusting
-                            * Monitoring web application
+                            * Monitoring infrastructure and application
                               * Users, servers...
 
                           <img src="../images/googleanalytics.png" width="60%" alt="">
@@ -183,7 +185,7 @@
                             * Put the application in production
 
 
-                            <img src="../images/ex3-application-flow.png" width="50%" alt="">
+                            <img src="../images/ex3-application-flow.png" width="60%" alt="">
 
 
                           </script>
@@ -200,7 +202,7 @@
                       <section data-markdown class="">
                         <script type="text/template">
                           ## The problem with HTTP...
-                          ...In realtime senario
+                          ...In realtime scenario
 
                           <img src="../images/chatproblem.png" width="80%" alt="">
 
@@ -219,14 +221,13 @@
                               * RTMP servers, Shared Objects
                               * Flash client
                             * Silverlight (.NET)
-                              * To late...
-                              * Well...was intended as a pure media server
+                              * Well...(no more development since 2013)
                           </script>
                       </section>
 
                       <section data-markdown class="">
                           <script type="text/template">
-                            ## HTML and javascript
+                            ## HTML and JavaScript
 
                             * Comet (umbrella term)
                               * Techniques that goes around the HTTP 1.1 spec. and browser implementations
@@ -235,11 +236,9 @@
                               * XHR long polling
                               * XHR streaming
                             * Server-sent events (HTML5)
-                              * No IE or Edge
+                              * No IE or Edge (https://caniuse.com/#feat=eventsource)
                               * Just from server, no bi-directional or full duplex (combine with XHR)
-                              * always over HTTP(S)
-                              * https://docs.webplatform.org/wiki/tutorials/eventsource_basics
-                            * WebSocket
+                            * Web Sockets
 
 
                           </script>
@@ -280,10 +279,24 @@
                           * Security
                             * Same-origin policy don´t exists
                                 * Use Content Security Policy
-                                * https://gist.github.com/subudeepak/9897212
+                                * https://gist.github.com/subudeepak/9897212#websockets---security-overview
                             * Encryption with wss://
                           </script>
                       </section>
+
+                      <section data-markdown class="">
+                        <script type="text/template">
+                        ## WebSocket server on node platform
+
+                        * Socket.io (https://socket.io/)
+                        * ws (https://www.npmjs.com/package/ws)
+                        * ...
+                        
+
+                        https://blog.bitsrc.io/8-node-js-web-socket-libraries-for-2018-818e7e5b67cf
+                        </script>
+                    </section>
+
 
 
 
@@ -295,6 +308,7 @@
                             * Client-to-Client
                               * P2P (peer-to-peer)
                               * WebRTC
+                                * http://www.html5rocks.com/en/tutorials/webrtc/basics/
                             * Server-to-server
                               * web hooks
 
@@ -303,50 +317,13 @@
 
                       <section data-markdown class="">
                           <script type="text/template">
-                          ## WebRTC (Web Real Time Communication)
-
-                          * Peer-to-peer (P2P)
-                            * Browser-to-browser
-                            * Init on a server
-                          * Audio, Video and DATA!
-                          * http://www.html5rocks.com/en/tutorials/webrtc/basics/
-
-                          </script>
-                      </section>
-
-                      <section data-markdown class="">
-                          <script type="text/template">
-                          ## Web Hooks
+                          ## Web Hooks, Server to server
 
                           <img width="65%" src="../images/webhooks.png" alt="">
-                          * Pubsubhubbub
-                            * An open protocol for distributed publish/subscribe
-
+                         
                           </script>
                       </section>
-                      <section data-markdown class="">
-                          <script type="text/template">
-                          ## Web Socket in node.js
-                          * Hosted solutions
-                            * "Push technology as a service"
-                              * https://www.firebase.com/, http://faye.jcoglan.com/, http://pusher.com, ...
-                          * Node Modules
-                            * http://socket.io/
-                            * https://www.npmjs.com/package/websocket
-                            * ...feel free to choose another
-
-                          </script>
-                      </section>
-
-                      <section data-markdown class="">
-                          <script type="text/template">
-                          ## DEMO - A chat
-
-                          A simple chat with socket.io and express.js
-                          </script>
-                      </section>
-
-
+                      
                         <section data-markdown class="">
                             <script type="text/template">
                             ## Challenges with web sockets
@@ -364,21 +341,14 @@
                           <section data-markdown class="">
                                 <script type="text/template">
                                 ## Next time
+                                * No more lectures
+                                  * Pre-recorded demos
                                 * Bringing the application to production
-                                * Preperation
-                                  * Student Developer Pack
-                                  * https://education.github.com/pack
-                                  * Get a hosted virtual server - Digital Ocean
+                                  * A virtual machine on our cloud
+                                    * SSH-key and public IP
                                 </script>
                             </section>
-                            <section data-markdown class="center">
-                                <script type="text/template">
-                                    ## Ajöken!
-
-                                    <img width="70%" src="../images/goodbye2.gif" alt="" />
-
-                                </script>
-                              </section>
+                          
 
         </div>
     </div>

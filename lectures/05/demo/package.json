@@ -2,12 +2,14 @@
   "name": "chat-example",
   "version": "0.0.0",
   "description": "A chat example to showcase how to use `socket.io`",
-  "main": "server.js",
+  "main": "app.js",
   "repository": "",
   "author": "John H",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
-    "async": "~0.2.8",
-    "express": "^3.2.6",
-    "socket.io": "^1.4.5"
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
   }
 }
