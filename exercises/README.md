@@ -21,7 +21,7 @@ As a registered student on the course you should have been given a exercise repo
 | Lectures| L01 |
 | Keywords| callback, promises, generators, filesystem |
 | Readme | https://github.com/CS-LNU-Learning-Objects/the-node-platform-exercise-rotten-tomatoes/blob/master/README.md |
-| Solution proposal | https://github.com/CS-LNU-Learning-Objects/SOLUTION-the-node-platform-exercise-rotten-tomatoes |
+| Solution proposal | https://github.com/CS-LNU-Learning-Objects/the-node-platform-exercise-rotten-tomatoes-SOLUTION |
 
 
 ***
@@ -49,7 +49,7 @@ As a registered student on the course you should have been given a exercise repo
 | Lectures| 1-2 |
 | Keywords| EventEmitter |
 | Readme | https://github.com/CS-LNU-Learning-Objects/the-node-platform-finding-waldo/ |
-| Solution proposal | https://github.com/CS-LNU-Learning-Objects/SOLUTION-the-node-platform-finding-waldo |
+| Solution proposal | https://github.com/CS-LNU-Learning-Objects/the-node-platform-finding-waldo-SOLUTION |
 
 ## Follow the route
 
@@ -61,7 +61,7 @@ As a registered student on the course you should have been given a exercise repo
 | Lectures| 3 |
 | Keywords| Express.js, routes, templates |
 | Readme | https://github.com/1dv023/follow-the-route |
-| Solution proposal | https://github.com/1dv023/SOLUTION-follow-the-route |
+| Solution proposal | https://github.com/1dv023/follow-the-route-SOLUTION |
 
 ## Pure approval
 
