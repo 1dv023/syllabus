@@ -1,13 +1,12 @@
-
 In this assignment, the task is to write a [web scraper](https://en.wikipedia.org/wiki/Web_scraping) that scrapes but also analyzes information on some web sites built especially for this assignment. The idea is that you are going to write a scraper/agent that is designed to solve a specific problem.
 
 You will get the main page to proceed from which links to three different web sites. You don't have to care about how they work internally, just the HTML they are rendering and how to form your HTTP request to get the data you want for analyzing.
 
-Your starting point is: **<http://vhost3.lnu.se:20080/weekend>**, which should also be the starting point in your scraping script, meaning that no more hardcoded URLs should be used in your code (except for the AJAX call in the *cinema* site). Your scraping script should also be able to handle the alternative server (see below).
+Your starting point is **<http://vhost3.lnu.se:20080/weekend>**, which should also be the starting point in your scraping script, meaning that no more hardcoded URLs should be used in your code (except for the AJAX call in the *cinema* site). Your scraping script should also be able to handle the alternative server (see below).
 
 ## Scenario
 
-The three friends Peter, Paul and Mary usually get together one weekend every month to see a movie and, after that, eat at a restaurant. The problem is that it is hard to plan this event since they must find a time slot when all three are available, look for a movie that plays at the cinema that day, and finally see if they can book a table at their favorite restaurant. Since all this information is available through HTTP requests it would be nice to have a script that automates this workflow!
+The three friends Peter, Paul, and Mary usually get together one weekend every month to see a movie and, after that, eat at a restaurant. The problem is that it is hard to plan this event since they must find a time slot when all three are available, look for a movie that plays at the cinema that day, and finally see if they can book a table at their favorite restaurant. Since all this information is available through HTTP requests it would be nice to have a script that automates this workflow!
 
 And that's your task...
 
@@ -43,24 +42,54 @@ The site will use session **cookies** for authorization which your application m
 
 ## What the application should look like
 
-The output of the application should look something like this:
+Start the application passing the start URL <http://vhost3.lnu.se:20080/weekend> as an argument to the process.
 
-![output of application](https://github.com/1dv023/syllabus/blob/master/examination/exam-assignment-1/output.png?raw=true)
+```shell
+npm start http://vhost3.lnu.se:20080/weekend
+```
 
-As you can see the application should start with the command `npm start` and a URL as an argument to the process.
-The output should not be more "verbose" than this. Be sure to remove all your other `console.log` calls before making your release.
-The result shown above is the correct one for the current state of the sites - you can use it to check your solution.
+The output of your application should look similar to this:
+
+```shell
+Scraping links...OK
+Scraping available days...OK
+Scraping showtimes...OK
+Scraping possible reservations...OK
+
+Recommendations
+===============
+* On Friday the movie "Keep Your Seats, Please" starts at 16:00 and there is a free table between 18:00-20:00.
+* On Friday the movie "A Day at the Races" starts at 16:00 and there is a free table between 18:00-20:00.
+```
+
+The output should not be more "verbose" than this. Be sure to remove all your other `console.log` calls before making your release. The recommendations shown above is the correct one for the current state of the sites, and you can use it to check your solution. Be sure to test your application using the alternative server.
+
+### Using the alternative server
+
+We have provided an alternative server where we have made some changes on the information and some URLs. Your application should also pass this server. The alternative start URL is **<http://cscloud304.lnu.se:8080>** and the output should be similar to this:
+
+```shell
+Scraping links...OK
+Scraping available days...OK
+Scraping showtimes...OK
+Scraping possible reservations...OK
+
+Recommendations
+===============
+* On Saturday the movie "Keep Your Seats, Please" starts at 18:00 and there is a free table between 20:00-22:00.
+* On Sunday the movie "Keep Your Seats, Please" starts at 18:00 and there is a free table between 20:00-22:00.
+```
 
 ## Requirements of your solution
 
-* The application should be written as a Node.js application in Javascript following the [JavaScript Standard Style](https://standardjs.com/) - You have to install and configure it yourself (and add it to the `package.json`) (your initial repo will be empty). The examiner should be able to run `standard` in the console to see that you have no errors **with the command ```npm run lint```**.
+* The application should be written as a Node.js application in JavaScript following the [JavaScript Standard Style](https://standardjs.com/). You have to install and configure it yourself (and add it to the `package.json`) (your initial repo will be empty). The examiner should be able to run `standard` in the console to see that you have no errors **with the command ```npm run lint```**.
 * The only command the examiner should use to run your application after cloning it from GitHub is `npm install` and `npm start` (with the starting URL as a parameter).
 * You should work with GitHub and **do several commits** to show how your solution has been made.
 * You are free to find and use external modules.
 * You must structure your code so **you must create at least use three own modules**.
-* The application **should be able to take a parameter with the start-URL** so one easy could change servers when running the examination.
+* The application **should be able to take a parameter with the start URL** so one easy could change servers when running the examination.
 * Try to make a solution that is as general as possible. We will provide an alternative server that your script also should pass (see below). This is to test that your code is general for different scenarios. **The HTML structure will never be changed** but there could be changes in:
-  * `href` attributes in HTML: To check that your scraper doesn't use hardcoded URLs. URLs only defined in Javascript code (as in the AJAX and *cinema* example) will not be changed, so you can hardcode these.
+  * `href` attributes in HTML: To check that your scraper doesn't use hardcoded URLs. URLs only defined in JavaScript code (as in the AJAX and *cinema* example) will not be changed, so you can hardcode these.
   * The day(s) all three friends will be available (remember: if none, the application should give the end-user a message about that).
   * The movie titles, their time and if they are fully booked or not.
   * The availability of tables at the restaurant and the redirect URL we get when we log in.
@@ -76,11 +105,5 @@ There will not be an oral examination combined with this assignment. The examine
 * Get knowledge about HTTP and use it when building an application in Node.js.
 * Analyze the traffic between the client and the server.
 * Get practical knowledge of asynchronous programming in Node.js.
-* Analyze and solve a problem with Javascript code.
+* Analyze and solve a problem with JavaScript code.
 * Using Git to show progress in your work.
-
-## The alternative server
-
-We have provided an alternative server where we have made some changes on the information and some URLs. Your application should also pass this server. The starting-URL is: **<http://cscloud304.lnu.se:8080>**
-The result of this site should look like this:
-<img src="https://github.com/1dv023/syllabus/blob/master/examination/exam-assignment-1/output2.png?raw=true" width="80%">
