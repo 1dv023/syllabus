@@ -43,6 +43,12 @@
       grid-gap: 10px;
       text-align: left;
     }
+
+    .reveal .twocolumn img {
+      max-width: unset;
+      max-height: unset;
+    }
+
   </style>
 </head>
 
@@ -68,7 +74,7 @@
       <section data-state="lnu-cc">
         <h2>Licence for this work</h2>
         <p>
-          This work is produced by <a href="https://github.com/thajo" style="color: #333">Mats Loock</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
+          This work is produced by Mats Loock for the course Server-based Web Programming (1DV023) at Linnaeus University.
         </p>
         <p>
           All content in this work excluding photographs, icons, picture of course literature and Linnaeus University logotype and symbol, is licensed under a
@@ -86,7 +92,7 @@
             If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus University logotype and symbol in your new work!
         </p>
         <p>
-            At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
+            At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
         </p>
       </section>
 
@@ -294,8 +300,8 @@ const server = http.createServer((req, res) => {
       <section>
         <h3>The dependencies</h3>
         <div class="twocolumn">
-          <div style="min-height: 600px">
-            <img src="./images/package.json.png" />
+          <div style="min-height: 600px;">
+            <img src="./images/package.json.png" style="max-height: 600px;" />
           </div>
           <div>
             <ul style="font-size: 80%">
@@ -328,7 +334,7 @@ const server = http.createServer((req, res) => {
         <h3>The entry point</h3>
         <div class="twocolumn">
           <div style="min-height: 600px">
-            <img src="./images/app.js.png" />
+            <img src="./images/app.js.png"  style="max-height: 500px;" />
           </div>
           <div style="font-size: 80%">
             <ul>
@@ -350,7 +356,7 @@ const server = http.createServer((req, res) => {
           <h3>The routing</h3>
           <div class="twocolumn">
             <div style="min-height: 600px">
-              <img src="./images/homeRouter.js.png" />
+              <img src="./images/homeRouter.js.png" style="max-width: 350px;" />
             </div>
             <div style="font-size: 80%">
               <ul>
@@ -372,7 +378,7 @@ const server = http.createServer((req, res) => {
           <h3>The controller</h3>
           <div class="twocolumn">
             <div style="min-height: 600px">
-              <img src="./images/homeController.js.png" />
+              <img src="./images/homeController.js.png" style="max-width: 500px;" />
             </div>
             <div style="font-size: 80%">
               <ul>
