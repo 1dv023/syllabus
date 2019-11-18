@@ -401,11 +401,58 @@ const server = http.createServer((req, res) => {
           </div>
         </section>
 
-        <section data-markdown>
+        <section>
+          <h3>The view</h3>
+          <div class="twocolumn">
+            <div style="min-height: 600px">
+              <div>
+                <img src="./images/index.hbs.png" style="max-width: 500px;" /></div>
+                <div><img src="./images/index.hbs.html.png" style="max-width: 500px;" /></div>
+            </div>
+            <div style="font-size: 80%">
+              <ul>
+                <li>A template engine enables you to transform a template to HTML sent to the client.</li>
+                <li>Express supports several template engines, such as Pug, Mustache, and EJS.</li>
+                <li>We will take a closer look at Express handlebars template engine (express-hbs) with 
+                    multiple layouts, blocks and partials.
+                    <ul>
+                      <li>Find out more about handlebars expressions at <a href="https://handlebarsjs.com/">https://handlebarsjs.com/</a>.</li>
+                    </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+            <h3>Installation and configuration</h3>
+            <div class="twocolumn">
+              <div style="min-height: 600px">
+                  <img src="./images/final-directory-structure-views.png" style="max-width: 500px;" />
+              </div>
+              <div style="font-size: 80%">
+                <ul>
+                  <li>Install express.hbs.
+                    <ul>
+                      <li><code>npm install express-hbs</code></li>
+                    </ul>
+                  </li>
+                  <li>Configure the template engine to use '.hbs' for extensions and find layouts in  'views/layouts'.
+                      Setting views directory for views and view engine as handlebars.
+                    <div>
+                    <img src="./images/express-hbs-configuration.png" style="max-width: 1000px;" />
+                  </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+  
+          <section data-markdown>
           <script type="text/template">
             ### The template engine
   
-            <img src="./images/template-engine.png" />
+            <img src="./images/template-engine2.png" />
           </script>
         </section>
 
