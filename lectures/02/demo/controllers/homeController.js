@@ -20,12 +20,12 @@ homeController.index = (req, res, next) => res.render('home/index')
  * index POST
  */
 homeController.indexPost = (req, res, next) => {
-  let locals = {
+  const viewData = {
     name: req.body.name,
     dayName: moment().format('dddd')
   }
 
-  res.render('home/index', { locals })
+  res.render('home/index', { viewData })
 }
 
 module.exports = homeController
