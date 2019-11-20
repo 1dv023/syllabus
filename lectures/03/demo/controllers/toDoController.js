@@ -16,7 +16,7 @@ const toDoController = {}
  */
 toDoController.index = async (req, res, next) => {
   try {
-    const locals = {
+    const viewData = {
       toDoItems: (await ToDoItem.find({}))
         .map(toDoItem => ({
           id: toDoItem._id,
@@ -24,7 +24,7 @@ toDoController.index = async (req, res, next) => {
           done: toDoItem.done
         }))
     }
-    res.render('toDo/index', { locals })
+    res.render('toDo/index', { viewData })
   } catch (error) {
     next(error)
   }
@@ -34,11 +34,11 @@ toDoController.index = async (req, res, next) => {
  * create GET
  */
 toDoController.create = async (req, res, next) => {
-  const locals = {
+  const viewData = {
     description: '',
     done: false
   }
-  res.render('toDo/create', { locals })
+  res.render('toDo/create', { viewData })
 }
 
 /**
@@ -67,12 +67,12 @@ toDoController.createPost = async (req, res, next) => {
 toDoController.edit = async (req, res, next) => {
   try {
     const toDoItem = await ToDoItem.findOne({ _id: req.params.id })
-    const locals = {
+    const viewData = {
       id: toDoItem._id,
       description: toDoItem.description,
       done: toDoItem.done
     }
-    res.render('toDo/edit', { locals })
+    res.render('toDo/edit', { viewData })
   } catch (error) {
     req.session.flash = { type: 'danger', text: error.message }
     res.redirect('.')
@@ -110,12 +110,12 @@ toDoController.editPost = async (req, res, next) => {
 toDoController.delete = async (req, res, next) => {
   try {
     const toDoItem = await ToDoItem.findOne({ _id: req.params.id })
-    const locals = {
+    const viewData = {
       id: toDoItem._id,
       description: toDoItem.description,
       done: toDoItem.done
     }
-    res.render('toDo/delete', { locals })
+    res.render('toDo/delete', { viewData })
   } catch (error) {
     req.session.flash = { type: 'danger', text: error.message }
     res.redirect('.')
