@@ -8,7 +8,7 @@ The assignment aims to give the student practical and theoretical experience abo
 
 ## Requirements of the application
 
-<img src="https://github.com/1dv023/syllabus/raw/master/examination/exam-assignment-3/application_flow.png" width="80%" />
+<img src="https://github.com/1dv023/syllabus/raw/master/examination/exam-assignment-3/application_flow2.png" width="80%" />
 
 The image above tries to explain the application flow in this assignment.
 
