@@ -5,6 +5,6 @@
     <input type="submit" value="Send" />
 </form>
 
-{{#if locals}}
-<p>Welcome {{locals.name}} on this wonderful {{locals.dayName}}!</p>
+{{#if viewData}}
+<p>Welcome {{viewData.name}} on this wonderful {{viewData.dayName}}!</p>
 {{/if}}
