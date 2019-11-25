@@ -1,21 +1,9 @@
-/**
- * Mongoose model ToDoItem.
- *
- * @author Mats Loock
- * @version 1.0.0
- */
-
 'use strict'
 
 const mongoose = require('mongoose')
 
 // Create a schema.
 const toDoItemSchema = new mongoose.Schema({
-  createdAt: {
-    type: Date,
-    required: true,
-    default: Date.now
-  },
   description: {
     type: String,
     required: true,
@@ -26,7 +14,8 @@ const toDoItemSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false
-  }
+  },
+  timestamps: true
 })
 
 // Create a model using the schema.

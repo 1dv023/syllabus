@@ -55,6 +55,11 @@
         text-indent: -1em;
         margin: 0 0 .5em 0;
     }
+
+    img.fix {
+      max-height: unset;
+    }
+
   </style>
 </head>
 
@@ -163,7 +168,7 @@
                 - Oracle, SQL Server, MySQL, MariaDB, PostgreSQL
                 - MongoDB
               - Cloud persistence?
-                - mLab.com (Database-as-a-Service), AWS, Azure, Google Cloud
+                - mongodb.com (DaaS, Data-as-a-Service), AWS, Azure, Google Cloud
           </script>
         </section>
 
@@ -171,7 +176,7 @@
           <h3>We will use a database!</h3>
           <div class="twocolumn">
             <div style="min-height: 600px">
-              <img src="./images/js-full-stack.png" />
+              <img src="./images/js-full-stack.png"  class="fix"/>
             </div>
             <div style="font-size: 80%">
               <ul>
@@ -198,7 +203,7 @@
             - NoSQL Databases types (non-relational database)
               - Document databases
                 - Organizes data into documents.
-                - MongoDB
+                - MongoDB, Firebase
               - Graph database
               - Key-value database
           </script>
@@ -213,7 +218,7 @@
           <h3>MongoDB ecosystem</h3>
           <div class="twocolumn">
             <div style="min-height: 600px">
-              <img src="./images/mongodb-mlab-mongoose.png" />
+              <img src="./images/mongodb-atlas-mongoose.png" class="fix" />
             </div>
             <div style="font-size: 80%">
               <ul>
@@ -228,10 +233,10 @@
                     <li>The document model is simple to learn and use.</li>
                   </ul>
                 </li>
-                <li>mLab
+                <li>MongoDB Atlas
                   <ul>
-                    <li>A cloud database service that hosts MongoDB databases.</li>
-                    <li>Easy to get started at <a href="https://docs.mlab.com/">https://docs.mlab.com/</a>.</li>
+                    <li>MongoDB Atlas is a cloud database service.</li>
+                    <li>Easy to get started at <a href="https://www.mongodb.com/cloud/atlas">https://www.mongodb.com/cloud/atlas</a>.</li>
                   </ul>
                 </li>
                 <li>Mongoose
@@ -251,13 +256,13 @@
         <section>
           <h3>Create a MongoDB database</h3>
           <div class="twocolumn">
-            <div style="min-width: 500px">
-              <img src="./images/mlab-db.png" />
+            <div style="min-width: 400px">
+              <img src="./images/getting-started-mongodb-atlas.png" class="fix" />
             </div>
             <div style="font-size: 80%">
               <ul>
-                <li>By following the first two steps in the <a href="https://docs.mlab.com/">Quick-Start Guide to mLab</a> it's easy to create a new MongoDB database.</li>
-                <li>For safety reasons it's strongly recommended to create a database user whose credentials you can use when connecting to the database, <a href="https://docs.mlab.com/connecting/#users">https://docs.mlab.com/connecting/#users</a>.</li>
+                <li>By starting out with <a href="https://docs.atlas.mongodb.com/getting-started/">Getting Started with MongoDB Atlas</a> it should easy to create a new MongoDB database.</li>
+                <li>For safety reasons be sure to follow <a href="https://docs.atlas.mongodb.com/getting-started/">Create a MongoDB User for Your Cluster</a>!</li>
               </ul>
             </div>
           </div>
@@ -267,14 +272,14 @@
           <h3>Managing the Mongoose connection</h3>
           <div class="twocolumn">
             <div style="min-height: 600px">
-              <img src="./images/mongoose.js.png" />
+              <img src="./images/mongoose.js.png" class="fix" />
             </div>
             <div style="font-size: 80%">
               <ul>
                 <li>You connect to MongoDB with the <code>mongoose.connect()</code> method.
                   <ul>
-                    <li>The connection string, enforcing access control, can be found at mLab.
-                      <ul><li><code>mongodb://&lt;dbuser&gt;:&lt;dbpassword&gt;@ds223605.mlab.com:23605/dbname</code></li></ul>
+                    <li>The connection string, enforcing access control, can be found at the DaaS provider.
+                      <ul><li><code>mongodb+srv://&lt;dbuser&gt;:&lt;password&gt;@&lt;cluster&gt;.mongodb.net/test?retryWrites=true&w=majority</code></li></ul>
                     </li>
                     <li>Returns a <code>Promise</code>.</li>
                   </ul>
@@ -321,7 +326,7 @@
           <h3>Converting a schema into a model</h3>
           <div class="twocolumn">
             <div style="min-height: 600px">
-              <img src="./images/todoitem.js.png" />
+              <img src="./images/todoitem.js.png" class="fix" />
             </div>
             <div style="font-size: 80%">
               <ul>
