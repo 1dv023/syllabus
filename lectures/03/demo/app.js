@@ -54,8 +54,10 @@ app.use(session(sessionOptions))
 // middleware to be executed before the routes
 app.use((req, res, next) => {
   // flash messages - survives only a round trip
-  res.locals.flash = req.session.flash
-  delete req.session.flash
+  if (req.session.flash) {
+    res.locals.flash = req.session.flash
+    delete req.session.flash
+  }
 
   next()
 })
