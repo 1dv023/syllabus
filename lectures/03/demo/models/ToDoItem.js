@@ -1,3 +1,10 @@
+/**
+ * Mongoose model ToDoItem.
+ *
+ * @author Mats Loock
+ * @version 1.0.0
+ */
+
 'use strict'
 
 const mongoose = require('mongoose')
@@ -14,7 +21,8 @@ const toDoItemSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false
-  },
+  }
+}, {
   timestamps: true
 })
 

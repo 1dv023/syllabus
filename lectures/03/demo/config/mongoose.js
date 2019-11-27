@@ -10,7 +10,7 @@
 const mongoose = require('mongoose')
 
 // DISCLAIMER: This is an example connection string. ALWAYS use an environment variable to store the connection string.
-const CONNECTION_STRING = 'mongodb+srv://<dbuser>:<dbpassword>@<dbcluster>.mongodb.net/test?retryWrites=true&w=majority'
+const CONNECTION_STRING = 'mongodb+srv://<dbuser>:<dbpassword>@<dbcluster>.mongodb.net/<dbname>?retryWrites=true&w=majority'
 
 /**
  * Establishes a connection to a database.
