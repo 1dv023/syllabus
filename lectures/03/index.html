@@ -378,12 +378,12 @@
       <section>
 
         <section>
-          <h3>The web server hasn't got a clue about state</h3>
+          <h3>The web server does not have a clue about the state</h3>
           <div class="center">
             <img src="./images/stateless.png" />
           </div>
           <ul>
-            <li>Neither the server or the browser has a intrinsic way of knowing that's the same browser wisting the same site.
+            <li>Neither the server nor the browser has an intrinsic way of knowing that it is the same browser that visits the same site.
               <ul>
                 <li>(How is it then possible to log on to something?)</li>
               </ul>
@@ -392,7 +392,7 @@
         </section>
 
         <section>
-          <h3>Maintaining state with sessions</h3>
+          <h3>Maintain the state with sessions</h3>
           <div class="center">
             <img src="./images/session-cookie.png"  height="500" />
           </div>
@@ -446,7 +446,7 @@
             ```
             req.session.name = 'Ada'      // creates the session variable 'name'
 
-            const name = req.session.name // get the value of the session variable 'name'
+            const name = req.session.name // gets the value of the session variable 'name'
 
             delete req.session.name       // removes the session variable 'name'
 
@@ -495,7 +495,7 @@
                     <li>How do we keep the user posted after the round trip?</li>
                   </ul>
                 </li>
-                <li>Whenever you redirect someone in your website it is a good idea to use a flash message to let them know that what they just did worked or not.
+                <li>Whenever you redirect someone on your website it is a good idea to use a flash message to let them know that what they just did worked or not.
                   <ul>
                     <li>The flash message should survive only a round trip.</li>
                     <li>Use a session variable to save the message and delete the message on the next request.</li>

@@ -32,5 +32,9 @@ module.exports.connect = async () => {
   })
 
   // Connect to the server.
-  return mongoose.connect(CONNECTION_STRING, { useNewUrlParser: true })
+  return mongoose.connect(CONNECTION_STRING, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
 }
