@@ -24,7 +24,7 @@ toDoController.index = async (req, res, next) => {
           done: toDoItem.done
         }))
     }
-    res.render('toDo/index', { viewData })
+    res.render('todo/index', { viewData })
   } catch (error) {
     next(error)
   }
@@ -38,7 +38,7 @@ toDoController.create = async (req, res, next) => {
     description: '',
     done: false
   }
-  res.render('toDo/create', { viewData })
+  res.render('todo/create', { viewData })
 }
 
 /**
@@ -72,7 +72,7 @@ toDoController.edit = async (req, res, next) => {
       description: toDoItem.description,
       done: toDoItem.done
     }
-    res.render('toDo/edit', { viewData })
+    res.render('todo/edit', { viewData })
   } catch (error) {
     req.session.flash = { type: 'danger', text: error.message }
     res.redirect('.')
@@ -115,7 +115,7 @@ toDoController.delete = async (req, res, next) => {
       description: toDoItem.description,
       done: toDoItem.done
     }
-    res.render('toDo/delete', { viewData })
+    res.render('todo/delete', { viewData })
   } catch (error) {
     req.session.flash = { type: 'danger', text: error.message }
     res.redirect('.')
