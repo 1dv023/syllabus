@@ -181,3 +181,7 @@
     border: none;
     box-shadow: none;
 }
+
+.expandCode pre code {
+    max-height: none;
+}

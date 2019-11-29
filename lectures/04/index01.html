@@ -97,17 +97,18 @@
                 <section data-markdown class="">
                  <script type="text/template">
                   ## User management
-                  How do we handle users in our application!?
+                  
+                  How do web applications manage users and its data?
 
-                  * Using third part solutions?
+                  * Using third party solutions?
                     * [Passport](http://www.passportjs.org/)
                     * OpenID Connect
                       * Facebook, Twitter, Github...
-                  * Write your own?
-                    * Remember your responsibility as web developer
-                    * Inform user how the credentials is handled
-                    * Force the user how to form the password?
-                    * Allow special characters and long passwords
+                  * Write your own from scratch?
+                    * Remember your responsibility as a web developer.
+                    * Inform user how the credentials is handled.
+                    * Enforce the user to create a strong password.
+                    * Allow special characters and long passwords.
                     
 
                  </script>
@@ -115,6 +116,7 @@
                <section data-markdown class="">
                 <script type="text/template">
                   ## User management
+
                   * Authentication
                     * Logging in the user against credentials
                     * POST /login
@@ -127,24 +129,34 @@
               </section>
 
 
-             <section data-markdown class="">
+             <section data-markdown class="expandCode">
                  <script type="text/template">
                    ## Storing user credentials
 
                    * Create a User model with username/email and password
 
                    ```javascript
-                   // Create a schema for user.
-                   const userSchema = new mongoose.Schema({
-                    email: { type: String, required: true, unique: true, ... },
-                    password: { type: String, required: true, ... },
-                    ...
-                   }, { timestamps: true })
-
-
-                   // Validate password
-                   userSchema.path('password').validate((password) => { return password.length >= 6 },
-                    'The password must be of minimum length 6 characters.')
+                    const userSchema = new Schema({
+                      email: {
+                        type: String,
+                        required: true,
+                        unique: true,
+                        lowercase: true,
+                        trim: true,
+                        validate: {
+                          validator: value => /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm.test(value),
+                          message: props => `${props.value} is not an valid email address.`
+                        }
+                      },
+                      password: {
+                        type: String,
+                        minlength: [6, 'The password must be of minimum length 6 characters.'],
+                        required: true
+                      }
+                    }, {
+                      timestamps: true,
+                      versionKey: false
+                    })
                    ```
 
                  </script>
@@ -216,14 +228,15 @@
                     * Using a pre-hook (runs before saving the user into database)
 
                   ```javascript
+                  // Salts and hashes password before save.
                   userSchema.pre('save', async function (next) {
-                    let user = this
-                  
-                    if (user.isModified('password') || user.isNew) {
-                      let hashPwd = await bcrypt.hash(user.password, 12)
-                      user.password = hashPwd
+                    try {
+                      const salt = await bcrypt.genSalt(8)
+                      this.password = await bcrypt.hash(this.password, salt)
+                      next()
+                    } catch (error) {
+                      next(error)
                     }
-                    next()
                   })
                   ```
 
@@ -261,23 +274,27 @@
 
                   ```javascript
                   // In the User model
-                  userSchema.methods.comparePassword = function (candidatePassword) {
-                    return bcrypt.compare(candidatePassword, this.password)
+                  userSchema.statics.authenticate = async function (email, password) {
+                    const user = await this.findOne({ email })
+                  
+                    if (!user || !(await bcrypt.compare(password, user.password))) {
+                      throw new Error('Invalid login attempt.')
+                    }
+                  
+                    return user
                   }
-                  ```
+                                    ```
 
                   ```javascript
                   // In the controller
                   ...
-                  let user = await User.findOne({ 'username': req.body.username })
-                  if (!user) {
-                    // No one with that username
-                  }
-                  let result = await user.comparePassword(req.body.password)
-                  if (result) {
-                    // OK                   
-                  } else {
-                    // FAIL
+                  try {
+                    const user = await User.authenticate(req.body.email, req.body.password)
+                    req.session.regenerate(() => {
+                      ...
+                    })
+                  } catch (error) {
+                    ...
                   }
                   ...
                   ```
