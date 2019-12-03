@@ -28,12 +28,13 @@
     margin: 0 0 .5em 0;
 }
 
-.lnu ul {
+.lnu ul,
+.lnu ol {
     list-style: none;
     padding: 0;
 }
 
-    .lnu ul li:before {
+    .lnu ul>li:before {
         content: "\2713\0020";
         color: #eba056;
         font-weight: bold;
@@ -46,7 +47,7 @@
         font-size: 80%;
     }
 
-        .lnu ul ul li:before {
+        .lnu ul ul>li:before {
             content: "\2610\0020";
             color: #98C807;
             font-weight: bold;
@@ -59,24 +60,24 @@
             font-size: 80%;
         }
 
-            .lnu ul ul ul li:before {
+            .lnu ul ul ul>li:before {
                 content: "\0bb\0020";
                 color: #cfb220;
                 font-weight: bold;
             }
 
-    .lnu ul ol {
+    .lnu ul>ol {
         list-style-type: none;
         padding: 0;
         margin-left: 1em;
         font-size: 80%;
     }
 
-.lnu ol li {
+.lnu ol>li {
     counter-increment: count-me;
 }
 
-    .lnu ol li:before {
+    .lnu ol>li:before {
         content: counter(count-me) ". ";
         color: #98C807;
         font-weight: bold;
@@ -104,27 +105,51 @@
 }
 
 .lnu-intro h1,
-.lnu-intro h3 {
+.lnu-intro h3,
+.lnu-intro h4 {
     color: #333;
 }
 
-.reveal .lnu-footer {
+.reveal2 .lnu-footer {
     border-top: 1px solid #333;
     text-align: left;
     position: relative;
     top: 200px;
 }
 
-    .reveal .lnu-footer img {
+    .reveal2 .lnu-footer img {
         background: none;
         border: none;
         box-shadow: none;
     }
 
-        .reveal .lnu-footer img:nth-of-type(2) {
+        .reveal2 .lnu-footer img:nth-of-type(2) {
             position: absolute;
             right: 0;
         }
+
+div.lnu-footer {
+    border-top: 1px solid #333;
+    padding-top: 10px;
+    text-align: left;
+    position: absolute;
+    margin-top:200px;
+    width:100%;
+}
+
+    .lnu-footer img {
+        height: 45px;
+    }
+
+        .lnu-footer img:nth-of-type(2) {
+            position: absolute;
+            right: 0;
+        }
+
+        .lnu-footer + .remark-slide-number {
+        display: none;
+    }
+        
 
 .lnu-cc div.slide-background.present {
     background-color: #98C807;

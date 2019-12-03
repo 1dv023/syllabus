@@ -42,17 +42,14 @@
         <div class="slides">
             <!-- Start -->
             <section class="center" data-state="lnu-intro">
-                <h3>Server-based Web Programming</h3>
-                <h3>(1DV023/1DV523)</h3>
-                <h1>Lecture</h1>
-                <h3>Web Security</h3>
-                <h4 style="color: black;">Authentication/Authorization</h4>
-                <div class="lnu-footer">
-                    <img src="../images/lnu-logotype.png" />
-                    <img src="../images/lnu-symbol.png" />
+              <h3>Web Applications and Access Control</h3>
+          
+              <h4>Authentication and Authorization</h4>
+              <h4>How to manage access control</h4>
+              <div class="lnu-footer">
+                  <img src="../images/lnu-logotype.png" />
+                  <img src="../images/lnu-symbol.png" />
                 </div>
-                <pre><code></code></pre> <!-- Fix for color coding in md -->
-
             </section>
 
             <!-- CC -->
@@ -92,106 +89,204 @@
                 </script>
             </section>
             
-            <section data-markdown>
-              <script type="text/template">
-                ## Why access control is needed
+            <section>
+              <section data-markdown>
+                <script type="text/template">
+                  ## Why access control is needed
 
-                - Access control is needed when there is a need to restrict users' access to resources within a web application.
-                - When performing access control, web applications often authenticate the user, authorize the request, to allow or prevent access to the requested resource. 
-                  - __Authentication__ is the act of verifying a user's identity (commonly by a username and password).
-                  - __Authorization__ is the process of allowing an authenticated user to access a requested resource or not.
-            
+                  - Access control is needed when there is a need to restrict users' access to resources within a web application.
+                  - When performing access control, web applications often authenticate the user, authorize the request, to allow or prevent access to the requested resource. 
+                    - __Authentication__ is the act of verifying a user's identity (commonly by a username and password).
+                    - __Authorization__ is the process of allowing an authenticated user to access a requested resource or not.
+              
+                  </script>
+              </section>
+              
+              <section data-markdown>
+                <script type="text/template">
+                  ## Different ways to authenticate
+
+                  - Cookie-based authentication
+                  - Token-based authentication
+                  - Third-party access
+                    - OAuth
+                  - OpenId
+                  - SAML
+
+                  The authentication method you choose to use depends on the type of application. For a web application, cookie- or token-based authentication is often appropriate.
+                  </script>
+              </section>
+              
+              <section>
+                <h3>Cookie-based authentication</h3>
+                <div class="center">
+                  <img src="./images/authentication-authorization.png"  height="600" />
+                </div>
+              </section>
+
+              <section data-markdown>
+                <script type="text/template">
+                  ## Password security (for the user)
+                  
+                  - *Passphrase* instead of password?
+                  - NEVER ever use the same password on multiple sites!
+                  - Always turn on two-factor authentication (2FA) if it is an option.
+                  - Do not try to remember your passwords, use a password manager.
+                    - A password should be 10 characters long, minimum; the longer the better.
+                    - Using numbers and/or special characters does not make a password stronger.
+                  - Never give an honest answer to a password recovery question.
+                    - Generate a random password and store it in your password manager.
                 </script>
-            </section>
-            
-            <section data-markdown>
-              <script type="text/template">
-                ## Different ways to authenticate
+              </section>
+              
+              <section data-markdown>
+                <script type="text/template">
+                  ## Password security (for the server)
+                  
+                  - Managing passwords is risky and complex!
+                  - Send passwords only over HTTPS.
+                  - Passwords should be stored in an encrypted format using strong cryptographic algorithms.
+                    - A password should never be able to be read back!
+                    - Always hash a password using a secure hashing algoritm (Argon2, bcrypt, scrypt) before storing it.
+                      - Avoid MD5, SHA1, SHA2, SHA3, SHA256, etc., because they are not safe password hashing algorithms.
+                    - Allow looooong passwords.
+              
+                  </script>
+              </section>
 
-                - Cookie-based authentication
-                - Token-based authentication
-                - Third-party access
-                  - OAuth
-                - OpenId
-                - SAML
+              <section data-markdown>
+                <script type="text/template">
+                  ## Rainbow tables
 
-                The authentication method you choose to use depends on the type of application. For a web application, cookie- or token-based authentication is often appropriate.
-                </script>
+                  - A rainbow table is a precomputed table with hashed "known passwords" for cracking passwords.
+
+                  | Plain text | Hash (MD5) |
+                  |-|-|
+                  | 123456     | e10adc3949ba59abbe56e057f20f883e |
+                  | 123456789  | 25f9e794323b453885f5181f1b624d0b |
+                  | password   | 5f4dcc3b5aa765d61d8327deb882cf99 |
+                  | qwerty     | d8578edf8458ce06fbc5bb76a58c5ca4 |
+                  | 111111     | 96e79218965eb72c92a549dd5a330112 |
+
+                  - A rainbow table attack is easily prevented by using salt techniques.
+              
+                  </script>
+              </section>
+              
+              <section data-markdown>
+                <script type="text/template">
+                  ## Salt the hash
+
+                  ![](./images/salt-hash.png)
+
+                  - The same password has different hashes if the salt is unique to each user.
+              
+                  </script>
+              </section>
+
+              <section data-markdown>
+                <script type="text/template">
+                  ## Authorize on the server
+
+                  - The server must perform the authorization because the request coming from a client cannot be trusted.
+                    - It is not sufficient to simply hide the delete button at the client from a user that are not allowed to delete something at the server.
+                  - Your authorization process should always, in a perfect world, prevent access to requested resources by default.
+                    -  It is safer to prevent access by default and override any requests that do not require permission.
+                  - Resource authorization can be complex because it validates whether or not a user allowed access to a specific resource.
+                    - A user should be able to modify their profile and only their own profile.
+                    - It is easy to allow access to a resource if the user just needs to be logged in.
+                  </script>
+              </section>
             </section>
             
             <section>
-              <h3>Cookie-based authentication</h3>
-              <div class="center">
-                <img src="./images/authentication-authorization.png"  height="600" />
-              </div>
-            </section>
+                <section data-markdown>
+                    <script type="text/template">
+                      ## How to manage registration
 
-            <section data-markdown>
-              <script type="text/template">
-                ## Password security (for the user)
-                
-                - NEVER ever use the same password on multiple sites!
-                - Always turn on two-factor authentication (2FA) if it is an option.
-                - Do not try to remember your passwords, use a password manager.
-                  - A password should be 10 characters long, minimum; the longer the better.
-                  - Using numbers and/or special characters does not make a password stronger.
-                - Only change the password if you think it has been compromised.
-                - Never give an honest answer to a password recovery question.
-                  - Generate a random password and store it in your password manager.
-              </script>
-            </section>
-            
-            <section data-markdown>
-              <script type="text/template">
-                ## Password security (for the web application)
-                
-                - Storing passwords is risky and complex!
-                - Allow looooong passwords.
-                - Passwords should be stored in an encrypted format using strong cryptographic algorithms.
-                  - A password should never be able to be read back!
-                  - Always hash a password using a secure hashing algoritm (Argon2, bcrypt, scrypt) before storing it.
-                    - Avoid MD5, SHA1, SHA2, SHA3, SHA256, etc., because they are not safe password hashing algorithms.
-                - Never force users to change passwords as this lowers security as the users is tempted to use less strong passwords.
-            
-                </script>
-            </section>
+                      - The user submits a registration form and the credentials are stored in a [MongoDB database](https://www.mongodb.com/cloud/atlas) using a [Mongoose schema](https://mongoosejs.com/docs/guide.html).
+                        - Make sure the username is unique.
+                        - Set minimum length of passwords.
+                        - Salt and hash password using [bcryptjs](https://www.npmjs.com/package/bcryptjs).
+                        - Applying the principle of separation of concerns is a good idea by adding [static methods](https://mongoosejs.com/docs/api.html#schema_Schema-static) to the Mongoose schema to register users.
+   
+                      </script>
+                  </section>
 
-            <section data-markdown>
-              <script type="text/template">
-                ## Rainbow tables
+                  <section data-markdown class="expandCode">
+                      <script type="text/template">
+                        ## User model
 
-                - A rainbow table is a precomputed table with hashed "known passwords" for cracking passwords.
+                        ![](./images/user-schema.png)
 
-                | Plain text | Hash (MD5) |
-                |-|-|
-                | 123456     | e10adc3949ba59abbe56e057f20f883e |
-                | 123456789  | 25f9e794323b453885f5181f1b624d0b |
-                | password   | 5f4dcc3b5aa765d61d8327deb882cf99 |
-                | qwerty     | d8578edf8458ce06fbc5bb76a58c5ca4 |
-                | 111111     | 96e79218965eb72c92a549dd5a330112 |
+                        - The username must be unique.
+                        - The length of the password is validated before salting and hashing.
+     
+                      </script>
+                  </section>
 
-                - A rainbow table attack is easily prevented by using salt techniques.
-            
-                </script>
-            </section>
-            
-            <section data-markdown>
-              <script type="text/template">
-                ## Salt the hash
+                  <section data-markdown class="expandCode">
+                      <script type="text/template">
+                        ## Hashing the password
 
-                ![](./images/salt-hash.png)
+                        - The `save` method triggers validation.
+                        - Using a pre hook you can execute code after the validation and before the data is written to the database.
+                        - You must call `pre()` before compiling the model.
 
-                | | username | salt | salted and hashed password |
-                |-|-|-|-|
-                | _abc123_ | john | wer074 | f18d825b03e598d1293b3ddb3f7be945 |
-                | _abc123_ | mike | jkl632 | 5df3853f391f80d6e6cfdfea8c9a4eaa |
-                | _xyz456_ | jane | sdf864 | bdbcefdfddb45cb39b49dbaa506754a4 |
+                        ![](./images/user-schema-hash-password.png)
 
-                - Different servers have different salt and different hash strings for the same password.
-                - The same password has different hashes if the salt is unique to each user.
-            
-                </script>
-            </section>
+                        - The salt and hash is auto-generated.
+     
+                      </script>
+                  </section>
+
+                  <section data-markdown>
+                      <script type="text/template">
+                        ## How to manage login
+  
+                        - The user submits a login form and the credentials are compared with the data in the database.
+                          - Create a new session cookie, store user data in session store, and redirect.
+                          - If the authentication fails send back the status code 401 Unauthorized or a custom flash error message.
+                          - Applying the principle of separation of concerns is a good idea by adding [static methods](https://mongoosejs.com/docs/api.html#schema_Schema-static) to the Mongoose schema to authenticate users.
+                        - (Do not forget to give the user a possibility to log off!)
+                        </script>
+                    </section>
+  
+                    <section data-markdown>
+                        <script type="text/template">
+                          ## Authenticating a user (1 of 2)
+  
+                          ![](./images/user-schema-authenticate.png)
+  
+                          - Lookup the user in the database and compare the provided password with the hashed one from the database.
+                            - Return the user object if the user is authenticated.
+                            - If the authentication fails, throw an error.
+       
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                          ## Authenticating a user (2 of 2)
+  
+                          ![](./images/login-post.png)
+  
+                          - Regenerate a session cookie, store user data in the session store, and redirect.
+                          - If the authentication fails redirect to the login page and show an error message (or send the status code 401).
+       
+                        </script>
+                    </section>
+
+                    <section data-markdown>
+                        <script type="text/template">
+                          ## How to authorize
+  
+                          - ...
+       
+                        </script>
+                    </section>
+
+                  </section>
 
             <section>
              <section data-markdown class="">
@@ -205,10 +300,8 @@
                    * ...
                  </script>
              </section>
-
             
           </section>
-
         </div>
     </div>
 
@@ -230,13 +323,13 @@
 
             // Optional reveal.js plugins
             dependencies: [
-                { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
-                { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
-                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
-                { src: '../reveal.js/plugin/notes/notes.js', async: true }
-            ]
+            { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
+            { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+            { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+            { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+            { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+            { src: '../reveal.js/plugin/notes/notes.js', async: true }
+        ]
         });
 
     </script>
