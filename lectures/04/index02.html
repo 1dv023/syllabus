@@ -111,7 +111,7 @@
                         * Shopping, Banking, Conversations, ...
                         * Sensitive and important information
                           * Privacy, Society, Web of things
-                        * Downtime == lost of money
+                        * Downtime === lost of money
                           * Denial of Service (DOS, DDOS)
                         * Rendering code running on clients <br />=>
                             more attack vectors
@@ -158,7 +158,8 @@
 
                     * Open, global non-profit organization
                       *  https://www.owasp.org
-                    * OWASP Top Ten
+                    * The Top 10 OWASP
+                      - No changes in 2019...
 
                     <img src="../images/owasp17.png" width="50%" alt="">
 
@@ -186,7 +187,7 @@
                <script type="text/template">
                  ## XSS - How?
 
-                 <img src="http://excess-xss.com/persistent-xss.png" alt="" width="80%">
+                 <img src="../images/persistent-xss.png" alt="" width="80%" />
 
 
                  <p class="small_text">
@@ -244,11 +245,10 @@
                  <script type="text/template">
                    ## CSRF - What?
 
-                   * Cross-Site Request Forgery [pronounced sea-surf]
-                   * Forged request, by attacker, are transmitted from a user that the website trusts (logged in)
-                    * Server/Application trust the user
-                   * Trick client to make request to site where the user has a session
-                   
+                   - Cross-Site Request Forgery (pronounced sea-surf).
+                   - Forces a client to make an unwanted request to a web application in which the user currently is authenticated.
+                   - CSRF attacks specifically target state-changing requests (transfer of funds, change password, change of email addresses, and so on).
+                    - If the victim is an administrative account, the entire web application can be compromised.
                  </script>
              </section>
 
