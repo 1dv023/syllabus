@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="sv-se">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Web Security - Server-based programming (1DV023/1DV523)</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="icon" href="../images/favicon.png" type="image/png" />
+
+    <link rel="stylesheet" href="../reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="../reveal.js/css/theme/black.lnu.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../reveal.js/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <div class="reveal lnu">
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <!-- Start -->
+            <section class="center" data-state="lnu-intro">
+                <h3>Server-based Web Programming</h3>
+                <h3>(1DV023/1DV523)</h3>
+                <h1>Lecture</h1>
+                <h3>Web Security</h3>
+                <h4 style="color: black;">Authentication/Authorization</h4>
+                <div class="lnu-footer">
+                    <img src="../images/lnu-logotype.png" />
+                    <img src="../images/lnu-symbol.png" />
+                </div>
+                <pre><code></code></pre> <!-- Fix for color coding in md -->
+
+            </section>
+
+            <!-- CC -->
+            <section data-state="lnu-cc">
+                <h2>Licensed for this work</h2>
+                <p>
+                    This work is produced by <a href="https://github.com/thajo" style="color: #333">John Häggerud</a> for the course Server-based Web Programming (1DV023) at Linnaeus University.
+                </p>
+                <p>All content in this work excluding photographs, icons, picture of course literature and Linnaeus University logotype and symbol, is licensed under a
+                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />Creative Commons Attribution 4.0 International License</a>.</p>
+                <h4>You are free to </h4>
+                <ul>
+                    <li>copy and redistribute the material in any medium or format</li>
+                    <li>spread the whole or parts of the content</li>
+                    <li>show the whole or parts of the content publicly and digital</li>
+                    <li>convert the content to another format</li>
+                    <li>change the content</li>
+                </ul>
+                <p>
+                    If you change the content do not use the photographs, icons, picture of the course literature or Linnaeus University logotype and symbol in your new work!
+                </p>
+                <p>
+                    At all times you must give credit to: ”Linnaeus university – Server-based Web Programming (1DV023)” with the link <a style="color: #333" href="https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/">https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/</a> and to the Creative Common-license above.
+                </p>
+            </section>
+
+            <section data-markdown>
+              <script type="text/template">
+                ## Content
+
+            
+                * Authentication and Authorization
+                  * User management
+                  * Passwords
+                * HTTPS/TLS
+                
+                </script>
+            </section>
+
+            
+              <section>
+                <section data-markdown class="">
+                 <script type="text/template">
+                  ## User management
+                  
+                  How do web applications manage users and its data?
+
+                  * Using third party solutions?
+                    * [Passport](http://www.passportjs.org/)
+                    * OpenID Connect
+                      * Facebook, Twitter, Github...
+                  * Write your own from scratch?
+                    * Remember your responsibility as a web developer.
+                    * Inform user how the credentials is handled.
+                    * Enforce the user to create a strong password.
+                    * Allow special characters and long passwords.
+                    
+
+                 </script>
+               </section>
+               <section data-markdown class="">
+                <script type="text/template">
+                  ## User management
+
+                  * Authentication
+                    * Logging in the user against credentials
+                    * POST /login
+                      * 302 Redirect (200 OK), with session cookie
+                      * 401 Unauthorized (You are not logged in, try again)
+                  * Authorization
+                    * Right resources to right user
+                      * 403 Forbidden (You may be logged in, but not authorized - Go away!)
+                </script>
+              </section>
+
+
+             <section data-markdown class="expandCode">
+                 <script type="text/template">
+                   ## Storing user credentials
+
+                   * Create a User model with username/email and password
+
+                   ```javascript
+                    const userSchema = new Schema({
+                      email: {
+                        type: String,
+                        required: true,
+                        unique: true,
+                        lowercase: true,
+                        trim: true,
+                        validate: {
+                          validator: value => /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm.test(value),
+                          message: props => `${props.value} is not an valid email address.`
+                        }
+                      },
+                      password: {
+                        type: String,
+                        minlength: [6, 'The password must be of minimum length 6 characters.'],
+                        required: true
+                      }
+                    }, {
+                      timestamps: true,
+                      versionKey: false
+                    })
+                   ```
+
+                 </script>
+             </section>
+
+             <section data-markdown class="">
+                 <script type="text/template">
+                  ## Passwords
+
+                  * Should the password have restrictions?
+                    * Allow looooong passwords
+                    * Restrict minimum length?
+                    * Allow special characters
+                  * A password should never be able to be read back
+                  * Use a secure hashing algoritm (Argon2, bcrypt, scrypt)
+                    * Avoid md5, sha1, sha256
+
+                  >nyoIjb8W4rVuJKap/AyxgmZv21shwaMHov
+
+
+                 </script>
+            </section>
+            <section data-markdown class="">
+                <script type="text/template">
+                  ##  Rainbow tables
+
+                  Trying to brute force hashed passwords trough tables with pre hashed "known passwords".
+
+                  <img width="25%" src="../images/rainbowtable.png" alt="">
+
+                </script>
+            </section>
+            <section data-markdown class="">
+                <script type="text/template">
+                  ## Salt your hash
+                  <img src="../images/saltcreate.png" width="80%" alt="">
+
+                  * Different servers have different salt and different hash strings
+                  for same password
+                  * Same password will have different hashes if the salt is unique for each user
+                  * Protection against rainbow tables
+
+                 
+                  
+                 
+
+
+                </script>
+            </section>
+            <section data-markdown class="">
+                <script type="text/template">
+                  ##  Register users on your site
+
+                  * Client fills the form
+                    * Client validation
+                    * required, e-mail format ect.
+                  * Check if username/email already exists in application
+                  * Before saving the user hash the password with a salt
+                  * Save the the hashed password-string in db
+                  * https://www.npmjs.com/package/bcrypt
+                    * bcrypt has salts built into the generated hashes
+                </script>
+            </section>
+
+            <section data-markdown class="">
+                <script type="text/template">
+                  ## Code for hashing passwords
+                  * In the User model
+                    * Using a pre-hook (runs before saving the user into database)
+
+                  ```javascript
+                  // Salts and hashes password before save.
+                  userSchema.pre('save', async function (next) {
+                    try {
+                      const salt = await bcrypt.genSalt(8)
+                      this.password = await bcrypt.hash(this.password, salt)
+                      next()
+                    } catch (error) {
+                      next(error)
+                    }
+                  })
+                  ```
+
+                </script>
+           </section>
+
+           
+
+
+           <section data-markdown class="">
+               <script type="text/template">
+                 ## How to login a client
+
+                 * Log-in form, user fill in data
+                    * Validate on client, validate on server
+                 * Check credentials against database
+                 * If successful
+                   * Create a secure session cookie (regenerate) for the client
+                     * Return it with a redirect (or 2xx response)
+                 * If unsuccessful
+                   * Return a 401 or a redirect to the login form
+                     * Give the client information about what went wrong
+                 * Dont forget to give the user the possibility to log off!
+                   * Destroy the session
+                     * Redirect to start page
+
+               </script>
+           </section>
+
+
+
+            <section data-markdown class="">
+                <script type="text/template">
+                  ## Code - login
+
+                  ```javascript
+                  // In the User model
+                  userSchema.statics.authenticate = async function (email, password) {
+                    const user = await this.findOne({ email })
+                  
+                    if (!user || !(await bcrypt.compare(password, user.password))) {
+                      throw new Error('Invalid login attempt.')
+                    }
+                  
+                    return user
+                  }
+                                    ```
+
+                  ```javascript
+                  // In the controller
+                  ...
+                  try {
+                    const user = await User.authenticate(req.body.email, req.body.password)
+                    req.session.regenerate(() => {
+                      ...
+                    })
+                  } catch (error) {
+                    ...
+                  }
+                  ...
+                  ```
+                </script>
+           </section>
+
+
+
+             
+
+
+             <section data-markdown class="">
+                 <script type="text/template">
+                  ## Authorization in code
+                  * Define middleware routes that catches all path you want to protect
+                  * Check that the client calling them has the correct session
+
+                  ```javascript
+                    // In userRouter
+                    router.post('/resources', controller.authorization, controller.index)
+                  ```
+
+                  ```javascript
+                    // In userController
+                    userController.authorization = function (req, res, next) {
+                      // Do authorization check here
+                      next()
+                    }
+                  ```
+                 </script>
+             </section>
+
+             
+             
+           
+            </section>
+
+            
+            <section>
+             <section data-markdown class="">
+                 <script type="text/template">
+                 ## Next time
+
+                 * Web attacks and how to protect us
+                   * XSS
+                   * CSRF
+                   * Injections
+                   * ...
+                 </script>
+             </section>
+
+            
+          </section>
+
+        </div>
+    </div>
+
+    <script src="../reveal.js/lib/js/head.min.js"></script>
+    <script src="../reveal.js/js/reveal.js"></script>
+
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            width: 1280,
+            height: 800,
+            controls: true,
+            progress: true,
+            history: true,
+            center: false,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: '../reveal.js/lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: '../reveal.js/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: '../reveal.js/plugin/highlight/highlight.js', async: true, condition: function () { return !!document.querySelector('pre code'); }, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: '../reveal.js/plugin/zoom-js/zoom.js', async: true },
+                { src: '../reveal.js/plugin/notes/notes.js', async: true }
+            ]
+        });
+
+    </script>
+
+</body>
+</html>
