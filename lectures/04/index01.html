@@ -175,10 +175,11 @@
               
               <section data-markdown>
                 <script type="text/template">
-                  ## Salt the hash
+                  ## Salting
 
                   ![](./images/salt-hash.png)
 
+                  - Rainbow tables becomes useless by adding a small chunk of random data, called a salt, to the password before it is hashed.
                   - The same password has different hashes if the salt is unique to each user.
               
                   </script>
@@ -240,7 +241,21 @@
                       </script>
                   </section>
 
-                  <section data-markdown>
+                  <section data-markdown class="expandCode">
+                    <script type="text/template">
+                      ## The hashed password
+
+                      ![](./images/bcrypt-hash.png)
+
+                      - A bcrypt hash has three fields, delimited by the "$" character.
+                        - `2a` identifies the bcrypt algorithm version that was used.
+                        - `08` is the cost; 2<sup>8</sup> iterations of the key derivation function are used (some recommend a cost of 12 or more).
+                        - `/ZADTNI3LjfDSEYbdErZAOiw.M1NwS01ohmlM8JywWHLClz1ALLmK` is the salt and the ciphertext.
+   
+                    </script>
+                </section>
+
+                <section data-markdown>
                       <script type="text/template">
                         ## How to manage login
   
@@ -258,9 +273,8 @@
   
                           ![](./images/user-schema-authenticate.png)
   
-                          - Lookup the user in the database and compare the provided password with the hashed one from the database.
-                            - Return the user object if the user is authenticated.
-                            - If the authentication fails, throw an error.
+                          - Lookup the user in the database and compare, using a 'constant-time' algorithm, the provided password with the hashed one from the database.
+                            - If the authentication fails, throw an error, otherwise, return an object representing the user.
        
                         </script>
                     </section>
