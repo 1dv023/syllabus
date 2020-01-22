@@ -1,13 +1,15 @@
 ## Exercises
 ** OBS! many of the links and the videos points to the 1dv023 organization on GitHub. This the same course as this 1DV523.**
 
-The solutions may be done with a different JavaScript Style-guide then "JavaScript Standard" that you suppose to use.
+The solutions may be done with a different JavaScript Style-guide than the recommended ESlint @lnu/eslint-config that you are supposed to use. We are trying to update repos but it is a lot of work.
 
-Exercises below are in separate repositories.
+Exercises below are in separate repositories but you could have them as folders in your Exercise-repo.
 
 The assignments are divided in to separate levels, A, B and C where C is the most difficult level. You should always strive to complete at least level A and B.
 
 As a registered student on the course you should have been given a exercise repo where you can save your solutions. This is up to your self to handle this. The course management will NOT check your exercise repo.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0utCRL9dLAY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ***
 
