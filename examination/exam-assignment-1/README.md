@@ -97,7 +97,7 @@ Recommendations
 
 ## Examination
 
-There will be no oral exam for this assignment. The examiner will notify you of the assessment of the assignment with a question on the repository.
+There will be no oral exam for this assignment. The examiner will notify you of the assessment of the assignment with an issue at the repository.
 
 ## Goals for this assignment
 
