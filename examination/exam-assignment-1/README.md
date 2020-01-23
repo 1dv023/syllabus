@@ -40,7 +40,7 @@ The site will use session **cookies** for authorization, which your application 
 * Present the solution(s) as output in your terminal/console window (or as an HTML view)
 * [Optional] - Use the form for a user to book a table with your application
 
-## What the application should look like
+## What the application must look like
 
 Start the application passing the start URL <http://vhost3.lnu.se:20080/weekend> as an argument to the process.
 
