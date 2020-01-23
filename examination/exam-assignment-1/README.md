@@ -82,7 +82,7 @@ Recommendations
 
 ## Requirements of your solution
 
-* The application should be written as a Node.js application in JavaScript following the code and JSDoc conventions the course uses ([@lnu/eslint-config](https://www.npmjs.com/package/@lnu/eslint-config) You have to install and configure the lint tools yourself (your initial repo will be empty). The examiner should be able to run `npm run lint` in the console to see that there are no errors (or warnings).
+* The application should be written as a Node.js application in JavaScript following the code and JSDoc conventions the course uses ([@lnu/eslint-config](https://www.npmjs.com/package/@lnu/eslint-config)). You have to install and configure the lint tools yourself (your initial repo will be empty). The examiner should be able to run `npm run lint` in the console to see that there are no errors (or warnings).
 * The only command the examiner should use to run your application after cloning it from it's repository is `npm install` and `npm start` (with the starting URL as a parameter).
 * You should work with GitLab and **do several commits** to show how your solution has been made.
 * You are free to find and use external modules.
@@ -93,7 +93,7 @@ Recommendations
   * The day(s) all three friends will be available (remember: if none, the application should give the end-user a message about that).
   * The movie titles, their time, and if they are fully booked or not.
   * The availability of tables at the restaurant and the redirect URL we get when we log in.
-* To submit your solution and tell the examiners that you are ready **you must create a release of your code at your repository**, otherwise will you not get feedback. Solutions without a release will be ignored!
+* To submit your solution and tell the examiners that you are ready **you must create a release of your code at your repository**, otherwise will you not get feedback. Solutions without a release will not be assessed!
 
 ## Examination
 
