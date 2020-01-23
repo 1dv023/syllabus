@@ -97,7 +97,7 @@ Recommendations
 
 ## Examination
 
-There will not be an oral examination combined with this assignment. The examiners will tell you if your solution has **Pass** or **Fail** through an issue on your repository.
+There will be no oral exam for this assignment. The examiner will notify you of the assessment of the assignment with a question on the repository.
 
 ## Goals for this assignment
 
