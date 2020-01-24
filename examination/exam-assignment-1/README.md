@@ -83,7 +83,7 @@ Recommendations
 ## Requirements of your solution
 
 * The application should be written as a Node.js application in JavaScript following the code and JSDoc conventions the course uses ([@lnu/eslint-config](https://www.npmjs.com/package/@lnu/eslint-config)). You have to install and configure the lint tools yourself (your initial repo will be empty). The examiner should be able to run `npm run lint` in the console to see that there are no errors (or warnings).
-* The only command the examiner should use to run your application after cloning it from it's repository is `npm install` and `npm start` (with the starting URL as a parameter).
+* The only command the examiner should use to run your application after cloning it from its repository is `npm install` and `npm start` (with the starting URL as a parameter).
 * You should work with GitLab and **do several commits** to show how your solution has been made.
 * You are free to find and use external modules.
 * You must structure your code so **you must create at least use three own modules**.
