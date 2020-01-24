@@ -93,7 +93,7 @@ Recommendations
   * The day(s) all three friends will be available (remember: if none, the application should give the end-user a message about that).
   * The movie titles, their time, and if they are fully booked or not.
   * The availability of tables at the restaurant and the redirect URL we get when we log in.
-* To submit your solution and tell the examiners that you are ready **you must create a release of your code at your repository**, otherwise will you not get feedback. Solutions without a release will not be assessed!
+* When you are done with the assignment be sure to make a complete submission for the assignment to be assessed.
 
 ## Examination
 
