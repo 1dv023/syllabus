@@ -8,7 +8,7 @@ Users must be able to register and login to the application after entering a use
 
 Anonymous users should only be able to view snippets. Authenticated users, in addition to view snippets, must also be able to create, edit, and delete their snippets. **No one but the authenticated user should be able to create, edit and delete their snippets.** Because of this, the application must support some basic authentication and authorization.  On the server-side, you may only use session storage, using the [express-session](https://www.npmjs.com/package/express-session) package, to implement authentication and authorization. **You must not use any packages such as Passport, etc., to authenticate or authorize.**
 
-When writing and presenting snippets, **the application must support multiline text**, enabling the user to write real code snippets, not just a one-line text string. The application should also be easy to understand, meaning that the users should get clear notifications on what is going on in the application (e.g., using flash messages).
+When writing and presenting snippets, **the application must support multiline text**, enabling the user to write real code snippets, not just a one-line text string. The application should be easy to understand, which means that users should be notified of what is happening in the application (e.g., with flash messages).
 
 If a user tries to access a resource that requires the user to be logged in, the application must return the status code 403 (Forbidden). Of course, when necessary, the application must also return the status code 404 (Not Found) as well as 500 (Internal Server Error).
 
