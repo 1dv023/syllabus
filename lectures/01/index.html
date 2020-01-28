@@ -89,10 +89,8 @@
                     * Their purpose
                     * Different kind of servers
                     * Different kind of web servers
-                  * HTTP
-                    * The web and how it works
-                    * TCP/IP and HTTP
-                    * About HTTP
+                    * DNS and Routing
+
 
                   </script>
               </section>
@@ -107,7 +105,7 @@
                         * A server is listening for connections on ports
                           * Different services have different ports
                         * Running in development environment
-                          * Localhost (127.0.0.1)
+                          * Localhost (127.0.0.1) / Public IP through tunnel (Ngrok)
                           * Virtual Machine, containers (Docker)
                           * Development server machine
                         * Running in production environment
@@ -159,7 +157,7 @@
                       * [Apache Software Foundation](Apache Software Foundation)
                     * The Apache HTTP Server was launched in 1995
                       *  Based on NCSA HTTPd server
-                      * "A-patchy-server"...?
+                      * Name: "Native American Indian tribe of Apache" / "A-patchy-server"
                     * Every request is spawn to a own thread (like a own process)
                       * Thread pool
                     * Loadable Dynamic Modules which extend the core functionality.
@@ -260,7 +258,7 @@
                   ### Application server
 
                   * Most of the times equals to web server
-                  * Web server always handle HTTP
+                  * A Web server always handle HTTP
                   * Application server could also handle other requests
               
              
@@ -394,81 +392,7 @@
             </section>
           </section>
         </section>
-        <section>
-          <section data-markdown>
-              <script type="text/template">
-                ### HTTP
-                * Client / server architecture
-                * Request / Response
-                * Stateless, no session
-                * No built-in security
-                * HTTP is a text-based protocol
-
-                <img src="../images/request_response.png" width="60%" alt="">
-              </script>
-            </section>
-
-            <section data-markdown>
-              <script type="text/template">
-                * HTTP 0.9 (1991)
-                * HTTP 1.0 (1996)
-                * HTTP 1.1 (1997)
-                * HTTP/2 (May 2015)
-              </script>
-            </section>
-
-            <section data-markdown>
-                <script type="text/template">
-                  ## HTTP request
-                  <img src="../images/http_request.png" width="80%" alt="">
-                </script>
-              </section>
-
-              <section data-markdown>
-                  <script type="text/template">
-                    ## HTTP response
-                    <img src="../images/http_response.png" width="60%" alt="">
-                  </script>
-                </section>
-        </section>
-
-        <section>
-
-          <section data-markdown>
-            <script type="text/template">
-              ### HTTP Methods (verbs)
-              *From Client to Server*
-
-              | *Verbs*        | *Actions*           |   |
-              | ------------- |-------------| -----:|
-              |GET | Get data; search result | safe, idempotent
-              |POST | Create data |unsafe, not idempotent|
-              |PUT | Update data |unsafe, idempotent|
-              |PATCH | Partial update of resource |unsafe, not idempotent|
-              |DELETE | Delete a resource |unsafe, idempotent|
-              |HEAD | Just get headers |safe, idempotent|
-              |OPTIONS | Check what the server can do |safe, idempotent|
-
-            </script>
-          </section>
-
-          <section data-markdown>
-            <script type="text/template">
-              ## Status codes - Server to client
-              * 1xx - Informational
-                * 101 Switching Protocols
-              * 2xx - Successful
-                * 200 OK, 201 Created, 204 No Content
-              * 3xx - Redirection
-                * 302 Found (follow "Location"), 304 Not Modified
-              * 4xx - Client Error
-                * 400 Bad request, 401 Unauthorized, 403 Forbidden
-              * 5xx - Server Error
-                * 500 Internal Server Error
-
-            </script>
-          </section>
-
+         
     <script src="../reveal.js/lib/js/head.min.js"></script>
     <script src="../reveal.js/js/reveal.js"></script>
 
