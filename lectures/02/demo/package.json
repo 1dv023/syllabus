@@ -4,22 +4,30 @@
   "description": "A simple Express application",
   "main": "app.js",
   "scripts": {
-    "start": "node ./app.js",
-    "devstart": "nodemon --inspect ./app.js",
-    "lint": "standard | snazzy || exit 0"
+    "start": "node app.js",
+    "lint": "npx eslint . || exit 0",
+    "lint:fix": "npx eslint . --fix || exit 0",
+    "devstart": "nodemon --inspect ./app.js"
   },
   "author": "Mats Loock <mats.loock@lnu.se>",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "express-hbs": "^2.2.0",
+    "express-hbs": "^2.3.0",
     "moment": "^2.24.0",
     "morgan": "^1.9.1"
   },
   "devDependencies": {
-    "nodemon": "*",
-    "snazzy": "*",
-    "standard": "*"
+    "@lnu/eslint-config": "^1.0.6",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsdoc": "^21.0.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  },
+  "eslintConfig": {
+    "extends": "@lnu"
   },
   "nodemonConfig": {
     "ext": "js,json,hbs,html,css"

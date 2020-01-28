@@ -12,8 +12,9 @@ const router = express.Router()
 
 const controller = require('../controllers/homeController')
 
-router.get('/', controller.index)
-
-router.post('/', controller.indexPost)
+// /
+router
+  .get('/', controller.index)
+  .post('/', controller.indexPost)
 
 module.exports = router
