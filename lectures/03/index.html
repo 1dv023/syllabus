@@ -71,10 +71,9 @@
     <div class="slides">
       <!-- Start -->
       <section class="center" data-state="lnu-intro">
+        <h1>Persistent data</h1>
         <h3>Server-based Web Programming</h3>
         <h3>(1DV023, 1DV523)</h3>
-        <h1>Lecture</h1>
-        <h3>Persistent data</h3>
         <div class="lnu-footer">
           <img src="../images/lnu-logotype.png" />
           <img src="../images/lnu-symbol.png" />
@@ -271,7 +270,7 @@
         <section>
           <h3>Managing the Mongoose connection</h3>
           <div class="twocolumn">
-            <div style="min-height: 600px">
+            <div style="min-width: 400px">
               <img src="./images/mongoose.js.png" class="fix" />
             </div>
             <div style="font-size: 80%">
@@ -279,7 +278,7 @@
                 <li>You connect to MongoDB with the <code>mongoose.connect()</code> method.
                   <ul>
                     <li>The connection string, enforcing access control, can be found at the DaaS provider.
-                      <ul><li><code>mongodb+srv://&lt;dbuser&gt;:&lt;password&gt;@&lt;cluster&gt;.mongodb.net/test?retryWrites=true&w=majority</code></li></ul>
+                      <ul><li><code>mongodb+srv://&lt;dbuser&gt;:&lt;password&gt;@&lt;cluster&gt;.mongodb.net/&lt;name&gt;?retryWrites=true&w=majority</code></li></ul>
                     </li>
                     <li>Returns a <code>Promise</code>.</li>
                   </ul>
@@ -342,7 +341,7 @@
           <h3>Create - the C in CRUD</h3>
           <img src="./images/todoitem-create.png" />
           <ul>
-            <li>Create a new instance of the model...</code>.</li>
+            <li>Create a new instance of the model...</code>.</ style="height: 500px;"li>
             <li>...and save the document to the database. Easy peasy!</li>
           </ul>
         </section>
@@ -358,7 +357,7 @@
 
         <section>
           <h3>Update - the U in CRUD</h3>
-          <img src="./images/todoitem-update.png" />
+          <img src="./images/todoitem-update.png" style="height: 500px;" />
           <ul>
             <li>Use <code>updateOne</code> to update a document in the database.</li>
           </ul>
