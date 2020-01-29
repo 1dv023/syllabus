@@ -60,6 +60,7 @@
       <!-- Start -->
       <section class="center" data-state="lnu-intro">
         <h1>Web Application Architecture</h1>
+        <h4>Express - A Node.js web application framework</h4>
         <div class="lnu-footer">
             <img src="../images/lnu-logotype.png" />
             <img src="../images/lnu-symbol.png" />
@@ -123,7 +124,7 @@ const server = http.createServer((req, res) => {
   res.end('hello, world\n')
 })
 
-server.listen(3000, () => console.log('Server running at http://localhost:3000/'))
+server.listen(8000, () => console.log('Server running at http://localhost:8000/'))
           ```
           - The build-in http module allows Node to transfer data over HTTP.
           - Event-driven programing.
@@ -140,7 +141,7 @@ server.listen(3000, () => console.log('Server running at http://localhost:3000/'
           ```
 const http = require('http')
 
-const server = http.createServer((req, res) => {
+http.createServer((req, res) => {
   const path = req.url.replace(/\/?(?:\?.*)?$/, '').toLowerCase()
 
   switch (path) {
@@ -160,7 +161,7 @@ const server = http.createServer((req, res) => {
       res.end('Not Found')
       break
   }
-})
+}).listen(8000, () => console.log('Server running at http://localhost:8000/'))
           ```
         </script>
       </section>
@@ -170,7 +171,7 @@ const server = http.createServer((req, res) => {
           ### Minimal website with simple routing (2 of 2)
 
           - Routing is the mechanism for serving the client with the requested content.
-            - It's possible to browse to http://localhost:3000 and http://localhost:3000/about (query strings will be ignored). Any other URL will get a response with status code 404.
+            - It's possible to browse to http://localhost:8000 and http://localhost:8000/about (query strings will be ignored). Any other URL will get a response with status code 404.
           - The complexity increases rapidly. We need something that makes it some what easier.
         </script>
       </section>
@@ -244,10 +245,10 @@ const server = http.createServer((req, res) => {
           app.get('/', (req, res) => res.send('Homepage'))
           app.get('/about', (req, res) => res.send('About'))
 
-          app.listen(3000, () => console.log('Server running at http://localhost:3000/'))
+          app.listen(8000, () => console.log('Server running at http://localhost:8000/'))
           ```
 
-          - The application starts a server and listens on port 3000 for connections.
+          - The application starts a server and listens on port 8000 for connections.
           - The framework will handle the request.
             - The application responds with "Homepage" for requests to the root URL (/).
             - The application responds with "About" for requests to the about URL (/about).
@@ -320,7 +321,16 @@ const server = http.createServer((req, res) => {
               </li>
               <li>
                 <code>nodemon</code>
-                <ul><li>Automatically restarts the application when file changes.</li></ul>
+                <ul>
+                  <li>
+                    Automatically restarts the application when file changes.
+                    <ul>
+                      <li>
+                        nodemonConfig
+                      </li>
+                    </ul>
+                      </li>
+                </ul>
               </li>
             </ul>
           </div>
@@ -353,7 +363,7 @@ const server = http.createServer((req, res) => {
           <h3>The routing</h3>
           <div class="twocolumn">
             <div style="min-height: 600px">
-              <img src="./images/homeRouter.js.png" style="max-width: 350px;" />
+              <img src="./images/homeRouter.js.png" style="max-width: 450px;" />
             </div>
             <div style="font-size: 80%">
               <ul>
@@ -362,8 +372,8 @@ const server = http.createServer((req, res) => {
                 <li>
                   You use the <code>router</code> object as an argument to <code>app.use()</code>.
                   <ul>
-                      <li><code>app.use('/', require('./routes/homeRouter'))</code> http://localhost:3000/</li>
-                      <li><code>app.use('/home', require('./routes/homeRouter'))</code> http://localhost:3000/home</li>
+                      <li><code>app.use('/', require('./routes/homeRouter'))</code> http://localhost:8000/</li>
+                      <li><code>app.use('/home', require('./routes/homeRouter'))</code> http://localhost:8000/home</li>
                     </ul>
                 </li>
               </ul>
@@ -390,7 +400,7 @@ const server = http.createServer((req, res) => {
                   <code>res.render(view [, locals])</code> renders a view and sends the HTML string to the client.
                   <ul>
                       <li><code>view</code>, the path of the view file to render.</li>
-                      <li><code>locals</code> (optional), an object that contains data to pass from the controller to the view.</li>
+                      <li><code>locals</code> (optional), an object that contains data (viewData) to pass from the controller to the view.</li>
                     </ul>
                   </li>
               </ul>
@@ -434,8 +444,8 @@ const server = http.createServer((req, res) => {
                       <li><code>npm install express-hbs</code></li>
                     </ul>
                   </li>
-                  <li>Configure the template engine to use '.hbs' for extensions and find layouts in  'views/layouts'.
-                      Setting the view engine as handlebars and views directory for views.
+                  <li>Configure the template engine to use <code>.hbs</code> for extensions and find layouts in <code>views/layouts</code>.</li>
+                  <li>Setting the view engine as handlebars and views directory for views.
                     <div>
                     <img src="./images/express-hbs-configuration.png" style="max-width: 1000px;" />
                   </div>
