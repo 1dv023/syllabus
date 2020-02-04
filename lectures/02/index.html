@@ -59,10 +59,10 @@
     <div class="slides">
       <!-- Start -->
       <section class="center" data-state="lnu-intro">
-        <h1>Web Application Architecture</h1>
-        <h4>Express - A Node.js web application framework</h4>
-        <h3>Server-based Web Programming</h3>
-        <h3>(1DV023, 1DV523)</h3>
+        <h6>Server-based Web Programming</h6>
+        <h6>(1DV023, 1DV523)</h6>
+        <h2>Web Application Architecture</h2>
+        <h5>Express - A Node.js web application framework</h5>
         <div class="lnu-footer">
             <img src="../images/lnu-logotype.png" />
             <img src="../images/lnu-symbol.png" />
@@ -369,7 +369,7 @@ http.createServer((req, res) => {
             </div>
             <div style="font-size: 80%">
               <ul>
-                <li>The <code>router.get()</code> and <code>router.post()</code> methods is two routing functions in Express.</li>
+                <li>The <code>router.get()</code> and <code>router.post()</code> methods are two routing functions in Express.</li>
                 <li>You provide a function to be called for a request matching the method and specified path.</li>
                 <li>
                   You use the <code>router</code> object as an argument to <code>app.use()</code>.
@@ -395,7 +395,7 @@ http.createServer((req, res) => {
                   <ul>
                     <li>...get the requested data (if any), ...</li>
                     <li>...render an HTML page using a template engine, and...</li>
-                    <li>...return HTML to the client.</li>
+                    <li>...send the HTML to the client.</li>
                   </ul>
                 </li>
                 <li>
@@ -447,7 +447,7 @@ http.createServer((req, res) => {
                     </ul>
                   </li>
                   <li>Configure the template engine to use <code>.hbs</code> for extensions and find layouts in <code>views/layouts</code>.</li>
-                  <li>Setting the view engine as handlebars and views directory for views.
+                  <li>Setting the view engine as handlebars and the root directory for the views.
                     <div>
                     <img src="./images/express-hbs-configuration.png" style="max-width: 1000px;" />
                   </div>

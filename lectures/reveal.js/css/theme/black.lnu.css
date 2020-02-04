@@ -105,8 +105,11 @@
 }
 
 .lnu-intro h1,
+.lnu-intro h2,
 .lnu-intro h3,
-.lnu-intro h4 {
+.lnu-intro h4,
+.lnu-intro h5,
+.lnu-intro h6 {
     color: #333;
 }
 
