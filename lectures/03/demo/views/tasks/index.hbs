@@ -1,5 +1,5 @@
 <h1>
-    <span class="far fa-list-alt"></span> Just To-do It
+    <span class="far fa-list-alt"></span> Just Task It
 </h1>
 
 <table class="table table-striped">
@@ -11,21 +11,21 @@
         </tr>
     </thead>
     <tbody>
-        {{#if viewData.toDoItems.length }}
-        {{#each viewData.toDoItems}}
+        {{#if viewData.tasks.length }}
+        {{#each viewData.tasks}}
         <tr>
             <td class="text-center text-primary"><span class="far fa-{{#if this.done }}check-square{{else}}square{{/if}}"></span></td>
             <td class="w-100 {{#if this.done }} text-muted {{/if}}">{{this.description}}</td>
             <td>
-                <a href="/todo/edit/{{this.id}}"><span class="far fa-edit"></span></a>
-                <a href="/todo/delete/{{this.id}}"><span class="far fa-trash-alt"></span></a>
+                <a href="/tasks/{{this.id}}/edit"><span class="far fa-edit"></span></a>
+                <a href="/tasks/{{this.id}}/remove"><span class="far fa-trash-alt"></span></a>
             </td>
         </tr>
         {{/each}}
         {{else}}
         <tr>
             <td colspan="3" class="text-center text-danger">
-                No to-do items to display.
+                There are no tasks to display.
             </td>
         </tr>
         {{/if}}

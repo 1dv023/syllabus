@@ -1,28 +1,38 @@
 {
-  "name": "justtodoit",
+  "name": "justtaskit",
   "version": "1.0.0",
-  "description": "A simple to-do application",
+  "description": "A simple task application",
   "main": "app.js",
   "scripts": {
-    "start": "node ./app.js",
-    "devstart": "nodemon --inspect ./app.js",
-    "lint": "standard | snazzy || exit 0"
+    "start": "node app.js",
+    "lint": "npx eslint . || exit 0",
+    "lint:fix": "npx eslint . --fix || exit 0",
+    "devstart": "nodemon --inspect app.js"
   },
-  "author": "mtslck <mats.loock@lnu.se>",
+  "author": "Mats Loock <mats.loock@lnu.se>",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-hbs": "^2.3.0",
     "express-session": "^1.17.0",
+    "http-errors": "^1.7.3",
     "moment": "^2.24.0",
-    "mongoose": "^5.7.12",
+    "mongoose": "^5.8.11",
     "morgan": "^1.9.1",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "nodemon": "*",
-    "snazzy": "*",
-    "standard": "*"
+    "@lnu/eslint-config": "^1.0.6",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsdoc": "^21.0.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  },
+  "eslintConfig": {
+    "extends": "@lnu"
   },
   "nodemonConfig": {
     "ext": "js,json,hbs,html,css"

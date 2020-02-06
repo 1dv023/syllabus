@@ -1,5 +1,5 @@
 /**
- * homeController.
+ * HomeController.
  *
  * @author Mats Loock
  * @version 1.0.0
@@ -10,9 +10,12 @@
 const homeController = {}
 
 /**
- * index GET
+ * Displays a start page.
+ *
+ * @param {object} req - Express request object.
+ * @param {object} res - Express response object.
  */
-homeController.index = (req, res, next) => res.render('home/index')
+homeController.index = (req, res) => { res.render('home/index') }
 
 // Exports.
 module.exports = homeController

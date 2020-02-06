@@ -10,13 +10,13 @@
 const mongoose = require('mongoose')
 
 // DISCLAIMER: This is an example connection string. ALWAYS use an environment variable to store the connection string.
-const CONNECTION_STRING = 'mongodb+srv://dbuser:PWIj1bl35O0Pv8ov@democluster-zfabi.mongodb.net/justtodoit?retryWrites=true&w=majority'
+// const DB_CONNECTION_STRING = 'mongodb+srv://<dbuser>:<password>@<cluster>.mongodb.net/<name>?retryWrites=true&w=majority'
 
 /**
  * Establishes a connection to a database.
  *
- * @returns {Promise}
-*/
+ * @returns {Promise} Resolves to this if connection succeeded.
+ */
 module.exports.connect = async () => {
   // Bind connection to events (to get notifications).
   mongoose.connection.on('connected', () => console.log('Mongoose connection is open.'))
@@ -32,7 +32,7 @@ module.exports.connect = async () => {
   })
 
   // Connect to the server.
-  return mongoose.connect(CONNECTION_STRING, {
+  return mongoose.connect(process.env.DB_CONNECTION_STRING, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true

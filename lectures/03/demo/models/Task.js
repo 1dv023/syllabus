@@ -1,5 +1,5 @@
 /**
- * Mongoose model ToDoItem.
+ * Mongoose model Task.
  *
  * @author Mats Loock
  * @version 1.0.0
@@ -10,7 +10,7 @@
 const mongoose = require('mongoose')
 
 // Create a schema.
-const toDoItemSchema = new mongoose.Schema({
+const taskSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
@@ -27,7 +27,7 @@ const toDoItemSchema = new mongoose.Schema({
 })
 
 // Create a model using the schema.
-const ToDoItem = mongoose.model('ToDoItem', toDoItemSchema)
+const Task = mongoose.model('Task', taskSchema)
 
 // Exports.
-module.exports = ToDoItem
+module.exports = Task
