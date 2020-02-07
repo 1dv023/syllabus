@@ -59,6 +59,9 @@
     img.fix {
       max-height: unset;
     }
+    .lnu ul, .lnu ol {
+      font-size: 80%;
+    }
 
   </style>
 </head>
@@ -177,7 +180,7 @@
             <div style="min-height: 600px">
               <img src="./images/js-full-stack.png"  class="fix"/>
             </div>
-            <div style="font-size: 80%">
+            <div>
               <ul>
                 <li>
                   A database is a collection of data that is organized so it can be easily accessed, manage and updated.
@@ -219,7 +222,7 @@
             <div style="min-height: 600px">
               <img src="./images/mongodb-atlas-mongoose.png" class="fix" />
             </div>
-            <div style="font-size: 80%">
+            <div>
               <ul>
                 <li>MongoDB
                   <ul>
@@ -258,7 +261,7 @@
             <div style="min-width: 400px">
               <img src="./images/getting-started-mongodb-atlas.png" class="fix" />
             </div>
-            <div style="font-size: 80%">
+            <div>
               <ul>
                 <li>By starting out with <a href="https://docs.atlas.mongodb.com/getting-started/">Getting Started with MongoDB Atlas</a> it should easy to create a new MongoDB database.</li>
                 <li>For safety reasons be sure to follow <a href="https://docs.atlas.mongodb.com/getting-started/">Create a MongoDB User for Your Cluster</a>!</li>
@@ -273,7 +276,7 @@
             <div style="min-width: 400px">
               <img src="./images/mongoose.js.png" class="fix" />
             </div>
-            <div style="font-size: 80%">
+            <div>
               <ul>
                 <li>You connect to MongoDB with the <code>mongoose.connect()</code> method.
                   <ul>
@@ -327,7 +330,7 @@
             <div style="min-height: 600px">
               <img src="./images/task.js.png" class="fix" />
             </div>
-            <div style="font-size: 80%">
+            <div>
               <ul>
                 <li>Convert a schema into a model by passing the schema to <code>mongoose.model(modelName, schema)</code>.</li>
                 <li>An instance of a model is called a document.</li>
@@ -343,7 +346,7 @@
             <li>A route provides a mapping between HTTP verbs and URLs to controller actions.</li>
             <li>Each action maps to a specific CRUD operation in a database.</li>
           </ul>
-          <img src="./images/crud-verbs-actions.png" />
+          <img src="./images/crud-verbs-actions.png" height="500px" />
         </section>
 
         <section>
@@ -506,7 +509,7 @@
               <img src="./images/flash-message-prg.png"  class="fix"/>
               <img src="./images/flash-message.png"  class="fix" />
             </div>
-            <div style="font-size: 80%">
+            <div>
               <ul>
                 <li>To avoid "double posting" it's common to use the <a href="https://en.wikipedia.org/wiki/Post/Redirect/Get">Post/Redirect/Get</a> pattern (PRG).
                   <ul>
@@ -532,7 +535,7 @@
             <img src="./images/flash-message-middleware.png" class="fix" />
             <img src="./images/flash-message-hbs.png" class="fix" />
             </div>
-            <div style="font-size: 80%">
+            <div>
               <ol>
                 <li>In the function handling the POST request, create a flash message before the redirect.</li>
                 <li>Before the routing be sure to transfer the data of session variable <code>flash</code> to the response object.</li>
