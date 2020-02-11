@@ -16,7 +16,6 @@ require('dotenv').config()
 
 const createError = require('http-errors')
 const express = require('express')
-const favicon = require('serve-favicon')
 const hbs = require('express-hbs')
 const session = require('express-session')
 const { join } = require('path')
@@ -44,7 +43,6 @@ app.set('views', join(__dirname, 'views'))
 app.use(logger('dev'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(join(__dirname, 'public')))
-app.use(favicon(join(__dirname, 'public', 'favicon.ico')))
 
 // setup and use session middleware (https://github.com/expressjs/session)
 const sessionOptions = {

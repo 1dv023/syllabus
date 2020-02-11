@@ -74,12 +74,13 @@
     <div class="slides">
       <!-- Start -->
       <section class="center" data-state="lnu-intro">
-        <h1>Persistent data</h1>
-        <h3>Server-based Web Programming</h3>
-        <h3>(1DV023, 1DV523)</h3>
+        <h6>Server-based Web Programming</h6>
+        <h6>(1DV023, 1DV523)</h6>
+        <h2>Persistent data</h2>
+        <h5>MongoDB, Mongoose, PRG, Sessions</h5>
         <div class="lnu-footer">
-          <img src="../images/lnu-logotype.png" />
-          <img src="../images/lnu-symbol.png" />
+            <img src="../images/lnu-logotype.png" />
+            <img src="../images/lnu-symbol.png" />
         </div>
         <pre><code></code></pre> <!-- Fix for color coding in md -->
 
@@ -178,7 +179,7 @@
           <h3>We will use a database!</h3>
           <div class="twocolumn">
             <div style="min-height: 600px">
-              <img src="./images/js-full-stack.png"  class="fix"/>
+              <img src="./images/js-full-stack-database.png"  class="fix"/>
             </div>
             <div>
               <ul>
@@ -347,15 +348,16 @@
             <li>Each action maps to a specific CRUD operation in a database.</li>
           </ul>
           <img src="./images/crud-verbs-actions.png" height="500px" />
+          <ul>
+            <li>Route parameters, such as <code>:id</code> above, are named URL segments that are used to capture the values specified at their position.</li>
+          </ul>
         </section>
 
         <section>
-          <h3>Routes</h3>
-          <img src="./images/routes.png" />
+          <h3>Routes mapping to the tasks controller</h3>
+          <img src="./images/routes.png" height="500px" />
           <ul>
-            <li>...</li>
-            <li>...</li>
-            <li>...</li>
+            <li>The captured values are populated in the <code>req.params</code> object, with the name of the route parameter specified in the path as their respective keys.</li>
           </ul>
         </section>
 
@@ -485,7 +487,7 @@
         <section>
           <h3>How to prevent duplicate form submissions?</h3>
           <div class="center">
-            <img src="./images/double-post.png"  height="500" />
+            <img src="./images/double-post2.png"  height="500" />
           </div>
           <ul>
             <li>"Double posting" occurs when the user refreshes the server response of an HTTP POST request.</li>
@@ -495,7 +497,7 @@
         <section>
           <h3>Post/Redirect/Get (PRG)</h3>
           <div class="center">
-            <img src="./images/prg.png"  height="500" />
+            <img src="./images/prg2.png"  height="500" />
           </div>
           <ul>
             <li>To avoid "double posting" return a redirect command instead of a view directly.</li>
