@@ -83,7 +83,7 @@
                 ## Content
 
                 * About web security
-                  * OWASP
+                  * OWASP (WSTG)
                 * Attack vectors
                   * XSS, CSRF, Injection...  
                 * HTTPS
@@ -110,7 +110,7 @@
                       * How do we use the web today?
                         * Shopping, Banking, Conversations, ...
                         * Sensitive and important information
-                          * Privacy, Society, Web of things
+                          * Privacy, Society, Web of things (Internet of Trouble)
                         * Downtime === lost of money
                           * Denial of Service (DOS, DDOS)
                         * Rendering code running on clients <br />=>
@@ -159,9 +159,12 @@
                     * Open, global non-profit organization
                       *  https://www.owasp.org
                     * The Top 10 OWASP
-                      - No changes in 2019...
-
+                      - No changes in 2020...
+                    * [Web Security Testing Guide (WSTG)](https://github.com/OWASP/wstg/tree/master/document)
+                    
                     <img src="../images/owasp17.png" width="50%" alt="">
+
+                    
 
                   </script>
               </section>
@@ -300,9 +303,8 @@
                     * https://caniuse.com/#feat=same-site-cookie-attribute
                   * strict
                     * prevent the cookie from being sent by the browser to the target site in all cross-site browsing context, even when following a regular link (e.g. GET). 
-                  * lax
+                  * lax (default from 2020)
                     * Blocking POSTs
-
                   
                 ```javascript
                 const sessionOptions = {
@@ -442,7 +444,7 @@
                             * Browser have a list of these
                             * Bind to your domain name, could cost money, different levels of trust
                             * Comodo, Symantec, GlobalSign...
-                          * https://letsencrypt.org/ - Check it up! 
+                          * https://letsencrypt.org/ - Check it out! 
                             * In development we can create our own - Self-signed
                       </script>
                   </section>
