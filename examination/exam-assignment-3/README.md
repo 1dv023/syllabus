@@ -44,7 +44,7 @@ You can solve this in a couple of ways. In this assignment, you should **use env
 
 ## Production of application
 
-The application shall be running on a public web server in a production environment. Each student will get their virtual public server (see the production part of this course), but feel free to choose your provider. During the examination, the application should be able to run on your production server (we will not run it locally) therefor you must add the URL to the application in your repository README.
+The application shall be running on a public web server in a production environment. Each student will get their virtual public server (see the production part of this course), but feel free to choose your provider. During the examination, the application should be able to run on your production server (we will not run it locally) therefor you must add the URL to the application in your RELEASE.md-file.
 
 ### Production requirements
 
@@ -56,7 +56,7 @@ The application shall be running on a public web server in a production environm
 
 ## Assignment report
 
-As a complement to your code, you should provide an assignment report. You do this by answering the following questions **in your repositories README**.
+As a complement to your code, you should provide an assignment report. You do this by answering the following questions **in your repositories RELEASE.md**.
 
 * What is the URL to your application?
 * Describe what you have done to make your application secure, both in code and when configuring your application server.
