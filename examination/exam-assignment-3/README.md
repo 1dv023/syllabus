@@ -33,7 +33,7 @@ We also have the following requirements:
 
 ### To handle API keys
 
-To be able to request data from GitHub's web API, you must get an API token that identifies yourself. Send the key in the Authorization header in every request so that GitHub could authorize the request. Please note that this key is personal to your GitHub account. That means that the key should never be stored in a repository or shared with anyone (not even the teachers).
+To be able to request data from GitHub REST API, you must get an API token that identifies yourself. Send the key in the Authorization header in every request so that GitHub could authorize the request. Please note that this key is personal to your GitHub account. That means that the key should never be stored in a repository or shared with anyone (not even the teachers).
 
 There are several ways to authenticate your calls to GitHub: <https://developer.github.com/v3/#authentication>
 We are going to use Basic Authentication, and you should create a ["personal access token"](https://github.com/settings/tokens). You allow this key to work with issues and send it along with the correct header.
@@ -44,7 +44,7 @@ You can solve this in a couple of ways. In this assignment, you should **use env
 
 ## Production of application
 
-The application shall be running on a public web server in a production environment. Each student will get their virtual public server (see the production part of this course), but feel free to choose your provider. During the examination, the application should be able to run on your production server (we will not run it locally) therefor you must add the URL to the application in your repository README.
+The application shall be running on a public web server in a production environment. Each student will get their virtual public server (see the production part of this course), but feel free to choose your provider. During the examination, the application should be able to run on your production server (we will not run it locally) therefore, you must add the URL to the application in your repository README.
 
 ### Production requirements
 
