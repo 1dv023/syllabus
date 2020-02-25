@@ -56,7 +56,7 @@ The application shall be running on a public web server in a production environm
 
 ## Assignment report
 
-As a complement to your code, you should provide an assignment report. You do this by answering the following questions **in your repositories README**.
+As a complement to your code, you should provide an assignment report. You do this by answering the following questions **in your repositories RELEASE.md**.
 
 * What is the URL to your application?
 * Describe what you have done to make your application secure, both in code and when configuring your application server.
