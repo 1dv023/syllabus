@@ -1,8 +1,6 @@
 In this assignment, you will be writing a web application where you have to include some real-time web technologies. You should also publish your application on a real (public) production server.
 
-The idea behind the application is that you should be able to list [issues](https://docs.gitlab.com/ee/user/project/issues/) from your GitLab repository for this assignment (e.g., <https://gitlab.lnu.se/1dvX23/xx222xx/assignment-3>). You will use this repository for your code but also test the application by creating issues (and comments) and include these in your application through the [GitLab API](https://docs.gitlab.com/ee/api/api_resources.html) and [webhooks](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#overview).
-
-> Do you want to use GitHub instead of GitLab? [Read the instructions for GitHub instead](https://coursepress.lnu.se/kurs/serverbaserad-webbprogrammering/assignment-3-github/).
+The idea behind the application is that you should be able to list [issues](https://guides.github.com/features/issues/) from your GitHub repository for this examination assignment (e.g., <https://github.com/1dvX23/xx222xx-examination-3>). You will use this repository for your code but also test the application by creating issues (and comments) and include these in your application through the [GitHub REST API](https://developer.github.com/v3/) and [GitHub's webhooks](https://developer.github.com/webhooks/).
 
 ### Assignment goals
 
@@ -14,16 +12,16 @@ The assignment aims to give the student practical and theoretical experience abo
 
 The image above tries to explain the application flow in this assignment.
 
-1. When a client connects to the application, it will use GitLab API (https://docs.gitlab.com/ee/api/README.html), a REST API, and fetch all created issues on your repository. The response will be in JSON, which is good because we work with Node.js.
-2. When your application gets the issue list from GitLab, you should use that to render the HTML-page for the client along with the JavaScript needed for the client.
+1. When a client connects to the application, it will contact GitHub through their [REST API](https://developer.github.com/v3/) and fetch all created issues on your repository. The response will be in JSON, which is good because we work with Node.js.
+2. When your application gets the issue list from GitHub, you should use that to render the HTML-page for the client along with the JavaScript needed for the client.
 3. One thing the client-script needs to do is, for example, the ability to connect to your server´s WebSocket channel.
-4. When a new "issue-event" happens on GitLab, they will fire a (by you) registered HTTP POST, which should point to your application.
+4. When a new "issue-event" happens on GitHub, they will fire a (by you) registered HTTP POST, which should point to your application.
 5. The webhook will send you data, and your application should use the web socket channel(s) to update the client in real-time.
 
 ### Other requirements
 
 * Design your application with security in mind.
-  * For instance, your code must check that the webhook POST comes from GitLab.
+  * For instance, your code must check that the webhook POST comes from GitHub.
 * Along with your code, and installation scripts, you should also commit an assignment report that answers some questions (see below).
 * You are free to choose and use third-party packages to solve the problem, but they should be mention and motivated in your assignment report.
 
@@ -35,10 +33,11 @@ We also have the following requirements:
 
 ### To handle API keys
 
-To be able to request data from GitLab API, you must get an API token that identifies yourself. Send the key in the Authorization header in every request so that GitLab could authorize the request. Please note that this key is personal to your GitLab account. That means that the key should never be stored in a repository or shared with anyone (not even the teachers).
+To be able to request data from GitHub REST API, you must get an API token that identifies yourself. Send the key in the Authorization header in every request so that GitHub could authorize the request. Please note that this key is personal to your GitHub account. That means that the key should never be stored in a repository or shared with anyone (not even the teachers).
 
-There are several ways to authenticate your calls to GitLab: <https://docs.gitlab.com/ee/api/README.html#authentication>
-We are going to use Basic Authentication, and you should create a ["personal access token"](https://docs.gitlab.com/ee/api/README.html#personal-access-tokens). You allow this key to work with issues and send it along with the correct header.
+There are several ways to authenticate your calls to GitHub: <https://developer.github.com/v3/#authentication>
+We are going to use Basic Authentication, and you should create a ["personal access token"](https://github.com/settings/tokens). You allow this key to work with issues and send it along with the correct header.
+If you want to use a module for this, we could recommend [Octonode](https://www.npmjs.com/package/octonode) that will help you a lot with the API calls.
 
 When you register a callback for the webhook, you should also define a secret so that you can validate the hook-requests to your application. This is also one thing to keep secret.
 You can solve this in a couple of ways. In this assignment, you should **use environment variables**. This way, you can read from the environment variables in your application and add it when you start your node-application.
@@ -77,12 +76,12 @@ For those of you aiming for higher grades in this course, there will be some sug
 * First of all - You probably have other ideas feel free to try them.
 * Implement a richer web client that can control the issues through the application (closing issues, adding comments, etc.). Think about security!
 * Add some kind of custom authentication before the user can enter the application.
-* Do an authentication through [GitLab's OAuth provider](https://docs.gitlab.com/ee/api/oauth2.html) instead of the Basic Authentication. This way, a user could log into your applications through their OAuth credentials and will see all of their resources.
+* Do an authentication through [GitHubs OAuth provider](https://developer.github.com/v3/oauth/#web-application-flow) instead of the Basic Authentication. This way, a user could log into your applications through their OAuth credentials and will see all of their resources.
   * The user could then choose what repository to watch, and the server application creates the webhook through the web API.
 
 ## Resources
 
-To be able to solve the assignment, you may do some reading in the documentation at GitLab. Here are some links:
+To be able to solve the assignment, you may do some reading in the documentation at GitHub. Here are some links:
 
 * <https://developer.github.com/v3/issues/>
 * <https://developer.github.com/webhooks/>
