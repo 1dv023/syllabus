@@ -1,72 +1,93 @@
-In this assignment, the task is to write a [web scraper](https://en.wikipedia.org/wiki/Web_scraping) that scrapes but also analyzes information on some web sites built especially for this assignment. The idea is that you are going to write a scraper/agent that solves a specific problem.
+# Assignment 1 - The Gathering Web Scraper
 
-You will get the main page to proceed from, which links to three different web sites. You don't have to care about how they work internally, just the HTML they are rendering, and how to form your HTTP request to get the data you want for analyzing.
+In this assignment, you got to help three friends, Peter, Paul, and Mary, with planning their once a month gathering. Once a month, they gather to watch a movie and then dine at their favorite restaurant. It is quite difficult for the friends to plan a gathering because they first have to find at least one day when everyone can then find a movie, to finally find a time when a table is free to book at the restaurant.
 
-Your starting point is **<http://vhost3.lnu.se:20080/weekend>**, which should also be the starting point in your scraping script, meaning that no other hardcoded URLs must be used in your code (except for the AJAX call in the *cinema* site). Your scraping script should also be able to handle the alternative server (see below).
+The friends have their calendars available online on a website, and the cinema and restaurant they visit also have websites. The friends realize that the planning of an evening should be able to be automated but do not know how to do it. What they do know is that they definitely do not need a GUI and want to run the application from a command prompt, and that Peter prefers Windows, Paul prefers macOS and Mary prefers Linux (#1).
 
-## Scenario
+Your task is to help the three friends by writing a web scraper that scrapes and analyzes data from the mentioned websites (explicitly built for this task). The application should be so generally written that it can handle two different start URLs, https://cscloud6-127.lnu.se/scraper-site-1 and https://cscloud6-127.lnu.se/scraper-site-2. (#3)
 
-The three friends Peter, Paul, and Mary usually get together one weekend every month to see a movie and, after that, eat at a restaurant. The problem is that it is hard to plan this event since they must find a time slot when all three are available, look for a movie that plays at the cinema that day, and finally see if they can book a table at their favorite restaurant. Since all this information is available through HTTP requests, it would be nice to have a script that automates this workflow!
+When starting the application, the start URL must be passed as an argument. The URLs are each leading to three other websites. It is irrelevant how these websites work under the hood. The interesting part is the HTML rendered and how to make HTTP requests to retrieve data. It does not matter which URL the application starts with because the websites are nearly the same, and only the data scraped differs, and thus the suggestions the application finally lists.
 
-And that's your task...
+## The websites
 
-### The web sites
+From the start URL, the application must be able to crawl all three websites on its own. Data must be scraped, analyzed, and suggestions for day, movie, and time to book a table must be listed. (#4)
 
-Your script should start to scrape the links at the starting-URL and continue from there. This starting-URL should be easy to change when running your script. Remember that we are going to examine your scraper against another server when grading your assignment. As mentioned before, from this URL, your application/web scraper should be able to crawl all three applications by itself. The scraper should be able to scrape all information, analyze it, and present a solution to the user in the right way. Of course, there will be some points internally in the web sites where you will have to hardcode, but try to write it as general as possible (see examinations for more info).
+Regardless of the start URL, the HTML of each website is nearly the same. The differences exist to ensure that your scraping code is as general as possible and as little as possible has been hard-coded. The minor differences that exist are:
 
-#### The calendar
+- href attribute values in HTML.
+- Days when the three friends are available.
+- Movie titles, when they start, and if there are any places left.
+- Which tables the friends can book, and the redirect URL when logging in.
 
-The first web site is where the three friends are syncing their *calendar*. Each of the friends has their page, where he/she can edit the information to let others know what day of the weekend is free. These pages are built with simple HTML, and the task is to scrape the pages and analyze what (if any) day(s) all three friends are free. The friends are only available to see each other on the weekends (Friday, Saturday, Sunday), so there is no need to handle other days.
+The varying `href` attribute values are to verify your scraping code does not use hard-coded URLs. URLs defined in JavaScript, as in the AJAX and cinema example, will not change. You can, in other words, hard-code these.
 
-#### The cinema
+### The start URL
 
-The *cinema* web site is a simple web site that displays the cinema's shows for the weekend. You can get which day and at which time a specific movie is running, and if it is fully booked or not. **By analyzing the traffic between the client and the server, you should be able to find a way to request this information** and use it in your code, together with the data from the *calendar* site. Use the browser's inspector to analyze the traffic.
+The application must start by scraping the links on the web page given by the start URL and continue from there.
 
-#### The restaurant
+### The calendar
 
-The third web site is the three friends' favorite *restaurant* (the only one they visit..!). To see this site, you must log in first. For this you can use the credentials below:
+The web pages are built using simple HTML, and the task is to scrape the pages and analyze which days all three friends can gather. The friends have already decided that they will meet on Fridays, Saturdays, and Sundays, so there is no need to look for any other days (#5).
 
-* Username: **zeke**
-* Password: **coys**
+### The cinema
 
-The site will use session **cookies** for authorization, which your application must handle in some way. After this, you can see the available booking times, which you should analyze with the other data to propose a final solution.
+The cinema website is a simple website that displays the cinema's shows for the weekend. You can find out what day and time a particular movie is shown and if it is sold out. By analyzing the traffic between the client and the server, you should find a way to request this information in your application and filter out suitable movies based on scraped data from the calendars.
+
+#### Hint
+
+Use the browser's inspector to analyze the traffic.
+
+### The restaurant
+
+The third website is for the three friends' favorite restaurant (the only one they visit). The application must log in, by the login credentials below, to scrape what times they can book a table.
+
+<table>
+  <tr>
+    <td>username</td>
+    <td>zeke</td>
+  </tr>
+  <tr>
+    <td>password</td>
+    <td>coys</td>
+  </tr>
+</table>
+
+The website uses session cookies for authorization, which the application must handle in some way. After a successful login, the scraper can find available times.
 
 ## The workflow to automate
 
-* Check which day or days all friends are available; if none - output this on screen
-* Get the available movies for that day(s)
-* Login to the restaurant web site and get the content
-* See when the three friends can eat. Think that they want to book a table **minimum two hours after the movie starts.**
-* Present the solution(s) as output in your terminal/console window (or as an HTML view)
-* [Optional] - Use the form for a user to book a table with your application
+1. Check which day, or days, all friends are available. If it is impossible to find a day when everyone can, this must be presented in the terminal window.
+2. Scrape available movies for the possible days.
+3. Log in to the restaurant's website to determine when the three friends can dine. Suppose they want to book a table at least two hours after the movie starts (#6).
+4. By analyzing the scraped data, it remains to put together proposals containing the day, the movie with start time, and between which times to book a table.
 
-## What the application must look like
+### Optional
 
-Start the application passing the start URL <http://vhost3.lnu.se:20080/weekend> as an argument to the process.
+- Pre-book a table using the restaurant's form. (#8)
+
+## Requirements
+
+You must use the repository created for you and this assignment and make continuous commits, so it is possible to follow the web scraper's creation. Make sure that no more files than necessary are committed to the repository. (#9)
+
+You must write the web scraper as a Node.js application (#1) and follow the course's coding standard (#10). You must split your source code into several modules (#12). Of course, you need to document and comment on the source code (#11).
+
+After cloning the repository with the application's source code and running `npm install`, it must be easy to lint the source code and run the application. Therefore, be sure to add the script `start` and `lint` to the "scripts" field in the `package.json` file. (#14)
+
+When running the web scraper, the user must pass the start URL as an argument (#2, #3). That is the only input the user should do during the scrape process (#2). Below is an example of how to start the scraper, using https://cscloud6-127.lnu.se/scraper-site-1 as the start URL:
 
 ```shell
-npm start http://vhost3.lnu.se:20080/weekend
+npm start https://cscloud6-127.lnu.se/scraper-site-1
 ```
 
-The output of your application must be exact:
+You are free to use whichever userland module you want (except if there is one out there with the complete solution). Do not forget to ensure, as far as possible, that the module is safe to use. (#13)
 
-```shell
-Scraping links...OK
-Scraping available days...OK
-Scraping showtimes...OK
-Scraping possible reservations...OK
+The web scraper must present the suggestions in a terminal window according to the details below (#7).
 
-Recommendations
-===============
-* On Friday the movie "Keep Your Seats, Please" starts at 16:00 and there is a free table between 18:00-20:00.
-* On Friday the movie "A Day at the Races" starts at 16:00 and there is a free table between 18:00-20:00.
-```
+## The output
 
-The output should not be more "verbose" than this. Be sure to remove all your other `console.log` calls before making your release. The recommendations shown above is the correct one for the current state of the sites, and you can use it to check your solution. Be sure to test your application using the alternative server.
+### Using the first start URL
 
-### Using the alternative server
-
-We have provided an alternative server where we have changed information and some URLs. Your application must also work with this server. The alternative start URL is **<http://cscloud304.lnu.se:8080>** and the output must be exact:
+If https://cscloud6-127.lnu.se/scraper-site-1 is used as the start URL, the list of suggestions must be exact:
 
 ```shell
 Scraping links...OK
@@ -74,36 +95,30 @@ Scraping available days...OK
 Scraping showtimes...OK
 Scraping possible reservations...OK
 
-Recommendations
-===============
-* On Saturday the movie "Keep Your Seats, Please" starts at 18:00 and there is a free table between 20:00-22:00.
-* On Sunday the movie "Keep Your Seats, Please" starts at 18:00 and there is a free table between 20:00-22:00.
+Suggestions
+===========
+* On Friday, "Keep Your Seats, Please" begins at 16:00, and there is a free table to book between 18:00-20:00.
+* On Friday, "A Day at the Races" begins at 16:00, and there is a free table to book between 18:00-20:00.
 ```
 
-## Requirements of your solution
+The result should not be more verbose than this. Be sure to delete all other statements printing to the terminal before submitting. The suggestions above are the correct ones for the first start URL, and you can use it to verify the output from your scraper.
 
-* The application should be written as a Node.js application in JavaScript following the code and JSDoc conventions the course uses ([@lnu/eslint-config](https://www.npmjs.com/package/@lnu/eslint-config)). You have to install and configure the lint tools yourself (your initial repo will be empty). The examiner should be able to run `npm run lint` in the console to see that there are no errors (or warnings).
-* The only command the examiner should use to run your application after cloning it from its repository is `npm install` and `npm start` (with the starting URL as a parameter).
-* You should work with GitLab and **do several commits** to show how your solution has been made.
-* You are free to find and use external modules.
-* You must structure your code so **you must create at least use three own modules**.
-* The application **should be able to take a parameter with the start URL** so one easy could change servers when running the examination.
-* Try to make a solution that is as general as possible. It must work with both servers. This is to test that your code is general for different scenarios. **The HTML structure will never be changed** but there could be changes in:
-  * `href` attributes in HTML: To check that your scraper doesn't use hardcoded URLs. URLs only defined in JavaScript code (as in the AJAX and *cinema* example) will not be changed so that you can hardcode these.
-  * The day(s) all three friends will be available (remember: if none, the application should give the end-user a message about that).
-  * The movie titles, their time, and if they are fully booked or not.
-  * The availability of tables at the restaurant and the redirect URL we get when we log in.
-* When you are done with the assignment be sure to make a complete submission for the assignment to be assessed.
+### Using the second start URL
 
-## Examination
+For the second URL, https://cscloud6-127.lnu.se/scraper-site-2, some of the data and URLs have changed. Your web scraper must be able to produce the correct suggestions for this start URL as well. The list of suggestions from the scraper must be exact:
 
-There will be no oral exam for this assignment. The examiner will notify you of the assessment of the assignment with an issue at the repository.
+```shell
+Scraping links...OK
+Scraping available days...OK
+Scraping showtimes...OK
+Scraping possible reservations...OK
 
-## Goals for this assignment
+Suggestions
+===========
+* On Saturday, "Keep Your Seats, Please" begins at 18:00, and there is a free table to book between 20:00-22:00.
+* On Sunday, "Keep Your Seats, Please" begins at 18:00, and there is a free table to book between 20:00-22:00.
+```
 
-* Get practical experience in building a web scraper.
-* Get knowledge about HTTP and use it when building an application in Node.js.
-* Analyze the traffic between the client and the server.
-* Get practical knowledge of asynchronous programming in Node.js.
-* Analyze and solve a problem with JavaScript code.
-* Using Git to show progress in your work.
+## Hints
+
+Make sure to do the "Promising Web Scraper" exercise.
