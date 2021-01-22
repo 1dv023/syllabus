@@ -1,4 +1,4 @@
-# Assignment 1 - The Gathering Web Scraper
+<!-- Assignment 1 - The Gathering Web Scraper -->
 
 In this assignment, you got to help three friends, Peter, Paul, and Mary, with planning their once a month gathering. Once a month, they gather to watch a movie and then dine at their favorite restaurant. It is quite difficult for the friends to plan a gathering because they first have to find at least one day when everyone can then find a movie, to finally find a time when a table is free to book at the restaurant.
 
